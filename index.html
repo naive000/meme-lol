@@ -1183,6 +1183,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     <div class="timeline">
 
       <div class="tl-item" data-level="both">
+        <span class="tl-stage">⓪ 入金</span>
+        <div class="card card--tool">
+          <h3>💰 台幣怎麼變成 SOL／USDC</h3>
+          <span class="tl-tool">用：MAX、BitoPro 等台灣交易所</span>
+          <p><strong>最穩的路：</strong>MAX 或 BitoPro 台幣入金（新戶每日入金上限約 NT$10 萬）→買 SOL 或 USDC→提領到自己的錢包。GMGN／Axiom 要有 SOL 付手續費；fomo 以 USDC 入金為主，官方也標榜支援 Apple Pay，但台灣的卡能不能過款官方沒明講，先小額測試再說。</p>
+          <div class="callout callout--danger">🚨 <strong>別走 P2P 私下換幣。</strong>收到來路不明的款項，你的銀行帳戶可能被列為警示帳戶並凍結——洗錢防制法對這塊查得越來越嚴。</div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-level="both">
         <span class="tl-stage">① 發現</span>
         <div class="card card--tool">
           <h3>🔎 找到候選幣，複製 CA</h3>
@@ -1248,6 +1258,11 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </div>
       </div>
 
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>🌙 什麼時候不要盯盤</h2>
+      <p><small>一般觀察：Solana 土狗最熱的時段是美國白天，換成台灣時間大約晚上 9 點到凌晨 1 點；台灣下午反而最冷清、滑價大。熱時段流動性好但新幣和 rug 也最多，加上熬夜判斷力下降，記得先設好停損和額度再開盤。</small></p>
     </div>
 
     <div class="card" data-level="both">
@@ -1328,6 +1343,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <h2>免責聲明</h2>
       <p>本站僅為工具操作教學與公開資訊整理，不構成任何投資建議。迷因幣屬於極高風險資產，多數最終會歸零；所有操作請自行研究（DYOR），只投入你可以承受全部損失的金額。</p>
       <p>本站與 GMGN、Axiom、fomo、DEX Screener 及 Robinhood 公司均無隸屬關係；各平台介面、費率與功能可能隨時變動，請以官方公告為準。本站部分連結含推薦碼。</p>
+      <p><small>💰 <strong>賺到錢記得報稅：</strong>依財政部 2025 年函釋，個人買賣加密貨幣的獲利屬「財產交易所得」，要併入綜合所得稅申報，交易所出金紀錄國稅局查得到。細節依個人狀況不同，建議諮詢會計師。</small></p>
     </div>
 
     <h2>🎣 5 種最常見的被割方式</h2>
@@ -1410,6 +1426,7 @@ window.REF = {
 };
 
 window.GLOSSARY = [
+{"term":"土狗","en":"Meme Coin / Shitcoin","cat":"基礎","simple":"鏈上剛發、沒團隊沒背景的迷因幣，就是英文的 meme coin／shitcoin。","pro":"衝土狗＝搶早期進場賭百倍；歸零＝跌到沒人接手；被割＝被莊家或 dev 出貨、撤池（rug）收走本金；極少數漲起來的叫「金狗」，但多數土狗最終結局是歸零。"},
 {"term":"CA合約地址","en":"Contract Address","cat":"基礎","simple":"每個幣獨一無二的一長串地址，用它搜才不會搜到假幣。","pro":"務必從官方管道取得 CA 並逐字核對頭尾字元；同名同代號的仿冒部署成本極低，用幣名搜尋幾乎必然搜到假的。"},
 {"term":"交易對Pair","en":"Pair","cat":"基礎","simple":"兩個幣互換的池子，例如 XXX/SOL，價格就是從這裡來的。","pro":"同一代幣可能有多個池，流動性分散時單一 pair 的深度不代表整體可出場量。"},
 {"term":"Bonding Curve聯合曲線","en":"Bonding Curve","cat":"基礎","simple":"一種自動定價機制：買的人越多，價格自動越貴；賣的人越多就越便宜。","pro":"Pump.fun 類發射平台的機制，不需要做市商，買賣直接跟曲線合約成交，所以早期進場成本極低，也是狙擊者要搶第一批的原因。曲線走完累積到門檻就觸發畢業；此階段滑點隨規模急遽變化。"},
