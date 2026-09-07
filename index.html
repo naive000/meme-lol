@@ -4,13 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="用手機把 GMGN、Axiom、fomo、DEX Screener 四個幣圈工具串成一條「發現→驗證→下單→追蹤→出場」流程的小白教學站，內建小白／進階雙模式與詞彙查詢。非投資建議，僅供工具操作教學。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪙</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="鏈上四寶">
+<meta property="og:description" content="用手機把 GMGN、Axiom、fomo、DEX Screener 四個幣圈工具串成一條「發現→驗證→下單→追蹤→出場」流程的小白教學站，內建小白／進階雙模式與詞彙查詢。非投資建議，僅供工具操作教學。">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#F4F5F8">
+<meta name="theme-color" content="#0B0E14" media="(prefers-color-scheme: dark)">
 <title>鏈上四寶</title>
 <style>
 /* ===== 1. 主題 Token（深/淺色，所有顏色只能從這裡取用） ===== */
 :root{
   --bg:#F4F5F8; --surface:#FFFFFF; --card:#FFFFFF; --border:#E1E4EA;
-  --text:#12131A; --text-2:#4B5162; --text-3:#8A90A0;
-  --accent:#6D28D9; --accent-2:#0891B2;
+  --text:#12131A; --text-2:#4B5162; --text-3:#5C6270;
+  --accent:#6D28D9; --accent-2:#0E7490;
   --up:#15803D; --down:#DC2626; --warn:#B45309;
   --beginner:#15803D; --advanced:#6D28D9; --danger:#DC2626;
   --shadow:0 1px 2px rgba(20,20,30,.08);
@@ -27,7 +35,7 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0B0E14; --surface:#12161F; --card:#181D28; --border:#262D3B;
-    --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#6B7484;
+    --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#9AA3B5;
     --accent:#A78BFA; --accent-2:#22D3EE;
     --up:#22C55E; --down:#EF4444; --warn:#F59E0B;
     --beginner:#22C55E; --advanced:#A78BFA; --danger:#EF4444;
@@ -43,7 +51,7 @@
 }
 :root[data-theme="dark"]{
   --bg:#0B0E14; --surface:#12161F; --card:#181D28; --border:#262D3B;
-  --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#6B7484;
+  --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#9AA3B5;
   --accent:#A78BFA; --accent-2:#22D3EE;
   --up:#22C55E; --down:#EF4444; --warn:#F59E0B;
   --beginner:#22C55E; --advanced:#A78BFA; --danger:#EF4444;
@@ -113,7 +121,7 @@ main{max-width:640px;margin:0 auto;padding:16px}
 }
 .tabbar button{
   flex:1 1 0;min-width:0;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  background:none;border:0;font-family:inherit;font-size:11px;color:var(--text-3);cursor:pointer;padding:0;
+  background:none;border:0;font-family:inherit;font-size:13px;color:var(--text-3);cursor:pointer;padding:0;
 }
 .tabbar button span{font-size:19px;line-height:1}
 .tabbar button[aria-current="page"]{color:var(--accent);font-weight:700}
@@ -228,6 +236,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important}
 }
+.site-footer{max-width:640px;margin:24px auto 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));text-align:center;color:var(--text-3);font-size:12px;border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
@@ -241,7 +250,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 <main>
 
   <!-- ================= 首頁 ================= -->
-  <section class="page" id="page-home" data-page="home">
+  <section class="page is-active" id="page-home" data-page="home">
     <div class="card" data-level="both">
       <h1>用手機 10 分鐘看懂 GMGN、Axiom、fomo、DEX Screener</h1>
       <p>從「發現一顆新幣」到「安全出場」的完整流程，全部用手機就能做完。不懂鏈上也沒關係，跟著步驟走就好。</p>
@@ -528,12 +537,12 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="card card--risk" data-level="both">
           <h4>✅ 每次下單前的 6 項自檢</h4>
           <div class="checklist">
-            <label><input type="checkbox"><span>安全面板全綠，沒有任何一項紅燈</span></label>
-            <label><input type="checkbox"><span>Mint／Freeze 權限已放棄、LP 已燒毀</span></label>
-            <label><input type="checkbox"><span>Top 10 持倉與 Dev 持倉沒有異常集中</span></label>
-            <label><input type="checkbox"><span>這筆金額 ≤ 錢包的 5%，賠光我也沒差</span></label>
-            <label><input type="checkbox"><span>止損（-30～-40%）與分批止盈已經先設好</span></label>
-            <label><input type="checkbox"><span>網址／Bot 帳號逐字核對過，不是釣魚站</span></label>
+            <label><input type="checkbox" data-ck="gmgn-1"><span>安全面板全綠，沒有任何一項紅燈</span></label>
+            <label><input type="checkbox" data-ck="gmgn-2"><span>Mint／Freeze 權限已放棄、LP 已燒毀</span></label>
+            <label><input type="checkbox" data-ck="gmgn-3"><span>Top 10 持倉與 Dev 持倉沒有異常集中</span></label>
+            <label><input type="checkbox" data-ck="gmgn-4"><span>這筆金額 ≤ 錢包的 5%，賠光我也沒差</span></label>
+            <label><input type="checkbox" data-ck="gmgn-5"><span>止損（-30～-40%）與分批止盈已經先設好</span></label>
+            <label><input type="checkbox" data-ck="gmgn-6"><span>網址／Bot 帳號逐字核對過，不是釣魚站</span></label>
           </div>
         </div>
 
@@ -645,12 +654,12 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="card" data-level="both">
           <h3>✅ 第一次下單前，勾完再按</h3>
           <div class="checklist">
-            <label><input type="checkbox"><span>12 字助記詞已抄在紙上、離線保存</span></label>
-            <label><input type="checkbox"><span>這筆錢就算歸零我也睡得著</span></label>
-            <label><input type="checkbox"><span>只在 Migrated 欄挑幣</span></label>
-            <label><input type="checkbox"><span>合約地址已用兩個來源交叉核對</span></label>
-            <label><input type="checkbox"><span>MEV 模式已設為 Secure</span></label>
-            <label><input type="checkbox"><span>已看過 Dev% / Top10% / Bundle% 這幾個數字</span></label>
+            <label><input type="checkbox" data-ck="axiom-1"><span>12 字助記詞已抄在紙上、離線保存</span></label>
+            <label><input type="checkbox" data-ck="axiom-2"><span>這筆錢就算歸零我也睡得著</span></label>
+            <label><input type="checkbox" data-ck="axiom-3"><span>只在 Migrated 欄挑幣</span></label>
+            <label><input type="checkbox" data-ck="axiom-4"><span>合約地址已用兩個來源交叉核對</span></label>
+            <label><input type="checkbox" data-ck="axiom-5"><span>MEV 模式已設為 Secure</span></label>
+            <label><input type="checkbox" data-ck="axiom-6"><span>已看過 Dev% / Top10% / Bundle% 這幾個數字</span></label>
           </div>
         </div>
       </div>
@@ -850,9 +859,9 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="card" data-level="both">
           <h4>✅ 開始前先勾這三項</h4>
           <div class="checklist">
-            <label><input type="checkbox"><span>我確認下載的 App 開發者是 FOMO Labs</span></label>
-            <label><input type="checkbox"><span>我已經完成一次小額買入＋賣出的完整測試</span></label>
-            <label><input type="checkbox"><span>我知道 fomo 沒有存款保險，手機遺失且沒備份＝錢沒了</span></label>
+            <label><input type="checkbox" data-ck="fomo-1"><span>我確認下載的 App 開發者是 FOMO Labs</span></label>
+            <label><input type="checkbox" data-ck="fomo-2"><span>我已經完成一次小額買入＋賣出的完整測試</span></label>
+            <label><input type="checkbox" data-ck="fomo-3"><span>我知道 fomo 沒有存款保險，手機遺失且沒備份＝錢沒了</span></label>
           </div>
         </div>
       </div>
@@ -951,10 +960,10 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="card card--risk" data-level="both">
           <h4>✅ 自我檢查</h4>
           <div class="checklist">
-            <label><input type="checkbox"><span>我用的是可以全部虧光的閒錢</span></label>
-            <label><input type="checkbox"><span>我已經知道怎麼匯出金鑰／做備份</span></label>
-            <label><input type="checkbox"><span>我不會因為看到排行榜就直接下單，會先自己查一次</span></label>
-            <label><input type="checkbox"><span>我知道 fomo 沒有平台幣，看到「fomo 空投／預售」一律當詐騙</span></label>
+            <label><input type="checkbox" data-ck="fomo-4"><span>我用的是可以全部虧光的閒錢</span></label>
+            <label><input type="checkbox" data-ck="fomo-5"><span>我已經知道怎麼匯出金鑰／做備份</span></label>
+            <label><input type="checkbox" data-ck="fomo-6"><span>我不會因為看到排行榜就直接下單，會先自己查一次</span></label>
+            <label><input type="checkbox" data-ck="fomo-7"><span>我知道 fomo 沒有平台幣，看到「fomo 空投／預售」一律當詐騙</span></label>
           </div>
         </div>
       </div>
@@ -1135,11 +1144,11 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="card card--risk" data-level="both">
           <h4>✅ 自我檢查</h4>
           <div class="checklist">
-            <label><input type="checkbox"><span>我是用 CA 合約地址搜的，不是用幣名</span></label>
-            <label><input type="checkbox"><span>我看過流動性 vs 市值的比例</span></label>
-            <label><input type="checkbox"><span>我確認買賣筆數沒有嚴重失衡</span></label>
-            <label><input type="checkbox"><span>我知道金色圖示／Boost 是付費的，不代表安全</span></label>
-            <label><input type="checkbox"><span>我知道任何「DEXScreener 代幣」都是詐騙</span></label>
+            <label><input type="checkbox" data-ck="dex-1"><span>我是用 CA 合約地址搜的，不是用幣名</span></label>
+            <label><input type="checkbox" data-ck="dex-2"><span>我看過流動性 vs 市值的比例</span></label>
+            <label><input type="checkbox" data-ck="dex-3"><span>我確認買賣筆數沒有嚴重失衡</span></label>
+            <label><input type="checkbox" data-ck="dex-4"><span>我知道金色圖示／Boost 是付費的，不代表安全</span></label>
+            <label><input type="checkbox" data-ck="dex-5"><span>我知道任何「DEXScreener 代幣」都是詐騙</span></label>
           </div>
         </div>
       </div>
@@ -1355,6 +1364,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
 </main>
 
+<footer class="site-footer">非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</footer>
+
 <nav class="tabbar" aria-label="主要導覽">
   <button type="button" data-route="home"><span aria-hidden="true">🏠</span>首頁</button>
   <button type="button" data-route="tools"><span aria-hidden="true">🧰</span>工具</button>
@@ -1470,6 +1481,14 @@ window.GLOSSARY = [
     }
     var accs = document.querySelectorAll('details.acc');
     for(var i = 0; i < accs.length; i++){ accs[i].open = (mode === 'advanced'); }
+    toolSecs.forEach(function(sec){
+      if(!sec){ return; }
+      var activePanel = sec.querySelector(':scope > .tabpanel.is-active');
+      var curKey = activePanel ? activePanel.getAttribute('data-panel') : null;
+      if(curKey === 'start' || curKey === 'pro'){
+        selectTab(sec, mode === 'advanced' ? 'pro' : 'start');
+      }
+    });
     LS.set('c4_mode', mode);
     renderGlossary();
   }
@@ -1502,20 +1521,27 @@ window.GLOSSARY = [
   });
 
   /* ---------- 工具頁內的 4 個子分頁 ---------- */
+  function selectTab(sec, key){
+    if(!sec){ return; }
+    var tabsInSec = sec.querySelectorAll(':scope > .tabs > .tab');
+    var found = false;
+    for(var i = 0; i < tabsInSec.length; i++){
+      var match = tabsInSec[i].getAttribute('data-tab') === key;
+      if(match){ found = true; }
+      tabsInSec[i].setAttribute('aria-selected', match ? 'true' : 'false');
+    }
+    if(!found){ return; }
+    var panels = sec.querySelectorAll(':scope > .tabpanel');
+    for(var j = 0; j < panels.length; j++){
+      panels[j].classList.toggle('is-active', panels[j].getAttribute('data-panel') === key);
+    }
+  }
   document.addEventListener('click', function(e){
     var tab = e.target && e.target.closest ? e.target.closest('.tab') : null;
     if(!tab){ return; }
     var sec = tab.closest('section');
     if(!sec){ return; }
-    var key = tab.getAttribute('data-tab');
-    var tabsInSec = sec.querySelectorAll(':scope > .tabs > .tab');
-    for(var i = 0; i < tabsInSec.length; i++){
-      tabsInSec[i].setAttribute('aria-selected', tabsInSec[i] === tab ? 'true' : 'false');
-    }
-    var panels = sec.querySelectorAll(':scope > .tabpanel');
-    for(var j = 0; j < panels.length; j++){
-      panels[j].classList.toggle('is-active', panels[j].getAttribute('data-panel') === key);
-    }
+    selectTab(sec, tab.getAttribute('data-tab'));
   });
 
   /* ---------- Hash 路由 ---------- */
@@ -1524,7 +1550,7 @@ window.GLOSSARY = [
     var parts = raw.split('/');
     var page = parts[0] || 'home';
     if(ROUTES.indexOf(page) < 0){ page = 'home'; }
-    return { page: page, sub: parts[1] || '' };
+    return { page: page, sub: parts[1] || '', tab: parts[2] || '' };
   }
   function route(){
     var r = parseHash();
@@ -1533,7 +1559,13 @@ window.GLOSSARY = [
       if(b.getAttribute('data-route') === r.page){ b.setAttribute('aria-current', 'page'); }
       else { b.removeAttribute('aria-current'); }
     });
-    if(r.page === 'tools'){ selectTool(r.sub || LS.get('c4_tool', 'gmgn')); }
+    if(r.page === 'tools'){
+      selectTool(r.sub || LS.get('c4_tool', 'gmgn'));
+      if(r.tab){
+        var activeSec = toolSecs.filter(function(s){ return s && !s.hidden; })[0];
+        if(activeSec){ selectTab(activeSec, r.tab); }
+      }
+    }
     if(r.page === 'glossary'){ renderGlossary(); }
     try{ window.scrollTo(0, 0); }catch(e){}
   }
@@ -1656,7 +1688,7 @@ window.GLOSSARY = [
 
   /* ---------- 安全檢查清單 ---------- */
   var CK_KEY = 'c4_checklist';
-  var ckBoxes = Array.prototype.slice.call(document.querySelectorAll('#safetyChecklist input[type=checkbox]'));
+  var ckBoxes = Array.prototype.slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
   function loadChecklist(){
     var saved = {};
     try{ saved = JSON.parse(LS.get(CK_KEY, '{}')) || {}; }catch(e){ saved = {}; }
