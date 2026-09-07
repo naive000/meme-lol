@@ -1,0 +1,114 @@
+[
+  {
+    "term": "Pulse",
+    "simple": "Axiom 的新幣雷達頁，三欄即時滾動顯示剛發的幣",
+    "pro": "可用 14 個條件篩選（幣齡、Top10%、Dev%、Snipers、Insiders、Bundle%、持有人數、Pro Traders、流動性、成交量、市值、交易數、買/賣數），並可指定發射台與關鍵字含/排除",
+    "en": "Pulse",
+    "cat": "介面"
+  },
+  {
+    "term": "New Pairs",
+    "simple": "剛發行的幣，市值常低於 $40K，最危險的一欄",
+    "pro": "多數在幾小時內歸零（官方說明），僅適合有完整風控與極快出場能力的老手",
+    "en": "New Pairs",
+    "cat": "介面"
+  },
+  {
+    "term": "Final Stretch",
+    "simple": "接近畢業門檻、快要進開放市場的幣",
+    "pro": "Sniper Buy 常鎖定此階段，在畢業瞬間自動搶進",
+    "en": "Final Stretch",
+    "cat": "介面"
+  },
+  {
+    "term": "Migrated",
+    "simple": "已畢業進入開放市場、流動性較深的幣，新手只看這欄",
+    "pro": "流動性較深但仍非安全區，仍需檢查 Top10%、Bundle%、Dev%",
+    "en": "Migrated",
+    "cat": "介面"
+  },
+  {
+    "term": "Quick Buy快買",
+    "simple": "閃電圖示的一鍵買入，用預設參數直接送單",
+    "pro": "金額與滑點沿用當前 Preset，建議先把 Preset 金額設在可承受範圍再啟用",
+    "en": "Quick Buy",
+    "cat": "交易"
+  },
+  {
+    "term": "Preset預設組",
+    "simple": "P1/P2/P3 三組交易參數，一鍵切換",
+    "pro": "每組可獨立設定滑點、優先費、Bribe 與 MEV 模式；MEV 建議選 Secure",
+    "en": "Preset",
+    "cat": "交易"
+  },
+  {
+    "term": "Bribe賄賂費",
+    "simple": "額外付給區塊打包者的錢，讓你的單被優先處理",
+    "pro": "與 Jito tip 搭配決定上鏈優先序，行情激烈時調高可提高成交率但增加成本",
+    "en": "Bribe",
+    "cat": "費用"
+  },
+  {
+    "term": "Jito Tip優先費",
+    "simple": "Solana 上加速交易確認的小費，Axiom 預設 0.001 SOL",
+    "pro": "屬於 1% 基礎費之外的額外成本，短線高頻交易時累積可觀",
+    "en": "Jito Tip",
+    "cat": "費用"
+  },
+  {
+    "term": "Turnkey託管錢包",
+    "simple": "用 Email 登入時自動生成的錢包，務必匯出助記詞備份",
+    "pro": "Settings › Account & Security › Manage Wallets 匯出 12 字助記詞；未匯出等同無最終控制權",
+    "en": "Turnkey Wallet",
+    "cat": "錢包"
+  },
+  {
+    "term": "PWA",
+    "simple": "把網頁「加到主畫面」變成類 App 的用法",
+    "pro": "Axiom 無官方 App，手機端僅此一途；App Store 上同名 App 皆為假冒",
+    "en": "Progressive Web App",
+    "cat": "工具"
+  },
+  {
+    "term": "Perps永續合約",
+    "simple": "沒有到期日的槓桿合約",
+    "pro": "Axiom 串接 Hyperliquid 提供，具爆倉風險，新手不建議使用",
+    "en": "Perpetual Futures",
+    "cat": "交易"
+  },
+  {
+    "term": "Yield生息",
+    "simple": "讓帳戶裡沒在用的資金產生利息",
+    "pro": "閒置資金理財功能，收益率與風險以官方公告為準",
+    "en": "Yield",
+    "cat": "功能"
+  },
+  {
+    "term": "HOOD/Robinhood Chain",
+    "simple": "Robinhood 推出的 Ethereum L2，gas 用 ETH，地址 0x 開頭",
+    "pro": "Arbitrum Orbit 技術，2026/7 上線，原定位 RWA 股票代幣化，實際 79% 以上 DEX 成交量為迷因幣（代表幣 CASHCAT）；官方不審核不背書任何代幣",
+    "en": "Robinhood Chain",
+    "cat": "區塊鏈"
+  },
+  {
+    "term": "Bonding Curve聯合曲線",
+    "simple": "發幣初期的自動定價機制，買越多價越高，賣越多價越低",
+    "pro": "畢業前的價格發現階段，流動性由曲線提供，滑點隨規模急遽變化",
+    "en": "Bonding Curve",
+    "cat": "機制"
+  },
+  {
+    "term": "Sniper Buy狙擊買",
+    "simple": "設定好條件，在代幣畢業瞬間自動搶進",
+    "pro": "對應有 Sniper Sell；可能在流動性尚未進場時成交，滑點風險高",
+    "en": "Sniper Buy",
+    "cat": "交易"
+  },
+  {
+    "term": "Tracker追蹤器",
+    "simple": "追蹤特定錢包或推特帳號動向的工具，可即時通知",
+    "pro": "錢包可手動加、JSON 批次匯入或從交易頁一鍵加入；推特最多 1500 帳號但需達交易量門檻；追蹤視窗可拖曳浮動",
+    "en": "Tracker",
+    "cat": "功能"
+  }
+]

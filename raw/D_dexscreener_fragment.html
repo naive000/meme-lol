@@ -1,0 +1,167 @@
+<div class="tabs">
+  <button class="tab chip chip--active" data-tab="start">🚀 上手</button>
+  <button class="tab chip" data-tab="pro">🟣 進階</button>
+  <button class="tab chip" data-tab="glossary">📖 詞彙</button>
+  <button class="tab chip" data-tab="risk">⚠️ 風險</button>
+</div>
+
+<div class="tabpanel" data-panel="start" data-level="both">
+  <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+
+  <div class="card card--tool" data-level="both">
+    <span class="badge badge--beginner">新手友善</span>
+    <h3>DEX Screener 是什麼？</h3>
+    <p>一句話：業界標準、<strong>免費免登入</strong>的「鏈上看盤機」。任何幣只要有流動性池就會自動被它收錄，所以它最大的用途是——買之前拿它<strong>交叉核對價格、流動性、還有這幣是真是假</strong>。它只看不買，不會碰到你的錢。（2026/9查證，請以官方公告為準）</p>
+    <p><a class="ext btn btn--primary" href="https://dexscreener.com/" target="_blank" rel="noopener">前往 DEX Screener →</a></p>
+  </div>
+
+  <div class="steps" data-level="both">
+    <div class="step">
+      <div class="step__num">1</div>
+      <div class="step__title">搜尋一定要貼「合約地址 CA」</div>
+      <div class="step__detail">頂部搜尋框直接貼 <span class="term" data-term="CA合約地址">CA（合約地址）</span>最安全。<strong>同名同代號的假幣多到誇張</strong>，用名字搜幾乎一定會搜到假的。左側／底部可以切換鏈（Solana、Ethereum、Robinhood Chain 等）。</div>
+      <div class="step__shot shot">畫面示意：頂部搜尋框貼上一長串 CA，下方跳出唯一結果 🔍</div>
+    </div>
+    <div class="step">
+      <div class="step__num">2</div>
+      <div class="step__title">看懂首頁四大區塊</div>
+      <div class="step__detail">Trending（依 5m/1h/6h/24h 熱度）、New Pairs（新配對）、Gainers &amp; Losers（漲跌幅排行）、Top <span class="term" data-term="Boost付費推廣">Boosted</span>。<strong>Top Boosted 是專案方付錢買的推廣位，不代表推薦、更不代表安全。</strong>（2026/9查證，請以官方公告為準）</div>
+      <div class="step__shot shot">畫面示意：首頁四欄清單，Boosted 那欄旁有金色小圖示 🏠</div>
+    </div>
+    <div class="step">
+      <div class="step__num">3</div>
+      <div class="step__title">讀懂交易對頁面的 8 個數字</div>
+      <div class="step__detail">價格｜5m/1h/6h/24h 漲跌幅｜<span class="term" data-term="Txns交易筆數">Txns</span>（買/賣筆數）｜Volume 成交量｜<span class="term" data-term="Makers獨立交易者">Makers</span>（獨立交易者數）｜<span class="term" data-term="流動性Liquidity">Liquidity 流動性（最重要）</span>｜<span class="term" data-term="FDV">FDV</span>／市值｜Pair age 配對年齡｜<span class="term" data-term="Pooled池子代幣">Pooled tokens</span> 池子代幣量。看不懂全部沒關係，先盯住流動性。</div>
+      <div class="step__shot shot">畫面示意：交易對頁上方數據列，Liquidity 欄位被圈起來 📊</div>
+    </div>
+    <div class="step">
+      <div class="step__num">4</div>
+      <div class="step__title">三個安全判斷（買之前 30 秒做完）</div>
+      <div class="step__detail">① <strong>流動性 vs 市值</strong>：例如市值 $90M 但流動性只有 $4M，代表你買了很可能賣不掉。② <strong>買賣筆數是否嚴重失衡</strong>：只有買沒有賣＝很可能賣不出去。③ <strong>配對年齡與 Makers 數是否太少</strong>：太新、交易的人太少，風險極高。手機 App 內還會多顯示審計旗標。（2026/9查證，請以官方公告為準）</div>
+      <div class="step__shot shot">畫面示意：Liquidity $4M / FDV $90M 對照，旁邊紅色警示 🚩</div>
+    </div>
+    <div class="step">
+      <div class="step__num">5</div>
+      <div class="step__title">加自選 ＋ 設價格警示</div>
+      <div class="step__detail">點交易對旁的星號加入 <span class="term" data-term="Watchlist自選清單">Watchlist</span>；用 Alerts 設價格通知，可走 App 推播或 Telegram Bot。這樣你不用整天盯盤。</div>
+      <div class="step__shot shot">畫面示意：星號變黃＋Alerts 設定彈窗輸入目標價 ⭐</div>
+    </div>
+  </div>
+
+  <div class="metric" data-level="both">
+    <div class="metric__name">💧 Liquidity 流動性</div>
+    <div class="metric__safe">✅ 相對安全：流動性佔市值比例健康、金額不會小到你一賣就砸盤</div>
+    <div class="metric__danger">🛑 危險：市值幾千萬但流動性只有幾十萬——買得進、賣不掉</div>
+  </div>
+  <div class="metric" data-level="both">
+    <div class="metric__name">🔁 Txns 買/賣筆數</div>
+    <div class="metric__safe">✅ 相對安全：買賣筆數大致均衡</div>
+    <div class="metric__danger">🛑 危險：幾乎只有買單、賣單極少（典型的賣不掉訊號）</div>
+  </div>
+  <div class="metric" data-level="both">
+    <div class="metric__name">⏱️ Pair age ＋ Makers</div>
+    <div class="metric__safe">✅ 相對安全：有一定年齡、獨立交易者數量多</div>
+    <div class="metric__danger">🛑 危險：剛開幾分鐘、Makers 個位數＝極可能是收割盤</div>
+  </div>
+  <p style="opacity:.7">（判斷標準 2026/9查證，請以官方公告為準；數字僅為觀念說明，非投資建議）</p>
+</div>
+
+<div class="tabpanel" data-panel="pro" data-level="advanced">
+  <div class="card" data-level="advanced">
+    <span class="badge badge--advanced">進階</span>
+    <p>會看單一交易對之後，這些功能能把 DEX Screener 變成你的主控台。</p>
+  </div>
+
+  <details class="acc" data-level="advanced">
+    <summary>🟣 進階：Multicharts 多圖同看 ▸</summary>
+    <p>同時開最多 16 張 <span class="term" data-term="TradingView">TradingView</span> 圖表，可掛 RSI／MA／MACD／布林通道（BB）等技術指標。適合同時盯多個標的或做輪動觀察。（2026/9查證，請以官方公告為準）</p>
+    <div class="shot">畫面示意：4×4 網格排列的 K 線圖牆 🧱</div>
+  </details>
+
+  <details class="acc" data-level="advanced">
+    <summary>🟣 進階：New Pairs 篩選器 ▸</summary>
+    <p>New Pairs 可設條件：最低流動性、最低成交量、幣齡區間。先把明顯的垃圾濾掉，再人工看。這是打新最實用的一步——不設篩選條件的 New Pairs 就是一面雜訊瀑布。</p>
+    <div class="callout callout--tip">💡 建議把「最低流動性」設成你能接受的出場門檻，而不是設成 0 然後靠眼力硬看。</div>
+  </details>
+
+  <details class="acc" data-level="advanced">
+    <summary>🟣 進階：Boosts 與 Enhanced Token Info 的真相 ▸</summary>
+    <p>專案方付費（約 $100–$1500）可換金色圖示、搜尋優先顯示與加強版資料卡（<span class="term" data-term="Enhanced Token Info">Enhanced Token Info</span>）。（2026/9查證，請以官方公告為準）</p>
+    <ul>
+      <li>它<strong>不影響 Trending 演算法排序</strong>。</li>
+      <li>它<strong>完全不代表安全</strong>——GMGN 甚至把 <code>dexscr_boost_fee</code>、<code>dexscr_ad</code> 這些欄位當成<strong>風險指標</strong>在看。</li>
+    </ul>
+    <div class="callout callout--danger">🛑 看到金色勾／金色圖示就覺得「這幣被認證了」，是新手最常見、也最貴的誤會。</div>
+  </details>
+
+  <details class="acc" data-level="advanced">
+    <summary>🟣 進階：CTO、FDV 算法、Moonshot ▸</summary>
+    <ul>
+      <li><span class="term" data-term="CTO社群接管">CTO（Community Takeover）</span>：開發者跑路後由社群接管的標記。看到 CTO 就知道原團隊已經不在了。</li>
+      <li><span class="term" data-term="FDV">FDV</span> 算法 =（總供給量 − 已燒毀量）× 價格；而<span class="term" data-term="市值">市值</span>是用專案自報或 CoinGecko 的流通量算的。<strong>兩者差很大時要特別警覺</strong>（代表大量代幣還沒解鎖）。（2026/9查證，請以官方公告為準）</li>
+      <li><span class="term" data-term="Moonshot">Moonshot</span>：官方合作的公平發射／交易 App。</li>
+    </ul>
+  </details>
+
+  <details class="acc" data-level="advanced">
+    <summary>🟣 進階：Portfolio、公開 API、行動 App ▸</summary>
+    <p>還有 Portfolio 總覽，以及公開 API（配對資料、搜尋、代幣的所有池子），可以自己接腳本做監控。iOS／Android App 有完整圖表與推播。（2026/9查證，請以官方公告為準）</p>
+    <p>要更進一步的鏈上籌碼分析，可搭配：
+      <a class="ext btn btn--ghost" href="https://gmgn.ai/?chain=sol&ref=KzpFUrXI" target="_blank" rel="noopener">GMGN</a>
+      <a class="ext btn btn--ghost" href="https://axiom.trade/discover?chain=robinhood&pulseChains=sol,robinhood,bnb&trackerChains=sol,robinhood,bnb,eth&discoverChains=sol,robinhood,bnb" target="_blank" rel="noopener">Axiom</a>
+      ；想直接下單的新手則看
+      <a class="ext btn btn--ghost" href="https://fomo.family" target="_blank" rel="noopener">fomo</a>。
+    </p>
+  </details>
+</div>
+
+<div class="tabpanel" data-panel="glossary" data-level="both">
+  <div class="card" data-level="both">
+    <h3>DEX Screener 詞彙表</h3>
+    <p>點任一詞看白話解釋。</p>
+    <p>
+      <span class="term" data-term="CA合約地址">CA 合約地址</span>
+      <span class="term" data-term="交易對Pair">交易對 Pair</span>
+      <span class="term" data-term="流動性Liquidity">流動性 Liquidity</span>
+      <span class="term" data-term="FDV">FDV</span>
+      <span class="term" data-term="市值">市值</span>
+      <span class="term" data-term="Makers獨立交易者">Makers 獨立交易者</span>
+      <span class="term" data-term="Txns交易筆數">Txns 交易筆數</span>
+      <span class="term" data-term="Pooled池子代幣">Pooled 池子代幣</span>
+      <span class="term" data-term="Boost付費推廣">Boost 付費推廣</span>
+      <span class="term" data-term="Enhanced Token Info">Enhanced Token Info</span>
+      <span class="term" data-term="CTO社群接管">CTO 社群接管</span>
+      <span class="term" data-term="Multicharts">Multicharts</span>
+      <span class="term" data-term="TradingView">TradingView</span>
+      <span class="term" data-term="K線圖">K 線圖</span>
+      <span class="term" data-term="Watchlist自選清單">Watchlist 自選清單</span>
+      <span class="term" data-term="Moonshot">Moonshot</span>
+    </p>
+  </div>
+  <div class="callout callout--tip">💡 只記一個詞的話，記 <strong>Liquidity（流動性）</strong>——它決定你賣不賣得掉，比價格圖表重要得多。</div>
+</div>
+
+<div class="tabpanel" data-panel="risk" data-level="both">
+  <div class="card card--risk" data-level="both">
+    <span class="badge badge--danger">必讀</span>
+    <h3>用 DEX Screener 前一定要懂的風險</h3>
+  </div>
+
+  <div class="callout callout--danger">🛑 <strong>DEX Screener 沒有自己發行的代幣。</strong>任何叫「DEXScreener 幣／預售／空投」的，100% 是詐騙。（2026/9查證，請以官方公告為準）</div>
+
+  <div class="callout callout--danger">🛑 <strong>上榜、Boost、金色勾都是花錢買的。</strong>付費推廣不等於安全認證，甚至反過來——有些工具把「有付費推廣」當風險訊號在看。</div>
+
+  <div class="callout callout--danger">🛑 <strong>用名字搜很容易搜到假幣。</strong>同名同代號的仿冒幣滿地都是，永遠用 CA 合約地址搜尋，而且 CA 要從專案官方管道複製，不要從搜尋結果或別人的留言隨手貼。</div>
+
+  <div class="callout callout--warn">⚠️ <strong>圖表漂亮 ≠ 賣得掉。</strong>DEX Screener 顯示的是成交紀錄，不保證你能以那個價格出場。流動性才是關鍵，永遠先看它。</div>
+
+  <div class="callout callout--warn">⚠️ <strong>它只是看盤工具，不是安全審計。</strong>它不會替你判斷合約有沒有後門、能不能賣（honeypot）、莊家持倉多少。這些要另外用鏈上分析工具查。</div>
+
+  <div class="checklist" data-level="both">
+    <label><input type="checkbox"> 我是用 CA 合約地址搜的，不是用幣名</label>
+    <label><input type="checkbox"> 我看過流動性 vs 市值的比例</label>
+    <label><input type="checkbox"> 我確認買賣筆數沒有嚴重失衡</label>
+    <label><input type="checkbox"> 我知道金色圖示／Boost 是付費的，不代表安全</label>
+    <label><input type="checkbox"> 我知道任何「DEXScreener 代幣」都是詐騙</label>
+  </div>
+</div>

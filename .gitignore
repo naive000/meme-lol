@@ -1,0 +1,11 @@
+*:Zone.Identifier
+.claude/
+.bash*
+.zsh*
+.profile
+.gitconfig
+.gitmodules
+.idea
+.vscode
+.mcp.json
+.ripgreprc

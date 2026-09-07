@@ -1,0 +1,205 @@
+[
+  {
+    "term": "社交交易",
+    "en": "Social Trading",
+    "cat": "fomo／社群",
+    "simple": "把「看別人買什麼」變成App主功能的交易方式，像逛社群一樣邊看邊下單。",
+    "pro": "fomo 屬於社交發現型（social discovery），與提供自動跟單（copy trading）的平台不同，訊號到執行之間仍有人為延遲。"
+  },
+  {
+    "term": "動態牆Feed",
+    "en": "Feed",
+    "cat": "fomo／社群",
+    "simple": "App首頁像IG動態一樣，即時滾出交易員買了什麼、賣了什麼。",
+    "pro": "Feed 附帶已實現損益，但不揭露倉位規模變化，資訊本身帶有倖存者偏差。"
+  },
+  {
+    "term": "已實現損益",
+    "en": "Realized PnL",
+    "cat": "通用／指標",
+    "simple": "已經賣掉、真的落袋（或真的虧掉）的錢，不含還沒賣的部位。",
+    "pro": "與未實現損益（Unrealized PnL）相對；只看已實現會低估或高估交易者的實際風險曝險。"
+  },
+  {
+    "term": "排行榜",
+    "en": "Leaderboard",
+    "cat": "fomo／社群",
+    "simple": "依30天績效排名的交易員榜單。",
+    "pro": "報酬率排序看不出本金加減碼與失敗樣本，屬於典型的選擇偏誤展示，不宜當作跟單依據。"
+  },
+  {
+    "term": "關注vs跟單",
+    "en": "Follow vs Copy Trade",
+    "cat": "fomo／社群",
+    "simple": "關注＝對方買了會通知你；跟單＝系統自動幫你買。fomo 只有前者。",
+    "pro": "無自動執行代表存在通知延遲與滑價，模仿高頻迷因幣交易者的實際成交價常明顯劣於原單。"
+  },
+  {
+    "term": "嵌入式錢包",
+    "en": "Embedded Wallet (Privy)",
+    "cat": "錢包／安全",
+    "simple": "App幫你內建好的錢包，註冊完就有，不用抄12個助記詞。",
+    "pro": "fomo 使用 Privy 方案，金鑰以分片形式保管，仍可匯出；便利性換取部分託管信任假設。"
+  },
+  {
+    "term": "金鑰分片",
+    "en": "Key Sharding / MPC",
+    "cat": "錢包／安全",
+    "simple": "把私鑰切成好幾片分開存，單一片被偷也動不了你的錢。",
+    "pro": "多方運算（MPC）簽章的常見實作，需注意分片保管方與恢復流程的信任邊界。"
+  },
+  {
+    "term": "gas代付",
+    "en": "Gas Sponsorship",
+    "cat": "錢包／安全",
+    "simple": "鏈上手續費由平台先幫你付掉，你不用先準備一堆原生幣。",
+    "pro": "透過 paymaster 代付，成本通常已內含於交易手續費，實際總成本要看確認頁報價。"
+  },
+  {
+    "term": "帳戶抽象(ERC-4337)",
+    "en": "Account Abstraction",
+    "cat": "錢包／安全",
+    "simple": "一種讓錢包變聰明的技術，能做到免gas、免助記詞這些體驗。",
+    "pro": "ERC-4337 以 UserOperation ＋ bundler／paymaster 架構實作，是 gas 代付與社交恢復的技術基礎。"
+  },
+  {
+    "term": "USDG",
+    "en": "USDG",
+    "cat": "資產／穩定幣",
+    "simple": "在 Robinhood Chain 上使用的穩定幣，一樣約等於1美元。",
+    "pro": "fomo 六鏈共用單一現金餘額，Robinhood Chain 上以 USDG 計價，跨鏈時要留意計價幣種差異。"
+  },
+  {
+    "term": "Perps永續合約",
+    "en": "Perpetual Futures",
+    "cat": "衍生品",
+    "simple": "沒有到期日的槓桿合約，可以做多也可以做空。",
+    "pro": "fomo 接 Hyperliquid／TradeXYZ，標的涵蓋加密貨幣、美股、指數、原物料與 pre-IPO；每邊 0.05% 加底層費用，美國用戶不可使用。（2026/9查證，請以官方公告為準）"
+  },
+  {
+    "term": "逐倉",
+    "en": "Isolated Margin",
+    "cat": "衍生品",
+    "simple": "每個倉位的保證金各自獨立，爆倉只賠那一筆，不會拖垮全部。",
+    "pro": "與全倉（cross margin）相對；逐倉風險可控但可用保證金較低，強平價更接近進場價。"
+  },
+  {
+    "term": "論點(thesis)",
+    "en": "Thesis",
+    "cat": "fomo／社群",
+    "simple": "你對這筆交易的理由說明，可以附在交易旁邊給大家看。",
+    "pro": "公開 thesis 有助於事後檢討決策品質，但也會造成承諾偏誤，讓人不願停損。"
+  },
+  {
+    "term": "CA合約地址",
+    "en": "Contract Address",
+    "cat": "DEX／基礎",
+    "simple": "每個幣獨一無二的一長串地址，用它搜才不會搜到假幣。",
+    "pro": "務必從官方管道取得 CA 並逐字核對頭尾字元；同名同代號的仿冒部署成本極低。"
+  },
+  {
+    "term": "交易對Pair",
+    "en": "Pair",
+    "cat": "DEX／基礎",
+    "simple": "兩個幣互換的池子，例如 XXX/SOL，價格就是從這裡來的。",
+    "pro": "同一代幣可能有多個池，流動性分散時單一 pair 的深度不代表整體可出場量。"
+  },
+  {
+    "term": "流動性Liquidity",
+    "en": "Liquidity",
+    "cat": "DEX／指標",
+    "simple": "池子裡的錢有多深。太淺你一賣價格就崩，等於賣不掉。",
+    "pro": "看流動性與市值/FDV 的比值；例如市值 $90M 對上 $4M 流動性即為高風險結構。（2026/9查證，請以官方公告為準）"
+  },
+  {
+    "term": "FDV",
+    "en": "Fully Diluted Valuation",
+    "cat": "DEX／指標",
+    "simple": "假設所有幣都流通時的總估值，通常比市值大。",
+    "pro": "DEX Screener 算法為（總供給量 − 已燒毀量）× 價格；FDV 遠高於市值代表大量未解鎖籌碼的潛在賣壓。"
+  },
+  {
+    "term": "市值",
+    "en": "Market Cap",
+    "cat": "DEX／指標",
+    "simple": "目前流通中的幣 × 價格。",
+    "pro": "DEX Screener 的市值採專案自報或 CoinGecko 流通量，來源可被操縱，宜與 FDV 併看。"
+  },
+  {
+    "term": "Makers獨立交易者",
+    "en": "Makers",
+    "cat": "DEX／指標",
+    "simple": "有多少個不同的人在交易這個幣。人太少很危險。",
+    "pro": "Makers 數可被女巫地址灌水，需搭配持有人分布與資金來源分析交叉驗證。"
+  },
+  {
+    "term": "Txns交易筆數",
+    "en": "Transactions",
+    "cat": "DEX／指標",
+    "simple": "一段時間內買了幾筆、賣了幾筆。",
+    "pro": "買賣筆數嚴重失衡（幾乎只有買）常是無法賣出（honeypot）或機器人刷量的訊號。"
+  },
+  {
+    "term": "Pooled池子代幣",
+    "en": "Pooled Tokens",
+    "cat": "DEX／指標",
+    "simple": "池子裡實際放了多少該代幣與多少報價幣。",
+    "pro": "可用來推估池子構成與單邊抽流動性的風險，突然變化通常先於 rug。"
+  },
+  {
+    "term": "Boost付費推廣",
+    "en": "Boosts",
+    "cat": "DEX／推廣",
+    "simple": "專案方花錢買的曝光，換金色圖示和搜尋優先，跟安全無關。",
+    "pro": "費用約 $100–$1500，不影響 Trending 排序；GMGN 將 dexscr_boost_fee、dexscr_ad 視為風險欄位。（2026/9查證，請以官方公告為準）"
+  },
+  {
+    "term": "Enhanced Token Info",
+    "en": "Enhanced Token Info",
+    "cat": "DEX／推廣",
+    "simple": "專案方付費後可展示的加強版資料卡（logo、社群連結等）。",
+    "pro": "屬付費展示位，內容由專案方提供，不構成任何驗證或審計。"
+  },
+  {
+    "term": "CTO社群接管",
+    "en": "Community Takeover",
+    "cat": "DEX／標記",
+    "simple": "原本的開發者跑路了，現在由社群自己接手經營的標記。",
+    "pro": "CTO 代表原團隊已放棄；需檢視合約權限是否已放棄、流動性是否鎖定，社群治理品質差異極大。"
+  },
+  {
+    "term": "Multicharts",
+    "en": "Multicharts",
+    "cat": "DEX／功能",
+    "simple": "一個畫面同時開很多張圖表（最多16張）。",
+    "pro": "搭配 RSI／MA／MACD／BB 等指標，適合做多標的輪動與相關性觀察。（2026/9查證，請以官方公告為準）"
+  },
+  {
+    "term": "TradingView",
+    "en": "TradingView",
+    "cat": "DEX／功能",
+    "simple": "圖表引擎，就是你在網站上看到的那個K線圖工具。",
+    "pro": "DEX Screener 內嵌 TradingView 圖表，可掛常見技術指標與畫線工具。"
+  },
+  {
+    "term": "K線圖",
+    "en": "Candlestick Chart",
+    "cat": "通用／圖表",
+    "simple": "用一根一根紅綠棒子表示一段時間內的開高低收價格。",
+    "pro": "低流動性代幣的 K 線常被單筆大單扭曲，短週期棒體參考價值有限。"
+  },
+  {
+    "term": "Watchlist自選清單",
+    "en": "Watchlist",
+    "cat": "DEX／功能",
+    "simple": "點星號把幣加進自己的追蹤清單。",
+    "pro": "可搭配 Alerts 設價格通知（App 推播或 Telegram Bot），減少盯盤造成的衝動交易。"
+  },
+  {
+    "term": "Moonshot",
+    "en": "Moonshot",
+    "cat": "DEX／生態",
+    "simple": "DEX Screener 官方合作的公平發射與交易App。",
+    "pro": "官方合作不等於標的安全，發射平台本身的公平機制與代幣風險是兩件事。"
+  }
+]

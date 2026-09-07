@@ -1,0 +1,742 @@
+<title>鏈上四寶｜幣圈4大工具懶人包</title>
+<style>
+/* ===== 1. 主題 Token（深/淺色，所有顏色只能從這裡取用） ===== */
+:root{
+  --bg:#F4F5F8; --surface:#FFFFFF; --card:#FFFFFF; --border:#E1E4EA;
+  --text:#12131A; --text-2:#4B5162; --text-3:#8A90A0;
+  --accent:#6D28D9; --accent-2:#0891B2;
+  --up:#15803D; --down:#DC2626; --warn:#B45309;
+  --beginner:#15803D; --advanced:#6D28D9; --danger:#DC2626;
+  --shadow:0 1px 2px rgba(20,20,30,.08);
+  /* 衍生 token（軟底色／覆蓋層／反白字，一律先在此定義） */
+  --on-accent:#FFFFFF;
+  --accent-soft:#F1ECFD;
+  --info-soft:#E6F6FA;
+  --ok-soft:#E8F5EC;
+  --warn-soft:#FDF3E3;
+  --danger-soft:#FDECEC;
+  --scrim:rgba(18,19,26,.45);
+  --topbar-h:52px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0E14; --surface:#12161F; --card:#181D28; --border:#262D3B;
+    --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#6B7484;
+    --accent:#A78BFA; --accent-2:#22D3EE;
+    --up:#22C55E; --down:#EF4444; --warn:#F59E0B;
+    --beginner:#22C55E; --advanced:#A78BFA; --danger:#EF4444;
+    --shadow:0 1px 3px rgba(0,0,0,.4);
+    --on-accent:#0B0E14;
+    --accent-soft:#221B3A;
+    --info-soft:#0E2C33;
+    --ok-soft:#10261A;
+    --warn-soft:#2E2410;
+    --danger-soft:#2E1416;
+    --scrim:rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0E14; --surface:#12161F; --card:#181D28; --border:#262D3B;
+  --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#6B7484;
+  --accent:#A78BFA; --accent-2:#22D3EE;
+  --up:#22C55E; --down:#EF4444; --warn:#F59E0B;
+  --beginner:#22C55E; --advanced:#A78BFA; --danger:#EF4444;
+  --shadow:0 1px 3px rgba(0,0,0,.4);
+  --on-accent:#0B0E14;
+  --accent-soft:#221B3A;
+  --info-soft:#0E2C33;
+  --ok-soft:#10261A;
+  --warn-soft:#2E2410;
+  --danger-soft:#2E1416;
+  --scrim:rgba(0,0,0,.6);
+}
+
+/* ===== 2. 基礎 ===== */
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  font-size:16px; line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  overflow-x:clip; overflow-wrap:break-word;
+  padding-bottom:calc(72px + env(safe-area-inset-bottom));
+}
+h1,h2,h3,h4{line-height:1.35;margin:0 0 8px}
+h1{font-size:22px;font-weight:800;letter-spacing:-.01em}
+h2{font-size:19px;font-weight:800;margin-top:4px}
+h3{font-size:17px;font-weight:700}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin:0 0 6px}
+a{color:var(--accent-2)}
+small{font-size:13px;color:var(--text-3);line-height:1.5}
+code{
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;
+  font-variant-numeric:tabular-nums;
+  font-size:14px; background:var(--surface); border:1px solid var(--border);
+  border-radius:6px; padding:1px 5px; word-break:break-all; color:var(--text);
+}
+table{width:100%;display:block;overflow-x:auto;border-collapse:collapse;font-size:14px;-webkit-overflow-scrolling:touch}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;white-space:nowrap}
+th{background:var(--surface);color:var(--text-2);font-weight:700}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+hr{border:0;border-top:1px solid var(--border);margin:16px 0}
+
+/* ===== 3. 版面骨架 ===== */
+.topbar{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border)}
+.topbar__inner{max-width:640px;margin:0 auto;min-height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 16px}
+.brand{font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--text)}
+#modeToggle{width:auto;min-height:38px;padding:0 12px;font-size:13px;border-radius:999px;flex:0 0 auto}
+main{max-width:640px;margin:0 auto;padding:16px}
+.page{display:none}
+.page.is-active{display:block}
+.page-head{margin:0 0 12px}
+.page-head p{color:var(--text-2);font-size:15px;margin:0}
+
+/* 底部 Tab Bar */
+.tabbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:var(--surface);border-top:1px solid var(--border);
+  height:calc(56px + env(safe-area-inset-bottom));
+  padding-bottom:env(safe-area-inset-bottom);
+  display:flex;
+}
+.tabbar button{
+  flex:1 1 0;min-width:0;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  background:none;border:0;font-family:inherit;font-size:11px;color:var(--text-3);cursor:pointer;padding:0;
+}
+.tabbar button span{font-size:19px;line-height:1}
+.tabbar button[aria-current="page"]{color:var(--accent);font-weight:700}
+
+/* ===== 4. 元件 ===== */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin:0 0 14px;box-shadow:var(--shadow)}
+.card--tool{border-left:4px solid var(--accent)}
+.card--risk{border-left:4px solid var(--danger)}
+.card > :last-child{margin-bottom:0}
+
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;line-height:1;padding:5px 9px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);margin:0 6px 6px 0}
+.badge--beginner{color:var(--beginner);border-color:var(--beginner);background:var(--ok-soft)}
+.badge--advanced{color:var(--advanced);border-color:var(--advanced);background:var(--accent-soft)}
+.badge--danger{color:var(--danger);border-color:var(--danger);background:var(--danger-soft)}
+
+.steps{margin:8px 0 0;padding:0;list-style:none}
+.steps > .step{position:relative;padding:0 0 16px 44px;margin:0}
+.steps > .step:last-child{padding-bottom:0}
+.steps > .step:not(:last-child)::before{content:"";position:absolute;left:14px;top:34px;bottom:2px;width:2px;background:var(--border)}
+.step__num{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.step__title{font-weight:700;font-size:16px;margin:2px 0 6px;color:var(--text)}
+.step__detail{color:var(--text-2);font-size:15px;margin:0 0 8px}
+.step__detail:last-child{margin-bottom:0}
+.step__shot{margin-top:8px}
+
+.shot{border:1.5px dashed var(--border);border-radius:12px;background:var(--surface);color:var(--text-3);font-size:13px;text-align:center;padding:16px 12px;min-height:76px;display:flex;align-items:center;justify-content:center}
+
+.callout{border:1px solid var(--border);border-left-width:4px;border-radius:12px;padding:12px 14px;margin:12px 0;font-size:15px;background:var(--surface);color:var(--text-2)}
+.callout > :last-child{margin-bottom:0}
+.callout--tip{border-color:var(--accent-2);background:var(--info-soft);color:var(--text)}
+.callout--warn{border-color:var(--warn);background:var(--warn-soft);color:var(--text)}
+.callout--danger{border-color:var(--danger);background:var(--danger-soft);color:var(--text)}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;text-align:center}
+.btn--primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn--ghost{background:transparent;border-color:var(--accent);color:var(--accent)}
+.btn + .btn{margin-top:10px}
+
+.acc{border:1px solid var(--border);border-radius:12px;background:var(--surface);margin:12px 0;overflow:hidden}
+.acc > summary{cursor:pointer;list-style:none;min-height:48px;display:flex;align-items:center;padding:10px 14px;font-size:15px;font-weight:700;color:var(--advanced)}
+.acc > summary::-webkit-details-marker{display:none}
+.acc[open] > summary{border-bottom:1px solid var(--border)}
+.acc > :not(summary){margin-left:14px;margin-right:14px}
+.acc > summary + *{margin-top:12px}
+.acc > :last-child{margin-bottom:12px}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tabpanel{display:none}
+.tabpanel.is-active{display:block}
+
+.chip{flex:0 0 auto;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap}
+.chip--active{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+.term{color:var(--accent);border-bottom:1px dashed var(--accent);cursor:pointer;font-weight:700}
+
+.checklist{margin:8px 0 0;padding:0;list-style:none}
+.checklist > label{display:flex;align-items:flex-start;gap:12px;min-height:48px;padding:12px 0;border-bottom:1px solid var(--border);font-size:15px;color:var(--text);cursor:pointer}
+.checklist > label:last-child{border-bottom:0}
+.checklist > label > input[type=checkbox]{flex:0 0 auto;width:22px;height:22px;margin:2px 0 0;accent-color:var(--accent)}
+
+.metric{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:12px 14px;margin:10px 0}
+.metric__name{font-weight:800;font-size:15px;color:var(--text);margin-bottom:6px}
+.metric__safe,.metric__danger{font-size:14px;line-height:1.55;font-variant-numeric:tabular-nums;display:block}
+.metric__safe{color:var(--up)}
+.metric__danger{color:var(--down);margin-top:4px}
+
+.ext{color:var(--accent-2);text-decoration:underline;word-break:break-all}
+
+/* 工具頁 sticky chip 列（重用 .tabs 容器） */
+#toolChips{position:sticky;top:var(--topbar-h);z-index:40;background:var(--bg);margin:-16px -16px 8px;padding:12px 16px 10px}
+
+/* 詞典 */
+#glossarySearch{width:100%;min-height:48px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:16px}
+#glossaryList .card{margin-bottom:10px}
+
+/* 底部彈窗 */
+.sheet-backdrop{position:fixed;inset:0;z-index:90;background:var(--scrim)}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;
+  max-width:640px;margin:0 auto;
+  background:var(--surface);color:var(--text);
+  border:1px solid var(--border);border-bottom:0;
+  border-radius:20px 20px 0 0;box-shadow:var(--shadow);
+  padding:8px 16px calc(16px + env(safe-area-inset-bottom));
+  max-height:82vh;overflow-y:auto;
+  transform:translateY(0);transition:transform .18s ease,opacity .18s ease;
+}
+.sheet::before{content:"";display:block;width:40px;height:4px;border-radius:999px;background:var(--border);margin:4px auto 12px}
+
+/* ===== 5. 模式切換（小白／進階） ===== */
+body[data-mode="beginner"] [data-level="advanced"]{display:none !important}
+body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
+body[data-mode="advanced"] .step__detail{display:none}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">🪙 鏈上四寶</span>
+    <button id="modeToggle" class="btn btn--ghost" type="button" aria-pressed="false">🟢 小白模式</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= 首頁 ================= -->
+  <section class="page" id="page-home" data-page="home">
+    <div class="card" data-level="both">
+      <h1>用手機 10 分鐘看懂 GMGN、Axiom、fomo、DEX Screener</h1>
+      <p>從「發現一顆新幣」到「安全出場」的完整流程，全部用手機就能做完。不懂鏈上也沒關係，跟著步驟走就好。</p>
+      <a class="btn btn--primary" href="#/flow">👉 我是小白，從這裡開始</a>
+      <a class="btn btn--ghost" href="#/tools">🧰 直接看四個工具</a>
+    </div>
+
+    <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+
+    <h2>四個工具，一句話認識</h2>
+
+    <div class="card card--tool" data-level="both">
+      <h3>🔍 GMGN.ai <span class="badge badge--beginner">小白友善 ★★★☆☆</span></h3>
+      <p>迷因幣「安全檢查＋聰明錢跟單」終端機。買之前先來這裡體檢，看看聰明錢在買什麼。</p>
+      <p><small>支援鏈：SOL／BSC／ETH／Base／Monad／TRON（＋Robinhood Chain）｜手機：Web＋App＋Telegram Bot｜費率：每筆約 1%（買賣各收）（2026/9查證，請以官方公告為準）</small></p>
+      <a class="btn btn--ghost" href="#/tools/gmgn">進入 GMGN 教學 ▸</a>
+    </div>
+
+    <div class="card card--tool" data-level="both">
+      <h3>⚡ Axiom.trade <span class="badge badge--advanced">小白友善 ★★☆☆☆</span></h3>
+      <p>專業級多鏈交易終端，招牌是 Pulse 新幣雷達，能在幣還很小的時候就看到它。</p>
+      <p><small>支援鏈：SOL／BNB／ETH／Robinhood Chain｜手機：沒有官方 App，用瀏覽器「加到主畫面」當 PWA｜費率：基礎 1%，等級最低 0.75%，推薦碼再 -10%（2026/9查證，請以官方公告為準）</small></p>
+      <a class="btn btn--ghost" href="#/tools/axiom">進入 Axiom 教學 ▸</a>
+    </div>
+
+    <div class="card card--tool" data-level="both">
+      <h3>📱 fomo.family <span class="badge badge--beginner">小白友善 ★★★★★</span></h3>
+      <p>社交交易 App，可以用 Apple Pay 入金、不用背助記詞，是四個裡面門檻最低的。</p>
+      <p><small>支援鏈：SOL／Base／BNB／Monad／ETH／Robinhood Chain｜手機：iOS／Android／Web｜費率：現貨約 0.5%，gas 由平台代付（2026/9查證，請以官方公告為準）</small></p>
+      <a class="btn btn--ghost" href="#/tools/fomo">進入 fomo 教學 ▸</a>
+    </div>
+
+    <div class="card card--tool" data-level="both">
+      <h3>📊 DEX Screener <span class="badge badge--beginner">小白友善 ★★★★☆</span></h3>
+      <p>免費、免登入的多鏈圖表與交易對聚合器，用來查價、查流動性、交叉核對合約地址。</p>
+      <p><small>支援鏈：幾乎所有主流鏈｜手機：iOS／Android／Web｜費率：免費（2026/9查證，請以官方公告為準）</small></p>
+      <a class="btn btn--ghost" href="#/tools/dexscreener">進入 DEX Screener 教學 ▸</a>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>🤔 到處看到的「Robinhood」是什麼？</h2>
+      <p>這裡的 Robinhood <strong>不是</strong> Robinhood 那間券商的 App，而是他們推出的以太坊 Layer 2 —— <strong>Robinhood Chain</strong>（2026/7 上線、EVM 相容、gas 用 ETH）（2026/9查證，請以官方公告為準）。</p>
+      <p>它本來想做股票代幣化（RWA），結果上面 79% 以上的成交量都是迷因幣（2026/9查證，請以官方公告為準）。</p>
+      <div class="callout callout--danger">🚨 Robinhood 公司<strong>不審核、不背書</strong>這條鏈上的任何代幣，同名仿冒幣非常多。看到「Robinhood 官方幣」之類的說法，先當作假的。</div>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>開始前必知 3 件事</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__title">先小額，把第一筆當學費</div>
+          <div class="step__detail">用你「整包歸零也不影響生活」的金額開始，先跑完一次買進到賣出的完整流程，再考慮加碼。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__title">先看<span class="term" data-term="流動性">流動性</span>，再看漲幅</div>
+          <div class="step__detail">流動性太淺的幣，你買得進去、賣不出來。買之前先確認池子大小與市值的比例。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__title">先設好停損金額再下單</div>
+          <div class="step__detail">下單前就先想好「跌到多少我就走」，並把它寫下來。沒有停損計畫的單，等於把決定權交給情緒。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 工具頁 ================= -->
+  <section class="page" id="page-tools" data-page="tools">
+    <div class="tabs" id="toolChips" role="tablist" aria-label="選擇工具">
+      <button class="chip chip--active" type="button" data-tool="gmgn" role="tab" aria-selected="true">🔍 GMGN</button>
+      <button class="chip" type="button" data-tool="axiom" role="tab" aria-selected="false">⚡ Axiom</button>
+      <button class="chip" type="button" data-tool="fomo" role="tab" aria-selected="false">📱 fomo</button>
+      <button class="chip" type="button" data-tool="dexscreener" role="tab" aria-selected="false">📊 DEX Screener</button>
+    </div>
+
+    <!-- ---------- GMGN ---------- -->
+    <section id="tool-gmgn" data-tool="gmgn">
+      <div class="page-head">
+        <h1>🔍 GMGN.ai</h1>
+        <p>迷因幣「安全檢查＋聰明錢跟單」終端機｜費率每筆約 1%（買賣各收）（2026/9查證，請以官方公告為準）</p>
+      </div>
+      <a class="btn btn--primary ext" href="https://gmgn.ai/?chain=sol&ref=KzpFUrXI" target="_blank" rel="noopener">開啟 GMGN 官網 ↗</a>
+      <div class="tabs" role="tablist" aria-label="GMGN 內容分頁">
+        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+      </div>
+      <div class="tabpanel is-active" data-panel="start">
+        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+        <!-- CONTENT:gmgn:start -->
+      </div>
+      <div class="tabpanel" data-panel="pro">
+        <!-- CONTENT:gmgn:pro -->
+      </div>
+      <div class="tabpanel" data-panel="glossary">
+        <!-- CONTENT:gmgn:glossary -->
+      </div>
+      <div class="tabpanel" data-panel="risk">
+        <!-- CONTENT:gmgn:risk -->
+      </div>
+    </section>
+
+    <!-- ---------- Axiom ---------- -->
+    <section id="tool-axiom" data-tool="axiom" hidden>
+      <div class="page-head">
+        <h1>⚡ Axiom.trade</h1>
+        <p>專業級多鏈交易終端（Pulse 新幣雷達）｜基礎 1%，等級最低 0.75%，推薦碼再 -10%（2026/9查證，請以官方公告為準）</p>
+      </div>
+      <a class="btn btn--primary ext" href="https://axiom.trade/discover?chain=robinhood&pulseChains=sol,robinhood,bnb&trackerChains=sol,robinhood,bnb,eth&discoverChains=sol,robinhood,bnb" target="_blank" rel="noopener">開啟 Axiom 官網 ↗</a>
+      <div class="tabs" role="tablist" aria-label="Axiom 內容分頁">
+        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+      </div>
+      <div class="tabpanel is-active" data-panel="start">
+        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+        <!-- CONTENT:axiom:start -->
+      </div>
+      <div class="tabpanel" data-panel="pro">
+        <!-- CONTENT:axiom:pro -->
+      </div>
+      <div class="tabpanel" data-panel="glossary">
+        <!-- CONTENT:axiom:glossary -->
+      </div>
+      <div class="tabpanel" data-panel="risk">
+        <!-- CONTENT:axiom:risk -->
+      </div>
+    </section>
+
+    <!-- ---------- fomo ---------- -->
+    <section id="tool-fomo" data-tool="fomo" hidden>
+      <div class="page-head">
+        <h1>📱 fomo.family</h1>
+        <p>社交交易 App，Apple Pay 入金、免助記詞｜現貨約 0.5%，gas 平台代付（2026/9查證，請以官方公告為準）</p>
+      </div>
+      <a class="btn btn--primary ext" href="https://fomo.family" target="_blank" rel="noopener">開啟 fomo 官網 ↗</a>
+      <div class="tabs" role="tablist" aria-label="fomo 內容分頁">
+        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+      </div>
+      <div class="tabpanel is-active" data-panel="start">
+        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+        <!-- CONTENT:fomo:start -->
+      </div>
+      <div class="tabpanel" data-panel="pro">
+        <!-- CONTENT:fomo:pro -->
+      </div>
+      <div class="tabpanel" data-panel="glossary">
+        <!-- CONTENT:fomo:glossary -->
+      </div>
+      <div class="tabpanel" data-panel="risk">
+        <!-- CONTENT:fomo:risk -->
+      </div>
+    </section>
+
+    <!-- ---------- DEX Screener ---------- -->
+    <section id="tool-dexscreener" data-tool="dexscreener" hidden>
+      <div class="page-head">
+        <h1>📊 DEX Screener</h1>
+        <p>免費免登入的多鏈圖表／交易對聚合器｜完全免費（2026/9查證，請以官方公告為準）</p>
+      </div>
+      <a class="btn btn--primary ext" href="https://dexscreener.com/" target="_blank" rel="noopener">開啟 DEX Screener 官網 ↗</a>
+      <div class="tabs" role="tablist" aria-label="DEX Screener 內容分頁">
+        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+      </div>
+      <div class="tabpanel is-active" data-panel="start">
+        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+        <!-- CONTENT:dexscreener:start -->
+      </div>
+      <div class="tabpanel" data-panel="pro">
+        <!-- CONTENT:dexscreener:pro -->
+      </div>
+      <div class="tabpanel" data-panel="glossary">
+        <!-- CONTENT:dexscreener:glossary -->
+      </div>
+      <div class="tabpanel" data-panel="risk">
+        <!-- CONTENT:dexscreener:risk -->
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= 流程頁 ================= -->
+  <section class="page" id="page-flow" data-page="flow">
+    <div class="page-head">
+      <h1>🔗 一條龍流程：從發現新幣到出場</h1>
+      <p>四個工具各有專長，串起來才好用。照著這條時間軸走一次，你就知道每個步驟該打開哪一個。</p>
+    </div>
+    <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+    <!-- CONTENT:flow -->
+  </section>
+
+  <!-- ================= 詞典頁 ================= -->
+  <section class="page" id="page-glossary" data-page="glossary">
+    <div class="page-head">
+      <h1>📖 白話詞典</h1>
+      <p>看到聽不懂的字先來這裡查。文章裡有底線的<span class="term" data-term="流動性">紫色詞</span>都可以直接點開。</p>
+    </div>
+    <input id="glossarySearch" type="search" placeholder="🔎 搜尋詞彙，例如：流動性、CA、滑點" autocomplete="off" aria-label="搜尋詞彙">
+    <div class="tabs" id="glossaryCats" aria-label="詞彙分類">
+      <button class="chip chip--active" type="button" data-cat="all">全部</button>
+      <button class="chip" type="button" data-cat="基礎">基礎</button>
+      <button class="chip" type="button" data-cat="安全指標">安全指標</button>
+      <button class="chip" type="button" data-cat="下單">下單</button>
+      <button class="chip" type="button" data-cat="鏈與錢包">鏈與錢包</button>
+    </div>
+    <div id="glossaryList"></div>
+  </section>
+
+  <!-- ================= 風險頁 ================= -->
+  <section class="page" id="page-risk" data-page="risk">
+    <div class="page-head">
+      <h1>⚠️ 風險與免責</h1>
+      <p>這一頁比任何教學都重要，請先看完再開始操作。</p>
+    </div>
+
+    <div class="card card--risk" data-level="both">
+      <h2>免責聲明</h2>
+      <p>本站內容僅為工具操作教學與個人整理，<strong>不是投資建議</strong>，也不構成任何買賣要約。迷因幣屬於極高風險資產，絕大多數會歸零，你可能損失全部本金。所有介面、費率、規則請以各官方最新公告為準（2026/9查證，請以官方公告為準）。請只用你可以完全承受損失的資金，並自行為每一筆交易負責。</p>
+      <!-- CONTENT:risk-disclaimer -->
+    </div>
+
+    <h2>🎣 5 種最常見的被割方式</h2>
+    <!-- CONTENT:risk-scams -->
+
+    <div class="card card--risk" data-level="both">
+      <h2>✅ 下單前安全檢查清單</h2>
+      <p><small>勾選狀態會存在這台裝置的瀏覽器裡，換裝置不會同步。</small></p>
+      <div class="checklist" id="safetyChecklist">
+        <label><input type="checkbox" data-ck="ca"><span>我有把 <span class="term" data-term="CA">CA（合約地址）</span>拿到兩個不同工具交叉核對過，字元完全一致</span></label>
+        <label><input type="checkbox" data-ck="liq"><span>我確認過<span class="term" data-term="流動性">流動性</span>大於市值的 5%（2026/9查證，請以官方公告為準）</span></label>
+        <label><input type="checkbox" data-ck="top10"><span>我看過 Top 10 持倉比例，沒有過度集中在少數地址</span></label>
+        <label><input type="checkbox" data-ck="stop"><span>我已經決定好停損金額，而且寫下來了</span></label>
+        <label><input type="checkbox" data-ck="small"><span>我先用一筆極小額測試過買進與賣出，確認賣得掉</span></label>
+        <label><input type="checkbox" data-ck="backup"><span>我的錢包助記詞／私鑰已離線備份，而且沒有拍照上傳雲端</span></label>
+        <label><input type="checkbox" data-ck="auth"><span>我檢查過沒有隨便簽署不明授權，也沒點過來路不明的連結</span></label>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tabbar" aria-label="主要導覽">
+  <button type="button" data-route="home"><span aria-hidden="true">🏠</span>首頁</button>
+  <button type="button" data-route="tools"><span aria-hidden="true">🧰</span>工具</button>
+  <button type="button" data-route="flow"><span aria-hidden="true">🔗</span>流程</button>
+  <button type="button" data-route="glossary"><span aria-hidden="true">📖</span>詞典</button>
+  <button type="button" data-route="risk"><span aria-hidden="true">⚠️</span>風險</button>
+</nav>
+
+<div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+  <h2 id="sheetTitle">標題</h2>
+  <div id="sheetBody"></div>
+  <button class="btn btn--primary" type="button" id="sheetAction">我知道了</button>
+</div>
+
+<script>
+/* 詞典資料：下一階段請把下面這行換成完整的 GLOSSARY 陣列
+   格式：window.GLOSSARY = [{term:"流動性", en:"Liquidity", cat:"安全指標", simple:"白話解釋", pro:"進階補充"}, ...] */
+window.GLOSSARY = window.GLOSSARY || [];
+/* CONTENT:glossary-data */
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- localStorage 安全存取 ---------- */
+  var LS = {
+    get: function(k, d){ try{ var v = localStorage.getItem(k); return (v === null || v === undefined) ? d : v; }catch(e){ return d; } },
+    set: function(k, v){ try{ localStorage.setItem(k, v); }catch(e){} }
+  };
+
+  var ROUTES = ['home','tools','flow','glossary','risk'];
+  var TOOLS  = ['gmgn','axiom','fomo','dexscreener'];
+
+  var pages    = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navBtns  = Array.prototype.slice.call(document.querySelectorAll('.tabbar button'));
+  var toolChips= Array.prototype.slice.call(document.querySelectorAll('#toolChips .chip'));
+  var toolSecs = TOOLS.map(function(t){ return document.getElementById('tool-' + t); });
+
+  /* ---------- 模式切換：小白／進階 ---------- */
+  var modeBtn = document.getElementById('modeToggle');
+  function applyMode(mode){
+    if(mode !== 'advanced'){ mode = 'beginner'; }
+    document.body.setAttribute('data-mode', mode);
+    if(modeBtn){
+      modeBtn.setAttribute('aria-pressed', mode === 'advanced' ? 'true' : 'false');
+      modeBtn.textContent = mode === 'advanced' ? '🟣 進階模式' : '🟢 小白模式';
+    }
+    var accs = document.querySelectorAll('details.acc');
+    for(var i = 0; i < accs.length; i++){ accs[i].open = (mode === 'advanced'); }
+    LS.set('c4_mode', mode);
+    renderGlossary();
+  }
+  if(modeBtn){
+    modeBtn.addEventListener('click', function(){
+      applyMode(document.body.getAttribute('data-mode') === 'advanced' ? 'beginner' : 'advanced');
+    });
+  }
+
+  /* ---------- 工具 chip 切換 ---------- */
+  function selectTool(name){
+    if(TOOLS.indexOf(name) < 0){ name = 'gmgn'; }
+    toolChips.forEach(function(c){
+      var on = c.getAttribute('data-tool') === name;
+      c.classList.toggle('chip--active', on);
+      c.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    toolSecs.forEach(function(s){
+      if(!s){ return; }
+      s.hidden = (s.getAttribute('data-tool') !== name);
+    });
+    LS.set('c4_tool', name);
+  }
+  toolChips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var t = c.getAttribute('data-tool');
+      selectTool(t);
+      if(location.hash !== '#/tools/' + t){ location.hash = '#/tools/' + t; }
+    });
+  });
+
+  /* ---------- 工具頁內的 4 個子分頁 ---------- */
+  document.addEventListener('click', function(e){
+    var tab = e.target.closest ? e.target.closest('.tab') : null;
+    if(!tab){ return; }
+    var sec = tab.closest('section');
+    if(!sec){ return; }
+    var key = tab.getAttribute('data-tab');
+    var tabsInSec = sec.querySelectorAll(':scope > .tabs > .tab');
+    for(var i = 0; i < tabsInSec.length; i++){
+      tabsInSec[i].setAttribute('aria-selected', tabsInSec[i] === tab ? 'true' : 'false');
+    }
+    var panels = sec.querySelectorAll(':scope > .tabpanel');
+    for(var j = 0; j < panels.length; j++){
+      panels[j].classList.toggle('is-active', panels[j].getAttribute('data-panel') === key);
+    }
+  });
+
+  /* ---------- Hash 路由 ---------- */
+  function parseHash(){
+    var raw = (location.hash || '').replace(/^#\/?/, '');
+    var parts = raw.split('/');
+    var page = parts[0] || 'home';
+    if(ROUTES.indexOf(page) < 0){ page = 'home'; }
+    return { page: page, sub: parts[1] || '' };
+  }
+  function route(){
+    var r = parseHash();
+    pages.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-page') === r.page); });
+    navBtns.forEach(function(b){
+      if(b.getAttribute('data-route') === r.page){ b.setAttribute('aria-current', 'page'); }
+      else { b.removeAttribute('aria-current'); }
+    });
+    if(r.page === 'tools'){ selectTool(r.sub || LS.get('c4_tool', 'gmgn')); }
+    if(r.page === 'glossary'){ renderGlossary(); }
+    try{ window.scrollTo(0, 0); }catch(e){}
+  }
+  window.addEventListener('hashchange', route);
+  navBtns.forEach(function(b){
+    b.addEventListener('click', function(){ location.hash = '#/' + b.getAttribute('data-route'); });
+  });
+
+  /* ---------- 詞典渲染 ---------- */
+  var searchEl = document.getElementById('glossarySearch');
+  var listEl   = document.getElementById('glossaryList');
+  var catChips = Array.prototype.slice.call(document.querySelectorAll('#glossaryCats .chip'));
+  var curCat   = 'all';
+
+  function esc(s){
+    return String(s === undefined || s === null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function allTerms(){
+    var g = window.GLOSSARY;
+    return Object.prototype.toString.call(g) === '[object Array]' ? g : [];
+  }
+  function renderGlossary(){
+    if(!listEl){ return; }
+    var data = allTerms();
+    if(!data.length){
+      listEl.innerHTML = '<div class="card"><p>📚 詞典整理中，之後會補上完整詞彙表。你也可以先從「工具」頁每個工具的「詞彙」分頁看起。</p></div>';
+      return;
+    }
+    var q = (searchEl && searchEl.value ? searchEl.value : '').trim().toLowerCase();
+    var rows = data.filter(function(t){
+      if(!t){ return false; }
+      if(curCat !== 'all' && t.cat !== curCat){ return false; }
+      if(!q){ return true; }
+      return [t.term, t.en, t.simple, t.pro].join(' ').toLowerCase().indexOf(q) >= 0;
+    });
+    if(!rows.length){
+      listEl.innerHTML = '<div class="card"><p>🔍 找不到相符的詞彙，換個關鍵字試試。</p></div>';
+      return;
+    }
+    listEl.innerHTML = rows.map(function(t){
+      var pro = t.pro ? '<div data-level="advanced"><hr><p><span class="badge badge--advanced">進階</span></p><p>' + esc(t.pro) + '</p></div>' : '';
+      return '<div class="card">' +
+        '<h3>' + esc(t.term) + (t.en ? ' <small>' + esc(t.en) + '</small>' : '') + '</h3>' +
+        (t.cat ? '<p><span class="badge">' + esc(t.cat) + '</span></p>' : '') +
+        '<p>' + esc(t.simple) + '</p>' + pro +
+      '</div>';
+    }).join('');
+  }
+  window.refreshGlossary = renderGlossary;
+
+  if(searchEl){ searchEl.addEventListener('input', renderGlossary); }
+  catChips.forEach(function(c){
+    c.addEventListener('click', function(){
+      curCat = c.getAttribute('data-cat') || 'all';
+      catChips.forEach(function(x){ x.classList.toggle('chip--active', x === c); });
+      renderGlossary();
+    });
+  });
+
+  /* ---------- 底部彈窗 ---------- */
+  var sheet     = document.getElementById('sheet');
+  var backdrop  = document.getElementById('sheetBackdrop');
+  var sheetTtl  = document.getElementById('sheetTitle');
+  var sheetBody = document.getElementById('sheetBody');
+  var sheetBtn  = document.getElementById('sheetAction');
+  var onSheetAction = null;
+  var sheetLocked = false;
+
+  function openSheet(title, bodyHTML, btnText, action, locked){
+    if(!sheet){ return; }
+    sheetTtl.textContent = title;
+    sheetBody.innerHTML = bodyHTML;
+    sheetBtn.textContent = btnText || '關閉';
+    onSheetAction = action || null;
+    sheetLocked = !!locked;
+    backdrop.hidden = false;
+    sheet.hidden = false;
+  }
+  function closeSheet(){
+    if(!sheet){ return; }
+    sheet.hidden = true;
+    backdrop.hidden = true;
+    onSheetAction = null;
+    sheetLocked = false;
+  }
+  if(sheetBtn){
+    sheetBtn.addEventListener('click', function(){
+      var fn = onSheetAction;
+      closeSheet();
+      if(fn){ fn(); }
+    });
+  }
+  if(backdrop){
+    backdrop.addEventListener('click', function(){ if(!sheetLocked){ closeSheet(); } });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && sheet && !sheet.hidden && !sheetLocked){ closeSheet(); }
+  });
+
+  /* ---------- 術語點擊 ---------- */
+  document.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.term') : null;
+    if(!el){ return; }
+    var name = el.getAttribute('data-term') || el.textContent.trim();
+    var hit = null, data = allTerms();
+    for(var i = 0; i < data.length; i++){
+      if(data[i] && (data[i].term === name || data[i].en === name)){ hit = data[i]; break; }
+    }
+    if(!hit){
+      openSheet(name, '<p>這個詞還在整理中，先到「📖 詞典」頁看看其他解釋。</p>', '關閉', null, false);
+      return;
+    }
+    var isPro = document.body.getAttribute('data-mode') === 'advanced';
+    var html = (hit.cat ? '<p><span class="badge">' + esc(hit.cat) + '</span>' + (hit.en ? ' <small>' + esc(hit.en) + '</small>' : '') + '</p>' : '') +
+               '<p>' + esc(hit.simple) + '</p>' +
+               (isPro && hit.pro ? '<hr><p><span class="badge badge--advanced">進階</span></p><p>' + esc(hit.pro) + '</p>' : '');
+    openSheet(hit.term, html, '關閉', null, false);
+  });
+
+  /* ---------- 安全檢查清單 ---------- */
+  var CK_KEY = 'c4_checklist';
+  var ckBoxes = Array.prototype.slice.call(document.querySelectorAll('#safetyChecklist input[type=checkbox]'));
+  function loadChecklist(){
+    var saved = {};
+    try{ saved = JSON.parse(LS.get(CK_KEY, '{}')) || {}; }catch(e){ saved = {}; }
+    ckBoxes.forEach(function(b){ b.checked = !!saved[b.getAttribute('data-ck')]; });
+  }
+  function saveChecklist(){
+    var out = {};
+    ckBoxes.forEach(function(b){ out[b.getAttribute('data-ck')] = b.checked; });
+    try{ LS.set(CK_KEY, JSON.stringify(out)); }catch(e){}
+  }
+  ckBoxes.forEach(function(b){ b.addEventListener('change', saveChecklist); });
+
+  /* ---------- 首次進站免責彈窗 ---------- */
+  function maybeFirstVisit(){
+    if(LS.get('c4_seen_disclaimer', '') === '1'){ return; }
+    openSheet('⚠️ 先講清楚',
+      '<p>本站只是<strong>工具操作教學</strong>，<strong>不是投資建議</strong>。</p>' +
+      '<p>迷因幣風險極高、多數會歸零，你可能虧掉全部本金。所有費率與介面請以官方公告為準（2026/9查證，請以官方公告為準）。</p>' +
+      '<p>請只用你可以完全承受損失的錢，並自行為每一筆交易負責。</p>',
+      '我知道了',
+      function(){ LS.set('c4_seen_disclaimer', '1'); },
+      true);
+  }
+
+  /* ---------- 啟動 ---------- */
+  applyMode(LS.get('c4_mode', 'beginner'));
+  loadChecklist();
+  if(!location.hash){
+    try{ history.replaceState(null, '', '#/home'); }catch(e){ location.hash = '#/home'; }
+  }
+  route();
+  setTimeout(renderGlossary, 0);
+  maybeFirstVisit();
+})();
+</script>

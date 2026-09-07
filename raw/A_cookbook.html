@@ -1,0 +1,84 @@
+<!-- ===================================================================
+     鏈上四寶｜格式對照範本 COOKBOOK
+     下一階段產內容時，只准用以下 class，直接複製這裡的結構改文字。
+     插入位置：把 <!-- CONTENT:xxx --> 註解整行換成你的內容片段即可。
+     注意：每個工具「上手」面板的 callout--warn 已經寫在骨架裡，
+           你的內容要接在那個 callout 之後，不要重複再寫一次。
+     =================================================================== -->
+
+<!-- ① .steps > .step 步驟（上手面板主力，step__detail 在進階模式會自動隱藏） -->
+<div class="steps" data-level="both">
+  <div class="step">
+    <div class="step__num">1</div>
+    <div class="step__title">貼上合約地址（<span class="term" data-term="CA">CA</span>）</div>
+    <div class="step__detail">從推特或群組複製那串英數字，貼進最上方搜尋框。貼完先對一次頭尾各 4 碼，例如 <code>7xKX...j8Qp</code>，錯一個字就是另一顆幣。</div>
+    <div class="step__shot">
+      <div class="shot">畫面示意：頂部搜尋框已貼上合約地址，下方跳出同名代幣清單</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step__num">2</div>
+    <div class="step__title">看安全檢查是不是全綠</div>
+    <div class="step__detail">紅色的項目只要出現一項就先別買，回頭再找下一顆。</div>
+  </div>
+</div>
+
+<!-- ② .card--tool 工具卡（可用在流程頁／比較區塊；數字後面一律加查證註記） -->
+<div class="card card--tool" data-level="both">
+  <h3>🔍 GMGN.ai <span class="badge badge--beginner">小白友善 ★★★☆☆</span></h3>
+  <p>買之前的安全體檢站，順便看聰明錢在買什麼。</p>
+  <p><small>費率：每筆約 1%（買賣各收）（2026/9查證，請以官方公告為準）</small></p>
+  <a class="btn btn--ghost ext" href="https://gmgn.ai/?chain=sol&ref=KzpFUrXI" target="_blank" rel="noopener">開啟 GMGN ↗</a>
+</div>
+
+<!-- ③ <details class="acc"> 進階收合區（進階內容一律包在這裡，開頭固定 🟣 進階：，結尾 ▸） -->
+<details class="acc" data-level="advanced">
+  <summary>🟣 進階：滑點與優先費要怎麼調 ▸</summary>
+  <p>行情越熱、池子越淺，就要把<span class="term" data-term="滑點">滑點</span>拉高一點才不會一直失敗，但拉太高等於送錢給搶跑的人。</p>
+  <div class="callout callout--tip">💡 新幣開盤那幾分鐘，先用小額測一筆，確認能成交再放大金額。</div>
+  <p><small>以上設定與費率（2026/9查證，請以官方公告為準）。</small></p>
+</details>
+
+<!-- ④ .metric 指標速查卡（安全門檻用，safe 綠／danger 紅） -->
+<div class="metric" data-level="both">
+  <div class="metric__name">流動性 ÷ 市值</div>
+  <span class="metric__safe">✅ 安全：大於 5%，通常賣得掉（2026/9查證，請以官方公告為準）</span>
+  <span class="metric__danger">🚫 危險：小於 2%，你可能只買得進、賣不出（2026/9查證，請以官方公告為準）</span>
+</div>
+
+<!-- ⑤ 三種 callout 的用法分工 -->
+<div class="callout callout--tip">💡 小技巧：把常看的幣加到自選，下次不用再貼地址。</div>
+<div class="callout callout--warn">⚠️ 注意：費率與介面隨時會改（2026/9查證，請以官方公告為準）。</div>
+<div class="callout callout--danger">🚨 千萬別做：任何人叫你貼助記詞、私鑰，一律是詐騙。</div>
+
+<!-- ⑥ 兩種按鈕；外部連結一律加 .ext + target/rel -->
+<a class="btn btn--primary ext" href="https://dexscreener.com/" target="_blank" rel="noopener">開啟 DEX Screener ↗</a>
+<a class="btn btn--ghost" href="#/risk">先看風險頁 ▸</a>
+
+<!-- ⑦ 「詞彙」分頁建議格式：一個詞一張 .card，並在 window.GLOSSARY 也補一筆同名資料，
+        這樣其他頁面的 <span class="term" data-term="流動性">…</span> 點下去才彈得出來 -->
+<div class="card" data-level="both">
+  <h3>流動性 <small>Liquidity</small></h3>
+  <p><span class="badge">安全指標</span></p>
+  <p>池子裡有多少錢可以跟你對做。池子越大，你的單越不會把價格砸出坑。</p>
+  <div data-level="advanced">
+    <hr>
+    <p><span class="badge badge--advanced">進階</span></p>
+    <p>看 LP 是否已鎖倉或燒毀，只看金額大小不夠。</p>
+  </div>
+</div>
+
+<!-- ⑧ 寬表格一定要能橫向捲（骨架已把 table 設成 display:block; overflow-x:auto，直接寫 table 即可） -->
+<table>
+  <tr><th>工具</th><th>費率</th></tr>
+  <tr><td>fomo.family</td><td>現貨約 0.5%（2026/9查證，請以官方公告為準）</td></tr>
+</table>
+
+<!-- ⑨ data-level 使用規則
+     both     = 小白／進階模式都看得到（核心安全步驟一律用 both）
+     beginner = 只在小白模式出現（超簡化說法）
+     advanced = 只在進階模式出現（通常直接放在 <details class="acc"> 上）
+     省略不寫 = 等同 both -->
+
+<!-- ⑩ 禁止事項：不要 <img>、不要外部圖片或 icon 字型、不要自創 class、
+        不要在片段裡出現 <!DOCTYPE>/<html>/<head>/<body>、不要寫死色碼（一律 var(--token)） -->
