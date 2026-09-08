@@ -246,6 +246,17 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 .card--flat:last-child{border-bottom:0}
 .skip-link{position:absolute;left:8px;top:-48px;z-index:200;background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;transition:top .15s ease}
 .skip-link:focus{top:8px}
+/* ===== 7. 插圖 figure + 桌機版RWD ===== */
+.figure{margin:12px 0}
+.figure svg{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.figure figcaption{margin-top:6px;font-size:13px;color:var(--text-3);text-align:center}
+@media (min-width:768px){
+  main{max-width:720px}
+  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-left:0}
+  .timeline::before{display:none}
+  .tl-item::before{display:none}
+  .figure--wide{max-width:900px;margin-left:calc(50% - 450px);margin-right:calc(50% - 450px)}
+}
 </style>
 </head>
 <body>
