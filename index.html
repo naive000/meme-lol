@@ -240,6 +240,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">跳至主要內容</a>
 <header class="topbar">
   <div class="topbar__inner">
     <span class="brand">🪙 鏈上四寶</span>
@@ -247,7 +248,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   </div>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
 
   <!-- ================= 首頁 ================= -->
   <section class="page is-active" id="page-home" data-page="home">
@@ -293,14 +294,14 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <a class="btn btn--ghost" href="#/tools/dexscreener">進入 DEX Screener 教學 ▸</a>
     </div>
 
-    <div class="card" data-level="both">
-      <h2>🤔 到處看到的「Robinhood」是什麼？</h2>
+    <div class="card card--flat" data-level="both">
+      <h2>到處看到的「Robinhood」是什麼？</h2>
       <p>這裡的 Robinhood <strong>不是</strong> Robinhood 那間券商的 App，而是他們推出的以太坊 Layer 2 —— <strong>Robinhood Chain</strong>（2026/7 上線、EVM 相容、gas 用 ETH）（2026/9查證，請以官方公告為準）。</p>
       <p>它本來想做股票代幣化（RWA），結果上面 79% 以上的成交量都是迷因幣。</p>
       <div class="callout callout--danger">🚨 Robinhood 公司<strong>不審核、不背書</strong>這條鏈上的任何代幣，同名仿冒幣非常多。看到「Robinhood 官方幣」之類的說法，先當作假的。</div>
     </div>
 
-    <div class="card" data-level="both">
+    <div class="card card--flat" data-level="both">
       <h2>開始前必知 3 件事</h2>
       <div class="steps">
         <div class="step">
@@ -484,21 +485,21 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       </div>
 
       <div class="tabpanel" data-panel="glossary">
-        <div class="card">
+        <div class="card card--flat">
           <span class="badge badge--beginner">點一下看解釋</span>
           <h3>GMGN 會用到的 21 個詞</h3>
           <p>看到看不懂的字先回來這裡查，不要不懂裝懂就下單。</p>
         </div>
 
-        <div class="card" data-level="both">
-          <h4>🏟 場地與階段</h4>
+        <div class="card card--flat" data-level="both">
+          <h4>場地與階段</h4>
           <p><span class="term" data-term="Trenches戰壕">Trenches 戰壕</span>：新幣最前線<br>
           <span class="term" data-term="Bonding Curve聯合曲線">Bonding Curve 聯合曲線</span>：買越多越貴的自動定價<br>
           <span class="term" data-term="畢業(Migrate)">畢業 Migrate</span>：新幣升級到正式交易池</p>
         </div>
 
-        <div class="card" data-level="both">
-          <h4>🛡 安全檢查項目</h4>
+        <div class="card card--flat" data-level="both">
+          <h4>安全檢查項目</h4>
           <p><span class="term" data-term="Honeypot蜜罐">Honeypot 蜜罐</span>：買得進賣不出<br>
           <span class="term" data-term="Mint權限">Mint 權限</span>：能不能無限增發<br>
           <span class="term" data-term="Freeze權限">Freeze 權限</span>：能不能凍結你的幣<br>
@@ -506,13 +507,13 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <span class="term" data-term="Rug機率">Rug 機率</span>：跑路風險分數</p>
         </div>
 
-        <div class="card" data-level="both">
-          <h4>👥 持倉與身分標籤</h4>
+        <div class="card card--flat" data-level="both">
+          <h4>持倉與身分標籤</h4>
           <p><span class="term" data-term="Top10持倉">Top 10 持倉</span>｜<span class="term" data-term="Dev持倉">Dev 持倉</span>｜<span class="term" data-term="Bundler捆綁">Bundler 捆綁</span>｜<span class="term" data-term="Sniper狙擊">Sniper 狙擊</span>｜<span class="term" data-term="Insider內部人">Insider 內部人</span>｜<span class="term" data-term="Smart Money聰明錢">Smart Money 聰明錢</span>｜<span class="term" data-term="KOL">KOL</span>｜<span class="term" data-term="Fresh Wallet新錢包">Fresh Wallet 新錢包</span></p>
         </div>
 
-        <div class="card" data-level="both">
-          <h4>⚙️ 交易操作</h4>
+        <div class="card card--flat" data-level="both">
+          <h4>交易操作</h4>
           <p><span class="term" data-term="跟單">跟單 Copy Trade</span>｜<span class="term" data-term="TP/SL止盈止損">TP／SL 止盈止損</span>｜<span class="term" data-term="優先費(Jito Tip)">優先費 Jito Tip</span>｜<span class="term" data-term="MEV/三明治攻擊">MEV／三明治攻擊</span>｜<span class="term" data-term="滑點">滑點 Slippage</span></p>
         </div>
       </div>
@@ -648,16 +649,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           </div>
         </div>
 
-        <div class="card" data-level="both">
+        <div class="card card--flat" data-level="both">
           <span class="badge badge--danger">仿冒幣重災區</span>
-          <h3>🟠 Robinhood Chain（HOOD）到底是什麼？</h3>
+          <h3>Robinhood Chain（HOOD）到底是什麼？</h3>
           <p>它是 <strong>Robinhood 公司自己推出的 Ethereum Layer-2</strong>，底層用 Arbitrum Orbit 技術，2026/7 上線。gas 用 ETH 付，地址是 <code>0x</code> 開頭（EVM 相容，跟以太坊同一套格式）。</p>
           <p>有趣的地方是：它原本定位是<strong>股票代幣化（RWA）</strong>，結果實際跑起來，<strong>79% 以上的 DEX 成交量都是迷因幣</strong>，代表幣是 CASHCAT。</p>
           <div class="callout callout--danger">🔴 一定要記住：<strong>Robinhood 公司不審核、不背書鏈上任何代幣</strong>。這條鏈上同名仿冒幣非常多，看到熟悉的名字千萬別直接買——<strong>合約地址一定要用兩個來源交叉核對</strong>（例如官方推特＋<a class="ext" href="https://dexscreener.com/" target="_blank" rel="noopener">DEX Screener</a>）。</div>
         </div>
 
         <div class="card" data-level="both">
-          <h3>✅ 第一次下單前，勾完再按</h3>
+          <h3>第一次下單前，勾完再按</h3>
           <div class="checklist">
             <label><input type="checkbox" data-ck="axiom-1"><span>12 字助記詞已抄在紙上、離線保存</span></label>
             <label><input type="checkbox" data-ck="axiom-2"><span>這筆錢就算歸零我也睡得著</span></label>
@@ -750,8 +751,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       </div>
 
       <div class="tabpanel" data-panel="glossary">
-        <div class="card" data-level="both">
-          <h3>📖 Axiom 詞彙表</h3>
+        <div class="card card--flat" data-level="both">
+          <h3>Axiom 詞彙表</h3>
           <p>看到不懂的字回來查這裡就好，不用背。</p>
           <ul>
             <li><span class="term" data-term="Pulse">Pulse</span>：Axiom 的新幣雷達頁，三欄即時滾動顯示剛發的幣。</li>
@@ -777,7 +778,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tabpanel" data-panel="risk">
         <div class="card card--risk" data-level="both">
           <span class="badge badge--danger">必讀</span>
-          <h3>⚠️ Axiom 使用風險清單</h3>
+          <h3>Axiom 使用風險清單</h3>
 
           <div class="callout callout--danger">🔴 <strong>New Pairs 裡多數幣幾小時內就會歸零</strong>——這不是我說的，是官方自己講的。新手請完全不要碰這一欄。</div>
 
@@ -923,7 +924,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       </div>
 
       <div class="tabpanel" data-panel="glossary">
-        <div class="card" data-level="both">
+        <div class="card card--flat" data-level="both">
           <h3>fomo.family 詞彙表</h3>
           <p>點任一詞看白話解釋。</p>
           <p>
@@ -1106,7 +1107,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       </div>
 
       <div class="tabpanel" data-panel="glossary">
-        <div class="card" data-level="both">
+        <div class="card card--flat" data-level="both">
           <h3>DEX Screener 詞彙表</h3>
           <p>點任一詞看白話解釋。</p>
           <p>
@@ -1169,7 +1170,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </div>
     <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
 
-    <div class="card" data-level="both">
+    <div class="card card--flat" data-level="both">
       <h2>先記住每個工具的位置</h2>
       <ul>
         <li><strong>📱 fomo</strong>＝最像一般 App 的入口</li>
@@ -1185,7 +1186,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tl-item" data-level="both">
         <span class="tl-stage">⓪ 入金</span>
         <div class="card card--tool">
-          <h3>💰 台幣怎麼變成 SOL／USDC</h3>
+          <h3>台幣怎麼變成 SOL／USDC</h3>
           <span class="tl-tool">用：MAX、BitoPro 等台灣交易所</span>
           <p><strong>最穩的路：</strong>MAX 或 BitoPro 台幣入金（新戶每日入金上限約 NT$10 萬）→買 SOL 或 USDC→提領到自己的錢包。GMGN／Axiom 要有 SOL 付手續費；fomo 以 USDC 入金為主，官方也標榜支援 Apple Pay，但台灣的卡能不能過款官方沒明講，先小額測試再說。</p>
           <div class="callout callout--danger">🚨 <strong>別走 P2P 私下換幣。</strong>收到來路不明的款項，你的銀行帳戶可能被列為警示帳戶並凍結——洗錢防制法對這塊查得越來越嚴。</div>
@@ -1195,7 +1196,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tl-item" data-level="both">
         <span class="tl-stage">① 發現</span>
         <div class="card card--tool">
-          <h3>🔎 找到候選幣，複製 CA</h3>
+          <h3>找到候選幣，複製 CA</h3>
           <span class="tl-tool">用：Axiom Pulse 的 Migrated 欄／GMGN Trending／fomo 動態牆</span>
           <p><strong>做什麼：</strong>在這三個地方隨便挑一個逛，看到有興趣的幣，先把它的<span class="term" data-term="CA合約地址">合約地址（CA）</span>複製起來——不要急著買。</p>
           <p><strong>看哪些數字：</strong>幣齡、市值、持有人數、成交量。</p>
@@ -1207,7 +1208,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tl-item" data-level="both">
         <span class="tl-stage">② 驗證</span>
         <div class="card card--tool">
-          <h3>🛡 用 CA 交叉核對兩個工具</h3>
+          <h3>用 CA 交叉核對兩個工具</h3>
           <span class="tl-tool">用：GMGN 安全面板 ＋ DEX Screener 交易對頁</span>
           <p><strong>做什麼：</strong>把剛剛複製的 CA 分別貼進 GMGN 和 DEX Screener，兩邊都看一次。<strong>只信一個工具是新手最貴的習慣。</strong></p>
           <p><strong>GMGN 看：</strong><span class="term" data-term="Honeypot蜜罐">Honeypot</span>／<span class="term" data-term="Mint權限">Mint</span>／<span class="term" data-term="Freeze權限">Freeze</span>／<span class="term" data-term="LP燒毀">LP 燒毀</span>／<span class="term" data-term="Rug機率">Rug 機率</span>／<span class="term" data-term="Top10持倉">Top10%</span>／<span class="term" data-term="Dev持倉">Dev%</span>／<span class="term" data-term="Bundler捆綁">Bundler%</span>。</p>
@@ -1225,7 +1226,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tl-item" data-level="both">
         <span class="tl-stage">③ 下單</span>
         <div class="card card--tool">
-          <h3>💸 小額買入，同時設好 TP／SL</h3>
+          <h3>小額買入，同時設好 TP／SL</h3>
           <span class="tl-tool">用：fomo（最簡單）／Axiom（專業、多鏈）／GMGN（要跟單或自動止盈止損）</span>
           <p><strong>做什麼：</strong>買進去的同一分鐘就把<span class="term" data-term="TP/SL止盈止損">止盈止損</span>設好，不要等「再看看」。</p>
           <p><strong>看哪些數字：</strong><span class="term" data-term="滑點">滑點</span>、<span class="term" data-term="優先費(Jito Tip)">優先費</span>、<span class="term" data-term="MEV/三明治攻擊">MEV 模式</span>、手續費。</p>
@@ -1237,7 +1238,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tl-item" data-level="both">
         <span class="tl-stage">④ 追蹤</span>
         <div class="card card--tool">
-          <h3>🔔 設警示，不要一直盯盤</h3>
+          <h3>設警示，不要一直盯盤</h3>
           <span class="tl-tool">用：DEX Screener 的 Watchlist ＋ Alerts／Axiom 與 GMGN 的錢包追蹤／fomo 關注交易員</span>
           <p><strong>做什麼：</strong>設價格警示，順便觀察<span class="term" data-term="Smart Money聰明錢">聰明錢</span>有沒有在出貨。</p>
           <p><strong>看哪些數字：</strong>聰明錢是否出貨、持有人數變化。</p>
@@ -1249,7 +1250,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="tl-item" data-level="both">
         <span class="tl-stage">⑤ 出場</span>
         <div class="card card--tool">
-          <h3>🏁 分批賣出，先把本金撈回來</h3>
+          <h3>分批賣出，先把本金撈回來</h3>
           <span class="tl-tool">用：回到你原本下單的那個工具</span>
           <p><strong>做什麼：</strong>分批賣。例如 2 倍先賣一半、跌到停損點就直接走，不要跟它談感情。</p>
           <p><strong>看哪些數字：</strong><span class="term" data-term="已實現損益">已實現損益</span>。</p>
@@ -1260,13 +1261,13 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
     </div>
 
-    <div class="card" data-level="both">
-      <h2>🌙 什麼時候不要盯盤</h2>
+    <div class="card card--flat" data-level="both">
+      <h2>什麼時候不要盯盤</h2>
       <p><small>一般觀察：Solana 土狗最熱的時段是美國白天，換成台灣時間大約晚上 9 點到凌晨 1 點；台灣下午反而最冷清、滑價大。熱時段流動性好但新幣和 rug 也最多，加上熬夜判斷力下降，記得先設好停損和額度再開盤。</small></p>
     </div>
 
     <div class="card" data-level="both">
-      <h2>📋 CA 怎麼複製貼上（共用教學）</h2>
+      <h2>CA 怎麼複製貼上（共用教學）</h2>
       <div class="steps">
         <div class="step">
           <div class="step__num">1</div>
@@ -1290,7 +1291,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </div>
 
     <div class="card" data-level="both">
-      <h2>🗺 一頁看完整條流程</h2>
+      <h2>一頁看完整條流程</h2>
       <div class="table-wrap">
         <table>
           <tr><th>階段</th><th>用什麼工具</th><th>看哪些數字</th><th>小白版建議</th></tr>
@@ -1308,7 +1309,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     <a class="btn btn--ghost" href="#/tools">🧰 回去看四個工具的操作 ▸</a>
 
     <div class="card" data-level="both">
-      <h3>💬 想跟其他人一起討論？</h3>
+      <h3>想跟其他人一起討論？</h3>
       <p>操作上卡關、想核對某個幣是不是仿冒、想看其他人怎麼判斷——加社群一起討論。</p>
       <a class="btn btn--ghost ext" href="#" data-ref="telegram" target="_blank" rel="noopener">加入 Telegram 社群 ↗</a>
     </div>
@@ -1346,7 +1347,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p><small>💰 <strong>賺到錢記得報稅：</strong>依財政部 2025 年函釋，個人買賣加密貨幣的獲利屬「財產交易所得」，要併入綜合所得稅申報，交易所出金紀錄國稅局查得到。細節依個人狀況不同，建議諮詢會計師。</small></p>
     </div>
 
-    <h2>🎣 5 種最常見的被割方式</h2>
+    <h2>5 種最常見的被割方式</h2>
 
     <div class="card card--risk" data-level="both">
       <h3>1️⃣ 仿冒幣（同名假幣）</h3>
@@ -1376,7 +1377,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     <div class="callout callout--danger" data-level="both">🚨 共通點：這五種都不是「運氣不好」，而是<strong>可以事先檢查出來的</strong>。花 60 秒做完下面的清單，就能避開絕大多數。</div>
 
     <div class="card card--risk" data-level="both">
-      <h2>✅ 下單前安全檢查清單</h2>
+      <h2>下單前安全檢查清單</h2>
       <p><small>勾選狀態會存在這台裝置的瀏覽器裡，換裝置不會同步。</small></p>
       <div class="checklist" id="safetyChecklist">
         <label><input type="checkbox" data-ck="ca"><span>我有把 <span class="term" data-term="CA合約地址">CA（合約地址）</span>拿到兩個不同工具交叉核對過，字元完全一致</span></label>
@@ -1390,7 +1391,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </div>
 
     <div class="card" data-level="both">
-      <h3>💬 買過被割、或不確定某個幣是不是仿冒？</h3>
+      <h3>買過被割、或不確定某個幣是不是仿冒？</h3>
       <p>先進社群丟出來問，通常幾分鐘內就有人告訴你是不是雷。</p>
       <a class="btn btn--ghost ext" href="#" data-ref="telegram" target="_blank" rel="noopener">加入 Telegram 社群 ↗</a>
     </div>
