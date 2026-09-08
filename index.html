@@ -132,7 +132,7 @@ main{max-width:640px;margin:0 auto;padding:16px}
 .card--risk{border-left:4px solid var(--danger)}
 .card > :last-child{margin-bottom:0}
 
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;line-height:1;padding:5px 9px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);margin:0 6px 6px 0}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;line-height:1;letter-spacing:.02em;padding:5px 9px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);margin:0 6px 6px 0}
 .badge--beginner{color:var(--beginner);border-color:var(--beginner);background:var(--ok-soft)}
 .badge--advanced{color:var(--advanced);border-color:var(--advanced);background:var(--accent-soft)}
 .badge--danger{color:var(--danger);border-color:var(--danger);background:var(--danger-soft)}
@@ -237,6 +237,15 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   *{animation:none !important;transition:none !important}
 }
 .site-footer{max-width:640px;margin:24px auto 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));text-align:center;color:var(--text-3);font-size:12px;border-top:1px solid var(--border)}
+/* ===== 6. 去AI味：互動回饋 + 卡片分級 + skip-link ===== */
+.btn,.tab,.chip,.term,.tabbar button,.acc > summary,.checklist > label{transition:transform .12s ease,background-color .15s ease,opacity .15s ease}
+.btn:active,.tab:active,.chip:active,.tabbar button:active{transform:scale(.97)}
+.acc > summary:active{opacity:.7}
+.checklist > label:active{opacity:.8}
+.card--flat{border:0;box-shadow:none;background:transparent;padding:0 0 14px;border-bottom:1px solid var(--border)}
+.card--flat:last-child{border-bottom:0}
+.skip-link{position:absolute;left:8px;top:-48px;z-index:200;background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;transition:top .15s ease}
+.skip-link:focus{top:8px}
 </style>
 </head>
 <body>
