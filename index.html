@@ -259,7 +259,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   .tl-item::before{display:none}
   .figure--wide{max-width:900px;margin:0 auto}
   .tabbar{position:fixed;left:0;top:0;bottom:0;width:172px;height:auto;flex-direction:column;justify-content:flex-start;overflow-x:visible;overflow-y:auto;border-right:1px solid var(--border);border-top:none;padding-top:64px}
-  main{margin-left:172px}
+  main{margin:0 auto 0 max(172px,calc((100vw - 548px) / 2));max-width:min(720px,calc(100vw - 204px))}
 }
 </style>
 </head>
