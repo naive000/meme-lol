@@ -1539,91 +1539,264 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
   <!-- ================= 新增頁面 ================= -->
   <section class="page" id="page-calc" data-page="calc">
-    <h2>🧮 計算器</h2>
     <div class="page-head">
-  <p>四個離線小工具，全部在你的手機／電腦本機算，不連任何伺服器、不記錄你輸入的數字。所有費率與滑點都只是<strong>估算範例</strong>，實際費率以平台當下顯示為準。</p>
-</div>
+      <h1>🧮 計算器</h1>
+      <p>四個離線小工具，全部在你的手機／電腦本機算，不連任何伺服器、不記錄你輸入的數字。所有費率與滑點都只是<strong>估算範例</strong>，實際費率以平台當下顯示為準。</p>
+    </div>
 
-<div class="callout callout--warn" data-level="both">⚠️ 這頁只是幫你算數字，不構成投資建議。算出來的「建議上限」是風險控管參考值，不是保證安全。</div>
+    <div class="callout callout--warn" data-level="both">⚠️ 這頁只是幫你算數字，不構成投資建議。算出來的「建議上限」是風險控管參考值，不是保證安全。</div>
 
-<!-- 1. 倉位計算器 -->
-<div class="card" data-level="both">
-  <h3>1️⃣ 倉位計算器：單筆該投多少</h3>
-  <p>迷因幣多數歸零，靠的是「20 次裡中 1 次」而不是一次梭哈。常見的風控抓法是<strong>單筆 ≤ 錢包總資金的 2%～5%</strong>。</p>
-  <p>
-    <label for="calc-pos-total">錢包總資金（台幣或 USDC 都可，單位自己記住就好）</label><br>
-    <input id="calc-pos-total" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 30000">
-  </p>
-  <p id="calc-pos-out">請輸入數字。</p>
-  <p><small>抓不定主意就用 2%。金額小到你賠光也不會影響生活，才是你該投的金額。</small></p>
-</div>
+    <div class="card card--flat" data-level="both">
+      <h2>為什麼要先算，再按買入</h2>
+      <p>大部分人被割不是因為看不懂鏈上數據，是因為<strong>沒算過自己這一筆到底承受得起多少</strong>。價格會漲會跌你控制不了，但「這筆最多賠多少」「要漲多少才回本」這兩件事，下單前 30 秒就能算完。</p>
+      <p>算完之後你會發現一件不太舒服的事：迷因幣的成本結構，本來就對頻繁交易的人不友善。這不是誰故意坑你，是機制本身如此。看清楚這點，你的操作方式就會自己修正。</p>
+      <p>底下四個工具建議照順序用一次：先決定<strong>投多少</strong>，再算<strong>要漲多少才回本</strong>，接著看<strong>滑點會吃掉多少</strong>，最後把單位換成你熟悉的台幣。</p>
+    </div>
 
-<!-- 2. 來回手續費 -->
-<div class="card" data-level="both">
-  <h3>2️⃣ 來回手續費：要漲多少才回本</h3>
-  <p>手續費是雙向的，買一次收、賣一次也收，再加上鏈上的優先費。你必須先漲超過這個總成本，才開始真的賺錢。</p>
-  <p>
-    <label for="calc-fee-amount">投入金額</label><br>
-    <input id="calc-fee-amount" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 1000">
-  </p>
-  <p>
-    <label for="calc-fee-buy">買入手續費（%）</label><br>
-    <input id="calc-fee-buy" type="number" inputmode="decimal" min="0" step="any" value="1">
-  </p>
-  <p>
-    <label for="calc-fee-sell">賣出手續費（%）</label><br>
-    <input id="calc-fee-sell" type="number" inputmode="decimal" min="0" step="any" value="1">
-  </p>
-  <p>
-    <label for="calc-fee-prio">鏈上優先費（跟投入金額同單位，沒有就留空）</label><br>
-    <input id="calc-fee-prio" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 5">
-  </p>
-  <p id="calc-fee-out">請輸入投入金額。</p>
-  <p><small>1%＋1% 只是常見的估算範例，實際費率以平台當下顯示為準。優先費請換算成跟投入金額相同的單位再填（例如 0.01 SOL 換成台幣）。</small></p>
-</div>
+    <!-- 1. 倉位計算器 -->
+    <div class="card" data-level="both">
+      <h3>1️⃣ 倉位計算器：單筆該投多少</h3>
+      <p>迷因幣多數歸零，靠的是「20 次裡中 1 次」而不是一次梭哈。常見的風控抓法是<strong>單筆 ≤ 錢包總資金的 2%～5%</strong>。</p>
+      <p>
+        <label for="calc-pos-total">錢包總資金（台幣或 USDC 都可，單位自己記住就好）</label><br>
+        <input id="calc-pos-total" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 30000">
+      </p>
+      <p id="calc-pos-out">請輸入數字。</p>
+      <p><small>抓不定主意就用 2%。金額小到你賠光也不會影響生活，才是你該投的金額。</small></p>
+    </div>
 
-<!-- 3. 滑點成本 -->
-<div class="card" data-level="both">
-  <h3>3️⃣ 滑點成本：這一刀被吃掉多少</h3>
-  <p>滑點是你「願意接受的最差成交價」。設太低會一直失敗，設太高等於允許別人把你的成交價拉爛。這裡算的是最壞情況下你多付的錢。</p>
-  <p>
-    <label for="calc-slip-amount">投入金額</label><br>
-    <input id="calc-slip-amount" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 1000">
-  </p>
-  <p>
-    <label for="calc-slip-pct">預期／設定滑點（%）</label><br>
-    <input id="calc-slip-pct" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 5">
-  </p>
-  <p id="calc-slip-out">請輸入數字。</p>
-  <p><small>這是最壞情況的估算，實際成交滑點通常比設定值小，但流動性差的幣可能直接吃滿。實際數字以平台成交結果為準。</small></p>
-</div>
+    <div class="card card--flat" data-level="both">
+      <h3>這個數字為什麼重要</h3>
+      <p>2% 到 5% 不是隨便抓的。它回答的是一個很具體的問題：<strong>你可以連續看錯幾次，還留在場上？</strong></p>
+      <p>單筆 5%，連續全損 10 次，本金剩下大約六成，還有翻身空間。單筆 20%，連續全損 5 次就歸零，而迷因幣連錯 5 次一點都不稀奇。這不是保守，這是讓你有機會等到那一次對的。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>單筆比例</th><th>連續全損 5 次後</th><th>連續全損 10 次後</th><th>適合誰</th></tr>
+          <tr><td>2%</td><td>約剩 90%</td><td>約剩 82%</td><td>剛開始、還在熟悉流程</td></tr>
+          <tr><td>5%</td><td>約剩 77%</td><td>約剩 60%</td><td>已經能穩定看完安全面板</td></tr>
+          <tr><td>10%</td><td>約剩 59%</td><td>約剩 35%</td><td>幾乎沒有容錯空間</td></tr>
+          <tr><td>20%</td><td>約剩 33%</td><td>約剩 11%</td><td>不建議</td></tr>
+        </table>
+      </div>
+      <p><small>表格是純數學推算（每次全損就是本金乘以 1 減去該比例），不代表實際勝率，也不是報酬預測。</small></p>
+    </div>
 
-<!-- 4. 台幣 ↔ SOL / USDC -->
-<div class="card" data-level="both">
-  <h3>4️⃣ 台幣 ↔ SOL／USDC 手動換算</h3>
-  <p><small>💱 匯率請自行查詢當下報價，本工具不提供即時匯率。</small></p>
-  <p>
-    <label for="calc-fx-rate">目前 1 顆 SOL（或 1 USDC）等於多少台幣</label><br>
-    <input id="calc-fx-rate" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 4500">
-  </p>
-  <p>
-    <label for="calc-fx-coin">幣的數量 → 換算台幣</label><br>
-    <input id="calc-fx-coin" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 0.5">
-  </p>
-  <p id="calc-fx-out-twd">請先填匯率與數量。</p>
-  <p>
-    <label for="calc-fx-twd">台幣金額 → 換算幣的數量</label><br>
-    <input id="calc-fx-twd" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 3000">
-  </p>
-  <p id="calc-fx-out-coin">請先填匯率與台幣金額。</p>
-  <p><small>兩個欄位互相獨立，各算各的，方便你同時看買進與賣出兩個方向。</small></p>
-</div>
+    <div class="card" data-level="both">
+      <h3>三個使用情境</h3>
+      <p><strong>情境一：手上有三萬，第一次想試。</strong>填 30000，算出來單筆上限是 600 到 1500。第一筆建議直接取下限那一端，甚至更低——第一筆的目的是<strong>跑完整套流程</strong>（買進、看盤、賣出、確認錢真的回到錢包），不是賺錢。</p>
+      <p><strong>情境二：同時看上三顆幣。</strong>很多人會把「單筆 5%」理解成「每顆各 5%」，於是三顆加起來 15%。比較安全的讀法是：<strong>把同時持有的部位加總，也當成一筆看。</strong>迷因幣在市場轉空時是一起跌的，分散到三顆並沒有你想像中那麼分散。</p>
+      <p><strong>情境三：這幾天賺了，總資金變大了。</strong>可以重新填一次總資金、放大單筆上限，但建議<strong>先把本金那一份轉出去</strong>再重算。用「已經落袋的獲利」去放大部位，跟用「帳面上的獲利」去放大部位，是兩件完全不同的事。</p>
+    </div>
 
-<details class="acc" data-level="advanced">
-  <summary>進階：為什麼「回本門檻」比你想的高</summary>
-  <p>假設來回手續費 2%、滑點來回各 3%，光是進出場就先賠掉約 8%。這代表幣要先漲 8% 你才回到原點，而這還沒算優先費。</p>
-  <p>結論很簡單：<strong>短進短出會被成本磨死</strong>。與其一天進出十次，不如挑好標的、把單筆金額控制在 2–5%，然後少動。</p>
-</details>
+    <div class="card card--risk" data-level="both">
+      <h3>常見誤用</h3>
+      <ul>
+        <li><strong>把「總資金」填成全部身家。</strong>這裡要填的是你劃給迷因幣這件事的資金，不是你的存款總額，更不是含房貸額度、信用卡額度的數字。</li>
+        <li><strong>算完之後又加碼。</strong>「先照計畫買 2%，漲了再補 8%」等於實際單筆 10%，只是分兩次進場。加碼要算進同一筆。</li>
+        <li><strong>把停損當成保險。</strong>設了停損不代表你一定停損得掉——<span class="term" data-term="流動性Liquidity">流動性</span>枯竭的時候賣單根本成交不了。倉位控制是唯一在任何情況下都有效的那道防線。</li>
+        <li><strong>賠完之後放大單筆想追回來。</strong>這是最常見、也最貴的一種誤用。剛虧完的心理狀態通常會讓你高估勝率，這時候應該做的是縮小，不是放大。</li>
+      </ul>
+    </div>
+
+    <!-- 2. 來回手續費 -->
+    <div class="card" data-level="both">
+      <h3>2️⃣ 來回手續費：要漲多少才回本</h3>
+      <p>手續費是雙向的，買一次收、賣一次也收，再加上鏈上的優先費。你必須先漲超過這個總成本，才開始真的賺錢。</p>
+      <p>
+        <label for="calc-fee-amount">投入金額</label><br>
+        <input id="calc-fee-amount" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 1000">
+      </p>
+      <p>
+        <label for="calc-fee-buy">買入手續費（%）</label><br>
+        <input id="calc-fee-buy" type="number" inputmode="decimal" min="0" step="any" value="1">
+      </p>
+      <p>
+        <label for="calc-fee-sell">賣出手續費（%）</label><br>
+        <input id="calc-fee-sell" type="number" inputmode="decimal" min="0" step="any" value="1">
+      </p>
+      <p>
+        <label for="calc-fee-prio">鏈上優先費（跟投入金額同單位，沒有就留空）</label><br>
+        <input id="calc-fee-prio" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 5">
+      </p>
+      <p id="calc-fee-out">請輸入投入金額。</p>
+      <p><small>1%＋1% 只是常見的估算範例，實際費率以平台當下顯示為準。優先費請換算成跟投入金額相同的單位再填（例如 0.01 SOL 換成台幣）。</small></p>
+    </div>
+
+    <div class="card card--flat" data-level="both">
+      <h3>你的成本一共有幾層</h3>
+      <p>新手最常低估的就是這一段。你以為只有「手續費 1%」，實際上一筆完整的進出至少會碰到四種成本，而且它們是<strong>相加</strong>的。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>成本項目</th><th>收在哪一步</th><th>大概量級</th><th>能不能控制</th></tr>
+          <tr><td>平台手續費</td><td>買一次、賣一次各收</td><td>每筆約 1% 上下</td><td>可以，換工具或用推薦連結</td></tr>
+          <tr><td><span class="term" data-term="優先費(Jito Tip)">優先費</span></td><td>每一筆上鏈交易</td><td>固定金額，跟本金無關</td><td>可以，但太低會一直失敗</td></tr>
+          <tr><td><span class="term" data-term="滑點">滑點</span></td><td>成交當下自動吃掉</td><td>視流動性，0 到設定上限</td><td>部分可以，見下一個工具</td></tr>
+          <tr><td><span class="term" data-term="MEV/三明治攻擊">MEV 夾擊</span></td><td>成交前後被人插隊</td><td>不固定，流動性淺時最痛</td><td>開防夾模式能降低</td></tr>
+        </table>
+      </div>
+      <p><small>量級全是常見範圍的估算，不同平台、不同鏈、不同時段都會變，實際數字以平台當下顯示與成交結果為準。</small></p>
+      <p>注意最右邊那一欄：<strong>四項裡面有三項跟「你挑什麼幣」直接相關。</strong>流動性夠深的幣，滑點小、被夾的空間也小；流動性淺的幣，你光是進出場就先賠掉一大塊。成本不只是費率問題，也是選標的的問題。</p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>換算成白話：漲多少才算開始賺</h3>
+      <p>把「來回總成本佔投入金額的百分比」記成一個門檻數字，你對行情的感覺會準很多。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>來回總成本</th><th>回本需要漲</th><th>白話翻譯</th></tr>
+          <tr><td>約 2%</td><td>約 2%</td><td>小漲一下就打平，還算健康</td></tr>
+          <tr><td>約 5%</td><td>約 5.3%</td><td>要有一波才回得來</td></tr>
+          <tr><td>約 10%</td><td>約 11.1%</td><td>你等於先被扣掉一成本金</td></tr>
+          <tr><td>約 20%</td><td>約 25%</td><td>這筆已經不值得做了</td></tr>
+        </table>
+      </div>
+      <p><small>回本漲幅比總成本略高，是因為賣出時的手續費也是從「已經漲上去的金額」抽，所以基數變大。數字為估算，實際以成交結果為準。</small></p>
+      <div class="callout callout--tip">💡 一個很實用的判斷：如果你算出來的回本門檻超過 10%，代表這筆的成本結構已經在跟你作對。這時候要問的不是「它會不會漲」，是「我為什麼要在這種條件下做這一筆」。</div>
+    </div>
+
+    <div class="card card--risk" data-level="both">
+      <h3>常見誤用</h3>
+      <ul>
+        <li><strong>優先費填錯單位。</strong>投入金額填台幣、優先費填 0.02（想表示 0.02 SOL），算出來會嚴重低估。兩個欄位一定要同單位，先用第 4 個工具換算過再填。</li>
+        <li><strong>只填買入費、忘了填賣出費。</strong>賣出那一刀是實打實會發生的，除非你打算永遠不賣。</li>
+        <li><strong>用平台首頁寫的費率當定值。</strong>費率會隨活動、等級、有沒有推薦連結而變動，請以你下單畫面上顯示的那個數字為準。</li>
+        <li><strong>忘了自己會進出很多次。</strong>單筆 2% 看起來很小，一天來回五次就是 10%。這個工具算的是一筆，不是一天。</li>
+      </ul>
+    </div>
+
+    <!-- 3. 滑點成本 -->
+    <div class="card" data-level="both">
+      <h3>3️⃣ 滑點成本：這一刀被吃掉多少</h3>
+      <p>滑點是你「願意接受的最差成交價」。設太低會一直失敗，設太高等於允許別人把你的成交價拉爛。這裡算的是最壞情況下你多付的錢。</p>
+      <p>
+        <label for="calc-slip-amount">投入金額</label><br>
+        <input id="calc-slip-amount" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 1000">
+      </p>
+      <p>
+        <label for="calc-slip-pct">預期／設定滑點（%）</label><br>
+        <input id="calc-slip-pct" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 5">
+      </p>
+      <p id="calc-slip-out">請輸入數字。</p>
+      <p><small>這是最壞情況的估算，實際成交滑點通常比設定值小，但流動性差的幣可能直接吃滿。實際數字以平台成交結果為準。</small></p>
+    </div>
+
+    <div class="card card--flat" data-level="both">
+      <h3>滑點設多少：兩難在哪</h3>
+      <p>滑點欄位是整個下單畫面裡最容易被亂填的一格，因為它兩邊都有代價：</p>
+      <div class="metric">
+        <div class="metric__name">設太低（例如 1%）</div>
+        <span class="metric__safe">好處：不會被吃掉太多，成交價接近你看到的價格</span>
+        <span class="metric__danger">壞處：新幣波動快，交易一直失敗，優先費照樣噴掉，急著賣的時候賣不出去</span>
+      </div>
+      <div class="metric">
+        <div class="metric__name">設太高（例如 30%）</div>
+        <span class="metric__safe">好處：幾乎一定成交，急殺出場時比較保險</span>
+        <span class="metric__danger">壞處：等於公開宣告「我可以接受差 30% 的價格」，<span class="term" data-term="MEV/三明治攻擊">夾擊機器人</span>最愛這種單</span>
+      </div>
+      <p>所以常見的抓法是：<strong>剛發射、波動極大的新幣 10–15%；已經<span class="term" data-term="畢業(Migrate)">畢業</span>、流動性穩定的幣 3–5%。</strong>賣出時如果真的要跑，才臨時放寬。</p>
+      <p><small>以上為常見設定範圍的參考，不同工具的滑點計算方式可能不同，請以平台當下顯示與說明為準。</small></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>一個很少人算的數字：來回滑點</h3>
+      <p>大部分人只算買進那一次的滑點，但你賣出時<strong>一樣要吃一次</strong>。買賣各設 5%，最壞情況就是來回被吃掉大約一成。</p>
+      <p>把它跟手續費合起來看：來回手續費 2%、來回滑點最壞情況 10%，你這筆在還沒開始算漲跌之前，就已經站在大約負 12% 的位置。這正是「短進短出被成本磨死」的具體長相。</p>
+      <div class="callout callout--warn">⚠️ 這個工具算的是<strong>單邊</strong>、而且是<strong>最壞情況</strong>。要看來回，就把同樣的數字算兩次；要看實際，請以成交後平台顯示的成交價為準。</div>
+    </div>
+
+    <div class="card card--risk" data-level="both">
+      <h3>常見誤用</h3>
+      <ul>
+        <li><strong>把滑點當成手續費。</strong>滑點不是被平台收走的，是被市場價差跟搶跑的人吃掉的。設定值只是上限，不是一定會發生。</li>
+        <li><strong>因為一直失敗就一路往上加。</strong>連續失敗通常代表這顆幣的流動性正在惡化，這時候該考慮的是「還要不要做這筆」，不是「再加 10%」。</li>
+        <li><strong>賣出時忘了滑點也會吃。</strong>算獲利的時候把賣出滑點漏掉，帳面獲利就會虛胖。</li>
+        <li><strong>拿這個數字去反推「我一定會虧這麼多」。</strong>它是最壞情況的天花板，不是預期值。流動性夠深的幣，實際滑點常常遠低於設定值。</li>
+      </ul>
+    </div>
+
+    <!-- 4. 台幣 ↔ SOL / USDC -->
+    <div class="card" data-level="both">
+      <h3>4️⃣ 台幣 ↔ SOL／USDC 手動換算</h3>
+      <p><small>💱 匯率請自行查詢當下報價，本工具不提供即時匯率。</small></p>
+      <p>
+        <label for="calc-fx-rate">目前 1 顆 SOL（或 1 USDC）等於多少台幣</label><br>
+        <input id="calc-fx-rate" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 4500">
+      </p>
+      <p>
+        <label for="calc-fx-coin">幣的數量 → 換算台幣</label><br>
+        <input id="calc-fx-coin" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 0.5">
+      </p>
+      <p id="calc-fx-out-twd">請先填匯率與數量。</p>
+      <p>
+        <label for="calc-fx-twd">台幣金額 → 換算幣的數量</label><br>
+        <input id="calc-fx-twd" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 3000">
+      </p>
+      <p id="calc-fx-out-coin">請先填匯率與台幣金額。</p>
+      <p><small>兩個欄位互相獨立，各算各的，方便你同時看買進與賣出兩個方向。</small></p>
+    </div>
+
+    <div class="card card--flat" data-level="both">
+      <h3>為什麼要一直換算回台幣</h3>
+      <p>用 SOL 計價久了會有一種奇怪的失真感：0.3 SOL 聽起來像零錢，換成台幣可能是一頓大餐的錢。<strong>對金額沒有痛感，是超額下注的開始。</strong></p>
+      <p>幾個實際會用到這個工具的時機：</p>
+      <ul>
+        <li><strong>設優先費的時候。</strong>0.02 SOL 到底貴不貴？換成台幣你就有感覺了，也才填得進上面第 2 個工具。</li>
+        <li><strong>算倉位上限的時候。</strong>第 1 個工具吐給你的是台幣，錢包裡的餘額是 SOL，要對得起來才知道自己有沒有超額。</li>
+        <li><strong>結算一天的時候。</strong>用台幣記帳，才不會出現「SOL 數量變多但其實在虧錢」這種自我安慰。</li>
+      </ul>
+      <div class="callout callout--tip">💡 USDC 這類穩定幣通常貼著美元走，換算相對單純；SOL 本身價格會波動，所以你的部位其實同時承擔「幣價」跟「SOL 價」兩層變動。</div>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>綜合演練：一筆完整交易長什麼樣</h2>
+      <p>把四個工具串起來跑一次。以下全部是<strong>假設數字</strong>，只是示範算法，不是任何推薦或報酬預期。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>步驟</th><th>用哪個工具</th><th>假設輸入</th><th>得到什麼</th></tr>
+          <tr><td>① 決定投多少</td><td>倉位計算器</td><td>總資金 30000</td><td>單筆上限 600–1500</td></tr>
+          <tr><td>② 換成 SOL</td><td>台幣換算</td><td>匯率自行查、金額 1000</td><td>對應的 SOL 數量</td></tr>
+          <tr><td>③ 算回本門檻</td><td>來回手續費</td><td>1000，買 1%、賣 1%、優先費 5</td><td>總成本約 25，門檻約 2.5%</td></tr>
+          <tr><td>④ 抓最壞滑點</td><td>滑點成本</td><td>1000，滑點 10%</td><td>單邊最多吃 100</td></tr>
+          <tr><td>⑤ 決定要不要做</td><td>你自己</td><td>把 ③ ④ 加起來看</td><td>心裡的底線數字</td></tr>
+        </table>
+      </div>
+      <p>跑完這五步，你手上會有一個很具體的句子：<strong>「這筆最多賠 1000，最壞情況要漲超過一成才回本。」</strong>接受這句話，再去按買入；不接受，就換一顆流動性更好的幣，或乾脆不做。</p>
+      <p><small>所有數字皆為示範用假設值，實際費率、滑點與匯率請以平台與市場當下顯示為準。本段不構成投資建議。</small></p>
+    </div>
+
+    <details class="acc" data-level="both">
+      <summary>算出來的數字我不喜歡，怎麼辦？ ▸</summary>
+      <p>這是最健康的反應。不喜歡通常來自兩個地方：一是<strong>倉位太大</strong>，把金額調小就好；二是<strong>這顆幣的成本結構太差</strong>（流動性淺、滑點要開很大），那就換標的。</p>
+      <p>比較不健康的反應是「先做再說，之後再想辦法」。成本是先扣的，行情是後來的，順序不會因為你不看就改變。</p>
+    </details>
+
+    <details class="acc" data-level="both">
+      <summary>為什麼這裡不提供即時匯率或即時費率？ ▸</summary>
+      <p>因為抓即時報價就得連伺服器，那等於把你輸入的金額送出去。這頁的設計原則是<strong>全部在你的裝置上算完</strong>，不傳、不存、不記錄。</p>
+      <p>代價是你得自己去查一次當下的匯率跟費率，多花十秒鐘，換到的是這頁完全不知道你有多少錢。</p>
+    </details>
+
+    <details class="acc" data-level="advanced">
+      <summary>進階：為什麼「回本門檻」比你想的高 ▸</summary>
+      <p>假設來回手續費 2%、滑點來回各 3%，光是進出場就先賠掉約 8%。這代表幣要先漲 8% 你才回到原點，而這還沒算優先費。</p>
+      <p>更精確一點看：賣出的手續費是從賣出金額抽的，所以你漲越多、賣出那一刀抽走的絕對金額也越大，回本需要的漲幅會比「總成本百分比」再高一點點。</p>
+      <p>結論很簡單：<strong>短進短出會被成本磨死</strong>。與其一天進出十次，不如挑好標的、把單筆金額控制在 2–5%，然後少動。</p>
+    </details>
+
+    <details class="acc" data-level="advanced">
+      <summary>進階：勝率、賠率與倉位的關係 ▸</summary>
+      <p>迷因幣的報酬分布極度偏斜：大部分歸零，極少數翻很多倍。這種分布下，決定你長期結果的不是「看得準不準」，而是<strong>單筆下注佔比</strong>。</p>
+      <p>直覺上的道理是：下注越重，你在遇到那次大的之前先出局的機率越高。所以在勝率低、賠率高的遊戲裡，正確做法是把單筆壓小、把次數拉長，而不是重壓少數幾次。</p>
+      <p>這也解釋了為什麼「這次感覺特別有把握」是最危險的句子——它會讓你在唯一能控制的變數上做出最糟的調整。</p>
+      <p><small>以上為風險控管的一般性說明，不構成任何投資建議或報酬保證。</small></p>
+    </details>
+
+    <div class="card" data-level="both">
+      <h3>算完之後，下一步</h3>
+      <p>數字算好了，還有一件事要做：<strong>確認這顆幣本身過不過得了安全檢查。</strong>成本再漂亮，買到蜜罐一樣是零。</p>
+      <a class="btn btn--primary" href="#/risk">⚠️ 去看下單前安全檢查清單 ▸</a>
+      <a class="btn btn--ghost" href="#/cases">🩹 看看別人是怎麼被割的 ▸</a>
+    </div>
 
 <script>
 (function () {
@@ -1703,12 +1876,18 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
   </section>
   <section class="page" id="page-onramp" data-page="onramp">
-    <h2>💸 入金出金</h2>
-        <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜以下為一般流程說明，實際手續費／天數／額度請以交易所與銀行當下公告為準</div>
+    <div class="page-head">
+      <h1>💸 入金出金</h1>
+      <p>把新台幣變成鏈上的 SOL／USDC，再把賺到的（或剩下的）換回台幣領進銀行帳戶。這是整條路上唯一跟你的身分、銀行、稅務綁在一起的環節，也是最不能出錯的一段。</p>
+    </div>
+
+    <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜以下為一般流程說明，實際手續費／天數／額度請以交易所與銀行當下公告為準</div>
 
     <div class="card card--flat" data-level="both">
       <h2>入金出金的完整迴圈</h2>
       <p>迷因幣玩到最後一定會碰到兩件事：<strong>把新台幣換成 SOL／USDC 進場</strong>，還有<strong>把賺到的（或剩下的）幣換回新台幣領出來</strong>。多數教學只講前半段，出金這段常常被忽略——但這頁會把雙向都講完。</p>
+      <p>為什麼出金更該先看？因為<strong>進去的路走錯只是慢，出來的路走錯是卡死。</strong>地址貼錯、網路選錯，資產通常找不回來；帳戶被列警示，你的錢會停在交易所裡動不了。這兩件事都不會有客服幫你按還原。</p>
+      <p>建議第一次操作時，把整段路當成一次「跑通測試」：<strong>每一步都只放最小金額</strong>，確認錢真的到了下一站，再回頭走第二次。這一趟測試的成本，遠低於你未來任何一次手滑。</p>
     </div>
 
     <h2>💰 入金：新台幣 → 錢包裡的 SOL／USDC</h2>
@@ -1717,7 +1896,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">① 交易所開戶</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>在合法交易所完成 KYC</h3>
           <span class="tl-tool">用：MAX（<a href="https://max.maicoin.com" target="_blank" rel="noopener">max.maicoin.com</a>）、BitoPro（<a href="https://www.bitopro.com" target="_blank" rel="noopener">www.bitopro.com</a>）等領有台灣主管機關核准的虛擬資產平台</span>
           <p>用身分證、自拍或視訊完成實名認證（KYC），綁定自己名下的銀行帳戶。<strong>帳戶開好前不要急著轉帳</strong>，未完成 KYC 的帳戶通常有入金上限或無法出金。</p>
@@ -1726,8 +1905,17 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       </div>
 
       <div class="tl-item" data-level="both">
-        <span class="tl-stage">② 銀行轉帳入金</span>
-        <div class="card card--tool">
+        <span class="tl-stage">② 等待審核通過</span>
+        <div class="card card--tool" data-level="both">
+          <h3>審核期間不要重複送件</h3>
+          <p>送出資料之後會進入人工或自動審核。<strong>沒過就照退件理由改，不要另外再開一個帳號重送</strong>——同一個人重複註冊反而容易被判定異常，卡更久。</p>
+          <p>審核時間依平台與當下件量而定，請以平台通知為準。這段時間可以先把後面幾步讀完，不必一直重整頁面。</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-level="both">
+        <span class="tl-stage">③ 銀行轉帳入金</span>
+        <div class="card card--tool" data-level="both">
           <h3>把新台幣轉進交易所帳戶</h3>
           <p>用自己綁定的銀行帳戶，以約定轉帳或 ATM／網銀轉帳把新台幣轉進交易所指定的虛擬帳號。<strong>務必用本人帳戶轉帳</strong>，不要幫別人代轉、也不要接受別人請你代收轉帳，這是後面警示帳戶最常見的起因。</p>
           <p><small>入金額度、手續費、到帳時間依交易所與身分認證等級不同，請以平台當下公告為準。</small></p>
@@ -1735,16 +1923,26 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       </div>
 
       <div class="tl-item" data-level="both">
-        <span class="tl-stage">③ 買入 SOL／USDC</span>
-        <div class="card card--tool">
-          <h3>用新台幣餘額買幣</h3>
-          <p>在交易所現貨頁面直接買 SOL 或 USDC。GMGN／Axiom 之類的鏈上工具要用 SOL 付手續費（Gas）；fomo 則以 USDC 入金為主。先買一點點試試看流程，熟悉之後再加碼。</p>
+        <span class="tl-stage">④ 確認台幣餘額入帳</span>
+        <div class="card card--tool" data-level="both">
+          <h3>看到餘額再往下走</h3>
+          <p>轉帳成功不等於入帳完成。回到交易所的資產頁面，確認新台幣餘額真的變多了，再進行下一步。</p>
+          <p>如果超過平台公告的到帳時間還沒看到，先自己核對三件事：<strong>轉入的虛擬帳號有沒有打錯、轉出的是不是綁定的那個本人帳戶、金額有沒有低於最低入金門檻。</strong>三項都對再去找客服，會快很多。</p>
         </div>
       </div>
 
       <div class="tl-item" data-level="both">
-        <span class="tl-stage">④ 提領到自己的錢包</span>
-        <div class="card card--tool">
+        <span class="tl-stage">⑤ 買入 SOL／USDC</span>
+        <div class="card card--tool" data-level="both">
+          <h3>用新台幣餘額買幣</h3>
+          <p>在交易所現貨頁面直接買 SOL 或 USDC。GMGN／Axiom 之類的鏈上工具要用 SOL 付手續費（Gas）；fomo 則以 USDC 入金為主。先買一點點試試看流程，熟悉之後再加碼。</p>
+          <div class="callout callout--tip">💡 記得多留一小筆 SOL 當油錢。錢包裡完全沒有 SOL 的時候，你連「賣出」這個動作都送不出去。</div>
+        </div>
+      </div>
+
+      <div class="tl-item" data-level="both">
+        <span class="tl-stage">⑥ 提領到自己的錢包</span>
+        <div class="card card--tool" data-level="both">
           <h3>從交易所轉出到 Phantom 等自架錢包</h3>
           <p>在交易所「提領」功能貼上自己 Phantom（或其他 Solana 錢包）的收款地址，選擇 Solana 網路送出。<strong>第一次提領務必先小額測試，確認地址跟網路都選對，收得到再轉大額。</strong>地址貼錯或網路選錯，資產通常找不回來。</p>
           <div class="callout callout--danger">🚨 收款地址一律用複製貼上，不要手動輸入；貼上後再核對前後幾碼是否一致。</div>
@@ -1753,42 +1951,110 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
     </div>
 
+    <div class="card" data-level="both">
+      <h2>🪪 KYC 實際會被問什麼</h2>
+      <p>很多人卡在這一關，是因為不知道會被要求什麼、於是東西沒準備好就開始填。以下是台灣合法平台常見的資料類型，<strong>實際欄位與要求以各平台當下規定為準</strong>。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>類別</th><th>常見會被要求的東西</th><th>常見卡關原因</th></tr>
+          <tr><td>身分證明</td><td>身分證正反面、第二證件</td><td>反光、四角沒入鏡、字看不清楚</td></tr>
+          <tr><td>人臉驗證</td><td>手持證件自拍或即時視訊</td><td>光線太暗、戴帽子口罩、跟證件照差太多</td></tr>
+          <tr><td>銀行帳戶</td><td>本人名下帳戶的存摺封面或截圖</td><td>用了家人的帳戶、戶名對不上</td></tr>
+          <tr><td>基本資料</td><td>地址、職業、資金來源、預計交易量</td><td>隨便亂填，跟後續金流對不起來</td></tr>
+          <tr><td>風險測驗</td><td>幾題投資經驗與風險認知問答</td><td>沒仔細看題目就送出</td></tr>
+        </table>
+      </div>
+      <p><strong>「資金來源」跟「預計交易量」這兩題請認真填。</strong>它們不是形式，平台之後會拿你填的內容跟實際金流比對；差太多會觸發人工複核，出金就卡住了。</p>
+      <p><small>各平台認證等級劃分、每個等級對應的額度與功能都不同，且會不定期調整，請以平台當下公告為準。</small></p>
+    </div>
+
+    <div class="card card--risk" data-level="both">
+      <h2>🏦 銀行轉帳最常見的卡關點</h2>
+      <p>這一段的問題幾乎都不是「交易所有問題」，而是<strong>銀行端的規則沒搞清楚</strong>。逐條對一次就能避開大半：</p>
+      <ul>
+        <li><strong>非約定轉帳有單筆／單日上限。</strong>金額大於上限就會直接失敗。要轉大額請先在網銀完成約定帳號設定，通常需要讀卡機或臨櫃辦理，且設定後可能有生效等待時間。</li>
+        <li><strong>轉錯成一般帳號。</strong>交易所給的是專屬虛擬帳號，長度與一般帳號不同，複製時容易少一碼。轉出前把號碼逐段念一次。</li>
+        <li><strong>用了非本人帳戶。</strong>代轉、共同帳戶、公司帳戶通常都不會入帳，而且退款流程很麻煩。只用你 KYC 時綁定的那一個。</li>
+        <li><strong>跨行手續費與到帳時間。</strong>跨行、非營業時間、國定假日都可能延後到帳。實際規則以你的銀行公告為準。</li>
+        <li><strong>金額低於最低入金門檻。</strong>有些平台低於一定金額不予入帳，也不一定會馬上退。先看清楚門檻再轉。</li>
+        <li><strong>剛開的新帳戶有轉帳限制。</strong>部分銀行對新開立的數位帳戶有一段觀察期，額度較低，這跟交易所無關。</li>
+      </ul>
+      <div class="callout callout--tip">💡 第一次一律先轉一筆很小的金額測試。等它成功入帳，你才真正確認「帳號對、身分對、路徑通」這三件事。</div>
+    </div>
+
     <h2>💸 出金：錢包裡的資產 → 新台幣進銀行帳戶</h2>
 
     <div class="timeline">
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">① 換回 SOL／USDC</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>手上的迷因幣先換成主流幣</h3>
           <p>用原本買進的工具（GMGN／Axiom／fomo）把想變現的迷因幣賣出，換回 SOL 或 USDC。交易所通常不直接收迷因幣，出金前一定要先換成主流幣這一步。</p>
+          <p>賣出時同樣會吃<span class="term" data-term="滑點">滑點</span>與手續費，所以你在錢包裡看到的「帳面價值」，跟最後真正換到的 SOL 數量會有落差。</p>
         </div>
       </div>
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">② 轉入交易所</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>把 SOL／USDC 轉回 MAX／BitoPro 等帳戶</h3>
           <p>在錢包（Phantom 等）發送 SOL 或 USDC 到交易所提供的存款地址，網路一樣選 Solana。同樣建議先小額測試一次，確認到帳無誤再轉剩下的。</p>
+          <div class="callout callout--danger">🚨 每個幣種、每條網路的存款地址都不一樣。USDC 存到 SOL 的地址、或選錯網路，資產通常拿不回來。每次都重新複製一次，不要用舊的。</div>
         </div>
       </div>
 
       <div class="tl-item" data-level="both">
-        <span class="tl-stage">③ 賣出換成新台幣</span>
-        <div class="card card--tool">
+        <span class="tl-stage">③ 等待鏈上確認</span>
+        <div class="card card--tool" data-level="both">
+          <h3>看到入帳再操作</h3>
+          <p>鏈上轉帳送出後，交易所還要等足夠的區塊確認才會入帳。這段時間資產不會消失，只是還沒顯示。</p>
+          <p><strong>不要因為沒看到就重送一次。</strong>先去看錢包的交易紀錄，確認那筆交易狀態是成功；如果成功但久久未入帳，帶著交易紀錄去問客服。</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-level="both">
+        <span class="tl-stage">④ 賣出換成新台幣</span>
+        <div class="card card--tool" data-level="both">
           <h3>在交易所現貨頁面賣出</h3>
           <p>把 SOL 或 USDC 賣掉換成新台幣，餘額會留在交易所帳戶裡等待提領。</p>
+          <p>大額賣出時注意掛單方式：市價單成交快但價格較差，限價單價格好但不一定成交得掉。金額大的時候分批賣通常比較穩。</p>
         </div>
       </div>
 
       <div class="tl-item" data-level="both">
-        <span class="tl-stage">④ 提領到銀行帳戶</span>
-        <div class="card card--tool">
+        <span class="tl-stage">⑤ 提領到銀行帳戶</span>
+        <div class="card card--tool" data-level="both">
           <h3>新台幣出金到自己的銀行帳戶</h3>
           <p>在交易所申請新台幣提領，金額會匯入你原本綁定 KYC 的那個本人銀行帳戶。<strong>到帳通常需要幾個工作天</strong>，實際天數、手續費、單筆／單日額度請以交易所當下公告為準，遇到人工審核（大額或異常交易）也可能再拉長時間。</p>
         </div>
       </div>
 
+      <div class="tl-item" data-level="both">
+        <span class="tl-stage">⑥ 留存紀錄</span>
+        <div class="card card--tool" data-level="both">
+          <h3>把這一趟的紀錄存下來</h3>
+          <p>出金完成當下，順手把交易明細、出金紀錄、對應的鏈上交易存一份。<strong>報稅、對帳、日後被問到資金來源，靠的都是這些紀錄。</strong></p>
+          <p>平台的歷史紀錄查詢通常有期限，不要假設它永遠查得到。自己留一份最保險。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>⏱️ 出金為什麼比入金慢</h2>
+      <p>入金是你主動把錢送過去，只要帳號對就好；出金是平台要把錢送出去，中間多了好幾道檢查。理解這幾道關卡，你就不會在第二天焦慮地按重整。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>關卡</th><th>在檢查什麼</th><th>你能做的事</th></tr>
+          <tr><td>帳戶狀態</td><td>KYC 是否有效、有無異常標記</td><td>資料到期前主動更新</td></tr>
+          <tr><td>額度檢查</td><td>單筆／單日是否超過你等級的上限</td><td>先看清楚上限，必要時分次</td></tr>
+          <tr><td>風控複核</td><td>金額或行為模式是否異於過往</td><td>不要突然一次拉高很多倍</td></tr>
+          <tr><td>銀行作業</td><td>匯款批次、營業日、跨行時間</td><td>避開假日與非營業時段送出</td></tr>
+        </table>
+      </div>
+      <p><small>各關卡的實際規則、時間與額度依平台與銀行而異，且會不定期調整，一律以官方當下公告為準。</small></p>
+      <div class="callout callout--warn">⚠️ 如果你有「某天一定要用到這筆錢」的需求，請把出金時間往前抓幾個工作天。加密資產的變現速度不是隨傳隨到。</div>
     </div>
 
     <div class="card card--risk" data-level="both">
@@ -1800,152 +2066,410 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <li>帳戶轉帳型態與過去習慣明顯不同（平常很少用的帳戶突然大量進出）</li>
         <li>把自己的帳戶借給別人代收轉帳，或幫陌生人代買代賣</li>
       </ul>
+      <p><strong>最常見的中招情境，其實跟迷因幣本身無關：</strong>有人在社群裡說「我這邊不方便匯款，借你的帳戶收一下，事後給你手續費」。收下的那筆錢如果來自詐騙被害人，你的帳戶當天就會被列警示，而你在解釋清楚之前，連自己的薪轉都領不出來。</p>
       <div class="callout callout--danger">🚨 保護自己的方法很簡單：<strong>只用本人帳戶、只轉自己名下的交易所帳戶、金流保持單純且有紀錄可查</strong>。不要幫任何人代收代轉，即使對方說「只是借用一下」。</div>
-      <p><small>本段只說明風險與正常保護作法，不涉及、也不建議任何規避銀行監控或洗防查核的方法。</small></p>
+      <p><small>本段只說明風險與正常保護作法，不涉及、也不建議任何規避銀行監控或洗防查核的方法。若帳戶已被列為警示，請直接聯繫往來銀行與警方依正式程序處理。</small></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>🔁 場外交易（OTC）為什麼不建議新手碰</h2>
+      <p>有人會說「直接找人現金換 U 比較快，也不用 KYC」。速度確實比較快，但你同時放棄了三件事：<strong>對方的身分保障、平台的爭議處理、以及一份能證明資金來源的紀錄。</strong></p>
+      <p>對新手來說最實際的風險不是被少給錢，而是<strong>收到的款項來源不明</strong>。錢一進你的帳戶，後續如果被追查，你手上沒有任何可以自證的文件。</p>
+      <p>合法平台的 KYC 流程麻煩，但麻煩換到的正是這份紀錄。先把正規路徑走順，再談有沒有必要走別的路。</p>
+    </div>
+
+    <div class="card card--flat" data-level="both">
+      <h2>❓ 入金出金常見問題</h2>
+
+      <details class="acc">
+        <summary>可以用家人的帳戶轉帳嗎？ ▸</summary>
+        <p>不行。交易所要求出入金帳戶與 KYC 身分一致，用非本人帳戶通常不會入帳，退款也要另外跑流程。更重要的是，非本人金流本身就是風控系統最在意的訊號之一。</p>
+      </details>
+
+      <details class="acc">
+        <summary>第一次應該轉多少測試？ ▸</summary>
+        <p>轉一筆你完全不心疼、但又高於平台最低門檻的金額就好。目的是驗證路徑通不通，不是要開始交易。這一筆的手續費，是你買保險的錢。</p>
+      </details>
+
+      <details class="acc">
+        <summary>提領到錢包時，網路選項要選哪個？ ▸</summary>
+        <p>要跟你的收款錢包所在的鏈一致。Phantom 的 Solana 地址就選 Solana。選錯網路資產通常找不回來，而且沒有客服能還原。送出前把「幣種」跟「網路」兩個欄位各念一次。</p>
+      </details>
+
+      <details class="acc">
+        <summary>錢包地址那麼長，怎麼確認沒貼錯？ ▸</summary>
+        <p>一律複製貼上，貼完再核對開頭四碼跟結尾四碼。有些惡意程式會偷偷替換你剪貼簿裡的地址，所以「貼完再看一次」不是多此一舉。</p>
+      </details>
+
+      <details class="acc">
+        <summary>轉錯地址或選錯網路，還有救嗎？ ▸</summary>
+        <p>絕大多數情況沒有。鏈上交易一旦確認就無法撤回，也沒有中心化的客服可以逆轉。少數情況（例如轉到某個交易所的存款地址但選錯幣種）可以嘗試聯繫該平台協助，但不保證、通常要收費、而且很慢。</p>
+      </details>
+
+      <details class="acc">
+        <summary>出金要幾天？可以加急嗎？ ▸</summary>
+        <p>依平台與銀行作業而定，通常需要幾個工作天，遇到人工審核會更久，實際請以平台當下公告為準。沒有正規的「加急」管道，任何聲稱能幫你加速出金的第三方，基本上都可以直接判定為詐騙。</p>
+      </details>
+
+      <details class="acc">
+        <summary>出金金額很大，會不會被盯上？ ▸</summary>
+        <p>「大額」本身不是問題，<strong>與你申報的資金來源和過往模式對不起來</strong>才是。平台觸發人工複核時，通常會請你補件說明。老老實實提供紀錄就好，這也是為什麼建議你每一筆都留存明細。</p>
+      </details>
+
+      <details class="acc">
+        <summary>可以只留在交易所不提到錢包嗎？ ▸</summary>
+        <p>可以，但這樣你玩不到鏈上的迷因幣——交易所通常沒有這些幣。取捨是：留在交易所比較省事但玩不到，提到自架錢包才能操作但你要自己負責保管。看你想做什麼而定。</p>
+      </details>
+
+      <details class="acc">
+        <summary>賺到的錢要一次全出金嗎？ ▸</summary>
+        <p>很多人的做法是「先出金本金那一份」，剩下的才留在場上。這樣至少確保你這一輪不會從賺變賠。要不要一次全出屬於個人資金規劃，本站不提供建議。</p>
+      </details>
+
+      <details class="acc">
+        <summary>報稅的時候需要什麼資料？ ▸</summary>
+        <p>至少要有每一筆的買入／賣出時間、金額，以及交易所的出入金紀錄。建議每個月固定匯出一次存起來，不要等到報稅前才回頭找。</p>
+      </details>
+
+      <details class="acc">
+        <summary>帳戶被凍結了怎麼辦？ ▸</summary>
+        <p>直接聯繫往來銀行與交易所，依正式程序提供說明與佐證資料。不要找任何自稱能「代辦解凍」的人，那本身就是另一種詐騙。</p>
+      </details>
     </div>
 
     <div class="card" data-level="both">
       <h2>📋 報稅提醒</h2>
       <p>依現行規定，個人買賣虛擬資產的獲利在台灣有申報義務，交易所的出金紀錄國稅局查得到，<strong>建議自己保留每一筆交易明細（買入/賣出時間、金額、對應交易所紀錄）</strong>，方便日後對帳與申報。</p>
+      <p>實務上比較省事的做法是：固定一個頻率（例如每月一次）把交易所的交易紀錄與出入金紀錄匯出存檔，鏈上那一段則靠錢包的交易紀錄補齊。<strong>紀錄是當下留最容易，事後補最痛苦。</strong></p>
       <p><strong>具體適用稅率、申報級距與計算方式，會依個人所得狀況、交易頻率與金額不同而有差異，本站不提供具體稅務建議或稅率數字，請洽詢會計師或國稅局，以你的實際狀況為準。</strong></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>錢進來了，下一步</h3>
+      <p>資產進到自架錢包之後，安全責任就全部在你身上了。<strong>沒有客服、沒有密碼重設、沒有還原。</strong>先把錢包這一關顧好，再去談買什麼。</p>
+      <a class="btn btn--primary" href="#/wallet">🔐 去看錢包安全 ▸</a>
+      <a class="btn btn--ghost" href="#/calc">🧮 先算算這筆該投多少 ▸</a>
     </div>
 
   </section>
   <section class="page" id="page-cases" data-page="cases">
-    <h2>🩹 被割案例</h2>
-    <p>以下都是社群裡常見的被割模式整理，<strong>細節已全部去識別化</strong>（幣名、合約地址、帳號、精確日期皆非真實），重點放在「事後回頭看，哪一步原本可以停下來」，不是教怎麼賺這個模式的錢。</p>
+    <div class="page-head">
+      <h1>🩹 被割案例</h1>
+      <p>以下都是社群裡常見的被割模式整理，<strong>細節已全部去識別化</strong>（幣名、合約地址、帳號、精確日期皆非真實），重點放在「事後回頭看，哪一步原本可以停下來」，不是教怎麼賺這個模式的錢。</p>
+    </div>
 
-<div class="card" data-level="both">
-  <h3>拉地毯（Rug Pull）<span class="badge badge--danger">案例一</span></h3>
-  <div class="timeline">
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">T+0</span>
-      <div class="card card--flat">
-        <p>某個 2026 年初出現的迷因幣，上線後幾小時內價格拉了好幾倍，社群訊息量暴增，看起來「很多人在買」。</p>
-      </div>
-    </div>
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">T+數小時</span>
-      <div class="card card--flat">
-        <p>Dev 錢包一次把流動性池（LP）的資金全部抽走，價格在幾分鐘內直接歸零，賣單全部成交不了。</p>
-      </div>
-    </div>
-  </div>
-  <p><strong>當時看得到的跡象：</strong>LP 從頭到尾沒有燒毀紀錄，Dev 持倉集中在少數幾個地址，比例明顯偏高。</p>
-  <p><strong>哪一步原本可以停下來：</strong>買進前查一次「LP 是否已燒毀」與「Dev 持倉」這兩個數字——這兩項都能在下單前的安全面板直接看到，沒有燒毀、持倉又高，就是還沒排除風險。</p>
-  <p><small>💸 事後估計：本金蒸發約九成以上。</small></p>
-</div>
+    <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜以下為模式整理與事後檢討，不描述任何特定標的，也不預測任何結果</div>
 
-<div class="card" data-level="both">
-  <h3>流動性緩慢抽乾（非一次性 Rug）<span class="badge badge--danger">案例二</span></h3>
-  <div class="timeline">
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">T+0 ~ T+3 天</span>
-      <div class="card card--flat">
-        <p>另一顆幣沒有一次性崩盤，而是連續幾天裡，流動性一點一點被分批抽走，價格緩步陰跌，看起來像「正常回檔」。</p>
-      </div>
+    <div class="card card--flat" data-level="both">
+      <h2>先說清楚這頁在做什麼</h2>
+      <p>看別人被割，很容易產生一種錯覺：「我不會這麼笨。」但這些案例裡的人，多半在事前也是這樣想的。<strong>被割的關鍵從來不是笨，是當下有一個很合理的理由讓你跳過檢查那一步。</strong></p>
+      <p>所以每個案例的重點不在「他虧了多少」，而在三件事：<strong>當時螢幕上其實看得到什麼</strong>、<strong>當時心裡在想什麼</strong>、<strong>哪一個動作原本可以打斷整條線</strong>。這三件事你都能提前準備，賠多少錢不能。</p>
+      <p>金額一律寫成區間，時間一律寫成 T+n。這不是含糊，是因為<strong>具體數字會讓人開始比較「我還好」，反而看不到模式本身</strong>。</p>
     </div>
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">T+3 天後</span>
-      <div class="card card--flat">
-        <p>等到有人想出場才發現，掛出的賣單需要用極大滑點才能成交一小部分，剩下的部位事實上已經賣不掉。</p>
-      </div>
-    </div>
-  </div>
-  <p><strong>當時看得到的跡象：</strong>流動性數字持續下滑，跟市值的比例越拉越低，但因為價格沒有瞬間崩，很容易被當成正常波動忽略。</p>
-  <p><strong>哪一步原本可以停下來：</strong>持有期間本來就該定期回頭看一次流動性佔市值的比例，而不是只在買進當下查一次；比例持續往下掉，就是該考慮先出場的訊號。</p>
-  <p><small>💸 事後估計：本金蒸發約七到八成。</small></p>
-</div>
 
-<div class="card" data-level="both">
-  <h3>蜜罐合約（Honeypot）：能買不能賣</h3>
-  <div class="timeline">
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">T+0</span>
-      <div class="card card--flat">
-        <p>某顆幣的買單暢通無阻，價格圖表看起來一路上漲，社群裡也有人貼出「已經翻倍」的截圖。</p>
+    <div class="card" data-level="both">
+      <h3>拉地毯（Rug Pull）<span class="badge badge--danger">案例一</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0</span>
+          <div class="card card--flat" data-level="both">
+            <p>某個 2026 年初出現的迷因幣，上線後幾小時內價格拉了好幾倍，社群訊息量暴增，看起來「很多人在買」。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+1 小時</span>
+          <div class="card card--flat" data-level="both">
+            <p>當事人有點開安全面板，看到有幾格是紅的，但同時看到群組裡一直有人貼獲利截圖。心裡的想法是：「大家都在買，應該不至於這麼快就跑。」於是把紅燈當成「早期都這樣」。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+數小時</span>
+          <div class="card card--flat" data-level="both">
+            <p>Dev 錢包一次把流動性池（LP）的資金全部抽走，價格在幾分鐘內直接歸零，賣單全部成交不了。群組在幾分鐘內從歡呼變成一片罵聲，然後管理員退群。</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">T+0 稍晚</span>
-      <div class="card card--flat">
-        <p>實際嘗試賣出時交易全部失敗或被課以近乎 100% 的稅率，才發現合約程式碼本身就把賣出這條路擋掉了。</p>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：無</span>
+        <span class="metric__danger">危險：<span class="term" data-term="LP燒毀">LP</span> 從頭到尾沒有燒毀紀錄；<span class="term" data-term="Dev持倉">Dev 持倉</span>集中在少數幾個地址，比例明顯偏高</span>
       </div>
+      <p><strong>當時心裡在想什麼：</strong>「已經漲這麼多了，現在不進就來不及。」急迫感是這個模式的核心工具——它讓你把「檢查」重新定義成「猶豫」。</p>
+      <p><strong>哪一步原本可以停下來：</strong>買進前查一次「LP 是否已燒毀」與「Dev 持倉」這兩個數字——這兩項都能在下單前的安全面板直接看到，沒有燒毀、持倉又高，就是還沒排除風險。看到紅燈的當下就是停損點，不是參考值。</p>
+      <p><small>💸 事後估計：本金蒸發約九成以上。</small></p>
     </div>
-  </div>
-  <p><strong>當時看得到的跡象：</strong>安全檢測工具的 Honeypot 欄位早就顯示異常，只是在下單前沒有點開來看。</p>
-  <p><strong>哪一步原本可以停下來：</strong>買進前用安全面板檢查一次 Honeypot 狀態，紅燈就是明確訊號，不需要再靠感覺判斷；也可以先用極小額測試一次買賣是否都能成交。</p>
-  <p><small>💸 事後估計：這筆部位等同全額歸零。</small></p>
-</div>
 
-<div class="card" data-level="both">
-  <h3>狙擊機器人搶跑（Sniper／Bundler）</h3>
-  <div class="timeline">
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">開盤瞬間</span>
-      <div class="card card--flat">
-        <p>某顆幣一開盤，短短幾秒內就被一批機器人或同一批錢包大量買進，籌碼迅速集中。</p>
+    <div class="card" data-level="both">
+      <h3>流動性緩慢抽乾（非一次性 Rug）<span class="badge badge--danger">案例二</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0 ~ T+3 天</span>
+          <div class="card card--flat" data-level="both">
+            <p>另一顆幣沒有一次性崩盤，而是連續幾天裡，流動性一點一點被分批抽走，價格緩步陰跌，看起來像「正常回檔」。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+2 天</span>
+          <div class="card card--flat" data-level="both">
+            <p>當事人有注意到一直在跌，但因為跌得慢，反而覺得「這是洗盤，不是崩盤」。甚至在這幾天裡又補了一次倉，理由是「均價可以拉低」。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+3 天後</span>
+          <div class="card card--flat" data-level="both">
+            <p>等到有人想出場才發現，掛出的賣單需要用極大滑點才能成交一小部分，剩下的部位事實上已經賣不掉。</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">開盤後幾分鐘</span>
-      <div class="card card--flat">
-        <p>價格被墊高後，一般使用者才看到「正在飆漲」的動態牆訊息追進去，買在整段行情的相對高點；隨後這批早期籌碼陸續倒出，價格快速回落。</p>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：價格沒有暴跌，K 線看起來平順</span>
+        <span class="metric__danger">危險：<span class="term" data-term="流動性Liquidity">流動性</span>數字持續下滑，跟<span class="term" data-term="市值">市值</span>的比例越拉越低</span>
       </div>
+      <p><strong>當時心裡在想什麼：</strong>「跌這麼慢，一定不是 rug。」這是這個模式最狠的地方——它刻意避開了所有人心裡對「被割」的畫面預期。慢慢流血不像被搶，像是行情不好。</p>
+      <p><strong>哪一步原本可以停下來：</strong>持有期間本來就該定期回頭看一次流動性佔市值的比例，而不是只在買進當下查一次；比例持續往下掉，就是該考慮先出場的訊號。<strong>價格會騙人，池子深度不會。</strong></p>
+      <p><small>💸 事後估計：本金蒸發約七到八成。</small></p>
     </div>
-  </div>
-  <p><strong>當時看得到的跡象：</strong>Snipers% 與 Top10% 在開盤當下就已經是偏高的數字，只是動態牆上看不到這一層。</p>
-  <p><strong>哪一步原本可以停下來：</strong>看到「動態牆正在飆漲」時，先切去查一次 Snipers%、Bundle%、Top10% 這三個數字，偏高就代表自己很可能是在幫早期籌碼接盤，而不是跟到起漲點。</p>
-  <p><small>💸 事後估計：追高部位平均虧損約五到七成。</small></p>
-</div>
 
-<div class="card" data-level="both">
-  <h3>假冒官方連結／釣魚網站</h3>
-  <div class="timeline">
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">收到訊息</span>
-      <div class="card card--flat">
-        <p>在某個社群或私訊裡收到一則看起來像官方公告的訊息，附上一個網址，網域跟真正的工具只差一兩個字母。</p>
+    <div class="card" data-level="both">
+      <h3>蜜罐合約（Honeypot）：能買不能賣<span class="badge badge--danger">案例三</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0</span>
+          <div class="card card--flat" data-level="both">
+            <p>某顆幣的買單暢通無阻，價格圖表看起來一路上漲，社群裡也有人貼出「已經翻倍」的截圖。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0 稍晚</span>
+          <div class="card card--flat" data-level="both">
+            <p>當事人想先賣一半落袋，交易送出後顯示失敗。第一反應是「網路不好」，於是調高滑點再試一次，還是失敗，接著又加了優先費。每失敗一次就多噴一點手續費。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0 更晚</span>
+          <div class="card card--flat" data-level="both">
+            <p>換了另一個工具試，才發現不是自己操作的問題——賣出被課以近乎 100% 的稅率，合約程式碼本身就把賣出這條路擋掉了。</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">點開連結後</span>
-      <div class="card card--flat">
-        <p>頁面介面幾乎一模一樣，操作流程裡要求「連接錢包」並簽署一筆授權；簽署完成後，錢包裡的資產在短時間內被陸續轉出。</p>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：買入完全正常，價格圖漂亮</span>
+        <span class="metric__danger">危險：安全檢測工具的 <span class="term" data-term="Honeypot蜜罐">Honeypot</span> 欄位早就顯示異常，只是沒有點開來看</span>
       </div>
+      <p><strong>當時心裡在想什麼：</strong>「買得進去就代表沒問題吧。」買入順暢是這個模式刻意留給你的體驗——它需要你買得進來。</p>
+      <p><strong>哪一步原本可以停下來：</strong>買進前用安全面板檢查一次 Honeypot 狀態，紅燈就是明確訊號，不需要再靠感覺判斷；更簡單的做法是<strong>先用極小額買一點、立刻賣掉</strong>，賣得掉才加碼。這一步的成本只有幾塊錢手續費。</p>
+      <p><small>💸 事後估計：這筆部位等同全額歸零。</small></p>
     </div>
-  </div>
-  <p><strong>當時看得到的跡象：</strong>網址列的網域名稱其實對不上官方網址，只是視覺上很像；訊息來源也不是從自己主動加的官方帳號發出。</p>
-  <p><strong>哪一步原本可以停下來：</strong>點連結前先核對網域是不是跟書籤裡存的官方網址完全一致，任何要求簽署不明授權的頁面都該先暫停，離開後再從官方管道重新確認。</p>
-  <p><small>💸 事後估計：綁定在該錢包裡的資產損失約八成以上。</small></p>
-</div>
 
-<div class="card" data-level="both">
-  <h3>仿冒幣（同名假幣）</h3>
-  <div class="timeline">
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">搜尋當下</span>
-      <div class="card card--flat">
-        <p>用某個熱門項目的名稱直接在工具裡搜尋，跳出來的第一顆幣圖示、名稱都一樣，於是直接點進去下單。</p>
+    <div class="card" data-level="both">
+      <h3>狙擊機器人搶跑（Sniper／Bundler）<span class="badge badge--danger">案例四</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">開盤瞬間</span>
+          <div class="card card--flat" data-level="both">
+            <p>某顆幣一開盤，短短幾秒內就被一批機器人或同一批錢包大量買進，籌碼迅速集中。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">開盤後幾分鐘</span>
+          <div class="card card--flat" data-level="both">
+            <p>價格被墊高後，一般使用者才看到「正在飆漲」的動態牆訊息追進去，買在整段行情的相對高點。當事人的判斷依據只有一句：「動態牆上一堆人在買。」</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">再幾分鐘後</span>
+          <div class="card card--flat" data-level="both">
+            <p>早期籌碼陸續倒出，價格快速回落。當事人沒有設停損，想著「跌下來再等它拉回」，結果一路等到剩下不到一半。</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="tl-item" data-level="both">
-      <span class="tl-stage">下單後</span>
-      <div class="card card--flat">
-        <p>事後對照才發現，買到的其實是別人用同名同圖複製出來的另一份合約，跟真正討論中的項目完全無關，流動性極低，價格隨時可能歸零。</p>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：成交熱度很高，動態牆訊息不斷</span>
+        <span class="metric__danger">危險：<span class="term" data-term="Sniper狙擊">Snipers%</span> 與 <span class="term" data-term="Top10持倉">Top10%</span> 在開盤當下就已經偏高</span>
       </div>
+      <p><strong>當時心裡在想什麼：</strong>「這麼多人在買，總不會全部都是假的。」但動態牆顯示的是<strong>交易筆數</strong>，不是<strong>有多少個不同的人</strong>。同一批人拆成幾十個錢包，在動態牆上看起來就是熱鬧。</p>
+      <p><strong>哪一步原本可以停下來：</strong>看到「動態牆正在飆漲」時，先切去查一次 Snipers%、Bundle%、Top10% 這三個數字，偏高就代表自己很可能是在幫早期籌碼接盤，而不是跟到起漲點。<strong>熱鬧是結果，籌碼分布才是原因。</strong></p>
+      <p><small>💸 事後估計：追高部位平均虧損約五到七成。</small></p>
     </div>
-  </div>
-  <p><strong>當時看得到的跡象：</strong>用名稱搜尋時其實同時跳出好幾顆同名同圖的幣，只是沒有停下來比對合約地址。</p>
-  <p><strong>哪一步原本可以停下來：</strong>下單前一律用 CA（合約地址）搜尋而不是用名稱搜尋，且 CA 要從官方管道取得後，再拿到第二個工具交叉核對名稱與圖示是否一致。</p>
-  <p><small>💸 事後估計：本金近乎全額損失。</small></p>
-</div>
+
+    <div class="card" data-level="both">
+      <h3>假冒官方連結／釣魚網站<span class="badge badge--danger">案例五</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">收到訊息</span>
+          <div class="card card--flat" data-level="both">
+            <p>在某個社群或私訊裡收到一則看起來像官方公告的訊息，附上一個網址，網域跟真正的工具只差一兩個字母。訊息裡寫著「限時領取，逾時作廢」。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">點開連結後</span>
+          <div class="card card--flat" data-level="both">
+            <p>頁面介面幾乎一模一樣，操作流程裡要求「連接錢包」並簽署一筆授權。錢包彈出的視窗有一大串看不懂的英文，當事人的想法是：「反正只是登入，簽一下而已。」</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">簽署之後</span>
+          <div class="card card--flat" data-level="both">
+            <p>頁面顯示「領取失敗，請稍後再試」。當事人以為只是網站有問題就關掉了。錢包裡的資產在接下來一段時間內被陸續轉出，發現時已經來不及。</p>
+          </div>
+        </div>
+      </div>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：頁面外觀跟官方幾乎沒有差別</span>
+        <span class="metric__danger">危險：網址列的網域對不上；簽名視窗寫的是授權而不是登入；訊息來源不是自己主動加的官方帳號</span>
+      </div>
+      <p><strong>當時心裡在想什麼：</strong>「限時」兩個字做完了大部分工作。急迫感讓人跳過核對網址這個只要三秒的動作。</p>
+      <p><strong>哪一步原本可以停下來：</strong>點連結前先核對網域是不是跟書籤裡存的官方網址完全一致；<strong>任何要求簽署的視窗，看不懂就先拒絕</strong>。簽名不是登入，是動作本身——按下去的那一刻，權限就已經交出去了。</p>
+      <p><small>💸 事後估計：綁定在該錢包裡的資產損失約八成以上。</small></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>仿冒幣（同名假幣）<span class="badge badge--danger">案例六</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">搜尋當下</span>
+          <div class="card card--flat" data-level="both">
+            <p>用某個熱門項目的名稱直接在工具裡搜尋，跳出來的第一顆幣圖示、名稱都一樣，於是直接點進去下單。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">下單後</span>
+          <div class="card card--flat" data-level="both">
+            <p>買進之後價格走勢跟社群討論的完全對不上。當事人一度以為是自己看的時間軸不對，還在群組裡問「怎麼你們那邊在漲我這邊在跌」。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">事後對照</span>
+          <div class="card card--flat" data-level="both">
+            <p>拿合約地址一比才發現，買到的是別人用同名同圖複製出來的另一份合約，跟真正討論中的項目完全無關，流動性極低，價格隨時可能歸零。</p>
+          </div>
+        </div>
+      </div>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：名稱、圖示、代號全部一致</span>
+        <span class="metric__danger">危險：同一個名稱底下其實同時跳出好幾顆幣；流動性明顯偏低</span>
+      </div>
+      <p><strong>當時心裡在想什麼：</strong>「搜尋結果第一個應該就是對的。」搜尋排序不是驗證，仿冒一顆同名同圖的幣，成本低到幾乎可以忽略。</p>
+      <p><strong>哪一步原本可以停下來：</strong>下單前一律用 <span class="term" data-term="CA合約地址">CA（合約地址）</span>搜尋而不是用名稱搜尋，且 CA 要從官方管道取得後，再拿到第二個工具交叉核對名稱與圖示是否一致。<strong>名字是誰都能取的，合約地址不是。</strong></p>
+      <p><small>💸 事後估計：本金近乎全額損失。</small></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>跟單跟到別人的出貨<span class="badge badge--danger">案例七</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0</span>
+          <div class="card card--flat" data-level="both">
+            <p>當事人在跟單功能裡找到一個標記為「聰明錢」的地址，近期戰績漂亮，於是決定之後這個地址買什麼就跟什麼。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0 幾分鐘後</span>
+          <div class="card card--flat" data-level="both">
+            <p>該地址買進一顆新幣，通知跳出來，當事人跟著買。但從通知跳出到自己成交，中間過了一段時間，成交價已經明顯高於對方的成本。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0 稍晚</span>
+          <div class="card card--flat" data-level="both">
+            <p>對方分批賣出，而當事人沒有收到「賣出」的即時提醒，等到發現時價格已經跌破自己的成本。事後回頭看那個地址的紀錄，它的獲利大半來自「早進晚出」，而跟單的人剛好站在它的對面。</p>
+          </div>
+        </div>
+      </div>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：該地址的歷史勝率確實不錯</span>
+        <span class="metric__danger">危險：樣本筆數偏少；資金規模與你差好幾個量級；通知到成交之間必然存在延遲</span>
+      </div>
+      <p><strong>當時心裡在想什麼：</strong>「他比我懂，跟著他就好。」但跟單複製的是<strong>動作</strong>，不是<strong>成本</strong>，更不是<strong>出場時機</strong>。同一顆幣，他賺錢跟你賠錢可以同時成立。</p>
+      <p><strong>哪一步原本可以停下來：</strong>把<span class="term" data-term="Smart Money聰明錢">聰明錢</span>標籤當成線索而不是結論。跟單前至少確認三件事：<strong>樣本筆數夠不夠、他的資金規模跟你差多少、你有沒有自己的出場條件。</strong>沒有出場條件的跟單，等於把賣出的決定權交給一個不知道你存在的人。</p>
+      <p><small>💸 事後估計：跟單部位虧損約四到六成。</small></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>不甘心加碼攤平<span class="badge badge--danger">案例八</span></h3>
+      <div class="timeline">
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+0</span>
+          <div class="card card--flat" data-level="both">
+            <p>當事人依照自己的規則，用總資金的一小部分買進一顆幣，也事先想好「跌三成就走」。這一步做得很標準。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+1 天</span>
+          <div class="card card--flat" data-level="both">
+            <p>價格跌到接近停損點。當事人沒有賣，理由是「再等一下，說不定會拉回」，接著反而又買了一筆，想把均價拉低。原本佔總資金一小部分的部位，變成了好幾倍大。</p>
+          </div>
+        </div>
+        <div class="tl-item" data-level="both">
+          <span class="tl-stage">T+3 天</span>
+          <div class="card card--flat" data-level="both">
+            <p>價格繼續往下，這時候要停損的金額已經大到「賣不下手」。最後是在情緒撐不住的時候，用很差的價格全部出清。</p>
+          </div>
+        </div>
+      </div>
+      <div class="metric">
+        <div class="metric__name">當時螢幕上看得到的</div>
+        <span class="metric__safe">安全：這顆幣的安全指標其實沒有惡化，也不是 rug</span>
+        <span class="metric__danger">危險：單一標的佔總資金的比例已經遠超過原本設定的上限</span>
+      </div>
+      <p><strong>當時心裡在想什麼：</strong>「攤平比認賠聰明。」問題是攤平的前提是你對這顆幣有超出價格以外的判斷依據，而當時的真正動機只是<strong>不想承認第一筆買錯了</strong>。這個案例沒有壞人，只有一個沒有被執行的規則。</p>
+      <p><strong>哪一步原本可以停下來：</strong>在 T+1 那一刻。<strong>停損的價值不在於它讓你少賠，而在於它讓你的部位大小維持在你當初算得出來的範圍內。</strong>一旦允許自己加碼攤平，倉位控制那道防線就等於不存在了。</p>
+      <p><small>💸 事後估計：本金損失約六到八成，其中大半來自加碼的那幾筆。</small></p>
+    </div>
+
+    <div class="card card--risk" data-level="both">
+      <h2>八個案例的共通點</h2>
+      <p>把上面全部排在一起看，會發現真正重複出現的不是某個技術指標，而是四種情境：</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>共通點</th><th>出現在哪些案例</th><th>對應的破解動作</th></tr>
+          <tr><td>被急迫感推著走</td><td>案例一、五</td><td>看到「限時」「快來不及」就強制停 60 秒</td></tr>
+          <tr><td>把熱鬧當成證據</td><td>案例一、四、七</td><td>查籌碼分布，不看訊息量</td></tr>
+          <tr><td>跳過只要三秒的檢查</td><td>案例三、五、六</td><td>把檢查做成固定順序，不臨場決定</td></tr>
+          <tr><td>規則訂了但沒執行</td><td>案例二、八</td><td>下單前就把停損寫下來，不靠記憶</td></tr>
+        </table>
+      </div>
+      <p><strong>注意最後一列。</strong>案例二跟案例八裡沒有詐騙、沒有惡意合約，虧損完全來自「當初訂好的規則，在該執行的時候被自己推翻」。這一類最不需要技術，也最難避免。</p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>把這頁變成可以執行的習慣</h2>
+      <p>看完案例最沒用的反應是「以後要小心」。把它換成幾個具體到不用思考的動作：</p>
+      <ul>
+        <li><strong>下單前固定看四個數字：</strong>Honeypot、LP 是否燒毀、Dev%、Top10%。順序固定，一項紅燈就結束。</li>
+        <li><strong>第一筆一律極小額買賣各做一次。</strong>賣得掉，才是真的能出場。</li>
+        <li><strong>停損寫下來再進場。</strong>寫在紙上、便條、備忘錄都行，重點是它在你情緒起來之前就存在了。</li>
+        <li><strong>持有期間定期回看流動性。</strong>價格會騙人，池子深度不會。</li>
+        <li><strong>看到「限時」就停 60 秒。</strong>真正的機會不會因為你多想一分鐘就消失；騙局會。</li>
+      </ul>
+      <a class="btn btn--primary" href="#/risk">⚠️ 去看完整的下單前檢查清單 ▸</a>
+      <a class="btn btn--ghost" href="#/wallet">🔐 錢包被清空的那幾種，看這頁 ▸</a>
+    </div>
+
+    <div class="card card--flat" data-level="both">
+      <p><small>本頁所有案例皆為社群常見模式之去識別化整理，幣名、地址、帳號、日期與金額均非真實資料，損失一律以區間表示。內容為事後檢討與風險教育用途，不構成任何投資建議，也不代表任何特定標的的評價或預測。</small></p>
+    </div>
 
   </section>
   <section class="page" id="page-wallet" data-page="wallet">
-    <h2>🔐 錢包安全</h2>
-        <div class="page-head">
+    <div class="page-head">
+      <h1>🔐 錢包安全</h1>
       <p>就算你買幣、賣幣每一步都很小心，錢包本身被偷一樣是全部歸零。這頁講的是「資產放哪裡、怎麼放才安全」，跟前面「怎麼避免買到被割的幣」是不同層的問題。</p>
+    </div>
+
+    <div class="callout callout--danger" data-level="both">🚨 全站最重要的一句話：<strong>任何人、任何網站、任何客服跟你要助記詞或私鑰，一律是詐騙，沒有例外。</strong>正牌客服永遠不需要這串字。</div>
+
+    <div class="card card--flat" data-level="both">
+      <h2>先理解一件事：這裡沒有「忘記密碼」</h2>
+      <p>你習慣的網路服務都有一條退路：帳號被盜可以申訴、密碼忘了可以重設、轉錯帳可以打電話。<strong>鏈上錢包一條都沒有。</strong></p>
+      <p>錢包不是一個「帳號」，它比較像一把鑰匙。誰握著那串助記詞，誰就是錢包的主人——系統不會問你是不是本人，因為對它來說，握有鑰匙就是本人。這件事同時是最大的優點和最大的風險。</p>
+      <p>所以這頁的所有建議只圍繞兩個問題：<strong>怎麼讓那串字不外流</strong>，以及<strong>萬一外流，怎麼讓損失有上限</strong>。</p>
     </div>
 
     <div class="card" data-level="beginner">
@@ -1956,11 +2480,68 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </div>
 
     <div class="card" data-level="both">
+      <h3>兩種錢包逐項對照</h3>
+      <dl>
+        <dt><strong>私鑰放在哪</strong></dt>
+        <dd><span class="term" data-term="熱錢包">熱錢包</span>存在手機或瀏覽器裡，跟著裝置走。冷錢包存在一顆離線的硬體裡，永遠不進入電腦。</dd>
+        <dt><strong>被遠端偷走的可能</strong></dt>
+        <dd>熱錢包有：中毒、惡意擴充功能、剪貼簿被監聽都可能。冷錢包幾乎沒有，因為簽名要在硬體上實體按鍵確認。</dd>
+        <dt><strong>操作速度</strong></dt>
+        <dd>熱錢包幾秒完成，適合搶時間的迷因幣交易。冷錢包每次都要接上裝置、在小螢幕上核對，慢很多。</dd>
+        <dt><strong>成本</strong></dt>
+        <dd>熱錢包免費。冷錢包要買硬體，是一筆一次性支出。</dd>
+        <dt><strong>適合放什麼</strong></dt>
+        <dd>熱錢包放「這幾天要動用的錢」。冷錢包放「打算放很久、不常動的錢」。</dd>
+        <dt><strong>出事的後果</strong></dt>
+        <dd>兩者一樣：資產轉走就是轉走了，無法追回、無法申訴。差別只在被偷走的機率與金額大小。</dd>
+      </dl>
+      <p><strong>結論不是「該用哪一種」，是「兩種都要有」。</strong>用途分開，風險就自然被切成兩塊。</p>
+    </div>
+
+    <div class="card" data-level="both">
       <h3>📝 助記詞（12／24 字）怎麼備份才對</h3>
       <p>助記詞（Seed Phrase）等於你錢包的最高權限密碼，誰拿到這串字，誰就能把裡面的錢全部轉走，而且轉走了無法追回、無法申訴。</p>
       <p><strong>金屬板刻字：</strong>防火防水防蟲蛀，一次投入成本較高，適合打算長期持有大額資產的人。</p>
       <p><strong>紙本手寫：</strong>成本幾乎是零、馬上就能做，但怕火怕水怕受潮，紙張時間久了也可能字跡模糊，比較適合先求有再求好，或搭配金屬板做雙重備份。</p>
       <div class="callout callout--danger">🚨 三個絕對不能做：<strong>不要拍照存進手機相簿、不要存進雲端筆記或雲端硬碟、不要用打字的方式傳給任何人——包括自稱「客服」的人。</strong>正牌客服永遠不會跟你要助記詞或私鑰，只要有人開口要，一律直接判定是詐騙。</div>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>備份助記詞的實際步驟</h2>
+      <p>大部分人「知道要備份」，但真正動手時會卡在細節。照下面這個順序做一次，之後就不用再想。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__title">先離線，再顯示助記詞</div>
+          <div class="step__detail">關掉螢幕分享、關掉會自動同步的截圖工具、離開視訊會議。<strong>最好連投影、外接螢幕都先拔掉。</strong>有人是在遠端會議忘記關螢幕分享時外流的，這不是誇張的例子。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__title">手寫，一個字一個字抄</div>
+          <div class="step__detail">用筆寫在紙上，<strong>連順序編號一起寫</strong>（1. xxx 2. xxx）。順序錯了整串就無效。寫完不要馬上收起來，先做下一步。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__title">當場核對兩次</div>
+          <div class="step__detail">照著你抄的內容，跟螢幕上的原文逐字對一次；再反過來從你的紙念一次、對螢幕一次。<strong>特別注意拼字相近的英文單字</strong>，助記詞的字庫裡有不少長得很像的字。抄錯一個字，等於這份備份是廢的，而你會在最需要它的時候才發現。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__title">做第二份，放在不同的地方</div>
+          <div class="step__detail">一份放家裡、一份放另一個你能控制的實體地點。<strong>兩份放同一個抽屜等於只有一份</strong>——火災、水災、搬家搞丟，一次全滅。長期持有的話，這時候可以把其中一份升級成金屬板。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">5</div>
+          <div class="step__title">用小額實測還原一次</div>
+          <div class="step__detail">這一步最多人跳過，也最重要。<strong>在另一個裝置上用你抄的助記詞還原錢包，確認地址跟原本一致。</strong>沒實測過的備份，只是一張你相信它有效的紙。實測完把測試裝置上的錢包移除。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">6</div>
+          <div class="step__title">清乾淨現場</div>
+          <div class="step__detail">草稿紙撕掉、剪貼簿清空、不要留任何電子副本。如果你中途曾經打字打進任何地方（記事本、輸入法、翻譯），<strong>那個錢包就當作已經曝光了，建議直接建一個新的、把資產搬過去。</strong></div>
+        </div>
+      </div>
+      <div class="callout callout--warn">⚠️ 別讓其他人知道你有備份、備份在哪裡、你大概有多少資產。這串字的風險不只有駭客，也包含現實生活裡的人。</div>
     </div>
 
     <div class="card card--risk" data-level="both">
@@ -1976,11 +2557,55 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="callout callout--danger">🚨 看不懂彈窗內容在寫什麼，就先不要按確認。<strong>先拒絕、關掉分頁，再回頭查證。</strong>簽名這動作沒有「先簽再說」，因為簽下去就是動作本身，不是登入而已。</div>
     </div>
 
+    <div class="card" data-level="both">
+      <h3>連接錢包之前的三個問題</h3>
+      <p>每次要按「Connect Wallet」之前，花五秒問自己三題。答不出來就不要連。</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>問題</th><th>安全的答案</th><th>危險的答案</th></tr>
+          <tr><td>我是怎麼來到這個網站的？</td><td>從自己的書籤或搜尋結果進來</td><td>點了訊息、私訊或群組裡的連結</td></tr>
+          <tr><td>網址列的網域對不對？</td><td>逐字比對過，完全一致</td><td>「看起來很像」「應該沒錯」</td></tr>
+          <tr><td>我用哪個錢包連？</td><td>只放小額的交易用錢包</td><td>放著大部分資產的那一個</td></tr>
+        </table>
+      </div>
+      <p>第三題最容易被忽略，也最容易補救。<strong>準備一個專門用來連陌生網站的錢包，裡面只放一點點油錢。</strong>就算真的簽錯，損失也被鎖在那個小錢包裡。</p>
+    </div>
+
     <div class="card" data-level="advanced">
-      <h3>🔓 Revoke（撤銷授權）：簽過的東西記得定期收回</h3>
+      <h3>🔓 撤銷授權（Revoke）：簽過的東西記得定期收回</h3>
       <p>就算當時簽的授權對象是正常的專案方，這個授權會一直留在鏈上，只要那個合約以後被駭、或私鑰外洩，你當初簽過的授權額度一樣可能被拿去動用你的資產——這是「即使沒被盜，長期放著也是風險」的部分。</p>
-      <p>做法是定期用<span class="term" data-term="Revoke撤銷授權">撤銷授權（Revoke）</span>工具，把自己錢包目前開放給各個合約的授權清單叫出來看，關掉不再需要、或不記得為什麼會有的授權。</p>
-      <p>這類工具搜尋「<strong>revoke.cash</strong>」這個名稱就找得到，用你自己的搜尋引擎或書籤進去，不要點任何人傳來的連結。</p>
+      <p>做法是定期用<strong>撤銷授權（Revoke）</strong>工具，把自己錢包目前開放給各個合約的授權清單叫出來看，關掉不再需要、或不記得為什麼會有的授權。</p>
+      <p>操作邏輯大致是：<strong>連上錢包 → 看到一份「這個錢包目前授權給哪些合約、額度多少」的清單 → 逐項判斷 → 對不需要的按撤銷 → 送出一筆交易（要付一點手續費）。</strong>撤銷本身也是鏈上交易，所以會有 gas 成本，這是正常的。</p>
+      <p>幾個判斷原則：<strong>不記得為什麼會有的，撤掉；很久沒用的網站，撤掉；額度是無上限的，優先撤掉。</strong>撤掉之後如果之後又要用，再重新授權一次就好，成本只有一點手續費。</p>
+      <p>這類工具搜尋「<strong>revoke.cash</strong>」這個名稱就找得到，用你自己的搜尋引擎或書籤進去，不要點任何人傳來的連結。<strong>連撤銷授權的網站本身，都有被仿冒的版本。</strong></p>
+      <div class="callout callout--warn">⚠️ 建議把「檢查一次授權清單」排進固定節奏，例如每個月一次，或每次玩完一輪新的專案之後。授權是累積的，不清理只會越來越多。</div>
+    </div>
+
+    <div class="card" data-level="advanced">
+      <h3>🗂️ 多錢包分層：把風險切開</h3>
+      <p>老手不會只有一個錢包，因為單一錢包意味著「任何一次失手都是全損」。常見的分法是三層：</p>
+      <dl>
+        <dt><strong>金庫錢包</strong></dt>
+        <dd>硬體錢包，放大部分長期資產。<strong>永遠不連任何 dApp、不簽任何授權</strong>，只做收款和轉出。它的地址理想上不要出現在任何交易網站上。</dd>
+        <dt><strong>交易錢包</strong></dt>
+        <dd>熱錢包，放這段時間打算交易的金額。會連常用的幾個工具，會簽授權。<strong>定期把獲利往金庫錢包搬</strong>，讓這裡的餘額維持在你能承受全損的水位。</dd>
+        <dt><strong>拋棄式錢包</strong></dt>
+        <dd>專門用來連沒用過的網站、領空投、試新工具。裡面只放一點點油錢。<strong>出事就直接放棄，不心疼。</strong></dd>
+      </dl>
+      <p>轉帳時注意：這三個錢包之間互轉會在鏈上留下關聯，如果你在意這件事，就要另外規劃；但對絕大多數人來說，<strong>先把「大額不簽授權」這件事做到，價值遠大於其他細節。</strong></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>📱 裝置本身的衛生</h3>
+      <p>錢包再安全，裝置被控制了也沒用。這幾件事成本很低，但擋掉的是最常見的攻擊路徑：</p>
+      <ul>
+        <li><strong>瀏覽器擴充功能只留必要的。</strong>擴充功能可以讀取你的網頁內容，包含錢包介面。來路不明的擴充功能是常見的失竊原因，尤其是「被原作者賣掉後偷偷改版」的那種。</li>
+        <li><strong>錢包擴充功能只從官方管道安裝。</strong>商店裡有大量同名同圖的假錢包，安裝前確認開發者與安裝數。</li>
+        <li><strong>交易用的瀏覽器另外開一個設定檔。</strong>跟你平常亂逛的那個分開，可以大幅降低誤觸的機率。</li>
+        <li><strong>不要在公共 Wi-Fi 上做大額操作。</strong>就算風險不高，成本也只是等回家再做。</li>
+        <li><strong>手機不要越獄／root，也不要裝來路不明的 APK。</strong>錢包 App 的安全假設建立在系統沒被破壞上。</li>
+        <li><strong>剪貼簿要留意。</strong>有惡意程式會偵測你複製了一串錢包地址，然後偷偷換成它的地址。<strong>貼上之後一定再核對一次頭尾。</strong></li>
+      </ul>
     </div>
 
     <div class="card" data-level="beginner">
@@ -1989,205 +2614,420 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <label><input type="checkbox" disabled><span>被拉進 LINE 投資群組，群裡一直有人曬獲利截圖，慫恿你跟單或加碼</span></label>
         <label><input type="checkbox" disabled><span>收到自稱交易所客服的私訊，說帳戶異常要你「驗證」錢包或提供助記詞</span></label>
         <label><input type="checkbox" disabled><span>「限時 24 小時內加入，保證幾倍獲利」這類製造急迫感的話術</span></label>
-        <label><input type="checkbox" disabled><span>打著知名 KOL／名人背書旗號的投資廣告或群組邀請</span></label>
+        <label><input type="checkbox" disabled><span>打著知名 <span class="term" data-term="KOL">KOL</span>／名人背書旗號的投資廣告或群組邀請</span></label>
+        <label><input type="checkbox" disabled><span>自稱「客服」主動私訊你，說要幫你解決提領卡住的問題</span></label>
+        <label><input type="checkbox" disabled><span>交友軟體認識、聊了一陣子之後才開始談投資的對象</span></label>
+        <label><input type="checkbox" disabled><span>要求你下載某個「專屬 App」或掃描 QR Code 才能操作</span></label>
+        <label><input type="checkbox" disabled><span>說你中了空投／獎金，但要先付一筆手續費或稅金才能領</span></label>
+        <label><input type="checkbox" disabled><span>要求你遠端協助、開螢幕分享，說要「教你操作」</span></label>
       </div>
       <p><small>這幾格不是給你打勾用的，是提醒你：符合其中任何一項，第一直覺就該是「這是詐騙」，而不是「這是不是真的機會」。</small></p>
     </div>
 
+    <div class="card card--risk" data-level="both">
+      <h3>三種話術的實際長相</h3>
+      <p><strong>假客服型。</strong>你在某個公開群組問了一句「提領怎麼卡住了」，五分鐘內收到私訊，對方頭像跟名稱都做得跟官方很像，說可以幫你處理，接著要你到某個頁面「驗證錢包」。<strong>破解點：官方客服不會主動私訊你。</strong>群組是公開的，誰都看得到你在問什麼。</p>
+      <p><strong>養套殺型。</strong>從交友軟體或社群認識，聊幾週生活，完全不談投資。等關係建立之後才「不小心」提到自己在做某個投資，帶你進一個看起來很專業的平台，前幾筆真的能提領，讓你放心加碼。<strong>破解點：能不能提領不是憑據，前幾筆小額放行本來就是設計的一部分。</strong></p>
+      <p><strong>先付費才能領型。</strong>通知你獲得某個空投或獎金，但要先支付「手續費」「保證金」「稅金」才能解鎖。<strong>破解點：真正的鏈上空投是你自己去領、自己付 gas，沒有人會先跟你收錢再給你錢。</strong></p>
+      <div class="callout callout--danger">🚨 三種話術有一個共同結構：<strong>先建立信任，再製造急迫，最後要你做一個不可逆的動作。</strong>認出這個結構，比記住一百種話術有用。</div>
+    </div>
+
+    <div class="card" data-level="both">
+      <h2>✅ 錢包安全自我檢查</h2>
+      <p><small>勾選狀態會存在這台裝置的瀏覽器裡，換裝置不會同步。</small></p>
+      <div class="checklist">
+        <label><input type="checkbox" data-ck="w-seed"><span>我的助記詞是手寫在實體紙或金屬板上，沒有任何電子副本</span></label>
+        <label><input type="checkbox" data-ck="w-test"><span>我實際用備份還原過一次，確認地址正確</span></label>
+        <label><input type="checkbox" data-ck="w-two"><span>我有兩份備份，而且放在不同的實體地點</span></label>
+        <label><input type="checkbox" data-ck="w-split"><span>我的大額資產跟交易用資產是分開的錢包</span></label>
+        <label><input type="checkbox" data-ck="w-burner"><span>我有一個只放小額、專門用來連陌生網站的錢包</span></label>
+        <label data-level="advanced"><input type="checkbox" data-ck="w-revoke"><span>我最近檢查並清理過一次授權清單</span></label>
+        <label><input type="checkbox" data-ck="w-ext"><span>我的瀏覽器只留必要的擴充功能，錢包是從官方管道安裝的</span></label>
+        <label><input type="checkbox" data-ck="w-sign"><span>我看得懂簽名彈窗在寫什麼，看不懂時會先拒絕</span></label>
+      </div>
+      <p>八項全勾不代表絕對安全，但只要有任何一項沒勾，<strong>那一項就是你目前最有可能出事的地方</strong>。先補那一項。</p>
+    </div>
+
+    <div class="card card--risk" data-level="both">
+      <h2>🆘 如果已經出事了</h2>
+      <p>發現錢包資產被轉走的當下，時間比什麼都重要。照順序做，不要先在群組裡發問。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__title">先搶救還沒被轉走的部分</div>
+          <div class="step__detail">立刻把剩餘資產轉到一個<strong>全新建立的錢包</strong>（不是你現有的另一個）。攻擊者可能還握有授權或私鑰，留在原錢包裡的東西隨時會被掃走。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__title">把原錢包當作永久廢棄</div>
+          <div class="step__detail">助記詞一旦外流就無法「改密碼」，那個錢包永遠不安全。<strong>不要再往它裡面轉任何東西</strong>，包括之後想不開的測試。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__title">保留證據</div>
+          <div class="step__detail">截圖交易紀錄、記下相關的交易與地址、保留你收到的可疑訊息與連結。這些是報案與後續處理的唯一憑據，而且越晚蒐集越容易遺失。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__title">釐清外流路徑再重來</div>
+          <div class="step__detail">回想是簽了什麼、點了什麼、在哪裡輸入過助記詞。<strong>沒找到破口就建新錢包，很可能只是換個地方再被偷一次</strong>——尤其如果問題出在裝置本身中毒。</div>
+        </div>
+        <div class="step">
+          <div class="step__num">5</div>
+          <div class="step__title">依正式管道處理，別找代辦</div>
+          <div class="step__detail">金額較大可以帶著紀錄報案存證。<strong>網路上任何自稱能「幫你追回被盜資產」的人或服務，請一律當成第二次詐騙。</strong>這是被盜之後最常見的二次受害。</div>
+        </div>
+      </div>
+      <p><small>鏈上交易一旦確認即無法逆轉，追回機率很低。本段為一般性的處置說明，不構成法律建議；實際處理請依正式程序並諮詢專業人士。</small></p>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>錢包顧好了，再回頭看交易</h3>
+      <p>錢包安全是地基，不是加分題。<strong>地基沒做，上面蓋得再漂亮都不算數。</strong></p>
+      <a class="btn btn--primary" href="#/risk">⚠️ 去看下單前安全檢查清單 ▸</a>
+      <a class="btn btn--ghost" href="#/cases">🩹 看看錢包是怎麼被清空的 ▸</a>
+    </div>
+
   </section>
   <section class="page" id="page-faq" data-page="faq">
-    <h2>❓ FAQ</h2>
-          <div class="card card--flat" data-level="both">
-        <h3>🌱 還沒開始 <span class="badge badge--beginner">入門</span></h3>
+    <div class="page-head">
+      <h1>❓ FAQ</h1>
+      <p>依照你現在的位置分成三組：還沒開始、剛開始、被割過。直接跳到你那一組看，不用從頭讀。</p>
+    </div>
 
-        <details class="acc">
-          <summary>要準備多少錢開始？ ▸</summary>
-          <p>建議先拿「賠光也不影響生活」的小額練手，例如幾千元台幣等值的 SOL 就夠熟悉整套流程。等你能穩定看懂安全指標、操作不手滑，再考慮加碼。</p>
-        </details>
+    <div class="callout callout--warn" data-level="both">⚠️ 以下皆為一般性說明與方法整理，不構成投資、法律或稅務建議。費率、規則與介面請以各平台當下公告為準。</div>
 
-        <details class="acc">
-          <summary>一定要買硬體錢包嗎？ ▸</summary>
-          <p>不是必須，但金額變大之後強烈建議。手機／瀏覽器錢包方便下單，可是私鑰長期留在連網裝置上風險較高，資金一大就該分流到冷錢包。</p>
-        </details>
+    <div class="card" data-level="both">
+      <h2>⚡ 30 秒速查</h2>
+      <p>最常被問的幾題，先給結論。細節在下面各組展開。</p>
+      <dl>
+        <dt><strong>要準備多少錢？</strong></dt>
+        <dd>賠光也不影響生活的金額。單筆控制在總資金的 2% 到 5%。</dd>
+        <dt><strong>最重要的一件事是什麼？</strong></dt>
+        <dd>助記詞不外流。任何人跟你要，一律是詐騙。</dd>
+        <dt><strong>下單前一定要看什麼？</strong></dt>
+        <dd>Honeypot、LP 是否燒毀、Dev%、Top10%。任一項紅燈就不碰。</dd>
+        <dt><strong>怎麼確認買到的不是假幣？</strong></dt>
+        <dd>用合約地址搜尋，不要用幣名，而且要拿到第二個工具交叉核對。</dd>
+        <dt><strong>被割了能追回來嗎？</strong></dt>
+        <dd>絕大多數不行。鏈上交易確認後無法逆轉，也沒有客服可以申訴。</dd>
+        <dt><strong>賺到錢要報稅嗎？</strong></dt>
+        <dd>有申報義務，交易所出金紀錄查得到。細節請洽會計師或國稅局。</dd>
+      </dl>
+    </div>
 
-        <details class="acc">
-          <summary>GMGN 跟 Axiom 差在哪？ ▸</summary>
-          <p>兩者都能查安全指標、下單交易，介面邏輯不同：GMGN 對新手比較直覺，Axiom 進階篩選與訂單類型更完整，但操作門檻也比較高。可以都裝，習慣哪個用哪個。</p>
-        </details>
+    <div class="card card--flat" data-level="both">
+      <h3>🌱 還沒開始 <span class="badge badge--beginner">入門</span></h3>
 
-        <details class="acc">
-          <summary>台灣人可以合法玩迷因幣嗎？ ▸</summary>
-          <p>目前台灣沒有全面禁止個人持有或交易加密貨幣，但交易所與相關業者需遵守洗錢防制規範。用海外去中心化工具下單，法遵風險與獲利都要自己承擔，本站不提供法律或稅務建議。</p>
-        </details>
+      <details class="acc">
+        <summary>要準備多少錢開始？ ▸</summary>
+        <p>建議先拿「賠光也不影響生活」的小額練手，例如幾千元台幣等值的 SOL 就夠熟悉整套流程。這筆錢的用途是<strong>買經驗，不是買獲利</strong>——你要用它把入金、下單、賣出、出金整條路跑一次。</p>
+        <p>等你能穩定看懂安全指標、操作不手滑，再考慮加碼。判斷自己準備好了沒，有個簡單的標準：<strong>你能不能在不看教學的情況下，說出下單前該檢查哪四個數字。</strong></p>
+      </details>
 
-        <details class="acc">
-          <summary>需要先懂程式或區塊鏈技術嗎？ ▸</summary>
-          <p>不用。GMGN、Axiom 這類工具都是圖形介面，你只需要看得懂安全指標、會操作錢包連接跟下單就能開始，技術細節可以邊做邊補。</p>
-        </details>
+      <details class="acc">
+        <summary>一定要買硬體錢包嗎？ ▸</summary>
+        <p>不是必須，但金額變大之後強烈建議。手機／瀏覽器錢包方便下單，可是私鑰長期留在連網裝置上風險較高，資金一大就該分流到冷錢包。</p>
+        <p>一個常見的抓法是：<strong>當你放在熱錢包裡的金額，已經超過一台硬體錢包的價格好幾倍時，就該買了。</strong>在那之前，先把「熱錢包只放這幾天要用的錢」這個習慣建立起來，效果其實差不多。</p>
+      </details>
 
-        <details class="acc">
-          <summary>要選哪一條鏈？Solana 還是以太坊？ ▸</summary>
-          <p>迷因幣熱度目前主要集中在 Solana，手續費低、發射速度快，適合新手入門練習。以太坊系的迷因幣手續費（gas）較高，比較適合資金和經驗都到一定程度後再碰。</p>
-        </details>
+      <details class="acc">
+        <summary>GMGN 跟 Axiom 差在哪？ ▸</summary>
+        <p>兩者都能查安全指標、下單交易，介面邏輯不同：GMGN 對新手比較直覺，安全面板把紅綠燈直接標好；Axiom 進階篩選與訂單類型更完整，但操作門檻也比較高。</p>
+        <p>建議的做法是<strong>都裝，先用 GMGN 建立判讀習慣</strong>，之後有需要更細的篩選再轉 Axiom。兩個工具交叉核對同一顆幣，本身也是一種安全檢查。</p>
+      </details>
 
-        <details class="acc">
-          <summary>錢包助記詞要存在哪裡？ ▸</summary>
-          <p>寫在紙上放實體保險櫃或安全的地方，絕對不要拍照存手機、傳雲端筆記、貼進聊天視窗，也不要輸入到任何網站或App。看到任何要你「輸入助記詞驗證」的地方，都是詐騙。</p>
-        </details>
+      <details class="acc">
+        <summary>台灣人可以合法玩迷因幣嗎？ ▸</summary>
+        <p>目前台灣沒有全面禁止個人持有或交易加密貨幣，但交易所與相關業者需遵守洗錢防制規範。用海外去中心化工具下單，法遵風險與獲利都要自己承擔。</p>
+        <p>實務上比較該注意的是<strong>金流那一段</strong>：只用本人帳戶、只跟自己名下的交易所帳戶往來、保留完整紀錄。本站不提供法律或稅務建議，有疑慮請諮詢專業人士。</p>
+      </details>
 
-        <details class="acc">
-          <summary>看到某個幣漲很多，現在追進去可以嗎？ ▸</summary>
-          <p>不要用「已經漲多少」判斷該不該進場，而是回頭檢查安全指標（Dev%、Top10%、Bundle%、流動性）跟你自己的風險承受度。追高本身不是理由，指標健康才是判斷依據。</p>
-        </details>
+      <details class="acc">
+        <summary>需要先懂程式或區塊鏈技術嗎？ ▸</summary>
+        <p>不用。GMGN、Axiom 這類工具都是圖形介面，你只需要看得懂安全指標、會操作錢包連接跟下單就能開始。</p>
+        <p>真正需要學的其實不是技術，是<strong>幾個名詞的意思跟它們的安全門檻</strong>：流動性、Dev 持倉、LP 燒毀、滑點。這幾個看懂了，你的判斷力就會比大部分人好。技術細節可以邊做邊補。</p>
+      </details>
 
-        <details class="acc">
-          <summary>新手最容易犯的錯是什麼？ ▸</summary>
-          <p>常見三個：沒設止損就重壓、看到別人曬單就跟單、幣安地址跟合約地址搞混轉錯錢。這三個先避開，能省下大部分新手學費。</p>
-        </details>
+      <details class="acc">
+        <summary>要選哪一條鏈？Solana 還是以太坊？ ▸</summary>
+        <p>迷因幣熱度目前主要集中在 Solana，手續費低、發射速度快，適合新手入門練習。以太坊系的迷因幣手續費（gas）較高，同樣的操作次數，成本會明顯不同。</p>
+        <p>新手建議<strong>先只玩一條鏈</strong>。同時玩多條鏈最常見的後果不是賺更多，是轉錯網路把資產弄丟。</p>
+      </details>
 
-        <details class="acc">
-          <summary>要不要先在測試網或模擬盤練習？ ▸</summary>
-          <p>迷因幣交易多半直接在主網小額進行，沒有太多人用測試網練這塊。比較實際的做法是拿小額真錢跑一輪完整流程（買、看盤、賣），體感會比看教學更快建立。</p>
-        </details>
+      <details class="acc">
+        <summary>錢包助記詞要存在哪裡？ ▸</summary>
+        <p>寫在紙上放實體保險櫃或安全的地方，絕對不要拍照存手機、傳雲端筆記、貼進聊天視窗，也不要輸入到任何網站或 App。</p>
+        <p>抄完之後<strong>一定要實測還原一次</strong>，確認你抄的內容真的能還原出同一個地址。沒實測過的備份，只是一張你相信它有效的紙。看到任何要你「輸入助記詞驗證」的地方，都是詐騙。</p>
+      </details>
 
-        <details class="acc">
-          <summary>手機交易跟電腦交易有差嗎？ ▸</summary>
-          <p>功能上大同小異，多數工具都有做手機網頁版（PWA）。差別在操作精細度：電腦看盤資訊更多、下單更穩，手機適合臨時看一眼或緊急止損。</p>
-        </details>
+      <details class="acc">
+        <summary>看到某個幣漲很多，現在追進去可以嗎？ ▸</summary>
+        <p>不要用「已經漲多少」判斷該不該進場，而是回頭檢查安全指標（Dev%、Top10%、Bundle%、流動性）跟你自己的風險承受度。</p>
+        <p>「已經漲很多」這件事對你的決策其實沒有提供任何資訊——它既不代表會繼續漲，也不代表會跌。<strong>追高本身不是理由，指標健康才是判斷依據。</strong></p>
+      </details>
 
-        <details class="acc">
-          <summary>怎麼判斷現在是不是進場時機？ ▸</summary>
-          <p>看流動性夠不夠深、Dev% 和 Bundle% 是否偏高、持有人數是否過少集中，而不是看價格已經漲了多少。本站不推薦具體標的，時機判斷要建立在指標而非情緒上。</p>
-        </details>
-      </div>
+      <details class="acc">
+        <summary>新手最容易犯的錯是什麼？ ▸</summary>
+        <p>常見三個：沒設止損就重壓、看到別人曬單就跟單、地址搞混轉錯錢。這三個先避開，能省下大部分新手學費。</p>
+        <p>還有一個比較隱形但更貴的：<strong>賠了之後放大部位想追回來。</strong>這個錯誤的特徵是它通常發生在你最不冷靜的時候，所以要靠事先訂好的規則擋，不能靠當下的意志力。</p>
+      </details>
 
-      <div class="card card--flat" data-level="both">
-        <h3>🚀 剛開始 <span class="badge badge--advanced">進行中</span></h3>
+      <details class="acc">
+        <summary>要不要先在測試網或模擬盤練習？ ▸</summary>
+        <p>迷因幣交易多半直接在主網小額進行，沒有太多人用測試網練這塊。比較實際的做法是拿小額真錢跑一輪完整流程（買、看盤、賣），體感會比看教學更快建立。</p>
+        <p>原因很直接：<strong>模擬盤練不到的是情緒</strong>，而情緒才是新手最大的風險來源。用小到不心疼的真錢練，才練得到真的東西。</p>
+      </details>
 
-        <details class="acc">
-          <summary>買了之後多久該賣？ ▸</summary>
-          <p>沒有固定時間，重點是出發前先設好停利／停損點，達標就照計畫走，不要臨時因為「感覺還會漲」而改變原則。</p>
-        </details>
+      <details class="acc">
+        <summary>手機交易跟電腦交易有差嗎？ ▸</summary>
+        <p>功能上大同小異，多數工具都有做手機網頁版。差別在操作精細度：電腦看盤資訊更多、下單更穩，手機適合臨時看一眼或緊急止損。</p>
+        <p>比較實際的建議是<strong>研究跟下單在電腦上做，手機只用來看跟緊急處理</strong>。手機介面小，誤觸的機率明顯比較高。</p>
+      </details>
 
-        <details class="acc">
-          <summary>為什麼我看到的價格跟實際成交不一樣（滑點）？ ▸</summary>
-          <p>這叫滑點：從你按下買入到交易真正上鏈之間，價格可能已經變動，尤其在流動性淺或波動大的幣種上更明顯。下單前把滑點容忍度設合理範圍，避免用超差的價格成交。</p>
-        </details>
+      <details class="acc">
+        <summary>怎麼判斷現在是不是進場時機？ ▸</summary>
+        <p>看流動性夠不夠深、Dev% 和 Bundle% 是否偏高、持有人數是否過少集中，而不是看價格已經漲了多少。</p>
+        <p>更誠實的答案是：<strong>「時機」這個問題本身就問錯了。</strong>你能控制的是「這一筆的條件好不好」跟「我投多少」，不是市場的節奏。本站不推薦具體標的，也不預測任何時機。</p>
+      </details>
 
-        <details class="acc">
-          <summary>MEV 是什麼，會影響我嗎？ ▸</summary>
-          <p>MEV（礦工/驗證者可提取價值）是有心人利用交易上鏈的時間差插隊，讓你買貴、賣便宜。流動性淺、滑點設太寬的交易特別容易被夾。用有防夾功能的工具、把滑點設緊一點能降低影響。</p>
-        </details>
+      <details class="acc">
+        <summary>該用哪個錢包？ ▸</summary>
+        <p>Solana 生態最常見的是 Phantom 這類手機／瀏覽器錢包，安裝簡單、跟大部分工具都相容。重點不是選哪一個，是<strong>從官方管道安裝</strong>——商店裡有大量同名同圖的假錢包。</p>
+        <p>安裝完先做一件事：建好錢包、抄好助記詞、實測還原一次，再開始放錢進去。順序反過來的人，通常會在最糟的時候發現備份是壞的。</p>
+      </details>
 
-        <details class="acc">
-          <summary>止損設多少比較合理？ ▸</summary>
-          <p>沒有一個數字適用所有情況，常見做法是依照自己能接受的虧損比例（例如本金的一定百分比）先設好，而不是看盤面感覺隨時調整。重點是「有設」比「設多少」更重要。</p>
-        </details>
+      <details class="acc">
+        <summary>什麼是 gas？為什麼錢包裡要留一點 SOL？ ▸</summary>
+        <p>gas 是鏈上處理你這筆交易的費用，在 Solana 上用 SOL 支付。它跟你買什麼幣無關，只跟「你送出了一筆交易」有關。</p>
+        <p>所以錢包裡一定要留一小筆 SOL 當油錢。<strong>油錢用完的時候，你連「賣出」都送不出去</strong>——這是新手很常遇到、但完全可以避免的窘境。</p>
+      </details>
 
-        <details class="acc">
-          <summary>為什麼賣不掉，掛單一直卡著？ ▸</summary>
-          <p>通常是流動性不足或滑點設太緊導致交易撮合不了。可以先確認池子深度，適度放寬滑點，如果流動性真的枯竭，代表這個幣可能已經沒什麼人接盤了。</p>
-        </details>
+      <details class="acc">
+        <summary>迷因幣跟一般加密貨幣差在哪？ ▸</summary>
+        <p>差在有沒有「基本面」這個東西。多數迷因幣沒有產品、沒有營收、沒有團隊承諾，價格完全來自注意力與籌碼結構。</p>
+        <p>這代表你不能用分析公司的方式分析它。<strong>能分析的只有合約安全性、籌碼分布與流動性這三件事</strong>，其他都是猜測。認清這點，你的期待值會比較健康。</p>
+      </details>
 
-        <details class="acc">
-          <summary>Dev% 跟 Top10% 這些指標要多常看？ ▸</summary>
-          <p>買之前一定要看，持倉期間也建議定期回看，尤其是 Dev% 有沒有在往下掉（代表開發者在賣）。這些數字不是買進當下看一次就結束。</p>
-        </details>
+      <details class="acc">
+        <summary>可以借錢或用信用卡額度來玩嗎？ ▸</summary>
+        <p>本站不提供財務建議，但可以指出一個事實：<strong>迷因幣的報酬分布極度偏斜，大多數標的最終歸零。</strong>用有還款壓力的錢參與，等於在一個你無法控制節奏的市場裡加上一個你必須遵守的時間表。</p>
+        <p>倉位計算器那一頁的「總資金」欄位，指的是你劃給這件事、賠光也不影響生活的錢，不含任何借貸額度。</p>
+      </details>
+    </div>
 
-        <details class="acc">
-          <summary>聰明錢跟單有用嗎？ ▸</summary>
-          <p>聰明錢地址的歷史紀錄可以當參考，但不是保證。他們的資金規模、進出速度跟你不一樣，直接複製動作常常吃到更差的價格，建議當成輔助資訊而非唯一依據。</p>
-        </details>
+    <div class="card card--flat" data-level="both">
+      <h3>🚀 剛開始 <span class="badge badge--advanced">進行中</span></h3>
 
-        <details class="acc">
-          <summary>要不要分批買、分批賣？ ▸</summary>
-          <p>多數有經驗的玩家會採分批，用意是平均成本、降低一次性判斷錯誤的傷害，而不是想著一次抓到最低點或最高點。</p>
-        </details>
+      <details class="acc">
+        <summary>買了之後多久該賣？ ▸</summary>
+        <p>沒有固定時間，重點是出發前先設好停利／停損點，達標就照計畫走，不要臨時因為「感覺還會漲」而改變原則。</p>
+        <p>一個很多人用的簡化版本是：<strong>先賣回本金那一份，剩下的當作沒有成本的部位。</strong>這樣至少確保這一輪不會從賺變賠，心理壓力也小很多。</p>
+      </details>
 
-        <details class="acc">
-          <summary>看盤軟體上的「蜜罐風險」警示是什麼意思？ ▸</summary>
-          <p>蜜罐（Honeypot）是指這個代幣的合約設計成能買不能賣，或賣出要付極高稅率。看到蜜罐警示就不要碰，這通常不是誤判，是實際測試過賣不出去。</p>
-        </details>
+      <details class="acc">
+        <summary>為什麼我看到的價格跟實際成交不一樣（滑點）？ ▸</summary>
+        <p>這叫滑點：從你按下買入到交易真正上鏈之間，價格可能已經變動，尤其在流動性淺或波動大的幣種上更明顯。</p>
+        <p>你在下單畫面設的滑點是<strong>可接受的最差價格</strong>，不是預期會被吃掉多少。設太緊會一直失敗、白付優先費；設太寬等於公開告訴搶跑的人「我可以接受差很多的價格」。</p>
+      </details>
 
-        <details class="acc">
-          <summary>Rug pull 前有哪些徵兆？ ▸</summary>
-          <p>常見徵兆：Dev% 持續偏高且沒下降、流動性突然被抽走、社群突然改口風向、開發者社群帳號消失或停更。多個徵兆同時出現要提高警覺。</p>
-        </details>
+      <details class="acc">
+        <summary>MEV 是什麼，會影響我嗎？ ▸</summary>
+        <p>MEV 是有心人利用交易上鏈的時間差插隊，讓你買貴、賣便宜。流動性淺、滑點設太寬的交易特別容易被夾。</p>
+        <p>降低影響的做法是：<strong>用有防夾功能的模式、把滑點設在合理範圍、避開流動性太淺的幣。</strong>第三項最有效，因為池子夠深的時候，夾擊本身就不划算。</p>
+      </details>
 
-        <details class="acc">
-          <summary>用推薦碼下單會不會比較不安全？ ▸</summary>
-          <p>推薦碼本身只影響手續費折扣分潤，不會動到你的資產安全，前提是連結來自官方或你信任的來源，不是隨便一個陌生人丟的短網址。</p>
-        </details>
+      <details class="acc">
+        <summary>止損設多少比較合理？ ▸</summary>
+        <p>沒有一個數字適用所有情況，常見做法是依照自己能接受的虧損比例先設好，而不是看盤面感覺隨時調整。<strong>重點是「有設」比「設多少」更重要。</strong></p>
+        <p>還有一個更關鍵的前提：止損只在賣得掉的時候有效。流動性枯竭時掛單根本成交不了，所以<strong>倉位控制才是任何情況下都有效的那道防線</strong>，止損是第二層。</p>
+      </details>
 
-        <details class="acc">
-          <summary>怎麼判斷該加碼還是該停手？ ▸</summary>
-          <p>看你原本設定的計畫有沒有被打破，而不是看情緒。如果安全指標仍健康、只是價格回檔，可以照計畫執行；如果指標開始惡化（Dev% 上升、流動性下滑），就是該停手的訊號，不是加碼的理由。</p>
-        </details>
-      </div>
+      <details class="acc">
+        <summary>為什麼賣不掉，掛單一直卡著？ ▸</summary>
+        <p>通常是流動性不足或滑點設太緊導致交易撮合不了。先確認池子深度，適度放寬滑點再試。</p>
+        <p>如果放寬之後還是不行，要考慮兩種可能：<strong>流動性已經枯竭</strong>（這個幣沒什麼人接盤了），或是<strong>合約本身擋住賣出</strong>（蜜罐）。後者可以回頭看安全面板的 Honeypot 欄位確認。</p>
+      </details>
 
-      <div class="card card--flat" data-level="both">
-        <h3>💔 被割過 <span class="badge badge--danger">重新開始</span></h3>
+      <details class="acc">
+        <summary>Dev% 跟 Top10% 這些指標要多常看？ ▸</summary>
+        <p>買之前一定要看，持倉期間也建議定期回看，尤其是 Dev% 有沒有在往下掉（代表開發者在賣）。</p>
+        <p>這些數字不是買進當下看一次就結束的靜態資料，它們會隨著籌碼流動而變。<strong>「買的時候是安全的」跟「現在是安全的」是兩件事。</strong></p>
+      </details>
 
-        <details class="acc">
-          <summary>錢真的拿不回來了嗎？ ▸</summary>
-          <p>如果是 Rug pull 或蜜罐，鏈上交易一旦完成基本上無法逆轉，也沒有客服可以申訴。少數詐騙案件警方能透過鏈上分析追查，但追回機率很低，心理上要先接受這個現實再往下處理。</p>
-        </details>
+      <details class="acc">
+        <summary>聰明錢跟單有用嗎？ ▸</summary>
+        <p>聰明錢地址的歷史紀錄可以當參考，但不是保證。他們的資金規模、進出速度跟你不一樣，直接複製動作常常吃到更差的價格。</p>
+        <p>更關鍵的是<strong>你通常不會即時知道他什麼時候賣</strong>。跟單複製的是進場動作，不是成本，也不是出場時機——同一顆幣，他賺錢跟你賠錢可以同時成立。建議當成輔助資訊而非唯一依據。</p>
+      </details>
 
-        <details class="acc">
-          <summary>怎麼確認自己是不是被割了，還是只是正常下跌？ ▸</summary>
-          <p>看流動性池是否還在、能不能正常掛單賣出。如果流動性被抽乾、賣單一直失敗或稅率突然爆高，那是被割；如果只是價格跌但賣得出去，那是正常的市場波動。</p>
-        </details>
+      <details class="acc">
+        <summary>要不要分批買、分批賣？ ▸</summary>
+        <p>多數有經驗的玩家會採分批，用意是平均成本、降低一次性判斷錯誤的傷害，而不是想著一次抓到最低點或最高點。</p>
+        <p>要注意的是：<strong>分批不等於可以放大總部位。</strong>分三次各買一份，總量還是要算在你原本設定的單筆上限裡。很多人的「分批」其實是變相加碼。</p>
+      </details>
 
-        <details class="acc">
-          <summary>要不要去報警或申訴？ ▸</summary>
-          <p>如果金額較大，建議保留交易紀錄（合約地址、交易哈希、當時截圖）去報案存證，即使追回機率低，留紀錄對後續可能的集體訴訟或警方調查仍有幫助。</p>
-        </details>
+      <details class="acc">
+        <summary>看盤軟體上的「蜜罐風險」警示是什麼意思？ ▸</summary>
+        <p>蜜罐是指這個代幣的合約設計成能買不能賣，或賣出要付極高稅率。看到蜜罐警示就不要碰，這通常不是誤判。</p>
+        <p>想更確定的話有個成本極低的做法：<strong>先用極小額買一點，立刻賣掉。</strong>賣得掉再考慮加碼，賣不掉就當作繳了幾塊錢的手續費學費。</p>
+      </details>
 
-        <details class="acc">
-          <summary>下次要怎麼避免同樣的事？ ▸</summary>
-          <p>回頭檢查當初有沒有看安全指標、有沒有設止損、資金是不是重壓在單一標的。把這次的錯誤具體寫下來，比記住「以後要小心」更有用。</p>
-        </details>
+      <details class="acc">
+        <summary>Rug pull 前有哪些徵兆？ ▸</summary>
+        <p>常見徵兆：Dev% 持續偏高且沒下降、流動性突然被抽走、社群突然改口風向、開發者社群帳號消失或停更。多個徵兆同時出現要提高警覺。</p>
+        <p>另外要注意的是<strong>「慢速版」的 rug</strong>：流動性不是一次抽光，而是幾天內分批抽走，價格緩步陰跌看起來像正常回檔。這種最容易被忽略，破解方法是定期回看流動性佔市值的比例。</p>
+      </details>
 
-        <details class="acc">
-          <summary>心態上該怎麼調整？ ▸</summary>
-          <p>把這筆虧損當成付出的學費，而不是「我運氣特別差」。多數老手都繳過類似的學費，重點是虧損金額有沒有超出你能承受的範圍，以及有沒有從中學到具體的教訓。</p>
-        </details>
+      <details class="acc">
+        <summary>用推薦碼下單會不會比較不安全？ ▸</summary>
+        <p>推薦碼本身只影響手續費折扣分潤，不會動到你的資產安全，前提是連結來自官方或你信任的來源，不是隨便一個陌生人丟的短網址。</p>
+        <p>比較該警覺的是<strong>連結本身的網域</strong>。推薦連結一樣可以被做成釣魚版本，點進去之後照樣核對一次網址列。</p>
+      </details>
 
-        <details class="acc">
-          <summary>會不會影響我以後的信用或帳號？ ▸</summary>
-          <p>鏈上錢包的損失不會連動你的個人信用紀錄或其他帳號，除非你在過程中把身分資料或其他帳密洩漏給詐騙方，那部分才需要額外處理（改密碼、留意個資外洩風險）。</p>
-        </details>
+      <details class="acc">
+        <summary>怎麼判斷該加碼還是該停手？ ▸</summary>
+        <p>看你原本設定的計畫有沒有被打破，而不是看情緒。如果安全指標仍健康、只是價格回檔，可以照計畫執行；如果指標開始惡化（Dev% 上升、流動性下滑），就是該停手的訊號。</p>
+        <p>有一個很好用的自我檢查：<strong>問自己「如果我現在手上沒有這個部位，我會用這個價格買進嗎？」</strong>答案是否定的，那就沒有理由加碼，甚至該考慮出場。</p>
+      </details>
 
-        <details class="acc">
-          <summary>要馬上all-in想把虧損賺回來嗎？ ▸</summary>
-          <p>不建議。剛虧損後的心理狀態通常會讓判斷力變差，容易追求「快速回本」而做出更冒險的決定，反而放大虧損。先休息一段時間再重新評估比較穩。</p>
-        </details>
+      <details class="acc">
+        <summary>優先費（gas）要設多少？ ▸</summary>
+        <p>它決定你的交易被打包的優先順序。太低會一直等、甚至失敗；太高則是每筆都多付一點。網路壅塞時該調高，平常沒必要。</p>
+        <p>值得注意的是：<strong>優先費是固定金額，跟你的本金大小無關。</strong>所以本金越小，優先費佔的比例越高——這也是為什麼超小額頻繁進出特別不划算。</p>
+      </details>
 
-        <details class="acc">
-          <summary>要不要把這次的合約地址列黑名單警告別人？ ▸</summary>
-          <p>可以在信任的社群或群組分享合約地址跟事件經過，幫其他人避開同一個坑，但注意不要在過程中散布未經證實的個人指控。</p>
-        </details>
+      <details class="acc">
+        <summary>可以同時持有很多顆幣分散風險嗎？ ▸</summary>
+        <p>可以，但要注意迷因幣的「分散」效果比一般資產弱很多——它們在市場轉弱時往往一起跌，相關性很高。</p>
+        <p>比較實際的做法是<strong>把同時持有的部位加總，也當成一筆看</strong>，別讓「分散到五顆」變成總曝險放大五倍。分散的重點在總量，不在數量。</p>
+      </details>
 
-        <details class="acc">
-          <summary>被割之後還適合繼續玩迷因幣嗎？ ▸</summary>
-          <p>因人而異。如果你能誠實檢討出具體原因（沒看指標、沒設停損、重壓單一標的）並願意調整,可以考慮小額重新開始；如果虧損已經影響到生活或情緒，先停下來比較重要。</p>
-        </details>
+      <details class="acc">
+        <summary>「已經畢業」的幣是不是比較安全？ ▸</summary>
+        <p>畢業代表流動性從發射平台搬到正式交易池，通常意味著流動性比較穩定、參與人數比較多，這確實降低了一部分風險。</p>
+        <p>但<strong>畢業不等於安全</strong>。該檢查的權限狀態、LP 是否燒毀、籌碼集中度，一項都不能省。畢業只是換了場地，不是通過了審核。</p>
+      </details>
 
-        <details class="acc">
-          <summary>怎麼分辨「割我的人」是不是專業詐騙集團？ ▸</summary>
-          <p>看手法：如果合約部署後短時間內快速抽流動性、Dev 錢包在割後立刻分散轉出到多個地址洗鏈，通常是有組織的老手，不是單一衝動個體。這類手法辨識度高但難追回，重點還是回到事前預防。</p>
-        </details>
+      <details class="acc">
+        <summary>要不要記錄自己的每一筆交易？ ▸</summary>
+        <p>強烈建議。至少記下：進場理由、當時看到的關鍵數字、預設的停損、實際出場價與原因。</p>
+        <p>好處有兩個：<strong>報稅對帳時你會需要它</strong>，以及<strong>你會發現自己重複犯同一個錯</strong>。憑印象檢討幾乎沒有用，因為記憶會自動美化決策過程。</p>
+      </details>
 
-        <details class="acc">
-          <summary>為什麼社群裡大家都說要「拿回本金就好」？ ▸</summary>
-          <p>這是一種常見的心理停損策略：先設定一個明確的止血點（例如拿回本金就出場），避免因為捨不得而繼續留在高風險部位裡，等指標更惡化。</p>
-        </details>
+      <details class="acc">
+        <summary>群組裡有人喊單，可以跟嗎？ ▸</summary>
+        <p>把喊單當成「有一顆幣可以去查」的線索，而不是「該買」的結論。收到線索之後，照樣跑一次自己的檢查流程。</p>
+        <p>要留意一個結構性問題：<strong>喊單的人通常已經在裡面了</strong>，你的買入正好是他的流動性。這不必然是惡意，但代表你們的利益在這一刻並不一致。</p>
+      </details>
+    </div>
 
-        <details class="acc">
-          <summary>之後要怎麼避免自己心態崩掉、亂做決定？ ▸</summary>
-          <p>建議固定一套流程：下單前一定看指標、設好止損金額才進場、單一標的投入不超過總資金的一定比例。有紀律的流程比臨場的情緒判斷更能保護你。</p>
-        </details>
-      </div>
+    <div class="card card--flat" data-level="both">
+      <h3>💔 被割過 <span class="badge badge--danger">重新開始</span></h3>
+
+      <details class="acc">
+        <summary>錢真的拿不回來了嗎？ ▸</summary>
+        <p>如果是 rug pull 或蜜罐，鏈上交易一旦完成基本上無法逆轉，也沒有客服可以申訴。少數詐騙案件警方能透過鏈上分析追查，但追回機率很低。</p>
+        <p>心理上要先接受這個現實再往下處理。<strong>接受得越慢，越容易做出第二個錯誤決定</strong>——通常是急著加碼想追回來。</p>
+      </details>
+
+      <details class="acc">
+        <summary>怎麼確認自己是不是被割了，還是只是正常下跌？ ▸</summary>
+        <p>看流動性池是否還在、能不能正常掛單賣出。如果流動性被抽乾、賣單一直失敗或稅率突然爆高，那是被割；如果只是價格跌但賣得出去，那是正常的市場波動。</p>
+        <p>這個區分很重要，因為<strong>兩者的處置方式完全不同</strong>：前者要做的是保全剩餘資產與蒐證，後者要做的是回到自己原本的停損計畫。</p>
+      </details>
+
+      <details class="acc">
+        <summary>要不要去報警或申訴？ ▸</summary>
+        <p>如果金額較大，建議保留交易紀錄（合約地址、交易紀錄、當時截圖）去報案存證，即使追回機率低，留紀錄對後續可能的調查仍有幫助。</p>
+        <p>蒐證要盡早，<strong>相關的訊息、連結、群組很可能在幾天內就被刪掉</strong>。先截圖存檔，再去處理其他事。</p>
+      </details>
+
+      <details class="acc">
+        <summary>錢包被盜之後第一件事該做什麼？ ▸</summary>
+        <p>把還沒被轉走的資產立刻移到一個<strong>全新建立的錢包</strong>，不是你現有的另一個。攻擊者可能還握有授權或私鑰，留在原錢包裡的東西隨時會被掃走。</p>
+        <p>接著把原錢包當作永久廢棄，不要再往裡面轉任何東西。助記詞一旦外流就無法「改密碼」，那個錢包永遠不安全。</p>
+      </details>
+
+      <details class="acc">
+        <summary>有人說可以幫我追回被盜的資產，可信嗎？ ▸</summary>
+        <p>不可信。<strong>這是被盜之後最常見的二次詐騙</strong>，而且特別容易得手，因為受害者當下急著挽回。</p>
+        <p>典型話術是要你先付一筆「服務費」「解鎖費」「保證金」，或是要你提供助記詞「以便協助操作」。任何一項出現，就是詐騙。正式管道只有報案與依程序處理。</p>
+      </details>
+
+      <details class="acc">
+        <summary>下次要怎麼避免同樣的事？ ▸</summary>
+        <p>回頭檢查當初有沒有看安全指標、有沒有設止損、資金是不是重壓在單一標的。<strong>把這次的錯誤具體寫下來，比記住「以後要小心」更有用。</strong></p>
+        <p>具體的意思是寫成一個動作，例如「下單前一定先看 Honeypot 那一格」，而不是寫成一種態度。態度擋不住下一次的急迫感，固定動作可以。</p>
+      </details>
+
+      <details class="acc">
+        <summary>心態上該怎麼調整？ ▸</summary>
+        <p>把這筆虧損當成付出的學費，而不是「我運氣特別差」。多數老手都繳過類似的學費。</p>
+        <p>要誠實面對的關鍵問題是：<strong>虧損金額有沒有超出你能承受的範圍？</strong>如果有，那真正該檢討的不是這一次的判斷，而是倉位控制——判斷會一直錯，倉位控制是你唯一能保證的東西。</p>
+      </details>
+
+      <details class="acc">
+        <summary>會不會影響我以後的信用或帳號？ ▸</summary>
+        <p>鏈上錢包的損失不會連動你的個人信用紀錄或其他帳號。</p>
+        <p>但有兩種情況要額外處理：<strong>你在過程中洩漏了身分資料或其他帳密</strong>（要改密碼、留意個資外洩），或是<strong>你的銀行帳戶曾經幫別人代收代轉</strong>（可能面臨警示帳戶問題）。這兩件事跟錢包損失是分開的風險。</p>
+      </details>
+
+      <details class="acc">
+        <summary>要馬上 all-in 想把虧損賺回來嗎？ ▸</summary>
+        <p>不建議。剛虧損後的心理狀態通常會讓判斷力變差，容易追求「快速回本」而做出更冒險的決定，反而放大虧損。</p>
+        <p>這個模式有個名字叫追損，特徵是<strong>你放大部位的理由來自過去的虧損，而不是眼前這一筆的條件</strong>。認出這一點，通常就足以讓自己停下來。先休息一段時間再重新評估比較穩。</p>
+      </details>
+
+      <details class="acc">
+        <summary>要不要把這次的合約地址列黑名單警告別人？ ▸</summary>
+        <p>可以在信任的社群或群組分享合約地址跟事件經過，幫其他人避開同一個坑。</p>
+        <p>但注意兩件事：<strong>不要散布未經證實的個人指控</strong>，以及<strong>不要在公開場合透露自己損失多少</strong>——後者會讓你成為「協助追回」那類二次詐騙的目標。</p>
+      </details>
+
+      <details class="acc">
+        <summary>被割之後還適合繼續玩迷因幣嗎？ ▸</summary>
+        <p>因人而異。如果你能誠實檢討出具體原因（沒看指標、沒設停損、重壓單一標的）並願意調整，可以考慮小額重新開始。</p>
+        <p>如果虧損已經影響到生活或情緒，<strong>先停下來比較重要</strong>。市場明天還在，你的判斷力現在不在。</p>
+      </details>
+
+      <details class="acc">
+        <summary>怎麼分辨「割我的人」是不是專業詐騙集團？ ▸</summary>
+        <p>看手法：如果合約部署後短時間內快速抽流動性、Dev 錢包在割後立刻分散轉出到多個地址，通常是有組織的老手，不是單一衝動個體。</p>
+        <p>知道這件事的用處不是為了追查，而是為了<strong>調整你的預期</strong>：對方是專業的，你靠臨場判斷贏不了他，只能靠事前的固定檢查流程避開。重點永遠回到事前預防。</p>
+      </details>
+
+      <details class="acc">
+        <summary>為什麼社群裡大家都說要「拿回本金就好」？ ▸</summary>
+        <p>這是一種常見的心理停損策略：先設定一個明確的止血點（例如拿回本金就出場），避免因為捨不得而繼續留在高風險部位裡。</p>
+        <p>它的價值不在於數學上最優，而在於<strong>它是一個你在情緒上執行得下去的規則</strong>。能執行的規則，勝過理論上更好但你永遠不會照做的規則。</p>
+      </details>
+
+      <details class="acc">
+        <summary>之後要怎麼避免自己心態崩掉、亂做決定？ ▸</summary>
+        <p>建議固定一套流程：下單前一定看指標、設好止損金額才進場、單一標的投入不超過總資金的一定比例。</p>
+        <p>流程的重點是<strong>把決策提前到你冷靜的時候做完</strong>。行情來的當下你不會冷靜，這是正常的，所以不要指望那個時候的自己。有紀律的流程比臨場的情緒判斷更能保護你。</p>
+      </details>
+
+      <details class="acc">
+        <summary>要不要休息一段時間？多久比較好？ ▸</summary>
+        <p>沒有標準答案，但有一個實用的判斷：<strong>當你想到這件事還會胸口一緊、或還在反覆想「早知道就……」，就代表還沒好。</strong></p>
+        <p>休息期間可以做一件有用的事：把這次的完整過程寫下來，包含當時每一步在想什麼。等你能平靜地寫完它，通常也就準備好了。</p>
+      </details>
+
+      <details class="acc">
+        <summary>怎麼跟家人解釋這件事？ ▸</summary>
+        <p>本站不提供這方面的建議，但可以說一件相關的事：<strong>如果一筆虧損大到你不敢讓家人知道，那它本來就超過了你該投入的規模。</strong></p>
+        <p>把這件事當成一個訊號——不是道德問題，是倉位控制的問題。下一輪重新設定金額時，用「說出來不會有壓力」當作上限的參考。</p>
+      </details>
+    </div>
+
+    <div class="card" data-level="both">
+      <h3>還是沒找到答案？</h3>
+      <p>這頁只收常見問題。碰到具體的幣、具體的操作卡關，丟到社群問通常比自己猜快。</p>
+      <a class="btn btn--ghost ext" href="#" data-ref="telegram" target="_blank" rel="noopener">加入 Telegram 社群 ↗</a>
+      <a class="btn btn--ghost" href="#/risk">⚠️ 回去看風險與免責 ▸</a>
+    </div>
 
   </section>
 
