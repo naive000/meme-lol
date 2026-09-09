@@ -30,6 +30,7 @@
   --warn-soft:#FDF3E3;
   --danger-soft:#FDECEC;
   --scrim:rgba(18,19,26,.45);
+  --street-border:var(--text);
   --topbar-h:52px;
   /* 風格 token（只有排版三件事：字體堆疊／基準字級／圓角，顏色一律不碰） */
   --font-body:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
@@ -50,8 +51,12 @@
     --warn-soft:#2E2410;
     --danger-soft:#2E1416;
     --scrim:rgba(0,0,0,.6);
+    --street-border:var(--text-2);
   }
 }
+/* 深淺色目前完全跟隨系統 prefers-color-scheme；下面這段 data-theme="dark" 覆寫
+   目前沒有任何 UI 或 JS 會觸發，保留給未來若要做手動深淺色切換時使用，
+   同時也是測試深色樣式的唯一手動入口（手動設 documentElement 的 data-theme）。 */
 :root[data-theme="dark"]{
   --bg:#0B0E14; --surface:#12161F; --card:#181D28; --border:#262D3B;
   --text:#F1F5F9; --text-2:#A3ADBD; --text-3:#9AA3B5;
@@ -66,6 +71,7 @@
   --warn-soft:#2E2410;
   --danger-soft:#2E1416;
   --scrim:rgba(0,0,0,.6);
+  --street-border:var(--text-2);
 }
 
 /* ===== 2. 基礎 ===== */
@@ -98,8 +104,10 @@ code{
 .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
 .muted{color:var(--text-3);font-size:.8125rem;line-height:1.5}
 .table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius,12px)}
-table{width:100%;display:block;overflow-x:auto;border-collapse:collapse;font-size:.875rem;-webkit-overflow-scrolling:touch}
-th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:.875rem}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left}
+th:first-child,td:first-child{white-space:nowrap}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 th{background:var(--surface);color:var(--text-2);font-weight:700}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 hr{border:0;border-top:1px solid var(--border);margin:16px 0}
@@ -144,6 +152,7 @@ main{max-width:640px;margin:0 auto;padding:16px}
 .badge--beginner{color:var(--beginner);border-color:var(--beginner);background:var(--ok-soft)}
 .badge--advanced{color:var(--advanced);border-color:var(--advanced);background:var(--accent-soft)}
 .badge--danger{color:var(--danger);border-color:var(--danger);background:var(--danger-soft)}
+.badge--rating{color:var(--text-2);border-color:var(--border);background:var(--surface);font-variant-numeric:tabular-nums}
 
 .steps{margin:8px 0 0;padding:0;list-style:none}
 .steps > .step{position:relative;padding:0 0 16px 44px;margin:0}
@@ -187,7 +196,9 @@ main{max-width:640px;margin:0 auto;padding:16px}
 .chip{flex:0 0 auto;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:var(--radius,999px);border:1px solid var(--border);background:var(--surface);color:var(--text-2);font-family:inherit;font-size:.9375rem;font-weight:700;cursor:pointer;white-space:nowrap}
 .chip--active{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 
-.term{color:var(--accent);border-bottom:1px dashed var(--accent);cursor:pointer;font-weight:700}
+.term{display:inline;background:none;border:0;border-bottom:1px dashed var(--accent);padding:0;margin:0;
+  font:inherit;font-weight:700;line-height:inherit;text-align:inherit;color:var(--accent);
+  cursor:pointer;-webkit-appearance:none;appearance:none}
 
 .checklist{margin:8px 0 0;padding:0;list-style:none}
 .checklist > label{display:flex;align-items:flex-start;gap:12px;min-height:48px;padding:12px 0;border-bottom:1px solid var(--border);font-size:.9375rem;color:var(--text);cursor:pointer}
@@ -233,7 +244,6 @@ main{max-width:640px;margin:0 auto;padding:16px}
   border-radius:20px 20px 0 0;box-shadow:var(--shadow);
   padding:8px 16px calc(16px + env(safe-area-inset-bottom));
   max-height:82vh;overflow-y:auto;
-  transform:translateY(0);transition:transform .18s ease,opacity .18s ease;
 }
 .sheet::before{content:"";display:block;width:40px;height:4px;border-radius:999px;background:var(--border);margin:4px auto 12px}
 
@@ -244,8 +254,10 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important}
 }
+html.sheet-open,body.sheet-open{overflow:hidden}
 .site-footer{max-width:640px;margin:24px auto 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));text-align:center;color:var(--text-3);font-size:.75rem;border-top:1px solid var(--border)}
-/* ===== 6. 去AI味：互動回饋 + 卡片分級 + skip-link ===== */
+/* ===== 6a. a11y：skip-link 與焦點可見性 ===== */
+/* ===== 6b. 視覺回饋：按壓動態與卡片變體 ===== */
 .btn,.tab,.chip,.term,.tabbar button,.acc > summary,.checklist > label{transition:transform .12s ease,background-color .15s ease,opacity .15s ease}
 .btn:active,.tab:active,.chip:active,.tabbar button:active{transform:scale(.97)}
 .acc > summary:active{opacity:.7}
@@ -266,6 +278,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   .figure--wide{max-width:900px;margin:0 auto}
   .tabbar{position:fixed;left:0;top:0;bottom:0;width:172px;height:auto;flex-direction:column;justify-content:flex-start;overflow-x:visible;overflow-y:auto;border-right:1px solid var(--border);border-top:none;padding-top:64px}
   main{margin:0 auto 0 max(172px,calc((100vw - 548px) / 2));max-width:min(720px,calc(100vw - 204px))}
+  .site-footer{margin:24px auto 0 max(172px,calc((100vw - 548px) / 2));max-width:min(720px,calc(100vw - 204px))}
 }
 
 /* ===== 9. 風格切換（data-style，與 data-theme 深淺色互相獨立） ===== */
@@ -277,7 +290,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   --font-size-base:15px;
   --radius:0;
 }
-[data-style="terminal"] .card{border:1px solid var(--border);box-shadow:none}
+[data-style="terminal"] .card{border-width:1px;border-style:solid;box-shadow:none}
 
 /* 街頭風：大字重、粗黑框、微圓角、badge 歪一點 */
 [data-style="street"]{
@@ -287,7 +300,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 [data-style="street"] h1,
 [data-style="street"] h2,
 [data-style="street"] h3{font-weight:800}
-[data-style="street"] .card{border:2px solid var(--text);box-shadow:none}
+[data-style="street"] .card{border-width:2px;border-style:solid;border-color:var(--street-border);box-shadow:none}
 [data-style="street"] .badge{transform:rotate(-2deg)}
 
 /* 報表風：小字級、幾乎直角、卡片改用底線分隔 */
@@ -295,7 +308,11 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   --font-size-base:14px;
   --radius:2px;
 }
-[data-style="report"] .card{border:0;border-bottom:1px solid var(--border);box-shadow:none}
+[data-style="report"] .card{border-width:0 0 1px;border-style:solid;box-shadow:none}
+
+/* 語意色條（風險紅／工具紫）必須壓過上面三種風格的 .card 覆寫，故放在最後且提高特異度 */
+.card.card--risk,[data-style] .card.card--risk{border-left-width:4px;border-left-style:solid;border-left-color:var(--danger)}
+.card.card--tool,[data-style] .card.card--tool{border-left-width:4px;border-left-style:solid;border-left-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -314,44 +331,47 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
   <!-- ================= 首頁 ================= -->
   <section class="page is-active" id="page-home" data-page="home">
-    <div class="card" data-level="both">
+    <div class="page-head">
       <h1>第一筆 meme，不要當學費</h1>
-      <p>想靠土狗賺錢，先學會不要當第一批被割的人。用手機把 GMGN、Axiom、fomo、DEX Screener 串成一套流程：怎麼找、怎麼驗、怎麼下、什麼時候該走。</p>
+      <p>四個工具、一條流程，先學會不要當第一批被割的人。</p>
+    </div>
+    <div class="card" data-level="both">
+      <p>想靠<button type="button" class="term" data-term="土狗">土狗</button>賺錢，得先知道自己在跟誰對賭。用手機把 GMGN、Axiom、fomo、DEX Screener 串成一套流程：怎麼找、怎麼驗、怎麼下、什麼時候該走。</p>
       <a class="btn btn--primary" href="#/flow">👉 我是小白，從這裡開始</a>
       <a class="btn btn--ghost" href="#/tools">🧰 直接看四個工具</a>
     </div>
 
-    <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+    <div class="callout callout--warn" data-level="both">⚠️ 這站教的是工具怎麼操作，不是叫你買什麼。迷因幣多數會歸零，先假設這筆錢會全賠，再決定要不要往下看。</div>
 
     <h2>四個工具，一句話認識</h2>
 
     <div class="card card--tool" data-level="both">
-      <h3>🔍 GMGN.ai <span class="badge badge--beginner">小白友善 ★★★☆☆</span></h3>
-      <p><strong>【體檢站】</strong>買之前先來這裡照X光——安全紅綠燈＋聰明錢在買什麼一眼看穿。在你的賺錢流程裡，這站負責「排雷」。</p>
+      <h3>🔍 GMGN.ai <span class="badge badge--rating">小白友善 ★★★☆☆</span></h3>
+      <p><strong>【體檢站】</strong>買之前先來這裡照 X 光——安全紅綠燈、Top 10 持倉、聰明錢在買什麼，一頁看完。排雷這件事，四個工具裡它做得最細。</p>
       <p><small>支援鏈：SOL／BSC／ETH／Base／Monad／TRON（＋Robinhood Chain）｜手機：Web＋App＋Telegram Bot｜費率：每筆約 1%（買賣各收）</small></p>
       <p class="muted">🔗 本站連結含推薦碼，你的費率通常較低，我也會拿到分潤。</p>
       <a class="btn btn--ghost" href="#/tools/gmgn">進入 GMGN 教學 ▸</a>
     </div>
 
     <div class="card card--tool" data-level="both">
-      <h3>⚡ Axiom.trade <span class="badge badge--advanced">小白友善 ★★☆☆☆</span></h3>
-      <p><strong>【進階駕駛艙】</strong>想搶在多數人之前看到新幣，這是老手的武器庫。在你的賺錢流程裡，這站負責「搶時間差」。</p>
+      <h3>⚡ Axiom.trade <span class="badge badge--rating">小白友善 ★★☆☆☆</span></h3>
+      <p><strong>【進階駕駛艙】</strong>Pulse 三欄即時滾動，別人還在看排行榜，你已經看到剛發出來的幣。代價是資訊少、判斷時間短，這是老手拿來換時間差的工具。</p>
       <p><small>支援鏈：SOL／BNB／ETH／Robinhood Chain｜手機：沒有官方 App，用瀏覽器「加到主畫面」當 PWA｜費率：基礎 1%，等級最低 0.75%，推薦碼通常再折扣（實際比例以App顯示為準）</small></p>
-      <p class="muted">🔗 本站連結含推薦碼，你的費率通常較低，我也會拿到分潤。</p>
+      <p class="muted">🔗 走這條進 Axiom 會帶上我的推薦碼：等級折扣之外通常還能再省，平台的分潤則進我口袋。</p>
       <a class="btn btn--ghost" href="#/tools/axiom">進入 Axiom 教學 ▸</a>
     </div>
 
     <div class="card card--tool" data-level="both">
-      <h3>📱 fomo.family <span class="badge badge--beginner">小白友善 ★★★★★</span></h3>
-      <p><strong>【新手入口】</strong>從有錢包到下第一單，四個裡面門檻最低的一站。在你的賺錢流程裡，這站負責「讓你先上車」。</p>
+      <h3>📱 fomo.family <span class="badge badge--rating">小白友善 ★★★★★</span></h3>
+      <p><strong>【新手入口】</strong>連錢包都還沒開的話，從這裡起步最不容易卡住：gas 由平台代付、滑點不用自己調、註冊完錢包就在手上。</p>
       <p><small>支援鏈：SOL／Base／BNB／Monad／ETH／Robinhood Chain｜手機：iOS／Android／Web｜費率：現貨手續費以App實際顯示為準，gas 由平台代付</small></p>
-      <p class="muted">🔗 本站連結含推薦碼，你的費率通常較低，我也會拿到分潤。</p>
+      <p class="muted">🔗 fomo 這條同樣是推薦連結。手續費以 App 當下顯示為準，通常較優惠，成交後平台會分我一份。</p>
       <a class="btn btn--ghost" href="#/tools/fomo">進入 fomo 教學 ▸</a>
     </div>
 
     <div class="card card--tool" data-level="both">
-      <h3>📊 DEX Screener <span class="badge badge--beginner">小白友善 ★★★★☆</span></h3>
-      <p><strong>【查真假機】</strong>拿到合約地址先貼這裡查一次，價格、流動性、是不是詐騙一次看穿。在你的賺錢流程裡，這站負責「打假」。</p>
+      <h3>📊 DEX Screener <span class="badge badge--rating">小白友善 ★★★★☆</span></h3>
+      <p><strong>【查真假機】</strong>它的用法是反過來的：不是拿它找幣，而是拿到合約地址之後貼進去對一次。價格、流動性、池子鎖沒鎖，仿冒幣多半在這一步就露餡。</p>
       <p><small>支援鏈：幾乎所有主流鏈｜手機：iOS／Android／Web｜費率：免費</small></p>
       <a class="btn btn--ghost" href="#/tools/dexscreener">進入 DEX Screener 教學 ▸</a>
     </div>
@@ -373,7 +393,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </div>
         <div class="step">
           <div class="step__num">2</div>
-          <div class="step__title">先看<span class="term" data-term="流動性Liquidity">流動性</span>，再看漲幅</div>
+          <div class="step__title">先看<button type="button" class="term" data-term="流動性Liquidity">流動性</button>，再看漲幅</div>
           <div class="step__detail">流動性太淺的幣，你買得進去、賣不出來。買之前先確認池子大小與市值的比例。</div>
         </div>
         <div class="step">
@@ -388,34 +408,34 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   <!-- ================= 工具頁 ================= -->
   <section class="page" id="page-tools" data-page="tools">
     <div class="tabs" id="toolChips" role="tablist" aria-label="選擇工具">
-      <button class="chip chip--active" type="button" data-tool="gmgn" role="tab" aria-selected="true">🔍 GMGN</button>
-      <button class="chip" type="button" data-tool="axiom" role="tab" aria-selected="false">⚡ Axiom</button>
-      <button class="chip" type="button" data-tool="fomo" role="tab" aria-selected="false">📱 fomo</button>
-      <button class="chip" type="button" data-tool="dexscreener" role="tab" aria-selected="false">📊 DEX Screener</button>
+      <button class="chip chip--active" type="button" data-tool="gmgn" role="tab" id="chip-gmgn" aria-controls="tool-gmgn" aria-selected="true">🔍 GMGN</button>
+      <button class="chip" type="button" data-tool="axiom" role="tab" id="chip-axiom" aria-controls="tool-axiom" aria-selected="false">⚡ Axiom</button>
+      <button class="chip" type="button" data-tool="fomo" role="tab" id="chip-fomo" aria-controls="tool-fomo" aria-selected="false">📱 fomo</button>
+      <button class="chip" type="button" data-tool="dexscreener" role="tab" id="chip-dexscreener" aria-controls="tool-dexscreener" aria-selected="false">📊 DEX Screener</button>
     </div>
 
     <!-- ---------- GMGN ---------- -->
-    <section id="tool-gmgn" data-tool="gmgn">
+    <section id="tool-gmgn" data-tool="gmgn" role="tabpanel" aria-labelledby="chip-gmgn">
       <div class="page-head">
         <h1>🔍 GMGN.ai</h1>
         <p>迷因幣「安全檢查＋聰明錢跟單」終端機｜費率每筆約 1%（買賣各收）（2026/9查證，請以官方公告為準）</p>
       </div>
       <a class="btn btn--primary ext" href="#" data-ref="gmgn" target="_blank" rel="noopener">開啟 GMGN 官網 ↗</a>
-      <p class="muted">🔗 上面按鈕含推薦碼，你的費率通常較低，我也會拿到分潤。</p>
+      <p class="muted">🔗 這顆按鈕不是官方原始網址，而是帶我推薦碼的入口。你的費率通常比自己搜進去低，我拿平台的分潤。</p>
       <div class="tabs" role="tablist" aria-label="GMGN 內容分頁">
-        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
-        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
-        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
-        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+        <button class="tab" type="button" data-tab="start" role="tab" id="tab-gmgn-start" aria-controls="panel-gmgn-start" aria-selected="true" tabindex="0">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" id="tab-gmgn-pro" aria-controls="panel-gmgn-pro" aria-selected="false" tabindex="-1">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" id="tab-gmgn-glossary" aria-controls="panel-gmgn-glossary" aria-selected="false" tabindex="-1">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" id="tab-gmgn-risk" aria-controls="panel-gmgn-risk" aria-selected="false" tabindex="-1">⚠️ 風險</button>
       </div>
-      <div class="tabpanel is-active" data-panel="start">
-        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+      <div class="tabpanel is-active" data-panel="start" id="panel-gmgn-start" role="tabpanel" aria-labelledby="tab-gmgn-start" tabindex="0">
+        <div class="callout callout--warn">⚠️ GMGN 的安全面板只是把鏈上數據攤開給你看。紅綠燈全綠不代表這顆幣會漲，也不保證它不會 rug。</div>
 
         <div class="card card--tool" data-level="both">
           <span class="badge badge--beginner">小白必讀</span>
           <h3>GMGN.ai 是什麼？一句話</h3>
           <p>它是迷因幣的「<strong>安全檢查＋聰明錢跟單</strong>」終端機。每一顆幣它都自動幫你做體檢（有沒有毒、會不會跑路），還可以一鍵複製厲害錢包的買賣動作。你不用會看鏈上數據，它把紅綠燈直接標好給你看。</p>
-          <p>有 <span class="term" data-term="Web／App／Telegram Bot">三種形式</span>：網頁版、手機 App、Telegram 機器人。<strong>新手就用網頁版或 App</strong>，Bot 留給老手。</p>
+          <p>有 <button type="button" class="term" data-term="Web／App／Telegram Bot">三種形式</button>：網頁版、手機 App、Telegram 機器人。<strong>新手就用網頁版或 App</strong>，Bot 留給老手。</p>
         </div>
 
         <div class="steps" data-level="both">
@@ -433,7 +453,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__num">2</div>
             <div class="step__title">建立或連接錢包（只放小錢）</div>
             <div class="step__detail">兩種做法：<br>
-            ① 用 Email／社群帳號登入，GMGN 會自動幫你生一個「<span class="term" data-term="熱錢包">熱錢包</span>」，可以匯出私鑰；<br>
+            ① 用 Email／社群帳號登入，GMGN 會自動幫你生一個「<button type="button" class="term" data-term="熱錢包">熱錢包</button>」，可以匯出私鑰；<br>
             ② 直接連你自己的 Phantom 錢包。<br>
             <strong>鐵律：這個錢包只放你「這次要拿去交易」的小額。</strong>賺到的錢定期轉去冷錢包或交易所，不要整副身家放在熱錢包裡。</div>
           </div>
@@ -442,7 +462,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__num">3</div>
             <div class="step__title">先看懂三個主頁面</div>
             <div class="step__detail">
-            <strong>Trenches（戰壕）</strong>＝剛發射的新幣，分三欄：<span class="term" data-term="Trenches戰壕">New Creation（剛建立）</span> → Completing（快畢業）→ Completed（已<span class="term" data-term="畢業(Migrate)">畢業</span>）。這裡最刺激也最容易被割。<br>
+            <strong>Trenches（戰壕）</strong>＝剛發射的新幣，分三欄：<button type="button" class="term" data-term="Trenches戰壕">New Creation（剛建立）</button> → Completing（快畢業）→ Completed（已<button type="button" class="term" data-term="畢業(Migrate)">畢業</button>）。這裡最刺激也最容易被割。<br>
             <strong>Trending（熱門）</strong>＝依成交量排行，可切 1m／5m／1h／6h／24h。<br>
             <strong>Copy Trade（跟單）</strong>＝複製別人買賣的功能區。<br>
             新手建議從 <strong>Trending 的 1h／24h</strong> 開始看，別一上來就跳進 Trenches。</div>
@@ -455,7 +475,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__num">4</div>
             <div class="step__title">點進代幣頁，先看「安全面板」紅綠燈</div>
             <div class="step__detail">這是 GMGN 最值錢的功能。點任一顆幣，會看到一整排紅綠燈檢查：<br>
-            <span class="term" data-term="Honeypot蜜罐">Honeypot（蜜罐）</span>、<span class="term" data-term="Mint權限">Mint 權限</span>／<span class="term" data-term="Freeze權限">Freeze 權限</span>是否放棄、<span class="term" data-term="LP燒毀">LP 是否燒毀</span>、<span class="term" data-term="Rug機率">Rug 機率</span>、<span class="term" data-term="Top10持倉">Top 10 持倉％</span>、<span class="term" data-term="Dev持倉">Dev 持倉％</span>、<span class="term" data-term="Insider內部人">Insiders</span>／<span class="term" data-term="Bundler捆綁">Bundlers</span>／<span class="term" data-term="Sniper狙擊">Snipers</span>％。<br>
+            <button type="button" class="term" data-term="Honeypot蜜罐">Honeypot（蜜罐）</button>、<button type="button" class="term" data-term="Mint權限">Mint 權限</button>／<button type="button" class="term" data-term="Freeze權限">Freeze 權限</button>是否放棄、<button type="button" class="term" data-term="LP燒毀">LP 是否燒毀</button>、<button type="button" class="term" data-term="Rug機率">Rug 機率</button>、<button type="button" class="term" data-term="Top10持倉">Top 10 持倉％</button>、<button type="button" class="term" data-term="Dev持倉">Dev 持倉％</button>、<button type="button" class="term" data-term="Insider內部人">Insiders</button>／<button type="button" class="term" data-term="Bundler捆綁">Bundlers</button>／<button type="button" class="term" data-term="Sniper狙擊">Snipers</button>％。<br>
             <strong>小白鐵律：任何一項亮紅燈就直接不碰，沒有例外。</strong>錯過一顆幣不會怎樣，踩一次雷會很痛。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="01">
@@ -486,10 +506,10 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__num">5</div>
             <div class="step__title">下單：金額 → 滑點 → 優先費 → MEV 保護</div>
             <div class="step__detail">在右側交易框輸入要花多少 SOL，然後設三個參數：<br>
-            ・<span class="term" data-term="滑點">滑點</span>：新幣 10–15%、老幣 3–5%<br>
-            ・<span class="term" data-term="優先費(Jito Tip)">優先費</span>：0.01–0.03 SOL<br>
-            ・<span class="term" data-term="MEV/三明治攻擊">MEV 保護</span>：選 <strong>Secure</strong><br>
-            按買入。賣出可以先把 <span class="term" data-term="TP/SL止盈止損">TP／SL（止盈／止損）</span>設好，讓它自動幫你賣，不要靠手速跟情緒。</div>
+            ・<button type="button" class="term" data-term="滑點">滑點</button>：新幣 10–15%、老幣 3–5%<br>
+            ・<button type="button" class="term" data-term="優先費(Jito Tip)">優先費</button>：0.01–0.03 SOL<br>
+            ・<button type="button" class="term" data-term="MEV/三明治攻擊">MEV 保護</button>：選 <strong>Secure</strong><br>
+            按買入。賣出可以先把 <button type="button" class="term" data-term="TP/SL止盈止損">TP／SL（止盈／止損）</button>設好，讓它自動幫你賣，不要靠手速跟情緒。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="02">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-02-t">
@@ -517,9 +537,9 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="callout callout--tip" data-level="beginner">💡 第一次玩就抓一個小到你不心痛的金額（例如 0.05–0.1 SOL）跑完整套流程一次，重點是熟悉操作，不是賺錢。</div>
       </div>
 
-      <div class="tabpanel" data-panel="pro">
+      <div class="tabpanel" data-panel="pro" id="panel-gmgn-pro" role="tabpanel" aria-labelledby="tab-gmgn-pro" tabindex="0">
 
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <span class="badge badge--advanced">進階玩家</span>
           <h3>把 GMGN 從「看盤網站」變成「自動化系統」</h3>
           <p>下面每一塊都可以獨立開關，建議一次只加一項、跑一週再加下一項，不然出問題你會找不到是哪裡壞掉。</p>
@@ -527,7 +547,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
         <details class="acc">
           <summary>🟣 進階：Smart Money／錢包追蹤 ▸</summary>
-          <p>GMGN 會幫錢包貼標籤：<span class="term" data-term="Smart Money聰明錢">Smart Money</span>、<span class="term" data-term="KOL">KOL</span>、<span class="term" data-term="Fresh Wallet新錢包">Fresh Wallet</span>、Sniper、Dev、Insider、Bundler。點進錢包可以看 7d／30d 的 PnL 與勝率。</p>
+          <p>GMGN 會幫錢包貼標籤：<button type="button" class="term" data-term="Smart Money聰明錢">Smart Money</button>、<button type="button" class="term" data-term="KOL">KOL</button>、<button type="button" class="term" data-term="Fresh Wallet新錢包">Fresh Wallet</button>、Sniper、Dev、Insider、Bundler。點進錢包可以看 7d／30d 的 PnL 與勝率。</p>
           <p>用 <strong>Monitor／Follow</strong> 追蹤後，那個錢包一動作就會有紅點＋聲音提醒。做法：先在熱門幣的持有者名單裡撈出重複出現的錢包，追蹤 10–20 個，觀察兩週，再淘汰掉只會亂衝的。</p>
           <div class="callout callout--warn">⚠️ 官方自己都講過：聰明錢也常常亂買。標籤是線索，不是保證。</div>
         </details>
@@ -555,7 +575,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <summary>🟣 進階：Sniper Bot 與滑點／MEV 三檔設定 ▸</summary>
           <p><strong>Sniper Bot</strong>：自動偵測新幣並在條件符合時自動買入。這是高手工具，沒有完整的止損規則之前不要開。</p>
           <p><strong>滑點三模式：</strong>Auto（自動）／Turbo（搶新幣用，滑點放很寬）／Anti-MEV（防夾）。</p>
-          <p><strong>MEV 保護三檔：</strong>Off／Reduced／Secure。想搶速度就往 Off 靠、想防<span class="term" data-term="MEV/三明治攻擊">三明治攻擊</span>就選 Secure。兩者無法兼得，先想清楚你在賺哪一種錢。</p>
+          <p><strong>MEV 保護三檔：</strong>Off／Reduced／Secure。想搶速度就往 Off 靠、想防<button type="button" class="term" data-term="MEV/三明治攻擊">三明治攻擊</button>就選 Secure。兩者無法兼得，先想清楚你在賺哪一種錢。</p>
         </details>
 
         <details class="acc">
@@ -580,8 +600,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </details>
       </div>
 
-      <div class="tabpanel" data-panel="glossary">
-        <div class="card card--flat">
+      <div class="tabpanel" data-panel="glossary" id="panel-gmgn-glossary" role="tabpanel" aria-labelledby="tab-gmgn-glossary" tabindex="0">
+        <div class="card card--flat" data-level="both">
           <span class="badge badge--beginner">點一下看解釋</span>
           <h3>GMGN 會用到的 21 個詞</h3>
           <p>看到看不懂的字先回來這裡查，不要不懂裝懂就下單。</p>
@@ -589,32 +609,32 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
         <div class="card card--flat" data-level="both">
           <h4>場地與階段</h4>
-          <p><span class="term" data-term="Trenches戰壕">Trenches 戰壕</span>：新幣最前線<br>
-          <span class="term" data-term="Bonding Curve聯合曲線">Bonding Curve 聯合曲線</span>：買越多越貴的自動定價<br>
-          <span class="term" data-term="畢業(Migrate)">畢業 Migrate</span>：新幣升級到正式交易池</p>
+          <p><button type="button" class="term" data-term="Trenches戰壕">Trenches 戰壕</button>：新幣最前線<br>
+          <button type="button" class="term" data-term="Bonding Curve聯合曲線">Bonding Curve 聯合曲線</button>：買越多越貴的自動定價<br>
+          <button type="button" class="term" data-term="畢業(Migrate)">畢業 Migrate</button>：新幣升級到正式交易池</p>
         </div>
 
         <div class="card card--flat" data-level="both">
           <h4>安全檢查項目</h4>
-          <p><span class="term" data-term="Honeypot蜜罐">Honeypot 蜜罐</span>：買得進賣不出<br>
-          <span class="term" data-term="Mint權限">Mint 權限</span>：能不能無限增發<br>
-          <span class="term" data-term="Freeze權限">Freeze 權限</span>：能不能凍結你的幣<br>
-          <span class="term" data-term="LP燒毀">LP 燒毀</span>：資金池鎖死無法抽走<br>
-          <span class="term" data-term="Rug機率">Rug 機率</span>：跑路風險分數</p>
+          <p><button type="button" class="term" data-term="Honeypot蜜罐">Honeypot 蜜罐</button>：買得進賣不出<br>
+          <button type="button" class="term" data-term="Mint權限">Mint 權限</button>：能不能無限增發<br>
+          <button type="button" class="term" data-term="Freeze權限">Freeze 權限</button>：能不能凍結你的幣<br>
+          <button type="button" class="term" data-term="LP燒毀">LP 燒毀</button>：資金池鎖死無法抽走<br>
+          <button type="button" class="term" data-term="Rug機率">Rug 機率</button>：跑路風險分數</p>
         </div>
 
         <div class="card card--flat" data-level="both">
           <h4>持倉與身分標籤</h4>
-          <p><span class="term" data-term="Top10持倉">Top 10 持倉</span>｜<span class="term" data-term="Dev持倉">Dev 持倉</span>｜<span class="term" data-term="Bundler捆綁">Bundler 捆綁</span>｜<span class="term" data-term="Sniper狙擊">Sniper 狙擊</span>｜<span class="term" data-term="Insider內部人">Insider 內部人</span>｜<span class="term" data-term="Smart Money聰明錢">Smart Money 聰明錢</span>｜<span class="term" data-term="KOL">KOL</span>｜<span class="term" data-term="Fresh Wallet新錢包">Fresh Wallet 新錢包</span></p>
+          <p><button type="button" class="term" data-term="Top10持倉">Top 10 持倉</button>｜<button type="button" class="term" data-term="Dev持倉">Dev 持倉</button>｜<button type="button" class="term" data-term="Bundler捆綁">Bundler 捆綁</button>｜<button type="button" class="term" data-term="Sniper狙擊">Sniper 狙擊</button>｜<button type="button" class="term" data-term="Insider內部人">Insider 內部人</button>｜<button type="button" class="term" data-term="Smart Money聰明錢">Smart Money 聰明錢</button>｜<button type="button" class="term" data-term="KOL">KOL</button>｜<button type="button" class="term" data-term="Fresh Wallet新錢包">Fresh Wallet 新錢包</button></p>
         </div>
 
         <div class="card card--flat" data-level="both">
           <h4>交易操作</h4>
-          <p><span class="term" data-term="跟單">跟單 Copy Trade</span>｜<span class="term" data-term="TP/SL止盈止損">TP／SL 止盈止損</span>｜<span class="term" data-term="優先費(Jito Tip)">優先費 Jito Tip</span>｜<span class="term" data-term="MEV/三明治攻擊">MEV／三明治攻擊</span>｜<span class="term" data-term="滑點">滑點 Slippage</span></p>
+          <p><button type="button" class="term" data-term="跟單">跟單 Copy Trade</button>｜<button type="button" class="term" data-term="TP/SL止盈止損">TP／SL 止盈止損</button>｜<button type="button" class="term" data-term="優先費(Jito Tip)">優先費 Jito Tip</button>｜<button type="button" class="term" data-term="MEV/三明治攻擊">MEV／三明治攻擊</button>｜<button type="button" class="term" data-term="滑點">滑點 Slippage</button></p>
         </div>
       </div>
 
-      <div class="tabpanel" data-panel="risk">
+      <div class="tabpanel" data-panel="risk" id="panel-gmgn-risk" role="tabpanel" aria-labelledby="tab-gmgn-risk" tabindex="0">
 
         <div class="card card--risk" data-level="both">
           <span class="badge badge--danger">先看完再下單</span>
@@ -652,26 +672,26 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </section>
 
     <!-- ---------- Axiom ---------- -->
-    <section id="tool-axiom" data-tool="axiom" hidden>
+    <section id="tool-axiom" data-tool="axiom" role="tabpanel" aria-labelledby="chip-axiom" hidden>
       <div class="page-head">
         <h1>⚡ Axiom.trade</h1>
         <p>專業級多鏈交易終端（Pulse 新幣雷達）｜基礎 1%，等級最低 0.75%，推薦碼通常再折扣（實際比例以App顯示為準）</p>
       </div>
       <a class="btn btn--primary ext" href="#" data-ref="axiom" target="_blank" rel="noopener">開啟 Axiom 官網 ↗</a>
-      <p class="muted">🔗 上面按鈕含推薦碼，你的費率通常較低，我也會拿到分潤。</p>
+      <p class="muted">🔗 揭露一下：這條連結掛我的推薦碼。註冊費率通常較低，你每筆成交我都會分到一點。</p>
       <div class="tabs" role="tablist" aria-label="Axiom 內容分頁">
-        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
-        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
-        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
-        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+        <button class="tab" type="button" data-tab="start" role="tab" id="tab-axiom-start" aria-controls="panel-axiom-start" aria-selected="true" tabindex="0">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" id="tab-axiom-pro" aria-controls="panel-axiom-pro" aria-selected="false" tabindex="-1">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" id="tab-axiom-glossary" aria-controls="panel-axiom-glossary" aria-selected="false" tabindex="-1">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" id="tab-axiom-risk" aria-controls="panel-axiom-risk" aria-selected="false" tabindex="-1">⚠️ 風險</button>
       </div>
-      <div class="tabpanel is-active" data-panel="start">
-        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+      <div class="tabpanel is-active" data-panel="start" id="panel-axiom-start" role="tabpanel" aria-labelledby="tab-axiom-start" tabindex="0">
+        <div class="callout callout--warn">⚠️ Axiom 的 Pulse 是新幣最前線，這一欄多數標的活不過幾小時。沒有先寫好停損規則，不要在這頁下單。</div>
 
         <div class="card card--tool" data-level="both">
           <span class="badge badge--beginner">新手友善</span>
           <h3>Axiom.trade 是什麼？</h3>
-          <p>一句話：<strong>Solana 老手最愛的專業交易終端</strong>，現在也能交易 BNB、ETH 跟 Robinhood Chain（HOOD）。核心武器是「<span class="term" data-term="Pulse">Pulse</span>」新幣雷達＋錢包／推特追蹤＋一鍵快買，把「找幣→查風險→下單」全部塞在同一個畫面。</p>
+          <p>一句話：<strong>Solana 老手最愛的專業交易終端</strong>，現在也能交易 BNB、ETH 跟 Robinhood Chain（HOOD）。核心武器是「<button type="button" class="term" data-term="Pulse">Pulse</button>」新幣雷達＋錢包／推特追蹤＋一鍵快買，把「找幣→查風險→下單」全部塞在同一個畫面。</p>
           <p>如果你用過交易所的 App 覺得很直覺，Axiom 一開始會有點嚇人——但看完下面 5 步，你會發現它其實比你想的簡單。</p>
         </div>
 
@@ -680,7 +700,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__num">1</div>
             <div class="step__title">註冊與錢包：先備份助記詞再說</div>
             <div class="step__detail">
-              <p>到 axiom.trade，可以用 <strong>Email／Google／Phantom</strong> 登入。用 Email 登入的話，系統會自動幫你開一個 <span class="term" data-term="Turnkey託管錢包">Turnkey 託管錢包</span>。</p>
+              <p>到 axiom.trade，可以用 <strong>Email／Google／Phantom</strong> 登入。用 Email 登入的話，系統會自動幫你開一個 <button type="button" class="term" data-term="Turnkey託管錢包">Turnkey 託管錢包</button>。</p>
               <p><strong>做完這件事再繼續：</strong>Settings › Account &amp; Security › Manage Wallets → <strong>匯出 12 字助記詞</strong>，抄在紙上收好。用推薦碼註冊手續費通常還能再折扣，實際比例以註冊當下App顯示為準。</p>
               <div class="callout callout--danger">🔴 助記詞沒備份 = 平台哪天出事，你的錢就是真的沒了。這步不能跳。</div>
             </div>
@@ -699,7 +719,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__num">3</div>
             <div class="step__title">選鏈：右上角那個下拉選單</div>
             <div class="step__detail">
-              <p>右上角鏈選單，選 <strong>SOL</strong> 或 <strong>HOOD</strong>（＝<span class="term" data-term="HOOD/Robinhood Chain">Robinhood Chain</span>）。</p>
+              <p>右上角鏈選單，選 <strong>SOL</strong> 或 <strong>HOOD</strong>（＝<button type="button" class="term" data-term="HOOD/Robinhood Chain">Robinhood Chain</button>）。</p>
               <p>Pulse／Tracker／Discover 這三個頁面可以<strong>各自勾多條鏈同時看</strong>，不用來回切。新手建議先只勾 SOL，一次看一條鏈就好，畫面才不會爆炸。</p>
             </div>
           </div>
@@ -710,9 +730,9 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__detail">
               <p>Pulse 是新幣雷達，由左到右三欄：</p>
               <ul>
-                <li><strong><span class="term" data-term="New Pairs">New Pairs</span></strong>：剛發的幣，市值常常 &lt; $40K。屍體最多的地方。</li>
-                <li><strong><span class="term" data-term="Final Stretch">Final Stretch</span></strong>：快「畢業」的幣。</li>
-                <li><strong><span class="term" data-term="Migrated">Migrated</span></strong>：已進開放市場、流動性比較深。</li>
+                <li><strong><button type="button" class="term" data-term="New Pairs">New Pairs</button></strong>：剛發的幣，市值常常 &lt; $40K。屍體最多的地方。</li>
+                <li><strong><button type="button" class="term" data-term="Final Stretch">Final Stretch</button></strong>：快「畢業」的幣。</li>
+                <li><strong><button type="button" class="term" data-term="Migrated">Migrated</button></strong>：已進開放市場、流動性比較深。</li>
               </ul>
               <p>每張卡會顯示幣齡、市值、成交量、持有人數、Dev%、Top10%、Snipers%、Insiders%、Bundle%。</p>
               <div class="callout callout--tip">💡 小白鐵律：<strong>只看 Migrated 這一欄</strong>。New Pairs 那欄是給老手拿命換錢的，先別碰。</div>
@@ -746,7 +766,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
             <div class="step__title">點代幣 → 檢查 → 買</div>
             <div class="step__detail">
               <p>先點代幣看 <strong>token info 彈窗</strong>（看有沒有審計圖示），確認沒問題再下手。</p>
-              <p>買法兩種：<strong>閃電 ⚡ <span class="term" data-term="Quick Buy快買">Quick Buy</span></strong>一鍵成交，或用右側交易面板慢慢調。預設有 <strong>P1／P2／P3 三組 <span class="term" data-term="Preset預設組">Preset</span></strong>，各自可設滑點、優先費、<span class="term" data-term="Bribe賄賂費">Bribe</span>、MEV 模式——<strong>MEV 模式請選 Secure</strong>，避免被三明治夾。</p>
+              <p>買法兩種：<strong>閃電 ⚡ <button type="button" class="term" data-term="Quick Buy快買">Quick Buy</button></strong>一鍵成交，或用右側交易面板慢慢調。預設有 <strong>P1／P2／P3 三組 <button type="button" class="term" data-term="Preset預設組">Preset</button></strong>，各自可設滑點、優先費、<button type="button" class="term" data-term="Bribe賄賂費">Bribe</button>、MEV 模式——<strong>MEV 模式請選 Secure</strong>，避免被三明治夾。</p>
               <p>賣出有 <strong>25% / 50% / 100% 快捷鍵</strong>，想跑隨時一鍵出場。</p>
             </div>
             <div class="step__shot">
@@ -776,8 +796,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </div>
       </div>
 
-      <div class="tabpanel" data-panel="pro">
-        <div class="card card--tool">
+      <div class="tabpanel" data-panel="pro" id="panel-axiom-pro" role="tabpanel" aria-labelledby="tab-axiom-pro" tabindex="0">
+        <div class="card card--tool" data-level="both">
           <span class="badge badge--advanced">進階</span>
           <p>下面是把 Axiom 從「能買幣」開到「當工作站用」的功能。新手可以先跳過，等你一天看超過 50 個幣的時候再回來。</p>
         </div>
@@ -822,7 +842,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <ul>
             <li><strong>限價單</strong>：掛在你要的價位，不用盯盤。</li>
             <li><strong>TP / SL</strong>：止盈與止損，迷因幣尤其建議設 SL——你不設，市場會幫你設在 0。</li>
-            <li><strong><span class="term" data-term="Sniper Buy狙擊買">Sniper Buy</span></strong>：代幣「畢業」那一瞬間自動下單；對應也有 <strong>Sniper Sell</strong>。</li>
+            <li><strong><button type="button" class="term" data-term="Sniper Buy狙擊買">Sniper Buy</button></strong>：代幣「畢業」那一瞬間自動下單；對應也有 <strong>Sniper Sell</strong>。</li>
           </ul>
           <div class="callout callout--warn">⚠️ Sniper 類功能是雙面刃：搶得快，但也可能在流動性還沒進來時就成交，滑點極慘。</div>
         </details>
@@ -830,8 +850,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <details class="acc">
           <summary>🟣 進階：Perps、Yield、Portfolio、Rewards ▸</summary>
           <ul>
-            <li><strong><span class="term" data-term="Perps永續合約">Perps 永續合約</span></strong>：串接 Hyperliquid，可以在同一個介面開槓桿。</li>
-            <li><strong><span class="term" data-term="Yield生息">Yield</span></strong>：閒置資金放著生息，不用一直躺著。</li>
+            <li><strong><button type="button" class="term" data-term="Perps永續合約">Perps 永續合約</button></strong>：串接 Hyperliquid，可以在同一個介面開槓桿。</li>
+            <li><strong><button type="button" class="term" data-term="Yield生息">Yield</button></strong>：閒置資金放著生息，不用一直躺著。</li>
             <li><strong>Portfolio</strong>：所有鏈的持倉與損益總覽。</li>
             <li><strong>Rewards</strong>：返現等級 <strong>wood → champion 共 6 級</strong>，費率從 1% 一路降到 0.75%，積分未來可能有空投。</li>
           </ul>
@@ -840,8 +860,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
         <details class="acc">
           <summary>🟣 進階：費用結構與手機使用 ▸</summary>
-          <p><strong>費用</strong>＝基礎 <strong>1%</strong> ＋ Solana 網路 gas ＋ 優先費／<span class="term" data-term="優先費(Jito Tip)">Jito tip</span>（預設 0.001 SOL）。走推薦碼通常可再折扣（比例以App顯示為準），衝到高等級 Rewards 可降到 0.75%。</p>
-          <p><strong>手機</strong>：Axiom <strong>沒有官方 App</strong>。用手機瀏覽器開網頁，再「加到主畫面」當 <span class="term" data-term="PWA">PWA</span> 用就好，體驗接近原生 App。</p>
+          <p><strong>費用</strong>＝基礎 <strong>1%</strong> ＋ Solana 網路 gas ＋ 優先費／<button type="button" class="term" data-term="優先費(Jito Tip)">Jito tip</button>（預設 0.001 SOL）。走推薦碼通常可再折扣（比例以App顯示為準），衝到高等級 Rewards 可降到 0.75%。</p>
+          <p><strong>手機</strong>：Axiom <strong>沒有官方 App</strong>。用手機瀏覽器開網頁，再「加到主畫面」當 <button type="button" class="term" data-term="PWA">PWA</button> 用就好，體驗接近原生 App。</p>
           <div class="callout callout--danger">🔴 App Store 上任何叫「Axiom App」的都是假的，載了就是送錢。</div>
         </details>
 
@@ -854,32 +874,32 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </details>
       </div>
 
-      <div class="tabpanel" data-panel="glossary">
+      <div class="tabpanel" data-panel="glossary" id="panel-axiom-glossary" role="tabpanel" aria-labelledby="tab-axiom-glossary" tabindex="0">
         <div class="card card--flat" data-level="both">
           <h3>Axiom 詞彙表</h3>
           <p>看到不懂的字回來查這裡就好，不用背。</p>
           <ul>
-            <li><span class="term" data-term="Pulse">Pulse</span>：Axiom 的新幣雷達頁，三欄即時滾動顯示剛發的幣。</li>
-            <li><span class="term" data-term="New Pairs">New Pairs</span>：剛發行的幣，市值常 &lt; $40K，最危險的一欄。</li>
-            <li><span class="term" data-term="Final Stretch">Final Stretch</span>：接近「畢業」門檻的幣，快要進開放市場。</li>
-            <li><span class="term" data-term="Migrated">Migrated</span>：已畢業並進入開放市場、流動性較深的幣。新手只看這欄。</li>
-            <li><span class="term" data-term="Quick Buy快買">Quick Buy 快買</span>：閃電圖示的一鍵買入，用你預設好的參數直接送單。</li>
-            <li><span class="term" data-term="Preset預設組">Preset 預設組</span>：P1/P2/P3 三組交易參數（滑點、優先費、Bribe、MEV 模式），一鍵切換。</li>
-            <li><span class="term" data-term="Bribe賄賂費">Bribe 賄賂費</span>：額外付給區塊打包者的錢，讓你的單被優先處理。</li>
-            <li><span class="term" data-term="優先費(Jito Tip)">Jito Tip 優先費</span>：Solana 上加速交易確認的小費，Axiom 預設 0.001 SOL。</li>
-            <li><span class="term" data-term="Turnkey託管錢包">Turnkey 託管錢包</span>：Email 登入時自動幫你生成的錢包，務必匯出助記詞備份。</li>
-            <li><span class="term" data-term="PWA">PWA</span>：把網頁「加到主畫面」變成類 App 的用法。Axiom 手機端只有這條路。</li>
-            <li><span class="term" data-term="Perps永續合約">Perps 永續合約</span>：沒有到期日的槓桿合約，Axiom 串接 Hyperliquid。</li>
-            <li><span class="term" data-term="Yield生息">Yield 生息</span>：讓帳戶裡沒在用的資金產生利息。</li>
-            <li><span class="term" data-term="HOOD/Robinhood Chain">HOOD／Robinhood Chain</span>：Robinhood 推出的 Ethereum L2，2026/7 上線，gas 用 ETH，地址 0x 開頭。</li>
-            <li><span class="term" data-term="Bonding Curve聯合曲線">Bonding Curve 聯合曲線</span>：發幣初期的自動定價機制，買越多價越高，賣越多價越低。</li>
-            <li><span class="term" data-term="Sniper Buy狙擊買">Sniper Buy 狙擊買</span>：設定好條件，在代幣畢業瞬間自動搶進。</li>
-            <li><span class="term" data-term="Tracker追蹤器">Tracker 追蹤器</span>：追蹤特定錢包或推特帳號動向的工具，可即時通知。</li>
+            <li><button type="button" class="term" data-term="Pulse">Pulse</button>：Axiom 的新幣雷達頁，三欄即時滾動顯示剛發的幣。</li>
+            <li><button type="button" class="term" data-term="New Pairs">New Pairs</button>：剛發行的幣，市值常 &lt; $40K，最危險的一欄。</li>
+            <li><button type="button" class="term" data-term="Final Stretch">Final Stretch</button>：接近「畢業」門檻的幣，快要進開放市場。</li>
+            <li><button type="button" class="term" data-term="Migrated">Migrated</button>：已畢業並進入開放市場、流動性較深的幣。新手只看這欄。</li>
+            <li><button type="button" class="term" data-term="Quick Buy快買">Quick Buy 快買</button>：閃電圖示的一鍵買入，用你預設好的參數直接送單。</li>
+            <li><button type="button" class="term" data-term="Preset預設組">Preset 預設組</button>：P1/P2/P3 三組交易參數（滑點、優先費、Bribe、MEV 模式），一鍵切換。</li>
+            <li><button type="button" class="term" data-term="Bribe賄賂費">Bribe 賄賂費</button>：額外付給區塊打包者的錢，讓你的單被優先處理。</li>
+            <li><button type="button" class="term" data-term="優先費(Jito Tip)">Jito Tip 優先費</button>：Solana 上加速交易確認的小費，Axiom 預設 0.001 SOL。</li>
+            <li><button type="button" class="term" data-term="Turnkey託管錢包">Turnkey 託管錢包</button>：Email 登入時自動幫你生成的錢包，務必匯出助記詞備份。</li>
+            <li><button type="button" class="term" data-term="PWA">PWA</button>：把網頁「加到主畫面」變成類 App 的用法。Axiom 手機端只有這條路。</li>
+            <li><button type="button" class="term" data-term="Perps永續合約">Perps 永續合約</button>：沒有到期日的槓桿合約，Axiom 串接 Hyperliquid。</li>
+            <li><button type="button" class="term" data-term="Yield生息">Yield 生息</button>：讓帳戶裡沒在用的資金產生利息。</li>
+            <li><button type="button" class="term" data-term="HOOD/Robinhood Chain">HOOD／Robinhood Chain</button>：Robinhood 推出的 Ethereum L2，2026/7 上線，gas 用 ETH，地址 0x 開頭。</li>
+            <li><button type="button" class="term" data-term="Bonding Curve聯合曲線">Bonding Curve 聯合曲線</button>：發幣初期的自動定價機制，買越多價越高，賣越多價越低。</li>
+            <li><button type="button" class="term" data-term="Sniper Buy狙擊買">Sniper Buy 狙擊買</button>：設定好條件，在代幣畢業瞬間自動搶進。</li>
+            <li><button type="button" class="term" data-term="Tracker追蹤器">Tracker 追蹤器</button>：追蹤特定錢包或推特帳號動向的工具，可即時通知。</li>
           </ul>
         </div>
       </div>
 
-      <div class="tabpanel" data-panel="risk">
+      <div class="tabpanel" data-panel="risk" id="panel-axiom-risk" role="tabpanel" aria-labelledby="tab-axiom-risk" tabindex="0">
         <div class="card card--risk" data-level="both">
           <span class="badge badge--danger">必讀</span>
           <h3>Axiom 使用風險清單</h3>
@@ -908,38 +928,38 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </section>
 
     <!-- ---------- fomo ---------- -->
-    <section id="tool-fomo" data-tool="fomo" hidden>
+    <section id="tool-fomo" data-tool="fomo" role="tabpanel" aria-labelledby="chip-fomo" hidden>
       <div class="page-head">
         <h1>📱 fomo.family</h1>
         <p>社交交易 App，Apple Pay 入金、免助記詞｜現貨手續費以App實際顯示為準，gas 平台代付</p>
       </div>
       <a class="btn btn--primary ext" href="#" data-ref="fomo" target="_blank" rel="noopener">開啟 fomo 官網 ↗</a>
-      <p class="muted">🔗 上面按鈕含推薦碼，你的費率通常較低，我也會拿到分潤。</p>
+      <p class="muted">🔗 從這顆按鈕註冊會套用我的推薦碼，手續費通常比較優惠，而我也從平台拿分潤——兩件事同時成立，你自己斟酌。</p>
       <div class="tabs" role="tablist" aria-label="fomo 內容分頁">
-        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
-        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
-        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
-        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+        <button class="tab" type="button" data-tab="start" role="tab" id="tab-fomo-start" aria-controls="panel-fomo-start" aria-selected="true" tabindex="0">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" id="tab-fomo-pro" aria-controls="panel-fomo-pro" aria-selected="false" tabindex="-1">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" id="tab-fomo-glossary" aria-controls="panel-fomo-glossary" aria-selected="false" tabindex="-1">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" id="tab-fomo-risk" aria-controls="panel-fomo-risk" aria-selected="false" tabindex="-1">⚠️ 風險</button>
       </div>
-      <div class="tabpanel is-active" data-panel="start">
-        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+      <div class="tabpanel is-active" data-panel="start" id="panel-fomo-start" role="tabpanel" aria-labelledby="tab-fomo-start" tabindex="0">
+        <div class="callout callout--warn">⚠️ fomo 把 gas 和滑點都替你處理掉了，但門檻低不等於風險低——虧損一樣百分之百由你自己承擔。</div>
 
         <div class="card card--tool" data-level="both">
           <span class="badge badge--beginner">新手友善</span>
           <h3>fomo.family 是什麼？</h3>
-          <p>一句話：把迷因幣交易做成「社群 App」。用 Apple Pay 就能入金、<span class="term" data-term="嵌入式錢包">不用抄助記詞</span>、<span class="term" data-term="gas代付">不用自己付 gas</span>，還能直接看別人買了什麼。如果你完全沒碰過鏈上錢包，這是目前門檻最低的入口之一。</p>
+          <p>一句話：把迷因幣交易做成「社群 App」。用 Apple Pay 就能入金、<button type="button" class="term" data-term="嵌入式錢包">不用抄助記詞</button>、<button type="button" class="term" data-term="gas代付">不用自己付 gas</button>，還能直接看別人買了什麼。如果你完全沒碰過鏈上錢包，這是目前門檻最低的入口之一。</p>
         </div>
 
         <div class="steps" data-level="both">
           <div class="step">
             <div class="step__num">1</div>
             <div class="step__title">下載 App 並註冊（1 分鐘）</div>
-            <div class="step__detail">App Store／Google Play 搜「fomo」，<strong>務必核對開發者是「FOMO Labs」</strong>，仿冒 App 非常多。也可以直接用網頁版。註冊用 Email 或 Apple 帳號，不到一分鐘，全程沒有助記詞要抄——它用 Privy 的嵌入式錢包＋<span class="term" data-term="金鑰分片">金鑰分片</span>技術，但之後你仍然可以把私鑰匯出。</div>
+            <div class="step__detail">App Store／Google Play 搜「fomo」，<strong>務必核對開發者是「FOMO Labs」</strong>，仿冒 App 非常多。也可以直接用網頁版。註冊用 Email 或 Apple 帳號，不到一分鐘，全程沒有助記詞要抄——它用 Privy 的嵌入式錢包＋<button type="button" class="term" data-term="金鑰分片">金鑰分片</button>技術，但之後你仍然可以把私鑰匯出。</div>
           </div>
           <div class="step">
             <div class="step__num">2</div>
             <div class="step__title">入金：刷卡就能買幣</div>
-            <div class="step__detail">支援 Apple Pay／Google Pay／信用卡（走 Coinbase 金流通道），或直接轉 USDC 進來。重點是：<strong>一個帳戶只有一個現金餘額，六條鏈通用</strong>（Solana／Base／BNB／Monad／ETH／Robinhood Chain，Robinhood Chain 上用 <span class="term" data-term="USDG">USDG</span>），你不用煩惱「錢在哪條鏈上」這種新手最容易卡住的問題。</div>
+            <div class="step__detail">支援 Apple Pay／Google Pay／信用卡（走 Coinbase 金流通道），或直接轉 USDC 進來。重點是：<strong>一個帳戶只有一個現金餘額，六條鏈通用</strong>（Solana／Base／BNB／Monad／ETH／Robinhood Chain，Robinhood Chain 上用 <button type="button" class="term" data-term="USDG">USDG</button>），你不用煩惱「錢在哪條鏈上」這種新手最容易卡住的問題。</div>
             <div class="step__shot">
               <div class="shot">畫面示意：入金頁，Apple Pay 按鈕＋輸入美元金額 💳</div>
             </div>
@@ -947,7 +967,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <div class="step">
             <div class="step__num">3</div>
             <div class="step__title">找幣：動態牆、排行榜、代幣頁</div>
-            <div class="step__detail">首頁「<span class="term" data-term="動態牆Feed">動態牆 Feed</span>」看交易員即時買賣，還會附上他們的<span class="term" data-term="已實現損益">已實現損益</span>；「<span class="term" data-term="排行榜">排行榜</span>」看 30 天績效排名。點進任一代幣頁，能看到圖表、市值、流動性、持有人分布、安全警告、頂尖交易員名單，以及「誰剛剛買了」。</div>
+            <div class="step__detail">首頁「<button type="button" class="term" data-term="動態牆Feed">動態牆 Feed</button>」看交易員即時買賣，還會附上他們的<button type="button" class="term" data-term="已實現損益">已實現損益</button>；「<button type="button" class="term" data-term="排行榜">排行榜</button>」看 30 天績效排名。點進任一代幣頁，能看到圖表、市值、流動性、持有人分布、安全警告、頂尖交易員名單，以及「誰剛剛買了」。</div>
             <div class="step__shot">
               <div class="shot">畫面示意：動態牆卡片「某某交易員買入 $500 XXX，已實現 +32%」📱</div>
             </div>
@@ -974,22 +994,22 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </div>
       </div>
 
-      <div class="tabpanel" data-panel="pro">
-        <div class="card card--tool">
+      <div class="tabpanel" data-panel="pro" id="panel-fomo-pro" role="tabpanel" aria-labelledby="tab-fomo-pro" tabindex="0">
+        <div class="card card--tool" data-level="both">
           <span class="badge badge--advanced">進階</span>
           <p>會用基本買賣之後，fomo 真正的價值在「社交發現」和衍生品。以下每一塊點開看。</p>
         </div>
 
         <details class="acc">
           <summary>🟣 進階：關注交易員 ≠ 自動跟單 ▸</summary>
-          <p>你可以「關注」某個交易員，對方開新倉時會推播通知你。也能在自己的每筆交易附上<span class="term" data-term="論點(thesis)">論點（thesis）</span>，或在圖表下方留言討論。</p>
+          <p>你可以「關注」某個交易員，對方開新倉時會推播通知你。也能在自己的每筆交易附上<button type="button" class="term" data-term="論點(thesis)">論點（thesis）</button>，或在圖表下方留言討論。</p>
           <div class="callout callout--warn">⚠️ 關鍵誤解：<strong>fomo 沒有自動跟單（copy trade）功能</strong>，只有「社交發現」。看到別人買什麼，你還是得自己手動下單，價格早就不一樣了。</div>
           <div class="shot">畫面示意：交易員個人頁，關注按鈕＋近期持倉列表 👤</div>
         </details>
 
         <details class="acc">
           <summary>🟣 進階：Perps 永續合約（含美股、指數、pre-IPO） ▸</summary>
-          <p>fomo 接上 Hyperliquid／TradeXYZ 提供<span class="term" data-term="Perps永續合約">永續合約</span>，可交易加密貨幣、美股（例如 NVDA）、指數、原物料，甚至 pre-IPO 標的。採<span class="term" data-term="逐倉">逐倉</span>模式，可設 TP/SL 停利停損。</p>
+          <p>fomo 接上 Hyperliquid／TradeXYZ 提供<button type="button" class="term" data-term="Perps永續合約">永續合約</button>，可交易加密貨幣、美股（例如 NVDA）、指數、原物料，甚至 pre-IPO 標的。採<button type="button" class="term" data-term="逐倉">逐倉</button>模式，可設 TP/SL 停利停損。</p>
           <ul>
             <li>費率：每邊 0.05% ＋ Hyperliquid 本身費用</li>
             <li><strong>美國用戶不可使用</strong></li>
@@ -1001,7 +1021,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <summary>🟣 進階：費率、gas 代付與推薦制度 ▸</summary>
           <ul>
             <li>現貨手續費以App實際顯示為準，帶推薦碼通常更低，部分主流幣更低。</li>
-            <li>gas 由平台的<span class="term" data-term="帳戶抽象(ERC-4337)">帳戶抽象（ERC-4337）</span>代付，你看到的成本就是手續費本身。</li>
+            <li>gas 由平台的<button type="button" class="term" data-term="帳戶抽象(ERC-4337)">帳戶抽象（ERC-4337）</button>代付，你看到的成本就是手續費本身。</li>
             <li>推薦制度：被推薦人手續費 −10%，推薦人抽對方手續費的 25% 分潤。</li>
             <li><strong>沒有平台幣、沒有空投承諾</strong>——任何說「fomo 要空投／預售」的都是詐騙。</li>
           </ul>
@@ -1023,30 +1043,30 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </details>
       </div>
 
-      <div class="tabpanel" data-panel="glossary">
+      <div class="tabpanel" data-panel="glossary" id="panel-fomo-glossary" role="tabpanel" aria-labelledby="tab-fomo-glossary" tabindex="0">
         <div class="card card--flat" data-level="both">
           <h3>fomo.family 詞彙表</h3>
           <p>點任一詞看白話解釋。</p>
           <p>
-            <span class="term" data-term="社交交易">社交交易</span>
-            <span class="term" data-term="動態牆Feed">動態牆 Feed</span>
-            <span class="term" data-term="已實現損益">已實現損益</span>
-            <span class="term" data-term="排行榜">排行榜</span>
-            <span class="term" data-term="關注vs跟單">關注 vs 跟單</span>
-            <span class="term" data-term="嵌入式錢包">嵌入式錢包（Privy）</span>
-            <span class="term" data-term="金鑰分片">金鑰分片</span>
-            <span class="term" data-term="gas代付">gas 代付</span>
-            <span class="term" data-term="帳戶抽象(ERC-4337)">帳戶抽象（ERC-4337）</span>
-            <span class="term" data-term="USDG">USDG</span>
-            <span class="term" data-term="Perps永續合約">Perps 永續合約</span>
-            <span class="term" data-term="逐倉">逐倉</span>
-            <span class="term" data-term="論點(thesis)">論點（thesis）</span>
+            <button type="button" class="term" data-term="社交交易">社交交易</button>
+            <button type="button" class="term" data-term="動態牆Feed">動態牆 Feed</button>
+            <button type="button" class="term" data-term="已實現損益">已實現損益</button>
+            <button type="button" class="term" data-term="排行榜">排行榜</button>
+            <button type="button" class="term" data-term="關注vs跟單">關注 vs 跟單</button>
+            <button type="button" class="term" data-term="嵌入式錢包">嵌入式錢包（Privy）</button>
+            <button type="button" class="term" data-term="金鑰分片">金鑰分片</button>
+            <button type="button" class="term" data-term="gas代付">gas 代付</button>
+            <button type="button" class="term" data-term="帳戶抽象(ERC-4337)">帳戶抽象（ERC-4337）</button>
+            <button type="button" class="term" data-term="USDG">USDG</button>
+            <button type="button" class="term" data-term="Perps永續合約">Perps 永續合約</button>
+            <button type="button" class="term" data-term="逐倉">逐倉</button>
+            <button type="button" class="term" data-term="論點(thesis)">論點（thesis）</button>
           </p>
         </div>
         <div class="callout callout--tip">💡 最該記住的一條：<strong>「關注」不等於「跟單」</strong>。fomo 只會通知你別人買了什麼，不會自動幫你買。</div>
       </div>
 
-      <div class="tabpanel" data-panel="risk">
+      <div class="tabpanel" data-panel="risk" id="panel-fomo-risk" role="tabpanel" aria-labelledby="tab-fomo-risk" tabindex="0">
         <div class="card card--risk" data-level="both">
           <span class="badge badge--danger">必讀</span>
           <h3>用 fomo 前一定要懂的風險</h3>
@@ -1077,20 +1097,20 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
     </section>
 
     <!-- ---------- DEX Screener ---------- -->
-    <section id="tool-dexscreener" data-tool="dexscreener" hidden>
+    <section id="tool-dexscreener" data-tool="dexscreener" role="tabpanel" aria-labelledby="chip-dexscreener" hidden>
       <div class="page-head">
         <h1>📊 DEX Screener</h1>
         <p>免費免登入的多鏈圖表／交易對聚合器｜完全免費（2026/9查證，請以官方公告為準）</p>
       </div>
       <a class="btn btn--primary ext" href="https://dexscreener.com/" target="_blank" rel="noopener">開啟 DEX Screener 官網 ↗</a>
       <div class="tabs" role="tablist" aria-label="DEX Screener 內容分頁">
-        <button class="tab" type="button" data-tab="start" role="tab" aria-selected="true">🚀 上手</button>
-        <button class="tab" type="button" data-tab="pro" role="tab" aria-selected="false">🟣 進階</button>
-        <button class="tab" type="button" data-tab="glossary" role="tab" aria-selected="false">📖 詞彙</button>
-        <button class="tab" type="button" data-tab="risk" role="tab" aria-selected="false">⚠️ 風險</button>
+        <button class="tab" type="button" data-tab="start" role="tab" id="tab-dexscreener-start" aria-controls="panel-dexscreener-start" aria-selected="true" tabindex="0">🚀 上手</button>
+        <button class="tab" type="button" data-tab="pro" role="tab" id="tab-dexscreener-pro" aria-controls="panel-dexscreener-pro" aria-selected="false" tabindex="-1">🟣 進階</button>
+        <button class="tab" type="button" data-tab="glossary" role="tab" id="tab-dexscreener-glossary" aria-controls="panel-dexscreener-glossary" aria-selected="false" tabindex="-1">📖 詞彙</button>
+        <button class="tab" type="button" data-tab="risk" role="tab" id="tab-dexscreener-risk" aria-controls="panel-dexscreener-risk" aria-selected="false" tabindex="-1">⚠️ 風險</button>
       </div>
-      <div class="tabpanel is-active" data-panel="start">
-        <div class="callout callout--warn">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+      <div class="tabpanel is-active" data-panel="start" id="panel-dexscreener-start" role="tabpanel" aria-labelledby="tab-dexscreener-start" tabindex="0">
+        <div class="callout callout--warn">⚠️ DEX Screener 只告訴你「這顆幣現在長什麼樣」，它不審核專案也不背書。圖表好看跟能不能買，是兩件事。</div>
 
         <div class="card card--tool" data-level="both">
           <span class="badge badge--beginner">新手友善</span>
@@ -1102,7 +1122,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <div class="step">
             <div class="step__num">1</div>
             <div class="step__title">搜尋一定要貼「合約地址 CA」</div>
-            <div class="step__detail">頂部搜尋框直接貼 <span class="term" data-term="CA合約地址">CA（合約地址）</span>最安全。<strong>同名同代號的假幣多到誇張</strong>，用名字搜幾乎一定會搜到假的。左側／底部可以切換鏈（Solana、Ethereum、Robinhood Chain 等）。</div>
+            <div class="step__detail">頂部搜尋框直接貼 <button type="button" class="term" data-term="CA合約地址">CA（合約地址）</button>最安全。<strong>同名同代號的假幣多到誇張</strong>，用名字搜幾乎一定會搜到假的。左側／底部可以切換鏈（Solana、Ethereum、Robinhood Chain 等）。</div>
             <div class="step__shot">
               <div class="shot">畫面示意：頂部搜尋框貼上一長串 CA，下方跳出唯一結果 🔍</div>
             </div>
@@ -1110,12 +1130,12 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <div class="step">
             <div class="step__num">2</div>
             <div class="step__title">看懂首頁四大區塊</div>
-            <div class="step__detail">Trending（依 5m/1h/6h/24h 熱度）、New Pairs（新配對）、Gainers &amp; Losers（漲跌幅排行）、Top <span class="term" data-term="Boost付費推廣">Boosted</span>。<strong>Top Boosted 是專案方付錢買的推廣位，不代表推薦、更不代表安全。</strong></div>
+            <div class="step__detail">Trending（依 5m/1h/6h/24h 熱度）、New Pairs（新配對）、Gainers &amp; Losers（漲跌幅排行）、Top <button type="button" class="term" data-term="Boost付費推廣">Boosted</button>。<strong>Top Boosted 是專案方付錢買的推廣位，不代表推薦、更不代表安全。</strong></div>
           </div>
           <div class="step">
             <div class="step__num">3</div>
             <div class="step__title">讀懂交易對頁面的 8 個數字</div>
-            <div class="step__detail">價格｜5m/1h/6h/24h 漲跌幅｜<span class="term" data-term="Txns交易筆數">Txns</span>（買/賣筆數）｜Volume 成交量｜<span class="term" data-term="Makers獨立交易者">Makers</span>（獨立交易者數）｜<span class="term" data-term="流動性Liquidity">Liquidity 流動性（最重要）</span>｜<span class="term" data-term="FDV">FDV</span>／<span class="term" data-term="市值">市值</span>｜Pair age 配對年齡｜<span class="term" data-term="Pooled池子代幣">Pooled tokens</span> 池子代幣量。看不懂全部沒關係，先盯住流動性。</div>
+            <div class="step__detail">價格｜5m/1h/6h/24h 漲跌幅｜<button type="button" class="term" data-term="Txns交易筆數">Txns</button>（買/賣筆數）｜Volume 成交量｜<button type="button" class="term" data-term="Makers獨立交易者">Makers</button>（獨立交易者數）｜<button type="button" class="term" data-term="流動性Liquidity">Liquidity 流動性（最重要）</button>｜<button type="button" class="term" data-term="FDV">FDV</button>／<button type="button" class="term" data-term="市值">市值</button>｜Pair age 配對年齡｜<button type="button" class="term" data-term="Pooled池子代幣">Pooled tokens</button> 池子代幣量。看不懂全部沒關係，先盯住流動性。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="04">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-04-t">
@@ -1163,7 +1183,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
           <div class="step">
             <div class="step__num">5</div>
             <div class="step__title">加自選 ＋ 設價格警示</div>
-            <div class="step__detail">點交易對旁的星號加入 <span class="term" data-term="Watchlist自選清單">Watchlist</span>；用 Alerts 設價格通知，可走 App 推播或 Telegram Bot。這樣你不用整天盯盤。</div>
+            <div class="step__detail">點交易對旁的星號加入 <button type="button" class="term" data-term="Watchlist自選清單">Watchlist</button>；用 Alerts 設價格通知，可走 App 推播或 Telegram Bot。這樣你不用整天盯盤。</div>
             <div class="step__shot">
               <div class="shot">畫面示意：星號變黃＋Alerts 設定彈窗輸入目標價 ⭐</div>
             </div>
@@ -1188,15 +1208,15 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <p class="muted">（判斷標準 2026/9查證，請以官方公告為準；數字僅為觀念說明，非投資建議）</p>
       </div>
 
-      <div class="tabpanel" data-panel="pro">
-        <div class="card card--tool">
+      <div class="tabpanel" data-panel="pro" id="panel-dexscreener-pro" role="tabpanel" aria-labelledby="tab-dexscreener-pro" tabindex="0">
+        <div class="card card--tool" data-level="both">
           <span class="badge badge--advanced">進階</span>
           <p>會看單一交易對之後，這些功能能把 DEX Screener 變成你的主控台。</p>
         </div>
 
         <details class="acc">
           <summary>🟣 進階：Multicharts 多圖同看 ▸</summary>
-          <p>同時開最多 16 張 <span class="term" data-term="TradingView">TradingView</span> 圖表，可掛 RSI／MA／MACD／布林通道（BB）等技術指標。適合同時盯多個標的或做輪動觀察。</p>
+          <p>同時開最多 16 張 <button type="button" class="term" data-term="TradingView">TradingView</button> 圖表，可掛 RSI／MA／MACD／布林通道（BB）等技術指標。適合同時盯多個標的或做輪動觀察。</p>
         </details>
 
         <details class="acc">
@@ -1207,7 +1227,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
         <details class="acc">
           <summary>🟣 進階：Boosts 與 Enhanced Token Info 的真相 ▸</summary>
-          <p>專案方付費（約 $100–$1500）可換金色圖示、搜尋優先顯示與加強版資料卡（<span class="term" data-term="Enhanced Token Info">Enhanced Token Info</span>）。</p>
+          <p>專案方付費（約 $100–$1500）可換金色圖示、搜尋優先顯示與加強版資料卡（<button type="button" class="term" data-term="Enhanced Token Info">Enhanced Token Info</button>）。</p>
           <ul>
             <li>它<strong>不影響 Trending 演算法排序</strong>。</li>
             <li>它<strong>完全不代表安全</strong>——GMGN 甚至把 <code>dexscr_boost_fee</code>、<code>dexscr_ad</code> 這些欄位當成<strong>風險指標</strong>在看。</li>
@@ -1218,9 +1238,9 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <details class="acc">
           <summary>🟣 進階：CTO、FDV 算法、Moonshot ▸</summary>
           <ul>
-            <li><span class="term" data-term="CTO社群接管">CTO（Community Takeover）</span>：開發者跑路後由社群接管的標記。看到 CTO 就知道原團隊已經不在了。</li>
-            <li><span class="term" data-term="FDV">FDV</span> 算法 =（總供給量 − 已燒毀量）× 價格；而<span class="term" data-term="市值">市值</span>是用專案自報或 CoinGecko 的流通量算的。<strong>兩者差很大時要特別警覺</strong>（代表大量代幣還沒解鎖）。</li>
-            <li><span class="term" data-term="Moonshot">Moonshot</span>：官方合作的公平發射／交易 App。</li>
+            <li><button type="button" class="term" data-term="CTO社群接管">CTO（Community Takeover）</button>：開發者跑路後由社群接管的標記。看到 CTO 就知道原團隊已經不在了。</li>
+            <li><button type="button" class="term" data-term="FDV">FDV</button> 算法 =（總供給量 − 已燒毀量）× 價格；而<button type="button" class="term" data-term="市值">市值</button>是用專案自報或 CoinGecko 的流通量算的。<strong>兩者差很大時要特別警覺</strong>（代表大量代幣還沒解鎖）。</li>
+            <li><button type="button" class="term" data-term="Moonshot">Moonshot</button>：官方合作的公平發射／交易 App。</li>
           </ul>
         </details>
 
@@ -1234,33 +1254,33 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         </details>
       </div>
 
-      <div class="tabpanel" data-panel="glossary">
+      <div class="tabpanel" data-panel="glossary" id="panel-dexscreener-glossary" role="tabpanel" aria-labelledby="tab-dexscreener-glossary" tabindex="0">
         <div class="card card--flat" data-level="both">
           <h3>DEX Screener 詞彙表</h3>
           <p>點任一詞看白話解釋。</p>
           <p>
-            <span class="term" data-term="CA合約地址">CA 合約地址</span>
-            <span class="term" data-term="交易對Pair">交易對 Pair</span>
-            <span class="term" data-term="流動性Liquidity">流動性 Liquidity</span>
-            <span class="term" data-term="FDV">FDV</span>
-            <span class="term" data-term="市值">市值</span>
-            <span class="term" data-term="Makers獨立交易者">Makers 獨立交易者</span>
-            <span class="term" data-term="Txns交易筆數">Txns 交易筆數</span>
-            <span class="term" data-term="Pooled池子代幣">Pooled 池子代幣</span>
-            <span class="term" data-term="Boost付費推廣">Boost 付費推廣</span>
-            <span class="term" data-term="Enhanced Token Info">Enhanced Token Info</span>
-            <span class="term" data-term="CTO社群接管">CTO 社群接管</span>
-            <span class="term" data-term="Multicharts">Multicharts</span>
-            <span class="term" data-term="TradingView">TradingView</span>
-            <span class="term" data-term="K線圖">K 線圖</span>
-            <span class="term" data-term="Watchlist自選清單">Watchlist 自選清單</span>
-            <span class="term" data-term="Moonshot">Moonshot</span>
+            <button type="button" class="term" data-term="CA合約地址">CA 合約地址</button>
+            <button type="button" class="term" data-term="交易對Pair">交易對 Pair</button>
+            <button type="button" class="term" data-term="流動性Liquidity">流動性 Liquidity</button>
+            <button type="button" class="term" data-term="FDV">FDV</button>
+            <button type="button" class="term" data-term="市值">市值</button>
+            <button type="button" class="term" data-term="Makers獨立交易者">Makers 獨立交易者</button>
+            <button type="button" class="term" data-term="Txns交易筆數">Txns 交易筆數</button>
+            <button type="button" class="term" data-term="Pooled池子代幣">Pooled 池子代幣</button>
+            <button type="button" class="term" data-term="Boost付費推廣">Boost 付費推廣</button>
+            <button type="button" class="term" data-term="Enhanced Token Info">Enhanced Token Info</button>
+            <button type="button" class="term" data-term="CTO社群接管">CTO 社群接管</button>
+            <button type="button" class="term" data-term="Multicharts">Multicharts</button>
+            <button type="button" class="term" data-term="TradingView">TradingView</button>
+            <button type="button" class="term" data-term="K線圖">K 線圖</button>
+            <button type="button" class="term" data-term="Watchlist自選清單">Watchlist 自選清單</button>
+            <button type="button" class="term" data-term="Moonshot">Moonshot</button>
           </p>
         </div>
         <div class="callout callout--tip">💡 只記一個詞的話，記 <strong>Liquidity（流動性）</strong>——它決定你賣不賣得掉，比價格圖表重要得多。</div>
       </div>
 
-      <div class="tabpanel" data-panel="risk">
+      <div class="tabpanel" data-panel="risk" id="panel-dexscreener-risk" role="tabpanel" aria-labelledby="tab-dexscreener-risk" tabindex="0">
         <div class="card card--risk" data-level="both">
           <span class="badge badge--danger">必讀</span>
           <h3>用 DEX Screener 前一定要懂的風險</h3>
@@ -1296,7 +1316,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <h1>🔗 一條龍流程：從發現新幣到出場</h1>
       <p>四個工具各有專長，串起來才好用。照著這條時間軸走一次，你就知道每個步驟該打開哪一個。</p>
     </div>
-    <div class="callout callout--warn" data-level="both">⚠️ 非投資建議｜迷因幣極高風險，多數歸零｜介面與費率以官方為準</div>
+    <div class="callout callout--warn" data-level="both">⚠️ 這條流程能幫你少踩雷，但沒有任何一步保證獲利。五個階段全部走完，照樣可能全賠，請只用賠得起的錢。</div>
 
     <div class="card card--flat" data-level="both">
       <h2>先記住每個工具的位置</h2>
@@ -1313,7 +1333,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">⓪ 入金</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>台幣怎麼變成 SOL／USDC</h3>
           <span class="tl-tool">用：MAX、BitoPro 等台灣交易所</span>
           <p><strong>最穩的路：</strong>MAX 或 BitoPro 台幣入金（新戶每日入金上限約 NT$10 萬）→買 SOL 或 USDC→提領到自己的錢包。GMGN／Axiom 要有 SOL 付手續費；fomo 以 USDC 入金為主，官方也標榜支援 Apple Pay，但台灣的卡能不能過款官方沒明講，先小額測試再說。</p>
@@ -1323,10 +1343,10 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">① 發現</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>找到候選幣，複製 CA</h3>
           <span class="tl-tool">用：Axiom Pulse 的 Migrated 欄／GMGN Trending／fomo 動態牆</span>
-          <p><strong>做什麼：</strong>在這三個地方隨便挑一個逛，看到有興趣的幣，先把它的<span class="term" data-term="CA合約地址">合約地址（CA）</span>複製起來——不要急著買。</p>
+          <p><strong>做什麼：</strong>在這三個地方隨便挑一個逛，看到有興趣的幣，先把它的<button type="button" class="term" data-term="CA合約地址">合約地址（CA）</button>複製起來——不要急著買。</p>
           <p><strong>看哪些數字：</strong>幣齡、市值、持有人數、成交量。</p>
           <div class="callout callout--tip">💡 小白版建議：<strong>只看已經「畢業」或上榜超過 1 小時的幣。</strong>剛發射幾分鐘的那些，是給老手拿命換錢的。</div>
           <figure class="figure" data-fig="06">
@@ -1350,12 +1370,12 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">② 驗證</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>用 CA 交叉核對兩個工具</h3>
           <span class="tl-tool">用：GMGN 安全面板 ＋ DEX Screener 交易對頁</span>
           <p><strong>做什麼：</strong>把剛剛複製的 CA 分別貼進 GMGN 和 DEX Screener，兩邊都看一次。<strong>只信一個工具是新手最貴的習慣。</strong></p>
-          <p><strong>GMGN 看：</strong><span class="term" data-term="Honeypot蜜罐">Honeypot</span>／<span class="term" data-term="Mint權限">Mint</span>／<span class="term" data-term="Freeze權限">Freeze</span>／<span class="term" data-term="LP燒毀">LP 燒毀</span>／<span class="term" data-term="Rug機率">Rug 機率</span>／<span class="term" data-term="Top10持倉">Top10%</span>／<span class="term" data-term="Dev持倉">Dev%</span>／<span class="term" data-term="Bundler捆綁">Bundler%</span>。</p>
-          <p><strong>DEX Screener 看：</strong><span class="term" data-term="流動性Liquidity">流動性</span> vs 市值、買賣比、<span class="term" data-term="Makers獨立交易者">Makers</span> 數。</p>
+          <p><strong>GMGN 看：</strong><button type="button" class="term" data-term="Honeypot蜜罐">Honeypot</button>／<button type="button" class="term" data-term="Mint權限">Mint</button>／<button type="button" class="term" data-term="Freeze權限">Freeze</button>／<button type="button" class="term" data-term="LP燒毀">LP 燒毀</button>／<button type="button" class="term" data-term="Rug機率">Rug 機率</button>／<button type="button" class="term" data-term="Top10持倉">Top10%</button>／<button type="button" class="term" data-term="Dev持倉">Dev%</button>／<button type="button" class="term" data-term="Bundler捆綁">Bundler%</button>。</p>
+          <p><strong>DEX Screener 看：</strong><button type="button" class="term" data-term="流動性Liquidity">流動性</button> vs 市值、買賣比、<button type="button" class="term" data-term="Makers獨立交易者">Makers</button> 數。</p>
           <div class="metric">
             <div class="metric__name">流動性 ÷ 市值</div>
             <span class="metric__safe">✅ 相對安全：大於 5%，通常賣得掉</span>
@@ -1384,11 +1404,11 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">③ 下單</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>小額買入，同時設好 TP／SL</h3>
           <span class="tl-tool">用：fomo（最簡單）／Axiom（專業、多鏈）／GMGN（要跟單或自動止盈止損）</span>
-          <p><strong>做什麼：</strong>買進去的同一分鐘就把<span class="term" data-term="TP/SL止盈止損">止盈止損</span>設好，不要等「再看看」。</p>
-          <p><strong>看哪些數字：</strong><span class="term" data-term="滑點">滑點</span>、<span class="term" data-term="優先費(Jito Tip)">優先費</span>、<span class="term" data-term="MEV/三明治攻擊">MEV 模式</span>、手續費。</p>
+          <p><strong>做什麼：</strong>買進去的同一分鐘就把<button type="button" class="term" data-term="TP/SL止盈止損">止盈止損</button>設好，不要等「再看看」。</p>
+          <p><strong>看哪些數字：</strong><button type="button" class="term" data-term="滑點">滑點</button>、<button type="button" class="term" data-term="優先費(Jito Tip)">優先費</button>、<button type="button" class="term" data-term="MEV/三明治攻擊">MEV 模式</button>、手續費。</p>
           <div class="callout callout--tip">💡 小白版建議：<strong>第一筆不超過整個錢包的 2–5%</strong>，MEV 模式選 <strong>Secure</strong>。</div>
           <div class="shot">畫面示意：下單確認頁，金額、滑點、手續費與 MEV=Secure 標示</div>
         </div>
@@ -1396,10 +1416,10 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">④ 追蹤</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>設警示，不要一直盯盤</h3>
           <span class="tl-tool">用：DEX Screener 的 Watchlist ＋ Alerts／Axiom 與 GMGN 的錢包追蹤／fomo 關注交易員</span>
-          <p><strong>做什麼：</strong>設價格警示，順便觀察<span class="term" data-term="Smart Money聰明錢">聰明錢</span>有沒有在出貨。</p>
+          <p><strong>做什麼：</strong>設價格警示，順便觀察<button type="button" class="term" data-term="Smart Money聰明錢">聰明錢</button>有沒有在出貨。</p>
           <p><strong>看哪些數字：</strong>聰明錢是否出貨、持有人數變化。</p>
           <div class="callout callout--warn">⚠️ 小白版建議：<strong>只設警示，不要因為漲就一直加倉。</strong>加倉會把你的平均成本推高，等於把原本賺的緩衝全部吐回去。</div>
           <div class="shot">畫面示意：DEX Screener Alerts 設定頁，已加入 Watchlist 的星號</div>
@@ -1408,11 +1428,11 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
       <div class="tl-item" data-level="both">
         <span class="tl-stage">⑤ 出場</span>
-        <div class="card card--tool">
+        <div class="card card--tool" data-level="both">
           <h3>分批賣出，先把本金撈回來</h3>
           <span class="tl-tool">用：回到你原本下單的那個工具</span>
           <p><strong>做什麼：</strong>分批賣。例如 2 倍先賣一半、跌到停損點就直接走，不要跟它談感情。</p>
-          <p><strong>看哪些數字：</strong><span class="term" data-term="已實現損益">已實現損益</span>。</p>
+          <p><strong>看哪些數字：</strong><button type="button" class="term" data-term="已實現損益">已實現損益</button>。</p>
           <div class="callout callout--tip">💡 小白版建議：<strong>先賣回本金，剩下的才是「用別人的錢在玩」</strong>——這時候心態才會穩。</div>
           <div class="shot">畫面示意：持倉頁，已賣出 50%，已實現損益欄位轉正</div>
         </div>
@@ -1472,12 +1492,17 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <h2>一頁看完整條流程</h2>
       <div class="table-wrap">
         <table>
-          <tr><th>階段</th><th>用什麼工具</th><th>看哪些數字</th><th>小白版建議</th></tr>
+          <caption class="sr-only">流程五階段對照：每個階段用什麼工具、看哪些數字</caption>
+          <thead>
+            <tr><th scope="col">階段</th><th scope="col">用什麼工具</th><th scope="col">看哪些數字</th><th scope="col">小白版建議</th></tr>
+          </thead>
+          <tbody>
           <tr><td>① 發現</td><td>Axiom Pulse／GMGN Trending／fomo 動態牆</td><td>幣齡、市值、持有人數、成交量</td><td>只看已畢業或上榜超過 1 小時的幣</td></tr>
           <tr><td>② 驗證</td><td>GMGN 安全面板＋DEX Screener</td><td>紅綠燈全項、流動性 vs 市值、買賣比</td><td>一項紅燈就不碰；流動性 &lt; 市值 5% 不碰</td></tr>
           <tr><td>③ 下單</td><td>fomo／Axiom／GMGN</td><td>滑點、優先費、MEV、手續費</td><td>第一筆 ≤ 錢包的 2–5%；MEV 選 Secure</td></tr>
           <tr><td>④ 追蹤</td><td>DEX Screener Alerts／錢包追蹤</td><td>聰明錢動向、持有人數變化</td><td>只設警示，不要因為漲就加倉</td></tr>
           <tr><td>⑤ 出場</td><td>回到原本下單的工具</td><td>已實現損益</td><td>先賣回本金，剩下才是多的</td></tr>
+          </tbody>
         </table>
       </div>
       <p><small>（以上判斷標準皆為 2026/9 查證，請以官方公告為準；非投資建議）</small></p>
@@ -1497,18 +1522,18 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
   <section class="page" id="page-glossary" data-page="glossary">
     <div class="page-head">
       <h1>📖 白話詞典</h1>
-      <p>看到聽不懂的字先來這裡查。文章裡有底線的<span class="term" data-term="流動性Liquidity">紫色詞</span>都可以直接點開。以下數據皆為2026/9查證，請以官方公告為準。</p>
+      <p>看到聽不懂的字先來這裡查。文章裡有底線的<button type="button" class="term" data-term="流動性Liquidity">紫色詞</button>都可以直接點開。以下數據皆為2026/9查證，請以官方公告為準。</p>
     </div>
     <input id="glossarySearch" type="search" placeholder="🔎 搜尋詞彙，例如：流動性、CA、滑點" autocomplete="off" aria-label="搜尋詞彙">
-    <div class="tabs" id="glossaryCats" aria-label="詞彙分類">
-      <button class="chip chip--active" type="button" data-cat="all">全部</button>
-      <button class="chip" type="button" data-cat="基礎">基礎</button>
-      <button class="chip" type="button" data-cat="安全指標">安全指標</button>
-      <button class="chip" type="button" data-cat="下單">下單</button>
-      <button class="chip" type="button" data-cat="鏈與錢包">鏈與錢包</button>
-      <button class="chip" type="button" data-cat="介面工具">介面工具</button>
+    <div class="tabs" id="glossaryCats" role="tablist" aria-label="詞彙分類">
+      <button class="chip chip--active" type="button" data-cat="all" role="tab" aria-selected="true" aria-controls="glossaryList" tabindex="0">全部</button>
+      <button class="chip" type="button" data-cat="基礎" role="tab" aria-selected="false" aria-controls="glossaryList" tabindex="-1">基礎</button>
+      <button class="chip" type="button" data-cat="安全指標" role="tab" aria-selected="false" aria-controls="glossaryList" tabindex="-1">安全指標</button>
+      <button class="chip" type="button" data-cat="下單" role="tab" aria-selected="false" aria-controls="glossaryList" tabindex="-1">下單</button>
+      <button class="chip" type="button" data-cat="鏈與錢包" role="tab" aria-selected="false" aria-controls="glossaryList" tabindex="-1">鏈與錢包</button>
+      <button class="chip" type="button" data-cat="介面工具" role="tab" aria-selected="false" aria-controls="glossaryList" tabindex="-1">介面工具</button>
     </div>
-    <div id="glossaryList"></div>
+    <div id="glossaryList" role="tabpanel" tabindex="0"></div>
   </section>
 
   <!-- ================= 風險頁 ================= -->
@@ -1529,21 +1554,21 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
     <div class="card card--risk" data-level="both">
       <h3>1️⃣ 仿冒幣（同名假幣）</h3>
-      <p>做一顆名字、圖示、代號都跟熱門幣一模一樣的幣，等你搜名字搜到它、直接買下去。<strong>解法只有一個：永遠用 <span class="term" data-term="CA合約地址">CA 合約地址</span>搜，而且 CA 要從官方管道複製，再到第二個工具核對名稱、圖示、鏈都一致。</strong></p>
+      <p>做一顆名字、圖示、代號都跟熱門幣一模一樣的幣，等你搜名字搜到它、直接買下去。<strong>解法只有一個：永遠用 <button type="button" class="term" data-term="CA合約地址">CA 合約地址</button>搜，而且 CA 要從官方管道複製，再到第二個工具核對名稱、圖示、鏈都一致。</strong></p>
     </div>
 
     <div class="card card--risk" data-level="both">
-      <h3>2️⃣ <span class="term" data-term="Honeypot蜜罐">蜜罐（Honeypot）</span></h3>
+      <h3>2️⃣ <button type="button" class="term" data-term="Honeypot蜜罐">蜜罐（Honeypot）</button></h3>
       <p>合約在程式碼裡把「賣出」擋掉，你買得進去、賣不出來，價格看起來一路漲，實際上是一張你永遠兌不了現的支票。<strong>買之前先看 GMGN 安全面板的 Honeypot 那一格，紅燈就直接跳過。</strong></p>
     </div>
 
     <div class="card card--risk" data-level="both">
       <h3>3️⃣ 拉地毯（Rug Pull）</h3>
-      <p>開發者把資金池裡的錢一次抽光，價格瞬間歸零，你手上的幣變成廢紙。<strong>看 <span class="term" data-term="LP燒毀">LP 是否燒毀</span>、<span class="term" data-term="Dev持倉">Dev 持倉</span>高不高、<span class="term" data-term="Rug機率">Rug 機率</span>分數，三個一起看。</strong></p>
+      <p>開發者把資金池裡的錢一次抽光，價格瞬間歸零，你手上的幣變成廢紙。<strong>看 <button type="button" class="term" data-term="LP燒毀">LP 是否燒毀</button>、<button type="button" class="term" data-term="Dev持倉">Dev 持倉</button>高不高、<button type="button" class="term" data-term="Rug機率">Rug 機率</button>分數，三個一起看。</strong></p>
     </div>
 
     <div class="card card--risk" data-level="both">
-      <h3>4️⃣ <span class="term" data-term="Sniper狙擊">狙擊</span>與<span class="term" data-term="Bundler捆綁">捆綁</span>（Sniper／Bundler）</h3>
+      <h3>4️⃣ <button type="button" class="term" data-term="Sniper狙擊">狙擊</button>與<button type="button" class="term" data-term="Bundler捆綁">捆綁</button>（Sniper／Bundler）</h3>
       <p>一群機器人或同一個人的多個錢包在開盤瞬間吃掉大半籌碼，做出「很多人在搶」的假象，等散戶追進來就倒給你。<strong>看 Snipers%、Bundle%、Top10% 這三個數字，偏高就是你在幫他們接盤。</strong></p>
     </div>
 
@@ -1558,8 +1583,8 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <h2>下單前安全檢查清單</h2>
       <p><small>勾選狀態會存在這台裝置的瀏覽器裡，換裝置不會同步。</small></p>
       <div class="checklist" id="safetyChecklist">
-        <label><input type="checkbox" data-ck="ca"><span>我有把 <span class="term" data-term="CA合約地址">CA（合約地址）</span>拿到兩個不同工具交叉核對過，字元完全一致</span></label>
-        <label><input type="checkbox" data-ck="liq"><span>我確認過<span class="term" data-term="流動性Liquidity">流動性</span>大於市值的 5%</span></label>
+        <label><input type="checkbox" data-ck="ca"><span>我有把 <button type="button" class="term" data-term="CA合約地址">CA（合約地址）</button>拿到兩個不同工具交叉核對過，字元完全一致</span></label>
+        <label><input type="checkbox" data-ck="liq"><span>我確認過<button type="button" class="term" data-term="流動性Liquidity">流動性</button>大於市值的 5%</span></label>
         <label><input type="checkbox" data-ck="top10"><span>我看過 Top 10 持倉比例，沒有過度集中在少數地址</span></label>
         <label><input type="checkbox" data-ck="stop"><span>我已經決定好停損金額，而且寫下來了</span></label>
         <label><input type="checkbox" data-ck="small"><span>我先用一筆極小額測試過買進與賣出，確認賣得掉</span></label>
@@ -1599,7 +1624,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <label for="calc-pos-total">錢包總資金（台幣或 USDC 都可，單位自己記住就好）</label><br>
         <input id="calc-pos-total" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 30000">
       </p>
-      <p id="calc-pos-out">請輸入數字。</p>
+      <p id="calc-pos-out" aria-live="polite" aria-atomic="true">請輸入數字。</p>
       <p><small>抓不定主意就用 2%。金額小到你賠光也不會影響生活，才是你該投的金額。</small></p>
     </div>
 
@@ -1609,11 +1634,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>單筆 5%，連續全損 10 次，本金剩下大約六成，還有翻身空間。單筆 20%，連續全損 5 次就歸零，而迷因幣連錯 5 次一點都不稀奇。這不是保守，這是讓你有機會等到那一次對的。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>單筆比例</th><th>連續全損 5 次後</th><th>連續全損 10 次後</th><th>適合誰</th></tr>
+          <caption class="sr-only">單筆下注比例與連續全損後的本金殘餘對照</caption>
+          <thead>
+            <tr><th scope="col">單筆比例</th><th scope="col">連續全損 5 次後</th><th scope="col">連續全損 10 次後</th><th scope="col">適合誰</th></tr>
+          </thead>
+          <tbody>
           <tr><td>2%</td><td>約剩 90%</td><td>約剩 82%</td><td>剛開始、還在熟悉流程</td></tr>
           <tr><td>5%</td><td>約剩 77%</td><td>約剩 60%</td><td>已經能穩定看完安全面板</td></tr>
           <tr><td>10%</td><td>約剩 59%</td><td>約剩 35%</td><td>幾乎沒有容錯空間</td></tr>
           <tr><td>20%</td><td>約剩 33%</td><td>約剩 11%</td><td>不建議</td></tr>
+          </tbody>
         </table>
       </div>
       <p><small>表格是純數學推算（每次全損就是本金乘以 1 減去該比例），不代表實際勝率，也不是報酬預測。</small></p>
@@ -1631,7 +1661,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <ul>
         <li><strong>把「總資金」填成全部身家。</strong>這裡要填的是你劃給迷因幣這件事的資金，不是你的存款總額，更不是含房貸額度、信用卡額度的數字。</li>
         <li><strong>算完之後又加碼。</strong>「先照計畫買 2%，漲了再補 8%」等於實際單筆 10%，只是分兩次進場。加碼要算進同一筆。</li>
-        <li><strong>把停損當成保險。</strong>設了停損不代表你一定停損得掉——<span class="term" data-term="流動性Liquidity">流動性</span>枯竭的時候賣單根本成交不了。倉位控制是唯一在任何情況下都有效的那道防線。</li>
+        <li><strong>把停損當成保險。</strong>設了停損不代表你一定停損得掉——<button type="button" class="term" data-term="流動性Liquidity">流動性</button>枯竭的時候賣單根本成交不了。倉位控制是唯一在任何情況下都有效的那道防線。</li>
         <li><strong>賠完之後放大單筆想追回來。</strong>這是最常見、也最貴的一種誤用。剛虧完的心理狀態通常會讓你高估勝率，這時候應該做的是縮小，不是放大。</li>
       </ul>
     </div>
@@ -1656,7 +1686,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <label for="calc-fee-prio">鏈上優先費（跟投入金額同單位，沒有就留空）</label><br>
         <input id="calc-fee-prio" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 5">
       </p>
-      <p id="calc-fee-out">請輸入投入金額。</p>
+      <p id="calc-fee-out" aria-live="polite" aria-atomic="true">請輸入投入金額。</p>
       <p><small>1%＋1% 只是常見的估算範例，實際費率以平台當下顯示為準。優先費請換算成跟投入金額相同的單位再填（例如 0.01 SOL 換成台幣）。</small></p>
     </div>
 
@@ -1665,11 +1695,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>新手最常低估的就是這一段。你以為只有「手續費 1%」，實際上一筆完整的進出至少會碰到四種成本，而且它們是<strong>相加</strong>的。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>成本項目</th><th>收在哪一步</th><th>大概量級</th><th>能不能控制</th></tr>
+          <caption class="sr-only">一筆交易的四層成本、收費時機與可控程度</caption>
+          <thead>
+            <tr><th scope="col">成本項目</th><th scope="col">收在哪一步</th><th scope="col">大概量級</th><th scope="col">能不能控制</th></tr>
+          </thead>
+          <tbody>
           <tr><td>平台手續費</td><td>買一次、賣一次各收</td><td>每筆約 1% 上下</td><td>可以，換工具或用推薦連結</td></tr>
-          <tr><td><span class="term" data-term="優先費(Jito Tip)">優先費</span></td><td>每一筆上鏈交易</td><td>固定金額，跟本金無關</td><td>可以，但太低會一直失敗</td></tr>
-          <tr><td><span class="term" data-term="滑點">滑點</span></td><td>成交當下自動吃掉</td><td>視流動性，0 到設定上限</td><td>部分可以，見下一個工具</td></tr>
-          <tr><td><span class="term" data-term="MEV/三明治攻擊">MEV 夾擊</span></td><td>成交前後被人插隊</td><td>不固定，流動性淺時最痛</td><td>開防夾模式能降低</td></tr>
+          <tr><td><button type="button" class="term" data-term="優先費(Jito Tip)">優先費</button></td><td>每一筆上鏈交易</td><td>固定金額，跟本金無關</td><td>可以，但太低會一直失敗</td></tr>
+          <tr><td><button type="button" class="term" data-term="滑點">滑點</button></td><td>成交當下自動吃掉</td><td>視流動性，0 到設定上限</td><td>部分可以，見下一個工具</td></tr>
+          <tr><td><button type="button" class="term" data-term="MEV/三明治攻擊">MEV 夾擊</button></td><td>成交前後被人插隊</td><td>不固定，流動性淺時最痛</td><td>開防夾模式能降低</td></tr>
+          </tbody>
         </table>
       </div>
       <p><small>量級全是常見範圍的估算，不同平台、不同鏈、不同時段都會變，實際數字以平台當下顯示與成交結果為準。</small></p>
@@ -1681,11 +1716,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>把「來回總成本佔投入金額的百分比」記成一個門檻數字，你對行情的感覺會準很多。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>來回總成本</th><th>回本需要漲</th><th>白話翻譯</th></tr>
+          <caption class="sr-only">來回總成本對應的回本漲幅門檻</caption>
+          <thead>
+            <tr><th scope="col">來回總成本</th><th scope="col">回本需要漲</th><th scope="col">白話翻譯</th></tr>
+          </thead>
+          <tbody>
           <tr><td>約 2%</td><td>約 2%</td><td>小漲一下就打平，還算健康</td></tr>
           <tr><td>約 5%</td><td>約 5.3%</td><td>要有一波才回得來</td></tr>
           <tr><td>約 10%</td><td>約 11.1%</td><td>你等於先被扣掉一成本金</td></tr>
           <tr><td>約 20%</td><td>約 25%</td><td>這筆已經不值得做了</td></tr>
+          </tbody>
         </table>
       </div>
       <p><small>回本漲幅比總成本略高，是因為賣出時的手續費也是從「已經漲上去的金額」抽，所以基數變大。數字為估算，實際以成交結果為準。</small></p>
@@ -1714,7 +1754,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <label for="calc-slip-pct">預期／設定滑點（%）</label><br>
         <input id="calc-slip-pct" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 5">
       </p>
-      <p id="calc-slip-out">請輸入數字。</p>
+      <p id="calc-slip-out" aria-live="polite" aria-atomic="true">請輸入數字。</p>
       <p><small>這是最壞情況的估算，實際成交滑點通常比設定值小，但流動性差的幣可能直接吃滿。實際數字以平台成交結果為準。</small></p>
     </div>
 
@@ -1729,9 +1769,9 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="metric">
         <div class="metric__name">設太高（例如 30%）</div>
         <span class="metric__safe">好處：幾乎一定成交，急殺出場時比較保險</span>
-        <span class="metric__danger">壞處：等於公開宣告「我可以接受差 30% 的價格」，<span class="term" data-term="MEV/三明治攻擊">夾擊機器人</span>最愛這種單</span>
+        <span class="metric__danger">壞處：等於公開宣告「我可以接受差 30% 的價格」，<button type="button" class="term" data-term="MEV/三明治攻擊">夾擊機器人</button>最愛這種單</span>
       </div>
-      <p>所以常見的抓法是：<strong>剛發射、波動極大的新幣 10–15%；已經<span class="term" data-term="畢業(Migrate)">畢業</span>、流動性穩定的幣 3–5%。</strong>賣出時如果真的要跑，才臨時放寬。</p>
+      <p>所以常見的抓法是：<strong>剛發射、波動極大的新幣 10–15%；已經<button type="button" class="term" data-term="畢業(Migrate)">畢業</button>、流動性穩定的幣 3–5%。</strong>賣出時如果真的要跑，才臨時放寬。</p>
       <p><small>以上為常見設定範圍的參考，不同工具的滑點計算方式可能不同，請以平台當下顯示與說明為準。</small></p>
     </div>
 
@@ -1764,12 +1804,12 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <label for="calc-fx-coin">幣的數量 → 換算台幣</label><br>
         <input id="calc-fx-coin" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 0.5">
       </p>
-      <p id="calc-fx-out-twd">請先填匯率與數量。</p>
+      <p id="calc-fx-out-twd" aria-live="polite" aria-atomic="true">請先填匯率與數量。</p>
       <p>
         <label for="calc-fx-twd">台幣金額 → 換算幣的數量</label><br>
         <input id="calc-fx-twd" type="number" inputmode="decimal" min="0" step="any" placeholder="例如 3000">
       </p>
-      <p id="calc-fx-out-coin">請先填匯率與台幣金額。</p>
+      <p id="calc-fx-out-coin" aria-live="polite" aria-atomic="true">請先填匯率與台幣金額。</p>
       <p><small>兩個欄位互相獨立，各算各的，方便你同時看買進與賣出兩個方向。</small></p>
     </div>
 
@@ -1790,12 +1830,17 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>把四個工具串起來跑一次。以下全部是<strong>假設數字</strong>，只是示範算法，不是任何推薦或報酬預期。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>步驟</th><th>用哪個工具</th><th>假設輸入</th><th>得到什麼</th></tr>
+          <caption class="sr-only">四個計算器串起來跑一筆交易的演練步驟</caption>
+          <thead>
+            <tr><th scope="col">步驟</th><th scope="col">用哪個工具</th><th scope="col">假設輸入</th><th scope="col">得到什麼</th></tr>
+          </thead>
+          <tbody>
           <tr><td>① 決定投多少</td><td>倉位計算器</td><td>總資金 30000</td><td>單筆上限 600–1500</td></tr>
           <tr><td>② 換成 SOL</td><td>台幣換算</td><td>匯率自行查、金額 1000</td><td>對應的 SOL 數量</td></tr>
           <tr><td>③ 算回本門檻</td><td>來回手續費</td><td>1000，買 1%、賣 1%、優先費 5</td><td>總成本約 25，門檻約 2.5%</td></tr>
           <tr><td>④ 抓最壞滑點</td><td>滑點成本</td><td>1000，滑點 10%</td><td>單邊最多吃 100</td></tr>
           <tr><td>⑤ 決定要不要做</td><td>你自己</td><td>把 ③ ④ 加起來看</td><td>心裡的底線數字</td></tr>
+          </tbody>
         </table>
       </div>
       <p>跑完這五步，你手上會有一個很具體的句子：<strong>「這筆最多賠 1000，最壞情況要漲超過一成才回本。」</strong>接受這句話，再去按買入；不接受，就換一顆流動性更好的幣，或乾脆不做。</p>
@@ -1994,12 +2039,17 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>很多人卡在這一關，是因為不知道會被要求什麼、於是東西沒準備好就開始填。以下是台灣合法平台常見的資料類型，<strong>實際欄位與要求以各平台當下規定為準</strong>。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>類別</th><th>常見會被要求的東西</th><th>常見卡關原因</th></tr>
+          <caption class="sr-only">KYC 各類別常見要求與卡關原因</caption>
+          <thead>
+            <tr><th scope="col">類別</th><th scope="col">常見會被要求的東西</th><th scope="col">常見卡關原因</th></tr>
+          </thead>
+          <tbody>
           <tr><td>身分證明</td><td>身分證正反面、第二證件</td><td>反光、四角沒入鏡、字看不清楚</td></tr>
           <tr><td>人臉驗證</td><td>手持證件自拍或即時視訊</td><td>光線太暗、戴帽子口罩、跟證件照差太多</td></tr>
           <tr><td>銀行帳戶</td><td>本人名下帳戶的存摺封面或截圖</td><td>用了家人的帳戶、戶名對不上</td></tr>
           <tr><td>基本資料</td><td>地址、職業、資金來源、預計交易量</td><td>隨便亂填，跟後續金流對不起來</td></tr>
           <tr><td>風險測驗</td><td>幾題投資經驗與風險認知問答</td><td>沒仔細看題目就送出</td></tr>
+          </tbody>
         </table>
       </div>
       <p><strong>「資金來源」跟「預計交易量」這兩題請認真填。</strong>它們不是形式，平台之後會拿你填的內容跟實際金流比對；差太多會觸發人工複核，出金就卡住了。</p>
@@ -2029,7 +2079,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <div class="card card--tool" data-level="both">
           <h3>手上的迷因幣先換成主流幣</h3>
           <p>用原本買進的工具（GMGN／Axiom／fomo）把想變現的迷因幣賣出，換回 SOL 或 USDC。交易所通常不直接收迷因幣，出金前一定要先換成主流幣這一步。</p>
-          <p>賣出時同樣會吃<span class="term" data-term="滑點">滑點</span>與手續費，所以你在錢包裡看到的「帳面價值」，跟最後真正換到的 SOL 數量會有落差。</p>
+          <p>賣出時同樣會吃<button type="button" class="term" data-term="滑點">滑點</button>與手續費，所以你在錢包裡看到的「帳面價值」，跟最後真正換到的 SOL 數量會有落差。</p>
         </div>
       </div>
 
@@ -2084,11 +2134,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>入金是你主動把錢送過去，只要帳號對就好；出金是平台要把錢送出去，中間多了好幾道檢查。理解這幾道關卡，你就不會在第二天焦慮地按重整。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>關卡</th><th>在檢查什麼</th><th>你能做的事</th></tr>
+          <caption class="sr-only">出金流程各關卡在檢查什麼、你能做什麼</caption>
+          <thead>
+            <tr><th scope="col">關卡</th><th scope="col">在檢查什麼</th><th scope="col">你能做的事</th></tr>
+          </thead>
+          <tbody>
           <tr><td>帳戶狀態</td><td>KYC 是否有效、有無異常標記</td><td>資料到期前主動更新</td></tr>
           <tr><td>額度檢查</td><td>單筆／單日是否超過你等級的上限</td><td>先看清楚上限，必要時分次</td></tr>
           <tr><td>風控複核</td><td>金額或行為模式是否異於過往</td><td>不要突然一次拉高很多倍</td></tr>
           <tr><td>銀行作業</td><td>匯款批次、營業日、跨行時間</td><td>避開假日與非營業時段送出</td></tr>
+          </tbody>
         </table>
       </div>
       <p><small>各關卡的實際規則、時間與額度依平台與銀行而異，且會不定期調整，一律以官方當下公告為準。</small></p>
@@ -2230,7 +2285,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="metric">
         <div class="metric__name">當時螢幕上看得到的</div>
         <span class="metric__safe">安全：無</span>
-        <span class="metric__danger">危險：<span class="term" data-term="LP燒毀">LP</span> 從頭到尾沒有燒毀紀錄；<span class="term" data-term="Dev持倉">Dev 持倉</span>集中在少數幾個地址，比例明顯偏高</span>
+        <span class="metric__danger">危險：<button type="button" class="term" data-term="LP燒毀">LP</button> 從頭到尾沒有燒毀紀錄；<button type="button" class="term" data-term="Dev持倉">Dev 持倉</button>集中在少數幾個地址，比例明顯偏高</span>
       </div>
       <p><strong>當時心裡在想什麼：</strong>「已經漲這麼多了，現在不進就來不及。」急迫感是這個模式的核心工具——它讓你把「檢查」重新定義成「猶豫」。</p>
       <p><strong>哪一步原本可以停下來：</strong>買進前查一次「LP 是否已燒毀」與「Dev 持倉」這兩個數字——這兩項都能在下單前的安全面板直接看到，沒有燒毀、持倉又高，就是還沒排除風險。看到紅燈的當下就是停損點，不是參考值。</p>
@@ -2262,7 +2317,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="metric">
         <div class="metric__name">當時螢幕上看得到的</div>
         <span class="metric__safe">安全：價格沒有暴跌，K 線看起來平順</span>
-        <span class="metric__danger">危險：<span class="term" data-term="流動性Liquidity">流動性</span>數字持續下滑，跟<span class="term" data-term="市值">市值</span>的比例越拉越低</span>
+        <span class="metric__danger">危險：<button type="button" class="term" data-term="流動性Liquidity">流動性</button>數字持續下滑，跟<button type="button" class="term" data-term="市值">市值</button>的比例越拉越低</span>
       </div>
       <p><strong>當時心裡在想什麼：</strong>「跌這麼慢，一定不是 rug。」這是這個模式最狠的地方——它刻意避開了所有人心裡對「被割」的畫面預期。慢慢流血不像被搶，像是行情不好。</p>
       <p><strong>哪一步原本可以停下來：</strong>持有期間本來就該定期回頭看一次流動性佔市值的比例，而不是只在買進當下查一次；比例持續往下掉，就是該考慮先出場的訊號。<strong>價格會騙人，池子深度不會。</strong></p>
@@ -2294,7 +2349,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="metric">
         <div class="metric__name">當時螢幕上看得到的</div>
         <span class="metric__safe">安全：買入完全正常，價格圖漂亮</span>
-        <span class="metric__danger">危險：安全檢測工具的 <span class="term" data-term="Honeypot蜜罐">Honeypot</span> 欄位早就顯示異常，只是沒有點開來看</span>
+        <span class="metric__danger">危險：安全檢測工具的 <button type="button" class="term" data-term="Honeypot蜜罐">Honeypot</button> 欄位早就顯示異常，只是沒有點開來看</span>
       </div>
       <p><strong>當時心裡在想什麼：</strong>「買得進去就代表沒問題吧。」買入順暢是這個模式刻意留給你的體驗——它需要你買得進來。</p>
       <p><strong>哪一步原本可以停下來：</strong>買進前用安全面板檢查一次 Honeypot 狀態，紅燈就是明確訊號，不需要再靠感覺判斷；更簡單的做法是<strong>先用極小額買一點、立刻賣掉</strong>，賣得掉才加碼。這一步的成本只有幾塊錢手續費。</p>
@@ -2326,7 +2381,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <div class="metric">
         <div class="metric__name">當時螢幕上看得到的</div>
         <span class="metric__safe">安全：成交熱度很高，動態牆訊息不斷</span>
-        <span class="metric__danger">危險：<span class="term" data-term="Sniper狙擊">Snipers%</span> 與 <span class="term" data-term="Top10持倉">Top10%</span> 在開盤當下就已經偏高</span>
+        <span class="metric__danger">危險：<button type="button" class="term" data-term="Sniper狙擊">Snipers%</button> 與 <button type="button" class="term" data-term="Top10持倉">Top10%</button> 在開盤當下就已經偏高</span>
       </div>
       <p><strong>當時心裡在想什麼：</strong>「這麼多人在買，總不會全部都是假的。」但動態牆顯示的是<strong>交易筆數</strong>，不是<strong>有多少個不同的人</strong>。同一批人拆成幾十個錢包，在動態牆上看起來就是熱鬧。</p>
       <p><strong>哪一步原本可以停下來：</strong>看到「動態牆正在飆漲」時，先切去查一次 Snipers%、Bundle%、Top10% 這三個數字，偏高就代表自己很可能是在幫早期籌碼接盤，而不是跟到起漲點。<strong>熱鬧是結果，籌碼分布才是原因。</strong></p>
@@ -2393,7 +2448,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <span class="metric__danger">危險：同一個名稱底下其實同時跳出好幾顆幣；流動性明顯偏低</span>
       </div>
       <p><strong>當時心裡在想什麼：</strong>「搜尋結果第一個應該就是對的。」搜尋排序不是驗證，仿冒一顆同名同圖的幣，成本低到幾乎可以忽略。</p>
-      <p><strong>哪一步原本可以停下來：</strong>下單前一律用 <span class="term" data-term="CA合約地址">CA（合約地址）</span>搜尋而不是用名稱搜尋，且 CA 要從官方管道取得後，再拿到第二個工具交叉核對名稱與圖示是否一致。<strong>名字是誰都能取的，合約地址不是。</strong></p>
+      <p><strong>哪一步原本可以停下來：</strong>下單前一律用 <button type="button" class="term" data-term="CA合約地址">CA（合約地址）</button>搜尋而不是用名稱搜尋，且 CA 要從官方管道取得後，再拿到第二個工具交叉核對名稱與圖示是否一致。<strong>名字是誰都能取的，合約地址不是。</strong></p>
       <p><small>💸 事後估計：本金近乎全額損失。</small></p>
     </div>
 
@@ -2425,7 +2480,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <span class="metric__danger">危險：樣本筆數偏少；資金規模與你差好幾個量級；通知到成交之間必然存在延遲</span>
       </div>
       <p><strong>當時心裡在想什麼：</strong>「他比我懂，跟著他就好。」但跟單複製的是<strong>動作</strong>，不是<strong>成本</strong>，更不是<strong>出場時機</strong>。同一顆幣，他賺錢跟你賠錢可以同時成立。</p>
-      <p><strong>哪一步原本可以停下來：</strong>把<span class="term" data-term="Smart Money聰明錢">聰明錢</span>標籤當成線索而不是結論。跟單前至少確認三件事：<strong>樣本筆數夠不夠、他的資金規模跟你差多少、你有沒有自己的出場條件。</strong>沒有出場條件的跟單，等於把賣出的決定權交給一個不知道你存在的人。</p>
+      <p><strong>哪一步原本可以停下來：</strong>把<button type="button" class="term" data-term="Smart Money聰明錢">聰明錢</button>標籤當成線索而不是結論。跟單前至少確認三件事：<strong>樣本筆數夠不夠、他的資金規模跟你差多少、你有沒有自己的出場條件。</strong>沒有出場條件的跟單，等於把賣出的決定權交給一個不知道你存在的人。</p>
       <p><small>💸 事後估計：跟單部位虧損約四到六成。</small></p>
     </div>
 
@@ -2466,11 +2521,16 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>把上面全部排在一起看，會發現真正重複出現的不是某個技術指標，而是四種情境：</p>
       <div class="table-wrap">
         <table>
-          <tr><th>共通點</th><th>出現在哪些案例</th><th>對應的破解動作</th></tr>
+          <caption class="sr-only">八個案例的共通點與對應破解動作</caption>
+          <thead>
+            <tr><th scope="col">共通點</th><th scope="col">出現在哪些案例</th><th scope="col">對應的破解動作</th></tr>
+          </thead>
+          <tbody>
           <tr><td>被急迫感推著走</td><td>案例一、五</td><td>看到「限時」「快來不及」就強制停 60 秒</td></tr>
           <tr><td>把熱鬧當成證據</td><td>案例一、四、七</td><td>查籌碼分布，不看訊息量</td></tr>
           <tr><td>跳過只要三秒的檢查</td><td>案例三、五、六</td><td>把檢查做成固定順序，不臨場決定</td></tr>
           <tr><td>規則訂了但沒執行</td><td>案例二、八</td><td>下單前就把停損寫下來，不靠記憶</td></tr>
+          </tbody>
         </table>
       </div>
       <p><strong>注意最後一列。</strong>案例二跟案例八裡沒有詐騙、沒有惡意合約，虧損完全來自「當初訂好的規則，在該執行的時候被自己推翻」。這一類最不需要技術，也最難避免。</p>
@@ -2521,7 +2581,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <h3>兩種錢包逐項對照</h3>
       <dl>
         <dt><strong>私鑰放在哪</strong></dt>
-        <dd><span class="term" data-term="熱錢包">熱錢包</span>存在手機或瀏覽器裡，跟著裝置走。冷錢包存在一顆離線的硬體裡，永遠不進入電腦。</dd>
+        <dd><button type="button" class="term" data-term="熱錢包">熱錢包</button>存在手機或瀏覽器裡，跟著裝置走。冷錢包存在一顆離線的硬體裡，永遠不進入電腦。</dd>
         <dt><strong>被遠端偷走的可能</strong></dt>
         <dd>熱錢包有：中毒、惡意擴充功能、剪貼簿被監聽都可能。冷錢包幾乎沒有，因為簽名要在硬體上實體按鍵確認。</dd>
         <dt><strong>操作速度</strong></dt>
@@ -2600,10 +2660,15 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
       <p>每次要按「Connect Wallet」之前，花五秒問自己三題。答不出來就不要連。</p>
       <div class="table-wrap">
         <table>
-          <tr><th>問題</th><th>安全的答案</th><th>危險的答案</th></tr>
+          <caption class="sr-only">連接錢包前三個問題的安全答案與危險答案</caption>
+          <thead>
+            <tr><th scope="col">問題</th><th scope="col">安全的答案</th><th scope="col">危險的答案</th></tr>
+          </thead>
+          <tbody>
           <tr><td>我是怎麼來到這個網站的？</td><td>從自己的書籤或搜尋結果進來</td><td>點了訊息、私訊或群組裡的連結</td></tr>
           <tr><td>網址列的網域對不對？</td><td>逐字比對過，完全一致</td><td>「看起來很像」「應該沒錯」</td></tr>
           <tr><td>我用哪個錢包連？</td><td>只放小額的交易用錢包</td><td>放著大部分資產的那一個</td></tr>
+          </tbody>
         </table>
       </div>
       <p>第三題最容易被忽略，也最容易補救。<strong>準備一個專門用來連陌生網站的錢包，裡面只放一點點油錢。</strong>就算真的簽錯，損失也被鎖在那個小錢包裡。</p>
@@ -2652,7 +2717,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
         <label><input type="checkbox" disabled><span>被拉進 LINE 投資群組，群裡一直有人曬獲利截圖，慫恿你跟單或加碼</span></label>
         <label><input type="checkbox" disabled><span>收到自稱交易所客服的私訊，說帳戶異常要你「驗證」錢包或提供助記詞</span></label>
         <label><input type="checkbox" disabled><span>「限時 24 小時內加入，保證幾倍獲利」這類製造急迫感的話術</span></label>
-        <label><input type="checkbox" disabled><span>打著知名 <span class="term" data-term="KOL">KOL</span>／名人背書旗號的投資廣告或群組邀請</span></label>
+        <label><input type="checkbox" disabled><span>打著知名 <button type="button" class="term" data-term="KOL">KOL</button>／名人背書旗號的投資廣告或群組邀請</span></label>
         <label><input type="checkbox" disabled><span>自稱「客服」主動私訊你，說要幫你解決提領卡住的問題</span></label>
         <label><input type="checkbox" disabled><span>交友軟體認識、聊了一陣子之後才開始談投資的對象</span></label>
         <label><input type="checkbox" disabled><span>要求你下載某個「專屬 App」或掃描 QR Code 才能操作</span></label>
@@ -3095,7 +3160,7 @@ body[data-mode="advanced"] [data-level="beginner"]{display:none !important}
 
 <script>
 /* 詞典資料：B／C／D 三人詞彙表合併去重後的完整版本 */
-/* 推薦連結：只改這個物件，全站13條GMGN/Axiom/fomo連結自動套用。DEX Screener不走推薦碼，不在此表。 */
+/* 推薦連結：只改這個物件，全站帶 data-ref 的外連（GMGN／Axiom／fomo／Telegram）都自動套用。DEX Screener 不走推薦碼，不在此表。 */
 window.REF = {
   gmgn: 'https://gmgn.ai/r/naive1688',
   axiom: 'https://axiom.trade/@naive1688',
@@ -3185,6 +3250,7 @@ window.GLOSSARY = [
 
   var ROUTES = ['home','tools','flow','glossary','risk','calc','onramp','cases','wallet','faq'];
   var TOOLS  = ['gmgn','axiom','fomo','dexscreener'];
+  var TABS   = ['start','pro','glossary','risk'];
 
   var pages    = Array.prototype.slice.call(document.querySelectorAll('.page'));
   var navBtns  = Array.prototype.slice.call(document.querySelectorAll('.tabbar button'));
@@ -3221,11 +3287,17 @@ window.GLOSSARY = [
 
   /* ---------- 工具 chip 切換 ---------- */
   function selectTool(name){
-    if(TOOLS.indexOf(name) < 0){ name = 'gmgn'; }
+    if(TOOLS.indexOf(name) < 0){
+      name = 'gmgn';
+      if(/^#\/tools/.test(location.hash || '') && history.replaceState){
+        try{ history.replaceState(null, '', '#/tools/' + name); }catch(e){}
+      }
+    }
     toolChips.forEach(function(c){
       var on = c.getAttribute('data-tool') === name;
       c.classList.toggle('chip--active', on);
       c.setAttribute('aria-selected', on ? 'true' : 'false');
+      c.setAttribute('tabindex', on ? '0' : '-1');
     });
     toolSecs.forEach(function(s){
       if(!s){ return; }
@@ -3250,6 +3322,7 @@ window.GLOSSARY = [
       var match = tabsInSec[i].getAttribute('data-tab') === key;
       if(match){ found = true; }
       tabsInSec[i].setAttribute('aria-selected', match ? 'true' : 'false');
+      tabsInSec[i].setAttribute('tabindex', match ? '0' : '-1');
     }
     if(!found){ return; }
     var panels = sec.querySelectorAll(':scope > .tabpanel');
@@ -3265,25 +3338,55 @@ window.GLOSSARY = [
     selectTab(sec, tab.getAttribute('data-tab'));
   });
 
+  /* tablist 方向鍵：左右移動焦點並同步選取（工具 chip 與工具內分頁共用） */
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'ArrowLeft' && e.key !== 'ArrowRight'){ return; }
+    var el = e.target && e.target.closest ? e.target.closest('[role="tab"]') : null;
+    if(!el){ return; }
+    var list = el.closest('[role="tablist"]');
+    if(!list){ return; }
+    var items = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    var idx = items.indexOf(el);
+    if(idx < 0){ return; }
+    e.preventDefault();
+    var next = items[(idx + (e.key === 'ArrowRight' ? 1 : items.length - 1)) % items.length];
+    if(!next){ return; }
+    next.focus();
+    next.click();
+  });
+
   /* ---------- Hash 路由 ---------- */
   function parseHash(){
     var raw = (location.hash || '').replace(/^#\/?/, '');
     var parts = raw.split('/');
     var page = parts[0] || 'home';
     if(ROUTES.indexOf(page) < 0){ page = 'home'; }
-    return { page: page, sub: parts[1] || '', tab: parts[2] || '' };
+    var sub = parts[1] || '';
+    var tab = parts[2] || '';
+    var dirty = false;
+    if(TOOLS.indexOf(sub) < 0){ dirty = dirty || !!sub; sub = ''; }
+    if(TABS.indexOf(tab) < 0){ dirty = dirty || !!tab; tab = ''; }
+    return { page: page, sub: sub, tab: tab, dirty: dirty };
   }
+  var prevPage = null;
   function route(){
     var r = parseHash();
+    var pageChanged = (r.page !== prevPage);
+    prevPage = r.page;
     pages.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-page') === r.page); });
     navBtns.forEach(function(b){
       if(b.getAttribute('data-route') === r.page){ b.setAttribute('aria-current', 'page'); }
       else { b.removeAttribute('aria-current'); }
     });
     var activeBtn = document.querySelector('.tabbar button[aria-current="page"]');
-    if(activeBtn && activeBtn.scrollIntoView){ activeBtn.scrollIntoView({block:'nearest', inline:'center'}); }
+    var isNarrow = !window.matchMedia || window.matchMedia('(max-width:767px)').matches;
+    if(isNarrow && activeBtn && activeBtn.scrollIntoView){ activeBtn.scrollIntoView({block:'nearest', inline:'center'}); }
     if(r.page === 'tools'){
       selectTool(r.sub || LS.get('c4_tool', 'gmgn'));
+      if(r.dirty && history.replaceState){
+        var fixed = '#/tools/' + (r.sub || LS.get('c4_tool', 'gmgn'));
+        try{ history.replaceState(null, '', fixed); }catch(e){}
+      }
       if(r.tab){
         var activeSec = toolSecs.filter(function(s){ return s && !s.hidden; })[0];
         if(activeSec){ selectTab(activeSec, r.tab); }
@@ -3291,6 +3394,23 @@ window.GLOSSARY = [
     }
     if(r.page === 'glossary'){ renderGlossary(); }
     try{ window.scrollTo(0, 0); }catch(e){}
+    /* 只有真的換頁才搶焦點；同一頁內切工具 chip 時焦點必須留在 tab 上 */
+    if(pageChanged){ focusPageHeading(r.page); }
+  }
+
+  /* 換頁後把焦點移到新頁的 h1，螢幕閱讀器才會察覺換了一頁 */
+  function focusPageHeading(page){
+    var sec = document.querySelector('.page[data-page="' + page + '"]');
+    if(!sec){ return; }
+    var h1 = null;
+    if(page === 'tools'){
+      var vis = toolSecs.filter(function(x){ return x && !x.hidden; })[0];
+      if(vis){ h1 = vis.querySelector('h1'); }
+    }
+    if(!h1){ h1 = sec.querySelector('h1'); }
+    if(!h1){ return; }
+    h1.setAttribute('tabindex', '-1');
+    try{ h1.focus({ preventScroll: true }); }catch(e){ try{ h1.focus(); }catch(e2){} }
   }
   window.addEventListener('hashchange', route);
   navBtns.forEach(function(b){
@@ -3305,7 +3425,7 @@ window.GLOSSARY = [
 
   function esc(s){
     return String(s === undefined || s === null ? '' : s)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   }
   function allTerms(){
     var g = window.GLOSSARY;
@@ -3315,7 +3435,7 @@ window.GLOSSARY = [
     if(!listEl){ return; }
     var data = allTerms();
     if(!data.length){
-      listEl.innerHTML = '<div class="card"><p>📚 詞典整理中，之後會補上完整詞彙表。你也可以先從「工具」頁每個工具的「詞彙」分頁看起。</p></div>';
+      listEl.innerHTML = '<div class="card"><p>📚 詞典載入失敗，請重新整理頁面。若持續失敗，可先從「工具」頁每個工具的「詞彙」分頁看起。</p></div>';
       return;
     }
     var q = (searchEl && searchEl.value ? searchEl.value : '').trim().toLowerCase();
@@ -3344,7 +3464,12 @@ window.GLOSSARY = [
   catChips.forEach(function(c){
     c.addEventListener('click', function(){
       curCat = c.getAttribute('data-cat') || 'all';
-      catChips.forEach(function(x){ x.classList.toggle('chip--active', x === c); });
+      catChips.forEach(function(x){
+        var on = x === c;
+        x.classList.toggle('chip--active', on);
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        x.setAttribute('tabindex', on ? '0' : '-1');
+      });
       renderGlossary();
     });
   });
@@ -3357,9 +3482,37 @@ window.GLOSSARY = [
   var sheetBtn  = document.getElementById('sheetAction');
   var onSheetAction = null;
   var sheetLocked = false;
+  var lastFocused = null;
+  var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
+  /* 彈窗開啟時要被隔離的背景容器（含 footer 與 skip-link，螢幕閱讀器同樣走得到） */
+  function bgNodes(){
+    var sel = ['header.topbar', 'main', 'nav.tabbar', 'footer.site-footer', '.skip-link'];
+    var out = [];
+    sel.forEach(function(q){
+      Array.prototype.slice.call(document.querySelectorAll(q)).forEach(function(n){ out.push(n); });
+    });
+    return out;
+  }
+  function setBackgroundInert(on){
+    bgNodes().forEach(function(n){
+      if(on){
+        n.setAttribute('inert', '');
+        n.setAttribute('aria-hidden', 'true');
+      } else {
+        n.removeAttribute('inert');
+        n.removeAttribute('aria-hidden');
+      }
+    });
+  }
+  function sheetFocusables(){
+    return Array.prototype.slice.call(sheet.querySelectorAll(FOCUSABLE))
+      .filter(function(el){ return el.offsetParent !== null || el === sheetBtn; });
+  }
 
   function openSheet(title, bodyHTML, btnText, action, locked){
     if(!sheet){ return; }
+    lastFocused = (document.activeElement && document.activeElement !== document.body) ? document.activeElement : null;
     sheetTtl.textContent = title;
     sheetBody.innerHTML = bodyHTML;
     sheetBtn.textContent = btnText || '關閉';
@@ -3367,6 +3520,12 @@ window.GLOSSARY = [
     sheetLocked = !!locked;
     backdrop.hidden = false;
     sheet.hidden = false;
+    document.documentElement.classList.add('sheet-open');
+    document.body.classList.add('sheet-open');
+    setBackgroundInert(true);
+    var f = sheetFocusables();
+    var first = f[0] || sheetBtn;
+    if(first){ try{ first.focus(); }catch(e){} }
   }
   function closeSheet(){
     if(!sheet){ return; }
@@ -3374,6 +3533,12 @@ window.GLOSSARY = [
     backdrop.hidden = true;
     onSheetAction = null;
     sheetLocked = false;
+    document.documentElement.classList.remove('sheet-open');
+    document.body.classList.remove('sheet-open');
+    setBackgroundInert(false);
+    var back = lastFocused;
+    lastFocused = null;
+    if(back && back.focus && document.contains(back)){ try{ back.focus(); }catch(e){} }
   }
   if(sheetBtn){
     sheetBtn.addEventListener('click', function(){
@@ -3386,20 +3551,50 @@ window.GLOSSARY = [
     backdrop.addEventListener('click', function(){ if(!sheetLocked){ closeSheet(); } });
   }
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && sheet && !sheet.hidden && !sheetLocked){ closeSheet(); }
+    if(!sheet || sheet.hidden){ return; }
+    if(e.key === 'Escape'){
+      if(sheetLocked){
+        /* 鎖定中不可關閉，把焦點拉回唯一的確認按鈕 */
+        e.preventDefault();
+        if(sheetBtn){ try{ sheetBtn.focus(); }catch(err){} }
+      } else {
+        closeSheet();
+      }
+      return;
+    }
+    if(e.key !== 'Tab'){ return; }
+    /* focus trap：Tab 迴圈鎖在彈窗內 */
+    var f = sheetFocusables();
+    if(!f.length){ e.preventDefault(); return; }
+    var first = f[0], last = f[f.length - 1];
+    var cur = document.activeElement;
+    if(!sheet.contains(cur)){
+      e.preventDefault();
+      try{ first.focus(); }catch(err){}
+      return;
+    }
+    if(e.shiftKey && cur === first){
+      e.preventDefault();
+      try{ last.focus(); }catch(err){}
+    } else if(!e.shiftKey && cur === last){
+      e.preventDefault();
+      try{ first.focus(); }catch(err){}
+    }
   });
 
   /* ---------- 術語點擊 ---------- */
   document.addEventListener('click', function(e){
     var el = e.target && e.target.closest ? e.target.closest('.term') : null;
     if(!el){ return; }
+    e.preventDefault();
+    e.stopPropagation();
     var name = el.getAttribute('data-term') || el.textContent.trim();
     var hit = null, data = allTerms();
     for(var i = 0; i < data.length; i++){
       if(data[i] && (data[i].term === name || data[i].en === name)){ hit = data[i]; break; }
     }
     if(!hit){
-      openSheet(name, '<p>這個詞還在整理中，先到「📖 詞典」頁看看其他解釋。</p>', '關閉', null, false);
+      openSheet(name, '<p>找不到這個詞的解釋，可能是詞典載入失敗。請重新整理頁面，或到「📖 詞典」頁直接搜尋。</p>', '關閉', null, false);
       return;
     }
     var isPro = document.body.getAttribute('data-mode') === 'advanced';
