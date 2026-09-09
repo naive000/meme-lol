@@ -1,0 +1,6 @@
+raw/
+*.md
+*.py
+wrangler.jsonc
+.assetsignore
+.gitignore
