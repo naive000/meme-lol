@@ -1246,6 +1246,30 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <button class="tab" type="button" data-tab="risk" role="tab" id="tab-dexscreener-risk" aria-controls="panel-dexscreener-risk" aria-selected="false" tabindex="-1">⚠️ 風險</button>
       </div>
       <div class="tabpanel is-active" data-panel="start" id="panel-dexscreener-start" role="tabpanel" aria-labelledby="tab-dexscreener-start" tabindex="0">
+        <div class="card card--tool" data-level="both">
+          <h3>打開 App，先認 5 個底部按鈕</h3>
+          <p>從左到右：<strong>Screener</strong>（代幣總表，日常主力）、<strong>Search</strong>（搜尋，備用）、<strong>Watchlist</strong>（自選清單）、<strong>Alerts</strong>（價格提醒）、<strong>Menu</strong>（設定）。新手先記住 Screener 跟 Watchlist 這兩個就夠用，其他三個需要時再點開，不用急著全部搞懂。</p>
+          <div class="step__shot">
+            <figure class="figure" data-fig="21">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-21-t">
+<title id="fig-21-t">DEX Screener App 底部 5 個分頁按鈕：Screener、Search、Watchlist、Alerts、Menu，Screener 是日常主力</title>
+<rect x="8" y="16" width="304" height="94" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+<text x="160" y="46" font-size="12" font-weight="700" fill="var(--text-2)" text-anchor="middle">代幣列表區</text>
+<text x="160" y="66" font-size="11" font-weight="700" fill="var(--text-3)" text-anchor="middle">（隨底部分頁切換內容）</text>
+<rect x="8" y="126" width="304" height="46" rx="6" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5"/>
+<rect x="10" y="128" width="60" height="42" rx="4" fill="var(--accent-soft)"/>
+<text x="40" y="153" font-size="10" font-weight="700" fill="var(--accent)" text-anchor="middle">Screener</text>
+<text x="100" y="153" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Search</text>
+<text x="160" y="153" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Watchlist</text>
+<text x="222" y="153" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Alerts</text>
+<text x="282" y="153" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Menu</text>
+<text x="40" y="118" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">日常主力</text>
+</svg>
+              <figcaption>示意圖：App 底部 5 個分頁按鈕，Screener 是日常主力</figcaption>
+            </figure>
+          </div>
+        </div>
+
         <div class="callout callout--warn">⚠️ DEX Screener 只告訴你「這顆幣現在長什麼樣」，它不審核專案也不背書。圖表好看跟能不能買，是兩件事。</div>
 
         <div class="card card--tool" data-level="both">
@@ -1258,7 +1282,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">1</div>
             <div class="step__title">搜尋一定要貼「合約地址 CA」</div>
-            <div class="step__detail">頂部搜尋框直接貼 <button type="button" class="term" data-term="CA合約地址">CA（合約地址）</button>最安全。<strong>同名同代號的假幣多到誇張</strong>，用名字搜幾乎一定會搜到假的。左側／底部可以切換鏈（Solana、Ethereum、Robinhood Chain 等）。</div>
+            <div class="step__detail">頂部搜尋框直接貼 <button type="button" class="term" data-term="CA合約地址">CA（合約地址）</button>最安全。<strong>同名同代號的假幣多到誇張</strong>，用名字搜幾乎一定會搜到假的。左側／底部可以切換鏈（Solana、Ethereum、Robinhood Chain 等），鏈別選單也支援直接打字搜尋鏈名，不是只能在畫面上的固定圖示裡選。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="16">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-16-t">
@@ -1282,7 +1306,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">2</div>
             <div class="step__title">看懂首頁四大區塊</div>
-            <div class="step__detail">Trending（依 5m/1h/6h/24h 熱度）、New Pairs（新配對）、Gainers &amp; Losers（漲跌幅排行）、Top <button type="button" class="term" data-term="Boost付費推廣">Boosted</button>。<strong>Top Boosted 是專案方付錢買的推廣位，不代表推薦、更不代表安全。</strong></div>
+            <div class="step__detail">首頁其實只有 <strong>Trending／New／Top</strong> 3 顆模式按鈕，不是並列的 4 個區塊。Trending 可切換 5m/1h/6h/24h 熱度窗；New 依上線時間排序；Top 可切 Most Volume／Most Txns。想看漲幅排行（Gainers）要點開目前選中的按鈕，在跳出的選單裡才找得到；想看跌幅排行（Losers）藏得更深，要點篩選列的「Sort」才有——這兩個沒有獨立入口，別以為畫面上沒看到就是沒有。篩選列上還有一個 <button type="button" class="term" data-term="Boost付費推廣">Boosted</button> 開關，開啟後只顯示花錢買推廣的代幣，不代表推薦、更不代表安全。</div>
           </div>
           <div class="step">
             <div class="step__num">3</div>
@@ -1307,6 +1331,25 @@ html.sheet-open,body.sheet-open{overflow:hidden}
 </svg>
             <figcaption>示意圖：交易對頁上方數據列，Liquidity 欄位被圈起來</figcaption>
           </figure>
+            </div>
+            <p class="step__detail">這 8 個數字其實分散在代幣詳情頁的 <strong>4 個子分頁</strong>裡：預設打開的 <strong>Info</strong> 只顯示上面這些數字總覽，要看 K 線圖和逐筆交易紀錄，要點下面另外 3 個分頁——<strong>Chart+Txns</strong>（K 線＋下方交易表＋持有人數）、<strong>Chart</strong>（純看圖）、<strong>Txns</strong>（純看逐筆交易）。第一次找不到 K 線圖，通常是還停在 Info 分頁。</p>
+            <div class="step__shot">
+              <figure class="figure" data-fig="22">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-22-t">
+<title id="fig-22-t">代幣詳情頁的 4 個子分頁：Info、Chart+Txns、Chart、Txns，K 線要點另外 3 個分頁才看得到</title>
+<rect x="8" y="16" width="304" height="40" rx="4" fill="var(--bg)" stroke="var(--border)" stroke-width="1.5"/>
+<rect x="12" y="20" width="70" height="32" rx="4" fill="var(--accent-soft)"/>
+<text x="47" y="41" font-size="11" font-weight="700" fill="var(--accent)" text-anchor="middle">Info</text>
+<text x="132" y="41" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Chart+Txns</text>
+<text x="220" y="41" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Chart</text>
+<text x="282" y="41" font-size="10" font-weight="700" fill="var(--text-3)" text-anchor="middle">Txns</text>
+<text x="160" y="80" font-size="12" font-weight="700" fill="var(--text)" text-anchor="middle">預設只顯示 Info（數字總覽）</text>
+<line x1="160" y1="92" x2="160" y2="108" stroke="var(--down-text)" stroke-width="2"/>
+<path d="M160 116 L152 104 L168 104 Z" fill="var(--down-text)"/>
+<text x="160" y="136" font-size="12" font-weight="700" fill="var(--down-text)" text-anchor="middle">點另外 3 個分頁才有 K 線／逐筆交易</text>
+</svg>
+                <figcaption>示意圖：代幣詳情頁 4 個子分頁，K 線要點 Chart+Txns 或 Chart 才看得到</figcaption>
+              </figure>
             </div>
           </div>
           <div class="step">
@@ -1335,7 +1378,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">5</div>
             <div class="step__title">加自選 ＋ 設價格警示</div>
-            <div class="step__detail">點交易對旁的星號加入 <button type="button" class="term" data-term="Watchlist自選清單">Watchlist</button>；用 Alerts 設價格通知，可走 App 推播或 Telegram Bot。這樣你不用整天盯盤。</div>
+            <div class="step__detail">點交易對旁的星號加入 <button type="button" class="term" data-term="Watchlist自選清單">Watchlist</button>；用 Alerts 設價格通知，可走 App 推播或 Telegram Bot。這樣你不用整天盯盤。Watchlist 也支援建立多個清單（例如分開放「觀察中」跟「已進場」），不是只能有一份。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="17">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-17-t">
@@ -1389,6 +1432,12 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <summary>🟣 進階：New Pairs 篩選器 ▸</summary>
           <p>New Pairs 可設條件：最低流動性、最低成交量、幣齡區間。先把明顯的垃圾濾掉，再人工看。這是打新最實用的一步——不設篩選條件的 New Pairs 就是一面雜訊瀑布。</p>
           <div class="callout callout--tip">💡 建議把「最低流動性」設成你能接受的出場門檻，而不是設成 0 然後靠眼力硬看。</div>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：Market Cap 篩選器，直接濾掉地雷幣 ▸</summary>
+          <p>篩選列上的 <strong>Market Cap／FDV／Txns／Buys／Sells</strong> 幾個 chip，點開不是排序，是「數值範圍篩選器」：有快速區間按鈕（例如 Market Cap 的 &lt;$100K／&gt;$1M／&gt;$10M），也能自己打 Min／Max。想避開「一碰就是超小型地雷幣」的標的，直接把 Market Cap 的 Min 設 $1M 左右，畫面就只剩下市值夠大的代幣。</p>
+          <div class="callout callout--tip">💡 這個篩選器設完記得檢查有沒有忘記清掉——欄位裡的數字會一直留著，下次打開 App 還在。</div>
         </details>
 
         <details class="acc">
@@ -1456,7 +1505,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
 
         <div class="callout callout--danger">🛑 <strong>上榜、Boost、金色勾都是花錢買的。</strong>付費推廣不等於安全認證，甚至反過來——有些工具把「有付費推廣」當風險訊號在看。</div>
 
-        <div class="callout callout--danger">🛑 <strong>用名字搜很容易搜到假幣。</strong>同名同代號的仿冒幣滿地都是，永遠用 CA 合約地址搜尋，而且 CA 要從專案官方管道複製，不要從搜尋結果或別人的留言隨手貼。</div>
+        <div class="callout callout--danger">🛑 <strong>用名字搜很容易搜到假幣。</strong>同名同代號的仿冒幣滿地都是，永遠用 CA 合約地址搜尋，而且 CA 要從專案官方管道複製，不要從搜尋結果或別人的留言隨手貼。實測過：在「New」新配對榜上，蹭 Google／Robinhood／Anthropic 名字的空白幣天天都有，圖示是灰色問號、市值只有幾百萬——篩選列的 <strong>Profile</strong> 開關可以先濾掉這種連基本資料都懶得填的幣，但記住：填了資料也不保證安全，只是最低標準。</div>
 
         <div class="callout callout--warn">⚠️ <strong>圖表漂亮 ≠ 賣得掉。</strong>DEX Screener 顯示的是成交紀錄，不保證你能以那個價格出場。流動性才是關鍵，永遠先看它。</div>
 
