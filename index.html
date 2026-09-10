@@ -13,6 +13,17 @@
 <meta name="theme-color" content="#F4F5F8">
 <meta name="theme-color" content="#0B0E14" media="(prefers-color-scheme: dark)">
 <title>鏈上四寶</title>
+<script>
+/* FOUC 防護：在瀏覽器繪製前先從 localStorage 套用 data-theme／data-style，body 尾端的 applyTheme()／applyStyle() 之後照常接手 */
+(function(){
+  try{
+    var t = localStorage.getItem('c4_theme');
+    if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); }
+    var s = localStorage.getItem('c4_style');
+    if(s === 'terminal' || s === 'street' || s === 'report'){ document.documentElement.setAttribute('data-style', s); }
+  }catch(e){}
+})();
+</script>
 <style>
 /* ===== 1. 主題 Token（深/淺色，所有顏色只能從這裡取用） ===== */
 :root{
