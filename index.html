@@ -116,9 +116,9 @@ hr{border:0;border-top:1px solid var(--border);margin:16px 0}
 .topbar{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border)}
 .topbar__inner{max-width:640px;margin:0 auto;min-height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 16px}
 .brand{font-weight:800;font-size:1.0625rem;letter-spacing:-.01em;color:var(--text)}
-#modeToggle,#styleToggle{width:auto;min-height:38px;padding:0 12px;font-size:.8125rem;border-radius:var(--radius,999px);flex:0 0 auto}
+#modeToggle,#styleToggle,#themeToggle{width:auto;min-height:38px;padding:0 12px;font-size:.8125rem;border-radius:var(--radius,999px);flex:0 0 auto}
 .topbar__actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
-#styleToggle{padding:0 10px;font-size:1rem}
+#styleToggle,#themeToggle{padding:0 10px;font-size:1rem}
 main{max-width:640px;margin:0 auto;padding:16px}
 .page{display:none}
 .page.is-active{display:block}
@@ -323,6 +323,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
     <div class="topbar__actions">
       <button id="modeToggle" class="btn btn--ghost" type="button" aria-pressed="false">🟢 小白模式</button>
       <button id="styleToggle" class="btn btn--ghost" type="button" aria-label="切換風格" title="切換風格">🎨</button>
+      <button id="themeToggle" class="btn btn--ghost" type="button" aria-label="目前跟隨系統深淺色，點擊切換為淺色" title="切換深淺色">🌓</button>
     </div>
   </div>
 </header>
@@ -3695,6 +3696,38 @@ window.GLOSSARY = [
     closeSheet();
   });
 
+  /* ---------- 深淺色切換：跟隨系統／淺色／深色（data-theme，與 data-style 互相獨立） ---------- */
+  var THEMES = [
+    { key:'auto',  icon:'🌓', label:'目前跟隨系統深淺色，點擊切換為淺色' },
+    { key:'light', icon:'☀️', label:'目前為淺色，點擊切換為深色' },
+    { key:'dark',  icon:'🌙', label:'目前為深色，點擊切換為跟隨系統' }
+  ];
+  var themeBtn = document.getElementById('themeToggle');
+  function themeIndex(theme){
+    for(var i = 0; i < THEMES.length; i++){ if(THEMES[i].key === theme){ return i; } }
+    return -1;
+  }
+  function applyTheme(theme){
+    var idx = themeIndex(theme);
+    if(idx < 0){ theme = 'auto'; idx = 0; }
+    if(theme === 'auto'){ document.documentElement.removeAttribute('data-theme'); }
+    else { document.documentElement.setAttribute('data-theme', theme); }
+    LS.set('c4_theme', theme);
+    if(themeBtn){
+      themeBtn.textContent = THEMES[idx].icon;
+      themeBtn.setAttribute('aria-label', THEMES[idx].label);
+    }
+  }
+  function currentTheme(){
+    return document.documentElement.getAttribute('data-theme') || 'auto';
+  }
+  if(themeBtn){
+    themeBtn.addEventListener('click', function(){
+      var idx = themeIndex(currentTheme());
+      applyTheme(THEMES[(idx < 0 ? 0 : idx + 1) % THEMES.length].key);
+    });
+  }
+
   /* ---------- 推薦連結套用 ---------- */
   function applyRefLinks(){
     var refs = window.REF || {};
@@ -3709,6 +3742,7 @@ window.GLOSSARY = [
   applyRefLinks();
   applyMode(LS.get('c4_mode', 'beginner'));
   applyStyle(LS.get('c4_style', 'default'));
+  applyTheme(LS.get('c4_theme', 'auto'));
   loadChecklist();
   if(!location.hash){
     try{ history.replaceState(null, '', '#/home'); }catch(e){ location.hash = '#/home'; }
