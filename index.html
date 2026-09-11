@@ -604,12 +604,26 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         </details>
 
         <details class="acc">
+          <summary>🟣 進階：我的幣不見了？（持倉篩選 ＋ 多錢包合併顯示） ▸</summary>
+          <p>持倉清單裡找不到剛買的幣，通常是這三個原因，解法都在同一顆篩選漏斗按鈕裡（紅色徽章顯示目前生效幾項）：</p>
+          <ul>
+            <li>清單預設<strong>隱藏「未購買（New）」與「已清倉」</strong>，另外還有「隱藏小池子」「隱藏貔貅幣」兩個常被順手勾上的選項</li>
+            <li>你可能停在<strong>別條鏈</strong>的資產視角——右上角切換鏈之後持倉才會出現</li>
+            <li>取消勾選對應項目 → 應用，幣就會回來</li>
+          </ul>
+          <p><strong>多錢包不是只能切換，可以合併看：</strong>錢包卡片「錢包 1 ▾」→ 選擇錢包 sheet 裡勾多個錢包 → 確定，總餘額與持倉就會合併顯示。錢包管理裡的「導入私鑰／創建錢包」是多子錢包的入口，配合「交易設定 → 多錢包交易」開啟後，可以一次用多個錢包分開下單。</p>
+        </details>
+
+        <details class="acc">
           <summary>🟣 進階：Copy Trade 跟單設定 ▸</summary>
           <p>最多可開 <strong>10 個跟單任務</strong>，實務上建議 5–7 個就好，開太多資金會被稀釋。</p>
           <p><strong>買入模式三選一：</strong>Fixed Buy（每次固定金額）／Max Buy（跟隨但設上限）／Fixed Ratio（照比例跟）。新手期用 Fixed Buy 最好控風險。</p>
           <p><strong>一定要開的篩選條件：</strong>市值下限、流動性下限、幣齡、LP 燒毀比例、單一幣種上限、只跟 Pump.fun 或 Raydium、黑名單（可放 20 個）。賣出會自動跟隨原錢包。</p>
           <p><strong>選錢包的標準：</strong>交易筆數 ≥ 30 筆、勝率 ≥ 60%、1d／7d／30d 三個週期都是正的。三個條件缺一個就先觀察不要跟。</p>
           <div class="callout callout--danger">🚨 跟單一定會落後原錢包<strong>至少 1 個區塊</strong>，這是機制限制，無法消除。所以別跟那些靠幾秒內進出賺錢的錢包，你永遠是接他的貨。</div>
+          <p><strong>閃電模式（預設開）：</strong>App 官方警語大意是比普通模式快 2 秒，但可能鏈上回滾或被重複發送，甚至出現「目標地址沒買、你卻買了」。新手請先關掉它，確定自己看得懂每一筆成交再開。</p>
+          <p><strong>賣出設置五選項</strong>（勾了才展開子欄位）：自動跟賣（按對方賣出比例等比賣）／止盈止損階梯（預設 100%→賣 50%、300%→賣 50%、-50%→賣 100%）／<strong>Dev 賣</strong>（Dev 單筆賣出超過一定比例就自動全部賣）／<strong>遷移自動賣</strong>（代幣畢業轉到 DEX 那一刻自動出場）／<strong>延時自動賣</strong>（買入後 0.5–60 秒內定時賣）。這五個就是迷因幣的五種出場邏輯，挑一個寫死，不要靠手速。</p>
+          <p>「僅買入一次」的防重複買保險<strong>只記憶 3 天或 200 檔</strong>，超過範圍就不再受限。過濾設置的最小值是防對方用小額買單洗你手續費，最大值是防對方大單拉高價格後把你當接盤；也可以設推特白名單，把跟單限定在指定 X 帳號關聯的代幣。費用設定裡跟主設定共用同一組滑點／優先費／防夾參數，其中<strong>自動費用不超過 0.1 SOL</strong>是你唯一的總花費上限，值得看一眼。</p>
         </details>
 
         <details class="acc">
@@ -637,6 +651,25 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <li><strong>「最佳倍數 207.52x」≠「常態表現」：</strong>喊單榜第一名寫著最佳倍數 207.52x，實測點開發現只喊過 3 次單，其中一則現在是 -92.48%。看平均／最佳倍數前，先看樣本數有幾筆。</li>
           </ul>
           <div class="callout callout--warn">⚠️ 訊號數字是官方真實資料，不是造假——但摘要指標永遠要點進明細看一次，跟 DEX Screener 那邊「Audit 投票數字可以隨便刷」是同一個教訓：工具給的第一層數字只能當線索，不能當結論。</div>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：戰壕篩選器的反 rug 三條件 ▸</summary>
+          <p>戰壕 → 篩選裡有三個本站沒提過的條件，設一次就能重複用：</p>
+          <ul>
+            <li><strong>X 改名次數：</strong>推特帳號改過名，可能是買來的老帳號套殼</li>
+            <li><strong>Dev 發盤遷移比例：</strong>這個 Dev 過去發的幣有多少比例真的畢業，對應卡片上的皇冠標記（例如 4/40）</li>
+            <li><strong>隱藏開發者地址：</strong>把一個 Dev 的所有幣直接從列表拿掉，被 rug 一次就永久拉黑</li>
+          </ul>
+          <p><strong>新手第一組安全網示範：</strong>發射台只留 Pumpfun ＋ 前 10 持倉大戶 ≤30% ＋ <button type="button" class="term" data-term="Dev持倉">Dev 持倉</button> ≤5% ＋ <button type="button" class="term" data-term="Bundler捆綁">捆綁交易</button> ≤20% ＋ <button type="button" class="term" data-term="Sniper狙擊">狙擊持倉</button> ≤20% ＋ 至少有一個社交媒體。這等於把「Top10／Dev／捆綁要自己看」變成可以設一次就重複使用的條件。</p>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：持有者分頁 — 一張表看完大戶在不在、賺不賺 ▸</summary>
+          <p>代幣詳情頁 → 持有者分頁，摘要卡四個數字：<button type="button" class="term" data-term="Top10持倉">TOP10 集中度</button>／釣魚錢包比例／TOP100 平均買價（括號是現價距該均價多遠）／TOP100 平均賣價。大戶平均買價遠低於現價＝他們隨時可以獲利了結，你現在進去是接他們的貨。</p>
+          <p><strong>「曾持有 → 現持有」持倉條</strong>（例：<code>28.95% → 2.74%</code>）一眼看到大戶正在砍倉。</p>
+          <p><strong>狙擊者氣泡圖</strong>看最早 70 個買家現在還在不在——實測範例是 66 個全數賣出、2 個部分賣出、2 個轉走，<strong>沒有一個加倉</strong>，這張圖就足以當「早期買家跑光」的教材。</p>
+          <p><strong>切到 KOL 視圖</strong>只列 KOL 錢包並換算 KOL 子集均價，實測有 KOL 平均買價<strong>高於</strong>現價（追高進場），可矯正「KOL 都買在底部」的想像。<button type="button" class="term" data-term="Dev持倉">Dev 持倉</button>／資金來源／跑路機率／開發者代幣履歷都在同一頁，不用另外記路徑。</p>
         </details>
 
         <details class="acc">
@@ -717,6 +750,14 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <div class="callout callout--warn">⚠️ <strong>跟單永遠慢至少 1 個區塊。</strong>你買到的價格一定比原錢包差，這無法消除，設定時要把這個成本算進去。</div>
 
         <div class="callout callout--warn">⚠️ <strong>單筆倉位建議 ≤ 整個錢包的 2–5%。</strong>迷因幣多數歸零，你要靠的是「20 次裡中 1 次」，不是一次梭哈。</div>
+
+        <div class="card card--risk" data-level="both">
+          <h4>🔍 錢包健康檢查：釣魚偵測 ＋ 利潤分佈</h4>
+          <p>資產頁的錢包卡片會自動幫每個錢包（含你自己）跑體檢：</p>
+          <div class="metric"><div class="metric__name">釣魚偵測四項</div><span class="metric__danger">🚫 黑名單／沒購買卻有幣（被空投釣魚幣）／賣出量大於買量（疑似內部人或貔貅）／十秒內完成買賣（機器人或夾子）</span></div>
+          <div class="metric"><div class="metric__name">利潤分佈五段</div><span class="metric__safe">看清楚錢包是「大量小賠、偶爾大賺」還是反過來：&gt;500%／200–500%／0–200%／-50–0%／&lt;-50%</span></div>
+          <p>看別人錢包決定要不要跟之前，先看這四項釣魚偵測，比看 PnL 重要——牛人榜上漂亮的 PnL 可能只靠一段利潤撐起來。這張表也<strong>同時適用於檢查自己</strong>，虧錢時回來看一次，比單純檢討感覺有用。</p>
+        </div>
 
         <div class="card card--risk" data-level="both">
           <h4>✅ 每次下單前的 6 項自檢</h4>
