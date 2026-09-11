@@ -453,7 +453,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">1</div>
             <div class="step__title">開啟網站並把鏈切到 SOL</div>
-            <div class="step__detail">直接開 <a class="ext" href="#" data-ref="gmgn" target="_blank" rel="noopener">gmgn.ai</a>，畫面最上面有一排鏈的選單，選 <strong>SOL（Solana）</strong>。迷因幣最熱鬧的就在 Solana，新手先只玩這條就好。GMGN 也支援 BSC／ETH／Base／Monad／TRON，但先別分心。</div>
+            <div class="step__detail">直接開 <a class="ext" href="#" data-ref="gmgn" target="_blank" rel="noopener">gmgn.ai</a>，畫面最上面有一排鏈的選單，選 <strong>SOL（Solana）</strong>。迷因幣最熱鬧的就在 Solana，新手先只玩這條就好。GMGN 實測至少支援 12 條鏈（包含 BSC／ETH／Base／Arbitrum／HyperEVM／X Layer／Robinhood Chain 等），TRON 是內嵌網頁模式、操作手感不同——但這些先別分心，新手鎖定 SOL 就好。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="09">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-09-t">
@@ -486,12 +486,10 @@ html.sheet-open,body.sheet-open{overflow:hidden}
 
           <div class="step">
             <div class="step__num">3</div>
-            <div class="step__title">先看懂三個主頁面</div>
+            <div class="step__title">先認識底部 5 個分頁</div>
             <div class="step__detail">
-            <strong>Trenches（戰壕）</strong>＝剛發射的新幣，分三欄：<button type="button" class="term" data-term="Trenches戰壕">New Creation（剛建立）</button> → Completing（快畢業）→ Completed（已<button type="button" class="term" data-term="畢業(Migrate)">畢業</button>）。這裡最刺激也最容易被割。<br>
-            <strong>Trending（熱門）</strong>＝依成交量排行，可切 1m／5m／1h／6h／24h。<br>
-            <strong>Copy Trade（跟單）</strong>＝複製別人買賣的功能區。<br>
-            新手建議從 <strong>Trending 的 1h／24h</strong> 開始看，別一上來就跳進 Trenches。</div>
+            GMGN App 底部其實是 <strong>5 個分頁</strong>，不是「三個主頁面」：<strong>發現</strong>（首頁，熱門榜 Trending 在這裡面，可切 1m／5m／1h／6h／24h）、<strong>戰壕</strong>（剛發射的新幣，分三欄：<button type="button" class="term" data-term="Trenches戰壕">New Creation（剛建立）</button> → Completing（快畢業）→ Completed（已<button type="button" class="term" data-term="畢業(Migrate)">畢業</button>），這裡最刺激也最容易被割）、<strong>監控</strong>（AI 訊號、KOL 喊單牆）、<strong>跟單</strong>（Copy Trade，複製別人買賣）、<strong>資產</strong>（你自己的持倉）。<br>
+            新手建議從 <strong>發現分頁的 Trending 1h／24h</strong> 開始看，別一上來就跳進戰壕或監控。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="10">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-10-t">
@@ -632,6 +630,16 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         </details>
 
         <details class="acc">
+          <summary>🟣 進階：KOL 訊號別急著信 ▸</summary>
+          <p>App 裡的「聰明錢／KOL 訊號」數字，是官方自己的資料，但點進明細常常跟表面數字不一樣：</p>
+          <ul>
+            <li><strong>「3 個 KOL 淨流入」≠「這 3 人還抱著」：</strong>實測點開某筆天眼訊號，寫著 3 個 KOL 淨流入，但點進這 3 個錢包一看，持倉全部是 $0——訊號講的是「他們買過」，不是「他們還在」。</li>
+            <li><strong>「最佳倍數 207.52x」≠「常態表現」：</strong>喊單榜第一名寫著最佳倍數 207.52x，實測點開發現只喊過 3 次單，其中一則現在是 -92.48%。看平均／最佳倍數前，先看樣本數有幾筆。</li>
+          </ul>
+          <div class="callout callout--warn">⚠️ 訊號數字是官方真實資料，不是造假——但摘要指標永遠要點進明細看一次，跟 DEX Screener 那邊「Audit 投票數字可以隨便刷」是同一個教訓：工具給的第一層數字只能當線索，不能當結論。</div>
+        </details>
+
+        <details class="acc">
           <summary>🟣 進階：Telegram Alert Bot（假冒陷阱最多） ▸</summary>
           <p>官方 Solana 機器人是 <strong>@GMGN_sol_bot</strong>。</p>
           <div class="callout callout--danger">🚨 假冒的 Bot 非常多，名字只差一個字母或底線。務必從官網連結點進去，逐字核對帳號。加錯 Bot 把私鑰餵進去＝錢直接沒了。</div>
@@ -703,6 +711,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <div class="callout callout--warn">⚠️ <strong>優先費不能大於交易本身。</strong>你買 0.02 SOL 卻付 0.03 SOL 優先費，那是在送錢。金額小就別搶那幾秒。</div>
 
         <div class="callout callout--warn">⚠️ <strong>聰明錢也常常亂買</strong>——這句是 GMGN 官方自己說的。Smart Money 標籤只是統計結果，不是預言。</div>
+
+        <div class="callout callout--warn">⚠️ <strong>App 內的訊號摘要（淨流入、平均倍數）常常跟明細不一樣</strong>——跟 DEX Screener 教學提過的「Audit 投票數字可以被刷」是同一個道理：工具給的摘要指標，永遠要點進去看明細再決定。</div>
 
         <div class="callout callout--warn">⚠️ <strong>跟單永遠慢至少 1 個區塊。</strong>你買到的價格一定比原錢包差，這無法消除，設定時要把這個成本算進去。</div>
 
