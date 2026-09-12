@@ -527,7 +527,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <div class="step__title">點進代幣頁，先看「安全面板」紅綠燈</div>
             <div class="step__detail">這是 GMGN 最值錢的功能。點任一顆幣，會看到一整排紅綠燈檢查：<br>
             <button type="button" class="term" data-term="Honeypot蜜罐">Honeypot（蜜罐）</button>、<button type="button" class="term" data-term="Mint權限">Mint 權限</button>／<button type="button" class="term" data-term="Freeze權限">Freeze 權限</button>是否放棄、<button type="button" class="term" data-term="LP燒毀">LP 是否燒毀</button>、<button type="button" class="term" data-term="Rug機率">Rug 機率</button>、<button type="button" class="term" data-term="Top10持倉">Top 10 持倉％</button>、<button type="button" class="term" data-term="Dev持倉">Dev 持倉％</button>、<button type="button" class="term" data-term="Insider內部人">Insiders</button>／<button type="button" class="term" data-term="Bundler捆綁">Bundlers</button>／<button type="button" class="term" data-term="Sniper狙擊">Snipers</button>％。<br>
-            <strong>小白鐵律：任何一項亮紅燈就直接不碰，沒有例外。</strong>錯過一顆幣不會怎樣，踩一次雷會很痛。</div>
+            <strong>小白鐵律：任何一項亮紅燈就直接不碰，沒有例外。</strong>錯過一顆幣不會怎樣，踩一次雷會很痛。<br>戰壕的代幣卡片還有一整排徽章：綠色代表正常、<strong>粉紅色代表超過警戒線</strong>；藍色「DS」標記代表 Dev 已經清倉；皇冠旁的分數（例如 4/40）是這個 Dev 過去發的幣裡有幾顆真的畢業，比例越低代表這個 Dev 的幣越常爛尾。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="01">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-01-t">
@@ -620,6 +620,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <p><strong>買入模式三選一：</strong>Fixed Buy（每次固定金額）／Max Buy（跟隨但設上限）／Fixed Ratio（照比例跟）。新手期用 Fixed Buy 最好控風險。</p>
           <p><strong>一定要開的篩選條件：</strong>市值下限、流動性下限、幣齡、LP 燒毀比例、單一幣種上限、只跟 Pump.fun 或 Raydium、黑名單（可放 20 個）。賣出會自動跟隨原錢包。</p>
           <p><strong>選錢包的標準：</strong>交易筆數 ≥ 30 筆、勝率 ≥ 60%、1d／7d／30d 三個週期都是正的。三個條件缺一個就先觀察不要跟。</p>
+          <p><strong>榜單本身不等於「可以跟」，三個實測案例：</strong>新錢包榜某帳號餘額只剩 0.0498 SOL，7天PnL卻是 +82.5%／+7.7K——賺完就轉走，你根本跟不到；盈虧日曆某高手當月11天6勝5負看似穩定，但+$323K裡有+$315K來自單一一天，其餘10天只賺+$8K；App 的「勝率」分母也不是交易筆數（58勝130敗卻仍顯示50%勝率），數字定義要先搞懂再信。</p>
           <div class="callout callout--danger">🚨 跟單一定會落後原錢包<strong>至少 1 個區塊</strong>，這是機制限制，無法消除。所以別跟那些靠幾秒內進出賺錢的錢包，你永遠是接他的貨。</div>
           <p><strong>閃電模式（預設開）：</strong>App 官方警語大意是比普通模式快 2 秒，但可能鏈上回滾或被重複發送，甚至出現「目標地址沒買、你卻買了」。新手請先關掉它，確定自己看得懂每一筆成交再開。</p>
           <p><strong>賣出設置五選項</strong>（勾了才展開子欄位）：自動跟賣（按對方賣出比例等比賣）／止盈止損階梯（預設 100%→賣 50%、300%→賣 50%、-50%→賣 100%）／<strong>Dev 賣</strong>（Dev 單筆賣出超過一定比例就自動全部賣）／<strong>遷移自動賣</strong>（代幣畢業轉到 DEX 那一刻自動出場）／<strong>延時自動賣</strong>（買入後 0.5–60 秒內定時賣）。這五個就是迷因幣的五種出場邏輯，挑一個寫死，不要靠手速。</p>
@@ -651,6 +652,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <li><strong>「最佳倍數 207.52x」≠「常態表現」：</strong>喊單榜第一名寫著最佳倍數 207.52x，實測點開發現只喊過 3 次單，其中一則現在是 -92.48%。看平均／最佳倍數前，先看樣本數有幾筆。</li>
           </ul>
           <div class="callout callout--warn">⚠️ 訊號數字是官方真實資料，不是造假——但摘要指標永遠要點進明細看一次，跟 DEX Screener 那邊「Audit 投票數字可以隨便刷」是同一個教訓：工具給的第一層數字只能當線索，不能當結論。</div>
+          <p>順帶一提：如果想把這條訊號流直接接成自動下單，跟單→<strong>天眼跟單</strong>就是「把 AI 訊號自動變成買單」的功能，官方推薦配置是止盈四段（30%→賣50%、60%→賣50%、25%+回撤20%→賣100%、止損20%→全賣），比錢包跟單常見的100%/300%止盈保守很多。要不要把錢交給演算法，讀者自己判斷。</p>
         </details>
 
         <details class="acc">
@@ -689,6 +691,36 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         </details>
 
         <details class="acc">
+          <summary>🟣 進階：推特監控只看 CA（名人發合約地址雷達） ▸</summary>
+          <p>監控 → 推特監控，訂閱的其實不只推特：X／Truth Social／幣安廣場／Instagram 都算。訂閱清單有「熱門訂閱」可以直接抓別人已經訂閱最多的帳號（依訂閱數排序）。</p>
+          <p><strong>篩選設定值得開：</strong>把類型篩選調成「只看發合約地址（CA）」，等於把整條社群動態流變成一個「誰貼了新幣合約」的雷達，不用逐條滑手機找。另外「刪除推文／更新頭像／更新簡介」這幾種變動類型可以額外訂閱，能抓到帳號喊完就刪、或帳號疑似被盜用的異常情況。</p>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：通知設定（不被推播淹死） ▸</summary>
+          <p>追蹤錢包／喊單／天眼訊號的通知都可以分開調，設定入口在對應頁面的 🔔。核心是<strong>三道門檻</strong>：</p>
+          <ul>
+            <li><strong>動作類型：</strong>買入／建倉／加倉／賣出／減倉／清倉六選，預設全勾，用不到的可以取消</li>
+            <li><strong>成交額門檻：</strong>&gt;5 SOL／&gt;10 SOL／&gt;50 SOL，或自訂 SOL 區間，濾掉太小的雜訊</li>
+            <li><strong>市值門檻：</strong>&gt;50K／&gt;100K／&gt;500K，或自訂 K 區間</li>
+          </ul>
+          <p>新手最常抱怨「推播太吵」，答案就在這裡：先把成交額跟市值門檻拉高，只留真正重要的動作類型，通知量會差很多。代幣詳情頁的價格提醒也可以設「市值下跌至」，當成停損鬧鐘用。</p>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：冷啟動攔截畫面／註銷帳號 vs 斷開連接 ▸</summary>
+          <p>App 從背景被系統清掉後重開，第一個畫面常常不是首頁，而是一份「推薦關注的高勝率錢包」清單，右上角按<strong>「跳過」</strong>即可，不影響任何功能。接著可能彈出「請為目前裝置綁定安全認證」——這是帳號安全設定，<strong>不是</strong>登入流程，新手可以先按「取消」，熟悉 App 後再回來設定。</p>
+          <p><strong>設定→關於我們裡有一個「註銷帳號」，跟平常用的「斷開連接」（登出）是完全不同的兩件事：</strong>斷開連接只是登出，帳號資料還在；註銷帳號會把整個帳號連同裡面的<strong>託管錢包一起刪除</strong>，是不可逆的破壞性操作，不要手滑點到。</p>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：提現在哪／GMGN 早晚報／盈虧日曆 ▸</summary>
+          <p><strong>「GMGN 提現在哪？」</strong>——新手最常問的問題之一，答案不在充值按鈕旁：資產頁 →「⋯更多」面板 → 提現／轉賬／歸集／分發都在這裡（歸集＝把多個子錢包的幣集中到一個錢包；分發則相反）。</p>
+          <p><strong>GMGN 早晚報：</strong>發現頁 banner 每天早晚 9 點各推送一則市場摘要（行情、吸金榜、熱門敘事、每日小教學），內容每天變動，這裡只提醒入口位置，通知開關在設定→通知設定。</p>
+          <p><strong>盈虧日曆：</strong>跟單相關頁面可以看到某個交易者逐日的盈虧紀錄，是社群流傳「PnL 截圖」的原始出處——如果你也想截圖分享戰績，記得先把錢包地址遮起來。</p>
+        </details>
+
+        <details class="acc">
           <summary>🟣 進階：搭配其他工具交叉驗證 ▸</summary>
           <p>不要只信一個站。GMGN 看安全與跟單，<a class="ext" href="https://dexscreener.com/" target="_blank" rel="noopener">DEX Screener</a> 看 K 線與流動性，<a class="ext" href="#" data-ref="axiom" target="_blank" rel="noopener">Axiom</a> 看另一套發現流，<a class="ext" href="#" data-ref="fomo" target="_blank" rel="noopener">fomo</a> 看社群氛圍。兩個站數據對不上，通常就是別碰的訊號。</p>
         </details>
@@ -697,7 +729,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
       <div class="tabpanel" data-panel="glossary" id="panel-gmgn-glossary" role="tabpanel" aria-labelledby="tab-gmgn-glossary" tabindex="0">
         <div class="card card--flat" data-level="both">
           <span class="badge badge--beginner">點一下看解釋</span>
-          <h3>GMGN 會用到的 21 個詞</h3>
+          <h3>GMGN 會用到的 31 個詞</h3>
           <p>看到看不懂的字先回來這裡查，不要不懂裝懂就下單。</p>
         </div>
 
@@ -705,7 +737,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <h4>場地與階段</h4>
           <p><button type="button" class="term" data-term="Trenches戰壕">Trenches 戰壕</button>：新幣最前線<br>
           <button type="button" class="term" data-term="Bonding Curve聯合曲線">Bonding Curve 聯合曲線</button>：買越多越貴的自動定價<br>
-          <button type="button" class="term" data-term="畢業(Migrate)">畢業 Migrate</button>：新幣升級到正式交易池</p>
+          <button type="button" class="term" data-term="畢業(Migrate)">畢業 Migrate</button>：新幣升級到正式交易池<br>
+          <button type="button" class="term" data-term="遷移時間內盤打滿耗時">遷移時間／打滿耗時</button>：戰壕卡片上的兩段式時間標記</p>
         </div>
 
         <div class="card card--flat" data-level="both">
@@ -714,7 +747,15 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <button type="button" class="term" data-term="Mint權限">Mint 權限</button>：能不能無限增發<br>
           <button type="button" class="term" data-term="Freeze權限">Freeze 權限</button>：能不能凍結你的幣<br>
           <button type="button" class="term" data-term="LP燒毀">LP 燒毀</button>：資金池鎖死無法抽走<br>
-          <button type="button" class="term" data-term="Rug機率">Rug 機率</button>：跑路風險分數</p>
+          <button type="button" class="term" data-term="Rug機率">Rug 機率</button>：跑路風險分數<br>
+          <button type="button" class="term" data-term="老鼠倉">老鼠倉</button>：疑似內幕早買的錢包<br>
+          <button type="button" class="term" data-term="淨流入">淨流入</button>：買賣金額差，≠還在持有<br>
+          <button type="button" class="term" data-term="KOL人數">KOL 人數</button>：意見領袖參與傳播的數量<br>
+          <button type="button" class="term" data-term="Dev已遷移Dev發幣總數">Dev 已遷移／發幣總數</button>：這個 Dev 的畢業成功率<br>
+          <button type="button" class="term" data-term="Dev燒幣">Dev 燒幣</button>：開發者銷毀自己持有的幣<br>
+          <button type="button" class="term" data-term="釣魚錢包">釣魚錢包</button>：疑似釣魚、有可疑轉入的地址<br>
+          <button type="button" class="term" data-term="Bot交易">Bot 交易</button>：自動化工具下的買單<br>
+          <button type="button" class="term" data-term="TG喊單">TG 喊單</button>：Telegram 社群被提到的次數</p>
         </div>
 
         <div class="card card--flat" data-level="both">
@@ -724,7 +765,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
 
         <div class="card card--flat" data-level="both">
           <h4>交易操作</h4>
-          <p><button type="button" class="term" data-term="跟單">跟單 Copy Trade</button>｜<button type="button" class="term" data-term="TP/SL止盈止損">TP／SL 止盈止損</button>｜<button type="button" class="term" data-term="優先費(Jito Tip)">優先費 Jito Tip</button>｜<button type="button" class="term" data-term="MEV/三明治攻擊">MEV／三明治攻擊</button>｜<button type="button" class="term" data-term="滑點">滑點 Slippage</button></p>
+          <p><button type="button" class="term" data-term="跟單">跟單 Copy Trade</button>｜<button type="button" class="term" data-term="TP/SL止盈止損">TP／SL 止盈止損</button>｜<button type="button" class="term" data-term="優先費(Jito Tip)">優先費 Jito Tip</button>｜<button type="button" class="term" data-term="MEV/三明治攻擊">MEV／三明治攻擊</button>｜<button type="button" class="term" data-term="滑點">滑點 Slippage</button>｜<button type="button" class="term" data-term="總手續費">總手續費</button></p>
         </div>
       </div>
 
@@ -738,6 +779,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <div class="callout callout--danger">🚨 <strong>假 Telegram Bot 釣魚超多。</strong>官方是 @GMGN_sol_bot，其他長得很像的都要當成詐騙。任何地方叫你貼私鑰／助記詞，一律關掉。</div>
 
         <div class="callout callout--danger">🚨 <strong>熱錢包只放小額。</strong>Email／社群登入生成的熱錢包方便，但私鑰在你手機／瀏覽器裡。賺到就轉走，別把身家留在上面。</div>
+
+        <div class="callout callout--warn">⚠️ <strong>GMGN 的錢包是託管式的，帳號安全就是資產安全。</strong>私鑰匯出的入口在「錢包管理」，<strong>不在</strong>「安全設定」——安全設定管的是你的帳號本身（Passkey／2FA／已登入裝置）。帳號被盜＝錢包被盜，這兩層 2FA／Passkey 值得花兩分鐘開起來。</div>
 
         <div class="callout callout--warn">⚠️ <strong>手續費是雙向的：</strong>買 1%＋賣 1%＝來回 2%。你必須先漲超過 2% 才開始賺錢，短進短出會被費用磨死。</div>
 
@@ -3686,20 +3729,29 @@ window.GLOSSARY = [
 {"term":"社交交易","en":"Social Trading","cat":"基礎","simple":"把「看別人買什麼」變成 App 主功能的交易方式，像逛社群一樣邊看邊下單。","pro":"fomo 屬於社交發現型（social discovery），與提供自動跟單（copy trading）的平台不同，訊號到執行之間仍有人為延遲。"},
 {"term":"關注vs跟單","en":"Follow vs Copy Trade","cat":"基礎","simple":"關注＝對方買了會通知你；跟單＝系統自動幫你買。fomo 只有前者。","pro":"無自動執行代表存在通知延遲與滑價，模仿高頻迷因幣交易者的實際成交價常明顯劣於原單。"},
 {"term":"論點(thesis)","en":"Thesis","cat":"基礎","simple":"你對這筆交易的理由說明，可以附在交易旁邊給大家看。","pro":"公開 thesis 有助於事後檢討決策品質，但也會造成承諾偏誤，讓人不願停損。"},
+{"term":"遷移時間內盤打滿耗時","en":"Migration Time / Bonding Curve Fill Time","cat":"基礎","simple":"戰壕卡片上的兩段式時間標記：完成遷移距今多久，或從創建到打滿花了多久。","pro":"對應戰壕「已開盤」卡片上常見的 37s/1s 這類標記；打滿耗時越短代表買盤越集中在極短時間內湧入，通常是機器人或捆綁交易，人工手速跟不上。"},
 {"term":"流動性Liquidity","en":"Liquidity","cat":"安全指標","simple":"池子裡有多少錢可以跟你對做。太淺你一賣價格就崩，等於賣不掉。","pro":"看流動性與市值／FDV 的比值，一般以大於 5% 為相對安全、低於 2% 視為買得進賣不出；也要看 LP 是否已鎖倉或燒毀，只看金額大小不夠。"},
 {"term":"Honeypot蜜罐","en":"Honeypot","cat":"安全指標","simple":"買得進去、賣不出來的陷阱幣。看起來一直漲，但你根本賣不掉。","pro":"合約層面對賣出設限（黑名單、稅率 100%、transfer 條件判斷）。GMGN 安全面板會直接標紅。這一項亮紅燈是絕對禁區，沒有任何值得冒險的理由。"},
 {"term":"Mint權限","en":"Mint Authority","cat":"安全指標","simple":"開發者還能不能無限印新的幣出來。沒放棄＝他隨時能印爆你的持倉。","pro":"Solana SPL token 的 mint authority 若未 revoke，持有者可任意增發稀釋所有人。安全的幣應顯示已放棄（revoked）。"},
 {"term":"Freeze權限","en":"Freeze Authority","cat":"安全指標","simple":"開發者能不能把你的幣凍結，讓你動不了。","pro":"SPL token 的 freeze authority 可凍結任意帳戶的 token account。未放棄等同於軟性 honeypot，開發者能點名讓特定人賣不掉。必須是 revoked。"},
 {"term":"LP燒毀","en":"LP Burned","cat":"安全指標","simple":"資金池的憑證被銷毀，代表開發者沒辦法把池子裡的錢抽走跑路。","pro":"LP token 被送到黑洞地址即為 burned。要注意兩件事：一是燒毀比例（部分燒毀仍留有抽水空間），二是燒毀不防止大戶砸盤，只防 rug pull 這一種死法。"},
-{"term":"Rug機率","en":"Rug Ratio","cat":"安全指標","simple":"GMGN 幫這顆幣算的跑路風險分數，越高越危險。","pro":"API 欄位為 rug_ratio，一般以大於 0.3 視為高風險。它是綜合權限、持倉集中度、開發者歷史等訊號的複合指標，適合拿來做自動篩選的第一道門檻。"},
+{"term":"Rug機率","en":"Rug Ratio","cat":"安全指標","simple":"GMGN 幫這顆幣算的跑路風險分數，越高越危險。","pro":"API 欄位為 rug_ratio，一般以大於 0.3 視為高風險。它是綜合權限、持倉集中度、開發者歷史等訊號的複合指標，適合拿來做自動篩選的第一道門檻。App 卡片上有時直接顯示為「跑路機率」，是同一個指標的不同稱呼。"},
 {"term":"Top10持倉","en":"Top 10 Holder Rate","cat":"安全指標","simple":"前十大地址握了多少比例。太集中＝少數人一砸盤你就完蛋。","pro":"API 欄位 top_10_holder_rate。要搭配地址性質判讀：若其中包含交易池、鎖倉合約，實際籌碼集中度會低於帳面數字；若都是新鮮錢包，代表開盤就被少數人吃走。"},
 {"term":"Dev持倉","en":"Dev Holding","cat":"安全指標","simple":"開發者自己留了多少幣。留太多代表他隨時可以出貨砸死你。","pro":"API 欄位 dev_team_hold_rate。也要看 Dev 的歷史紀錄——GMGN 會標記該地址過去發過的幣，連續發幣又連續歸零的 Dev 直接列黑名單；看盤時數字往下掉代表他正在賣。"},
 {"term":"Bundler捆綁","en":"Bundler","cat":"安全指標","simple":"用一堆錢包在同一瞬間一起買，假裝很多人搶購。","pro":"透過 Jito bundle 把多筆交易打包進同一區塊，繞過一般排序。API 欄位 bundler_rate 高，代表開盤籌碼其實掌握在同一批人手上，後續拉高出貨的機率很大。"},
 {"term":"Sniper狙擊","en":"Sniper","cat":"安全指標","simple":"用機器人在幣一發射的瞬間就搶到第一批的人。","pro":"成本極低，因此對他們來說任何漲幅都是獲利。Sniper 比例高的幣，早期賣壓非常重。GMGN 會在持有者名單標出 Sniper 標籤，可以據此判斷還有多少低成本籌碼沒出。"},
 {"term":"Insider內部人","en":"Insider","cat":"安全指標","simple":"跟開發者有關係、提前知道消息就先買的人。","pro":"GMGN 透過資金流向關聯（同一資金來源、關聯轉帳路徑）推斷內部人。內部人比例高不一定馬上跑，但代表資訊不對稱嚴重，你永遠是最後知道的那個。"},
-{"term":"Smart Money聰明錢","en":"Smart Money","cat":"安全指標","simple":"過去戰績好、常常買到會漲的幣的錢包。","pro":"GMGN 依歷史 PnL 與勝率自動打標。務必自己覆核 7d/30d PnL 與交易筆數——樣本太少的高勝率沒有意義。官方也明講聰明錢也常常亂買，只能當線索。"},
+{"term":"Smart Money聰明錢","en":"Smart Money","cat":"安全指標","simple":"過去戰績好、常常買到會漲的幣的錢包。","pro":"GMGN 依歷史 PnL 與勝率自動打標。務必自己覆核 7d/30d PnL 與交易筆數——樣本太少的高勝率沒有意義。官方也明講聰明錢也常常亂買，只能當線索。App 卡片上顯示為「🧠 聰明錢包數」。"},
 {"term":"KOL","en":"Key Opinion Leader","cat":"安全指標","simple":"有影響力的網紅／意見領袖的錢包。","pro":"KOL 買入常帶來短時間流量，但也是最典型的「喊單出貨」場景。看到 KOL 標籤要問的是：他是在建倉還是在派發？看他的持倉變化曲線，不是看他發什麼推文。"},
 {"term":"Fresh Wallet新錢包","en":"Fresh Wallet","cat":"安全指標","simple":"剛剛才建立、沒什麼歷史的錢包。","pro":"大量 Fresh Wallet 同時買入是人為操作的強烈訊號——通常是同一個人拆分資金，用來偽裝成很多人在搶。搭配 bundler_rate 一起看，準確率更高。"},
+{"term":"老鼠倉","en":"Insider Rat Trading (GMGN term)","cat":"安全指標","simple":"GMGN 對某些疑似有內幕消息、比大家早一步買進的錢包的稱呼。","pro":"跟本站既有的 Insider 內部人概念相近但用詞不同，App 卡片上顯示為「老鼠倉」；判斷邏輯同樣是資金流向關聯推斷，不是官方認證的內幕交易證據，只能當線索看。"},
+{"term":"淨流入","en":"Net Inflow","cat":"安全指標","simple":"過去 24 小時裡，買進金額減掉賣出金額的差額。","pro":"常出現在天眼訊號／KOL 卡片上，例如「3 個 KOL 淨流入」。淨流入是正的只代表「過去買得比賣得多」，不代表這些人現在還抱著——務必點進明細看目前持倉，別把「買過」當成「還在」。"},
+{"term":"KOL人數","en":"KOL Count","cat":"安全指標","simple":"參與傳播或站台這顆幣的意見領袖數量。","pro":"人數多能帶來短期流量與買氣，但也可能是集體拉盤前的鋪墊，跟「淨流入」一樣要點進明細看實際持倉與喊單次數，不要只看這顆數字。"},
+{"term":"Dev已遷移Dev發幣總數","en":"Dev Migrated / Dev Total Issued","cat":"安全指標","simple":"這個開發者過去總共發過幾顆幣、其中有幾顆真的畢業成功。","pro":"對應代幣卡片上的皇冠標記（例如 4/40），比例越低代表這個 Dev 發的幣多數以失敗或 rug 收場；戰壕篩選器可以直接用這個比例當反 rug 條件之一。"},
+{"term":"Dev燒幣","en":"Dev Burn","cat":"安全指標","simple":"開發者把自己手上或合約裡的一部分幣永久銷毀。","pro":"銷毀會降低流通供給，理論上減少賣壓，但也可能只是做給外界看的樣子——搭配 Dev 持倉％與 Rug 機率一起判斷，不要單獨因為「有燒幣」就放心。"},
+{"term":"釣魚錢包","en":"Phishing Wallet","cat":"安全指標","simple":"GMGN 判定疑似釣魚、對你的錢包有過可疑代幣轉入行為的地址。","pro":"對應資產頁錢包卡片的釣魚偵測四項之一：黑名單／沒購買卻有幣／賣出量大於買量／十秒內完成買賣。看別人錢包要不要跟之前，先看這四項比看 PnL 重要。"},
+{"term":"Bot交易","en":"Bot Trading","cat":"安全指標","simple":"用 Axiom／Padre／Photon 這類自動化工具下的買單，不是真人手動點的。","pro":"Bot 交易佔比高代表這顆幣的買盤有一部分是程式化搶進，不必然是壞事，但要跟「十秒內完成買賣」的釣魚偵測條件一起看，避免誤判為真實社群買盤。"},
+{"term":"TG喊單","en":"Telegram Callout","cat":"安全指標","simple":"這顆幣在監控中的 Telegram 社群裡被提到、喊單的次數。","pro":"次數多不等於安全，常常是喊單群集體拉抬的訊號；跟本站既有的 KOL 喊單榜同樣要「先看樣本數再看效果」。"},
 {"term":"Makers獨立交易者","en":"Makers","cat":"安全指標","simple":"有多少個不同的人在交易這個幣。人太少很危險。","pro":"Makers 數可被女巫地址灌水，需搭配持有人分布與資金來源分析交叉驗證。"},
 {"term":"Txns交易筆數","en":"Transactions","cat":"安全指標","simple":"一段時間內買了幾筆、賣了幾筆。","pro":"買賣筆數嚴重失衡（幾乎只有買）常是無法賣出（honeypot）或機器人刷量的訊號。"},
 {"term":"Pooled池子代幣","en":"Pooled Tokens","cat":"安全指標","simple":"池子裡實際放了多少該代幣與多少報價幣。","pro":"可用來推估池子構成與單邊抽流動性的風險，突然變化通常先於 rug。"},
@@ -3712,6 +3764,7 @@ window.GLOSSARY = [
 {"term":"MEV/三明治攻擊","en":"MEV / Sandwich Attack","cat":"下單","simple":"機器人搶在你前面買、又搶在你後面賣，兩邊夾你，讓你買貴賣便宜。","pro":"GMGN 提供 Off／Reduced／Secure 三檔保護，另有 Auto／Turbo／Anti-MEV 三種滑點模式；Axiom 的 Preset 也可指定 MEV 模式。Secure 走保護通道，成交較慢但不被夾；Turbo 搶速度但暴露在夾單風險中。速度與安全無法兼得。"},
 {"term":"TP/SL止盈止損","en":"Take Profit / Stop Loss","cat":"下單","simple":"事先設定「漲到多少自動賣」「跌到多少自動停損」，不用盯盤也不用跟情緒打架。","pro":"常見組合：止損 -30～-40%；止盈分批 2x 賣 50%、5x 賣 30%、留 20% 長期觀察。分批的意義是 2x 就把本金收回，剩下都是可承受虧損的部位，決策品質會明顯提升。（策略示例，非投資建議）"},
 {"term":"跟單","en":"Copy Trade","cat":"下單","simple":"設定好之後，別人買什麼你就自動跟著買什麼。","pro":"GMGN 最多 10 個任務（建議 5–7）。買入模式有 Fixed Buy／Max Buy／Fixed Ratio，可篩選市值、流動性、幣齡、LP 燒毀比、單幣上限，黑名單 20 個。選錢包標準：30 筆以上交易、勝率 60% 以上、1d/7d/30d 皆為正。跟單必定落後至少 1 個區塊。"},
+{"term":"總手續費","en":"Total Fees","cat":"下單","simple":"這顆幣至今累計付給鏈上的優先費＋賄賂費＋交易手續費總和。","pro":"數字越高代表這顆幣搶單越兇、鏈上競爭越激烈，也間接反映這段時間交易有多擁擠；可以當作「這顆幣現在多熱」的輔助指標，但不是安全指標。"},
 {"term":"Quick Buy快買","en":"Quick Buy","cat":"下單","simple":"閃電圖示的一鍵買入，用你預設好的參數直接送單。","pro":"金額與滑點沿用當前 Preset，建議先把 Preset 金額設在可承受範圍再啟用，否則很容易手滑。"},
 {"term":"Preset預設組","en":"Preset","cat":"下單","simple":"P1／P2／P3 三組交易參數，一鍵切換。","pro":"每組可獨立設定滑點、優先費、Bribe 與 MEV 模式；MEV 建議選 Secure。"},
 {"term":"Sniper Buy狙擊買","en":"Sniper Buy","cat":"下單","simple":"設定好條件，在代幣畢業瞬間自動搶進。","pro":"對應也有 Sniper Sell；可能在流動性尚未進場時就成交，滑點風險極高，沒有完整止損規則前不要開。"},
