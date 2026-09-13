@@ -1253,6 +1253,44 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         </details>
 
         <details class="acc">
+          <summary>🟣 進階：動態牆怎麼看，六種卡片＋篩選 ▸</summary>
+          <p><button type="button" class="term" data-term="動態牆Feed">動態牆</button>分「全球」「好友」兩種，會即時插入新卡片，主要有六種：</p>
+          <ul>
+            <li>官方置頂公告</li>
+            <li>買入／賣出（誰、買了什麼、多少錢）</li>
+            <li>已平倉（附盈虧百分比）</li>
+            <li>觀點（thesis 貼文）</li>
+            <li>多用戶聚合，例如「40 位交易者賣出 $501.2K」——這種卡片代表短時間內有一批人同時動作，比單一個人買賣更值得留意</li>
+          </ul>
+          <p>右上角篩選 icon 可以選資產類型（全部／代幣／永續合約），再勾選要看哪些事件：交易、已平倉、觀點、多用戶交易、新上線、價格飆升、盈利里程碑、新交易者。「好友」動態牆另外有一個「＞$1,000」開關，關掉能看到好友的小額交易（例如 $29），開著只看大單。</p>
+          <div class="callout callout--tip">💡 全球動態牆更新極快，點卡片常常點不準；想穩定測試互動，先切到「好友」動態牆。</div>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：排行榜與交易者主頁，看榜不被騙的判讀法 ▸</summary>
+          <p><button type="button" class="term" data-term="排行榜">排行榜</button>可以先用「交易類型篩選」限定看全部／代幣／永續合約，再切 24 小時／7 天／30 天／全部。點進任一交易者的公開主頁，比起排名數字，更值得看的是：</p>
+          <ul>
+            <li>投資組合價值走勢圖（24h／7d／30d），而不是單看某一筆的百分比</li>
+            <li>平均持倉天數、交易筆數、加入 fomo 的時間——天數太短、筆數太少的「戰績」樣本不足</li>
+            <li>持倉列表可切「持倉中／已平倉」，預設會隱藏小額持倉（有「顯示已隱藏」按鈕），別誤以為對方只有列出來的那幾筆</li>
+            <li>倉位旁若標「從外部錢包轉入」，代表這筆部位不是在 fomo 內建立的，判讀報酬率時要打折扣</li>
+          </ul>
+          <div class="callout callout--warn">⚠️ 交易者主頁有一顆「送現金」轉帳 icon，可以直接把錢轉給對方（10%／25%／50%／全部餘額可選）——這筆錢一旦送出去無法收回，不是打賞可退的機制，詳見風險分頁。</div>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：聯盟（Clans）是什麼 ▸</summary>
+          <p>排行榜分段裡的「聯盟」，官方原文解釋：「聯盟是分享持倉的交易者組成的團體，按所有成員的合計盈虧排名」。查看全部可以看完整聯盟排行榜（24h／7d／30d／全部），每個聯盟卡片顯示成員數與合計盈虧。</p>
+          <p>要自己申請聯盟，會跳出 App 到外部 Typeform 填表，規則是：<strong>至少 5 名成員、成員合計持有需 ≥$5,000 且每人都要有餘額、代幣專案團隊不能自己組聯盟</strong>。加入聯盟前，先想清楚你的持倉和交易紀錄會被算進團體排名裡。</p>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：通知設定 8 類，關注別人後你會收到什麼 ▸</summary>
+          <p>設定 → 通知，預設是關閉的，打開後可以個別控制：<strong>價格提醒</strong>、<strong>好友動態</strong>（好友買賣，可再點「管理」自訂只看誰）、<strong>熱門動態</strong>（多位用戶同時交易同一顆代幣）、<strong>頂級交易者動態</strong>（大額交易）、<strong>公告</strong>、<strong>新粉絲</strong>、<strong>邀請好友</strong>（有人用你的邀請碼註冊時）。上方還有一個「資產類型」下拉可以先篩一輪範圍。</p>
+          <div class="callout callout--tip">💡 關注越多交易員、開越多「好友動態」通知，手機被推播轟炸的機率越高——建議先關注幾個帳號觀察幾天，覺得訊號有用再逐步打開。</div>
+        </details>
+
+        <details class="acc">
           <summary>🟣 進階：Perps 永續合約（含美股、指數、pre-IPO） ▸</summary>
           <p>fomo 接上 Hyperliquid／TradeXYZ 提供<button type="button" class="term" data-term="Perps永續合約">永續合約</button>，可交易加密貨幣、美股（例如 NVDA）、指數、原物料，甚至 pre-IPO 標的。採<button type="button" class="term" data-term="逐倉">逐倉</button>模式，可設 TP/SL 停利停損。</p>
           <ul>
@@ -1323,6 +1361,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <button type="button" class="term" data-term="平均買入價(平均买入价)">平均買入價</button>
             <button type="button" class="term" data-term="已投入">已投入</button>
             <button type="button" class="term" data-term="未驗證代幣(未验证代币)">未驗證代幣</button>
+            <button type="button" class="term" data-term="聯盟(Clans)">聯盟（Clans）</button>
           </p>
         </div>
         <div class="callout callout--tip">💡 最該記住的一條：<strong>「關注」不等於「跟單」</strong>。fomo 只會通知你別人買了什麼，不會自動幫你買。</div>
@@ -1339,6 +1378,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <div class="callout callout--danger">🛑 <strong>沒有存款保險。</strong>不是銀行、不是券商。手機丟了又沒做金鑰備份，錢就是真的沒了。趁還有錢在裡面之前，先確認你知道怎麼匯出私鑰。</div>
 
         <div class="callout callout--danger">🛑 <strong>仿冒 App 很多。</strong>App Store 上有大量假的「fomo」，下載前核對開發者是 FOMO Labs。假 App 的目標就是你的入金。</div>
+
+        <div class="callout callout--danger">🛑 <strong>「送現金」轉帳一旦送出無法收回。</strong>交易者主頁的轉帳 icon 可以直接把餘額送給對方，不是打賞可退的機制，也沒有取消或申訴管道，按下去前務必確認對象與金額。</div>
 
         <div class="callout callout--danger">🛑 <strong>內盤／已畢業分類是官方自己標的高風險區。</strong>代幣列表這兩顆篩選底下的幣，App 自己就會跳警示（波動極高、可能永遠無法畢業）。點進去先看清楚警示文字再決定要不要碰，不要因為設定裡能「永久關閉」提示就當作風險消失了。</div>
 
@@ -3769,6 +3810,7 @@ window.GLOSSARY = [
 {"term":"平均買入價(平均买入价)","en":"Average Buy Price","cat":"基礎","simple":"某個交易員這筆持倉真正的平均成本，不是現在的市價。","pro":"要判斷一筆持倉是真的賺還是紙上富貴，先比對平均買入價跟現價，再看「已投入」金額大小，避免被單純的百分比數字誤導。"},
 {"term":"已投入","en":"Invested Amount","cat":"基礎","simple":"某個交易員這筆持倉實際放了多少本金。","pro":"排行榜和持倉卡只顯示報酬率時容易誤導——用 $100 賺 300% 跟用 $10 萬賺 300% 在榜上長得一樣，先看已投入金額才知道對方是不是真的下重本。"},
 {"term":"未驗證代幣(未验证代币)","en":"Unverified Token","cat":"安全指標","simple":"交易者持倉卡片上出現的紅色提示，代表這顆代幣連 App 自己都沒把握它的真實性。","pro":"看到這個標記，等於平台自己承認風險評估資料不足，應該當作比一般新幣更高一層的警訊，先去其他工具交叉核對再決定。"},
+{"term":"聯盟(Clans)","en":"Clans","cat":"基礎","simple":"由多個交易者組成的團體，排行榜按全體成員的合計盈虧排名。","pro":"申請聯盟需至少 5 名成員、合計持有 ≥$5,000 且每人都要有餘額，代幣專案團隊不能自己組聯盟；加入前先想清楚自己的交易紀錄會被算進團體排名。"},
 {"term":"遷移時間內盤打滿耗時","en":"Migration Time / Bonding Curve Fill Time","cat":"基礎","simple":"戰壕卡片上的兩段式時間標記：完成遷移距今多久，或從創建到打滿花了多久。","pro":"對應戰壕「已開盤」卡片上常見的 37s/1s 這類標記；打滿耗時越短代表買盤越集中在極短時間內湧入，通常是機器人或捆綁交易，人工手速跟不上。"},
 {"term":"流動性Liquidity","en":"Liquidity","cat":"安全指標","simple":"池子裡有多少錢可以跟你對做。太淺你一賣價格就崩，等於賣不掉。","pro":"看流動性與市值／FDV 的比值，一般以大於 5% 為相對安全、低於 2% 視為買得進賣不出；也要看 LP 是否已鎖倉或燒毀，只看金額大小不夠。"},
 {"term":"Honeypot蜜罐","en":"Honeypot","cat":"安全指標","simple":"買得進去、賣不出來的陷阱幣。看起來一直漲，但你根本賣不掉。","pro":"合約層面對賣出設限（黑名單、稅率 100%、transfer 條件判斷）。GMGN 安全面板會直接標紅。這一項亮紅燈是絕對禁區，沒有任何值得冒險的理由。"},
