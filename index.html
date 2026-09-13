@@ -1139,7 +1139,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">2</div>
             <div class="step__title">入金：刷卡就能買幣</div>
-            <div class="step__detail">支援 Apple Pay／Google Pay／信用卡（走 Coinbase 金流通道），或直接轉 USDC 進來。重點是：<strong>一個帳戶只有一個現金餘額，六條鏈通用</strong>（Solana／Base／BNB／Monad／ETH／Robinhood Chain，Robinhood Chain 上用 <button type="button" class="term" data-term="USDG">USDG</button>），你不用煩惱「錢在哪條鏈上」這種新手最容易卡住的問題。</div>
+            <div class="step__detail">支援 Apple Pay／Google Pay／信用卡（走 Coinbase 金流通道），或直接轉 USDC 進來。重點是：<strong>一個帳戶只有一個現金餘額，六條鏈通用</strong>（Solana／Base／BNB／Monad／ETH／Robinhood Chain，Robinhood Chain 上用 <button type="button" class="term" data-term="USDG">USDG</button>），你不用煩惱「錢在哪條鏈上」這種新手最容易卡住的問題。<strong>容易搞混的一點</strong>：Apple Pay 這條走的是「直接買幣」（PENGU、WIF 等 20 多種代幣任選），不是先儲值現金再買——首次用 Apple Pay 買還免手續費；轉 USDC 或用借記卡才是先進到現金餘額。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="12">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-12-t">
@@ -1297,7 +1297,20 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <li>費率：每邊 0.05% ＋ Hyperliquid 本身費用</li>
             <li><strong>美國用戶不可使用</strong></li>
           </ul>
+          <p>下單前，做多／做空按鈕會先跳出「你在美國境外嗎？」合規聲明，勾選確認並同意條款才能繼續，這是 App 自己內建的一道閘門，不是網站在嚇你。真正下單前，先看懂這兩個數字：<button type="button" class="term" data-term="未平倉量(open interest)">未平倉量</button>（整個市場目前掛著多少槓桿部位，數字越大代表越多人在賭同一個方向）、<button type="button" class="term" data-term="槓桿規模(notional size)">槓桿規模</button>（＝保證金 × 槓桿倍數，代表你的總曝險，不是你會虧的錢，但真的虧起來是照這個規模算）。</p>
           <div class="callout callout--danger">🛑 槓桿會放大虧損，逐倉爆倉就是那筆保證金歸零。沒有現貨經驗前不要碰。</div>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：提現 3 種方式，錢怎麼拿回來 ▸</summary>
+          <p>路徑：設定 → 充值與提現 → 提現 → 選擇提現方式，三張卡可選：</p>
+          <ul>
+            <li><strong>銀行帳戶</strong>：走 ACH，<strong>僅限美國</strong>——台灣讀者這條路走不通</li>
+            <li><strong>加密錢包</strong>：提領 USDC 到你自己支援的鏈上錢包地址</li>
+            <li><strong>金融應用</strong>：PayPal、Venmo、Robinhood、Wealthsimple 等（可用範圍以 App 當下顯示為準）</li>
+          </ul>
+          <p>提現前有兩件事要先確認：一是「總現金」其實分成<strong>代幣現金</strong>與<strong>永續合約現金</strong>兩格，永續那格的錢要先轉回代幣現金才能提；二是提現紀錄可以在「歷史記錄」用全部／轉帳記錄／交易／現金四種篩選對帳。</p>
+          <div class="callout callout--tip">💡 台灣讀者實務上多半只剩「加密錢包」或「金融應用」兩條路，提現前先確認自己要用的那個管道當下是否還支援，官方公告變動較快。</div>
         </details>
 
         <details class="acc">
@@ -1305,7 +1318,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <ul>
             <li>現貨手續費以App實際顯示為準，帶推薦碼通常更低；「最多人持有」分類的藍籌幣（BTC／ETH／SOL 等）手續費最低可到 0.05%，那是這個分類的下限，迷因幣仍以確認頁實際顯示為準。</li>
             <li>gas 由平台的<button type="button" class="term" data-term="帳戶抽象(ERC-4337)">帳戶抽象（ERC-4337）</button>代付，你看到的成本就是手續費本身。</li>
-            <li>推薦制度：被推薦人手續費 −10%，推薦人抽對方手續費的 25% 分潤。</li>
+            <li>推薦制度：被推薦人手續費 −10%，推薦人抽對方手續費的 25% 分潤，推薦連結格式是 <code>fomo.family/r/&lt;你的用戶名&gt;</code>，可以在個人主頁「獎勵」頁複製或分享。</li>
+            <li>個人主頁「獎勵」頁另外還有一格「創作者獎勵」：積極交易、發布觀點、累積粉絲可以再賺——實際門檻與金額以 App 當下顯示為準。</li>
             <li><strong>沒有平台幣、沒有空投承諾</strong>——任何說「fomo 要空投／預售」的都是詐騙。</li>
           </ul>
           <p class="muted">（以上皆 2026/9查證，請以官方公告為準）</p>
@@ -1362,6 +1376,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <button type="button" class="term" data-term="已投入">已投入</button>
             <button type="button" class="term" data-term="未驗證代幣(未验证代币)">未驗證代幣</button>
             <button type="button" class="term" data-term="聯盟(Clans)">聯盟（Clans）</button>
+            <button type="button" class="term" data-term="未平倉量(open interest)">未平倉量</button>
+            <button type="button" class="term" data-term="槓桿規模(notional size)">槓桿規模</button>
           </p>
         </div>
         <div class="callout callout--tip">💡 最該記住的一條：<strong>「關注」不等於「跟單」</strong>。fomo 只會通知你別人買了什麼，不會自動幫你買。</div>
@@ -3811,6 +3827,8 @@ window.GLOSSARY = [
 {"term":"已投入","en":"Invested Amount","cat":"基礎","simple":"某個交易員這筆持倉實際放了多少本金。","pro":"排行榜和持倉卡只顯示報酬率時容易誤導——用 $100 賺 300% 跟用 $10 萬賺 300% 在榜上長得一樣，先看已投入金額才知道對方是不是真的下重本。"},
 {"term":"未驗證代幣(未验证代币)","en":"Unverified Token","cat":"安全指標","simple":"交易者持倉卡片上出現的紅色提示，代表這顆代幣連 App 自己都沒把握它的真實性。","pro":"看到這個標記，等於平台自己承認風險評估資料不足，應該當作比一般新幣更高一層的警訊，先去其他工具交叉核對再決定。"},
 {"term":"聯盟(Clans)","en":"Clans","cat":"基礎","simple":"由多個交易者組成的團體，排行榜按全體成員的合計盈虧排名。","pro":"申請聯盟需至少 5 名成員、合計持有 ≥$5,000 且每人都要有餘額，代幣專案團隊不能自己組聯盟；加入前先想清楚自己的交易紀錄會被算進團體排名。"},
+{"term":"未平倉量(open interest)","en":"Open Interest","cat":"基礎","simple":"整個市場目前還掛著多少槓桿部位沒平倉，是永續合約頁上顯示的數字。","pro":"未平倉量越大代表越多資金押在同一個方向，行情反轉時的強制平倉（爆倉連鎖）風險也越高，適合當市場情緒的溫度計看，不是買賣訊號本身。"},
+{"term":"槓桿規模(notional size)","en":"Notional Size","cat":"基礎","simple":"你這筆永續合約倉位的總曝險金額，等於保證金乘以槓桿倍數。","pro":"槓桿規模不是你會虧的錢，但保證金歸零（爆倉）時，虧的就是你投入的保證金全部；下單前先用槓桿規模換算最壞情況會虧多少保證金，而不是只看倍數。"},
 {"term":"遷移時間內盤打滿耗時","en":"Migration Time / Bonding Curve Fill Time","cat":"基礎","simple":"戰壕卡片上的兩段式時間標記：完成遷移距今多久，或從創建到打滿花了多久。","pro":"對應戰壕「已開盤」卡片上常見的 37s/1s 這類標記；打滿耗時越短代表買盤越集中在極短時間內湧入，通常是機器人或捆綁交易，人工手速跟不上。"},
 {"term":"流動性Liquidity","en":"Liquidity","cat":"安全指標","simple":"池子裡有多少錢可以跟你對做。太淺你一賣價格就崩，等於賣不掉。","pro":"看流動性與市值／FDV 的比值，一般以大於 5% 為相對安全、低於 2% 視為買得進賣不出；也要看 LP 是否已鎖倉或燒毀，只看金額大小不夠。"},
 {"term":"Honeypot蜜罐","en":"Honeypot","cat":"安全指標","simple":"買得進去、賣不出來的陷阱幣。看起來一直漲，但你根本賣不掉。","pro":"合約層面對賣出設限（黑名單、稅率 100%、transfer 條件判斷）。GMGN 安全面板會直接標紅。這一項亮紅燈是絕對禁區，沒有任何值得冒險的理由。"},
