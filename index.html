@@ -1134,7 +1134,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">1</div>
             <div class="step__title">下載 App 並註冊（1 分鐘）</div>
-            <div class="step__detail">App Store／Google Play 搜「fomo」，<strong>務必核對開發者是「FOMO Labs」</strong>，仿冒 App 非常多。也可以直接用網頁版。註冊用 Email 或 Apple 帳號，不到一分鐘，全程沒有助記詞要抄——它用 Privy 的嵌入式錢包＋<button type="button" class="term" data-term="金鑰分片">金鑰分片</button>技術，但之後你仍然可以把私鑰匯出。</div>
+            <div class="step__detail">App Store／Google Play 搜「fomo」，<strong>務必核對開發者是「FOMO Labs」</strong>，仿冒 App 非常多。也可以直接用網頁版。註冊用 Email 或 Apple 帳號，不到一分鐘，全程沒有助記詞要抄——它用 Privy 的嵌入式錢包＋<button type="button" class="term" data-term="金鑰分片">金鑰分片</button>技術，但之後你仍然可以把私鑰匯出。註冊後可以到「個人主頁 → 編輯主頁」補綁 X 帳號。</div>
           </div>
           <div class="step">
             <div class="step__num">2</div>
@@ -1160,7 +1160,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <div class="step">
             <div class="step__num">3</div>
             <div class="step__title">找幣：動態牆、排行榜、代幣頁</div>
-            <div class="step__detail">首頁「<button type="button" class="term" data-term="動態牆Feed">動態牆 Feed</button>」看交易員即時買賣，還會附上他們的<button type="button" class="term" data-term="已實現損益">已實現損益</button>；「<button type="button" class="term" data-term="排行榜">排行榜</button>」看 30 天績效排名。點進任一代幣頁，能看到圖表、市值、流動性、持有人分布、安全警告、頂尖交易員名單，以及「誰剛剛買了」。</div>
+            <div class="step__detail">首頁「<button type="button" class="term" data-term="動態牆Feed">動態牆 Feed</button>」看交易員即時買賣，還會附上他們的<button type="button" class="term" data-term="已實現損益">已實現損益</button>；「<button type="button" class="term" data-term="排行榜">排行榜</button>」可切 24 小時／7 天／30 天／全部四種區間，<strong>區間越短噪音越大</strong>，新手建議先看 30 天以上再判斷。代幣列表本身還有五顆篩選：最多人持有（藍籌）、已畢業、<button type="button" class="term" data-term="內盤(内盘)">內盤</button>、漲幅榜、社區，其中「已畢業」與「內盤」App 自己就會跳警示，細節見下方進階分頁。點進任一代幣頁，能看到圖表、市值、流動性、持有人分布、安全警告、頂尖交易員名單，以及「誰剛剛買了」。</div>
             <div class="step__shot">
               <figure class="figure" data-fig="13">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-13-t">
@@ -1226,8 +1226,9 @@ html.sheet-open,body.sheet-open{overflow:hidden}
 
         <details class="acc">
           <summary>🟣 進階：關注交易員 ≠ 自動跟單 ▸</summary>
-          <p>你可以「關注」某個交易員，對方開新倉時會推播通知你。也能在自己的每筆交易附上<button type="button" class="term" data-term="論點(thesis)">論點（thesis）</button>，或在圖表下方留言討論。</p>
+          <p>你可以「關注」某個交易員，對方開新倉時會推播通知你。也能在自己的每筆交易附上<button type="button" class="term" data-term="論點(thesis)">論點（thesis）</button>，其他人可以按讚、分享，<strong>但目前沒有留言／回覆功能</strong>。</p>
           <div class="callout callout--warn">⚠️ 關鍵誤解：<strong>fomo 沒有自動跟單（copy trade）功能</strong>，只有「社交發現」。看到別人買什麼，你還是得自己手動下單，價格早就不一樣了。</div>
+          <p>點開任一持倉卡片，關鍵是這幾個數字：<button type="button" class="term" data-term="平均買入價(平均买入价)">平均買入價</button>（他真正的成本，不是現價）、<button type="button" class="term" data-term="已投入">已投入</button>（他放了多少本金，$100 賺 300% 跟 $10 萬賺 300% 完全不是同一件事）、交易筆數展開後的完整買賣紀錄。若卡片頂部出現紅色<button type="button" class="term" data-term="未驗證代幣(未验证代币)">未驗證代幣</button>提示，代表這顆幣連 App 自己都沒把握，多一層戒心。</p>
           <figure class="figure" data-fig="15">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="fig-15-t">
 <title id="fig-15-t">交易員個人頁，上方是頭像與關注按鈕，下方列出近期持倉</title>
@@ -1264,7 +1265,7 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <details class="acc">
           <summary>🟣 進階：費率、gas 代付與推薦制度 ▸</summary>
           <ul>
-            <li>現貨手續費以App實際顯示為準，帶推薦碼通常更低，部分主流幣更低。</li>
+            <li>現貨手續費以App實際顯示為準，帶推薦碼通常更低；「最多人持有」分類的藍籌幣（BTC／ETH／SOL 等）手續費最低可到 0.05%，那是這個分類的下限，迷因幣仍以確認頁實際顯示為準。</li>
             <li>gas 由平台的<button type="button" class="term" data-term="帳戶抽象(ERC-4337)">帳戶抽象（ERC-4337）</button>代付，你看到的成本就是手續費本身。</li>
             <li>推薦制度：被推薦人手續費 −10%，推薦人抽對方手續費的 25% 分潤。</li>
             <li><strong>沒有平台幣、沒有空投承諾</strong>——任何說「fomo 要空投／預售」的都是詐騙。</li>
@@ -1276,6 +1277,17 @@ html.sheet-open,body.sheet-open{overflow:hidden}
           <summary>🟣 進階：團隊背景與安全機制 ▸</summary>
           <p>舊金山 FOMO Labs，三位創辦人來自 dYdX，2025/5 上線；2026/6 拿到 Index Ventures 領投的 $75M B 輪，估值 $5.5 億美元，用戶超過 50 萬。提款或匯出金鑰都需要 FaceID 驗證。</p>
           <div class="callout callout--tip">💡 有創投背書不等於你的錢有保障，它終究不是銀行、沒有存款保險。</div>
+        </details>
+
+        <details class="acc">
+          <summary>🟣 進階：代幣列表五顆篩選，內盤與已畢業 App 自己都在警告 ▸</summary>
+          <p>首頁代幣列表切到「代幣」分段，上面有五顆篩選：<strong>最多人持有</strong>（藍籌，手續費最低）、<strong>已畢業</strong>、<strong>內盤</strong>、<strong>漲幅榜</strong>、<strong>社區</strong>（團隊身份已驗證）。前兩顆是新幣，風險最高，App 自己就會跳警示：</p>
+          <ul>
+            <li><button type="button" class="term" data-term="已畢業(已毕业)">已畢業</button>：卡片顯示幣齡（例如剛畢業 12 分鐘），App 原文警示「新畢業的代幣波動性極高，任何人都可以無需許可地發行代幣，包括不良行為者」。</li>
+            <li><button type="button" class="term" data-term="內盤(内盘)">內盤</button>：卡片顯示<button type="button" class="term" data-term="內盤進度(内盘进度)">內盤進度</button>百分比（例如 97%），App 原文警示「內盤代幣波動性極高，且可能永遠無法畢業」。設定裡雖然可以「永久關閉內盤警告」，但風險不會因為關掉提示就消失。</li>
+          </ul>
+          <div class="callout callout--danger">🛑 這兩顆分類的警示是 fomo 官方自己寫的，不是本站加碼恐嚇——連平台都提醒你小心，代表這裡是真正的高風險區。</div>
+          <p class="muted">「社區」分類代表團隊錢包已驗證身份，不代表安全，只是多一項可核對的資訊。</p>
         </details>
 
         <details class="acc">
@@ -1305,6 +1317,12 @@ html.sheet-open,body.sheet-open{overflow:hidden}
             <button type="button" class="term" data-term="Perps永續合約">Perps 永續合約</button>
             <button type="button" class="term" data-term="逐倉">逐倉</button>
             <button type="button" class="term" data-term="論點(thesis)">論點（thesis）</button>
+            <button type="button" class="term" data-term="內盤(内盘)">內盤（内盘）</button>
+            <button type="button" class="term" data-term="已畢業(已毕业)">已畢業（已毕业）</button>
+            <button type="button" class="term" data-term="內盤進度(内盘进度)">內盤進度</button>
+            <button type="button" class="term" data-term="平均買入價(平均买入价)">平均買入價</button>
+            <button type="button" class="term" data-term="已投入">已投入</button>
+            <button type="button" class="term" data-term="未驗證代幣(未验证代币)">未驗證代幣</button>
           </p>
         </div>
         <div class="callout callout--tip">💡 最該記住的一條：<strong>「關注」不等於「跟單」</strong>。fomo 只會通知你別人買了什麼，不會自動幫你買。</div>
@@ -1321,6 +1339,8 @@ html.sheet-open,body.sheet-open{overflow:hidden}
         <div class="callout callout--danger">🛑 <strong>沒有存款保險。</strong>不是銀行、不是券商。手機丟了又沒做金鑰備份，錢就是真的沒了。趁還有錢在裡面之前，先確認你知道怎麼匯出私鑰。</div>
 
         <div class="callout callout--danger">🛑 <strong>仿冒 App 很多。</strong>App Store 上有大量假的「fomo」，下載前核對開發者是 FOMO Labs。假 App 的目標就是你的入金。</div>
+
+        <div class="callout callout--danger">🛑 <strong>內盤／已畢業分類是官方自己標的高風險區。</strong>代幣列表這兩顆篩選底下的幣，App 自己就會跳警示（波動極高、可能永遠無法畢業）。點進去先看清楚警示文字再決定要不要碰，不要因為設定裡能「永久關閉」提示就當作風險消失了。</div>
 
         <div class="callout callout--warn">⚠️ <strong>動態牆和排行榜就是設計來讓你衝動下單的。</strong>看到別人 +300% 的當下最想跟，這就是 FOMO（錯失恐懼）。工具名字已經明講了。</div>
 
@@ -3743,6 +3763,12 @@ window.GLOSSARY = [
 {"term":"社交交易","en":"Social Trading","cat":"基礎","simple":"把「看別人買什麼」變成 App 主功能的交易方式，像逛社群一樣邊看邊下單。","pro":"fomo 屬於社交發現型（social discovery），與提供自動跟單（copy trading）的平台不同，訊號到執行之間仍有人為延遲。"},
 {"term":"關注vs跟單","en":"Follow vs Copy Trade","cat":"基礎","simple":"關注＝對方買了會通知你；跟單＝系統自動幫你買。fomo 只有前者。","pro":"無自動執行代表存在通知延遲與滑價，模仿高頻迷因幣交易者的實際成交價常明顯劣於原單。"},
 {"term":"論點(thesis)","en":"Thesis","cat":"基礎","simple":"你對這筆交易的理由說明，可以附在交易旁邊給大家看。","pro":"公開 thesis 有助於事後檢討決策品質，但也會造成承諾偏誤，讓人不願停損。"},
+{"term":"內盤(内盘)","en":"Inner Market","cat":"基礎","simple":"代幣還沒達到畢業門檻前，在發射平台內部曲線上交易的階段。","pro":"fomo 官方原文警示「內盤代幣波動性極高，且可能永遠無法畢業」；設定裡可以「永久關閉內盤警告」，但關掉提示不等於風險消失。"},
+{"term":"已畢業(已毕业)","en":"Graduated","cat":"基礎","simple":"代幣剛從內盤畢業、搬進正式交易池的階段，卡片上會顯示幣齡（例如剛畢業 12 分鐘）。","pro":"fomo 官方原文警示「新畢業的代幣波動性極高，任何人都可以無需許可地發行代幣，包括不良行為者」；幣齡越短代表越早期，波動通常越劇烈。"},
+{"term":"內盤進度(内盘进度)","en":"Bonding Progress","cat":"基礎","simple":"內盤分類卡片上顯示的百分比，代表這顆幣離畢業門檻還差多少。","pro":"進度接近 100% 通常伴隨劇烈波動，但進度停滯也可能代表買氣已經退潮、永遠到不了畢業門檻。"},
+{"term":"平均買入價(平均买入价)","en":"Average Buy Price","cat":"基礎","simple":"某個交易員這筆持倉真正的平均成本，不是現在的市價。","pro":"要判斷一筆持倉是真的賺還是紙上富貴，先比對平均買入價跟現價，再看「已投入」金額大小，避免被單純的百分比數字誤導。"},
+{"term":"已投入","en":"Invested Amount","cat":"基礎","simple":"某個交易員這筆持倉實際放了多少本金。","pro":"排行榜和持倉卡只顯示報酬率時容易誤導——用 $100 賺 300% 跟用 $10 萬賺 300% 在榜上長得一樣，先看已投入金額才知道對方是不是真的下重本。"},
+{"term":"未驗證代幣(未验证代币)","en":"Unverified Token","cat":"安全指標","simple":"交易者持倉卡片上出現的紅色提示，代表這顆代幣連 App 自己都沒把握它的真實性。","pro":"看到這個標記，等於平台自己承認風險評估資料不足，應該當作比一般新幣更高一層的警訊，先去其他工具交叉核對再決定。"},
 {"term":"遷移時間內盤打滿耗時","en":"Migration Time / Bonding Curve Fill Time","cat":"基礎","simple":"戰壕卡片上的兩段式時間標記：完成遷移距今多久，或從創建到打滿花了多久。","pro":"對應戰壕「已開盤」卡片上常見的 37s/1s 這類標記；打滿耗時越短代表買盤越集中在極短時間內湧入，通常是機器人或捆綁交易，人工手速跟不上。"},
 {"term":"流動性Liquidity","en":"Liquidity","cat":"安全指標","simple":"池子裡有多少錢可以跟你對做。太淺你一賣價格就崩，等於賣不掉。","pro":"看流動性與市值／FDV 的比值，一般以大於 5% 為相對安全、低於 2% 視為買得進賣不出；也要看 LP 是否已鎖倉或燒毀，只看金額大小不夠。"},
 {"term":"Honeypot蜜罐","en":"Honeypot","cat":"安全指標","simple":"買得進去、賣不出來的陷阱幣。看起來一直漲，但你根本賣不掉。","pro":"合約層面對賣出設限（黑名單、稅率 100%、transfer 條件判斷）。GMGN 安全面板會直接標紅。這一項亮紅燈是絕對禁區，沒有任何值得冒險的理由。"},
